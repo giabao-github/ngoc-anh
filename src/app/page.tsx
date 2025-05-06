@@ -111,21 +111,21 @@ const App = () => {
     <section className={`bg-[#0C2543] text-white ${arsenal.className}`}>
       <div className="max-w-[1340px] mx-auto grid md:grid-cols-2 gap-8 py-16 px-6">
         <div className="flex flex-col justify-center gap-y-4 md:gap-y-12">
-          <h2 className="text-5xl md:text-6xl mb-6 uppercase font-semibold tracking-wide text-[#BE984E]">TINH HOA TỪ ĐẤT
+          <h2 className="text-4xl md:text-6xl mb-6 uppercase font-semibold tracking-wide text-[#BE984E]">TINH HOA TỪ ĐẤT
           TINH XẢO TỪ NGƯỜI</h2>
-          <p className="mb-8 text-xl tracking-wide">55 năm cho một hành trình bền bỉ đưa gốm sứ Việt Nam vươn tầm thế giới, tạo nên những tuyệt tác vĩnh cửu</p>
+          <p className="mb-8 text-lg md:text-xl tracking-wide">55 năm cho một hành trình bền bỉ đưa gốm sứ Việt Nam vươn tầm thế giới, tạo nên những tuyệt tác vĩnh cửu</p>
           <button className="bg-transparent text-[#BE984E] font-semibold text-base border-1 border-[#BE984E] px-8 py-4 rounded-full w-fit hover:bg-[#BE984E] hover:text-white cursor-pointer transition-colors select-none flex items-center flex-row gap-x-3">
-            <span>
+            <span className="text-sm md:text-base">
               Tìm hiểu thêm
             </span>
             <FaArrowRightLong size={20} />
           </button>
         </div>
-        <div className="relative h-[400px] md:h-auto">
+        <div className="relative h-[300px] md:h-auto">
           <img
             src="https://file.hstatic.net/200000532849/file/chen_ngoc_th_ng_long_670x730px.png"
             alt="Featured Porcelain"
-            className="w-full h-full object-cover rounded-lg"
+            className="w-full h-full object-contain rounded-lg"
           />
         </div>
       </div>
@@ -142,7 +142,7 @@ const App = () => {
   const Collection = () => (
     <section ref={collectionRef} className={`py-16 md:py-32 px-6 bg-white ${arsenal.className}`}>
       <div className="max-w-lg md:max-w-7xl mx-auto">
-        <h2 className="text-3xl font-semibold text-center mb-12 text-black">Bộ Sưu Tập Minh Long</h2>
+        <h2 className="text-2xl md:text-3xl font-semibold text-center mb-12 text-black">Bộ Sưu Tập Minh Long</h2>
       </div>
       <FilterCarousel onSelect={() => {}} data={data} />
     </section>
@@ -151,14 +151,16 @@ const App = () => {
   const NewProducts = () => (
     <section ref={productsRef} className={`py-16 md:py-32 px-6 bg-[#BB9244] ${arsenal.className}`}>
       <div className="max-w-lg md:max-w-7xl mx-auto">
-        <h2 className="text-3xl font-semibold text-center mb-12 text-white">Khám phá cửa hàng trực tuyến MINH LONG</h2>
-        <div className="grid md:grid-cols-3 gap-8">
+        <h2 className="text-2xl md:text-3xl font-semibold text-center mb-12 text-white">
+          Khám phá cửa hàng trực tuyến MINH LONG
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 justify-center">
           {products.map((product) => (
             <div
               key={product.id}
-              className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+              className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow mx-auto max-w-full"
             >
-              <div className="bg-[#FFF3E5] overflow-hidden h-64 flex items-center justify-center">
+              <div className="flex bg-[#FFF3E5] overflow-hidden h-fit md:h-64 items-center justify-center">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -167,19 +169,24 @@ const App = () => {
                   className="w-full h-full object-contain transition-transform duration-300 transform group-hover:scale-105 cursor-pointer"
                 />
               </div>
-              <div className="p-4 bg-white">
-                <h3 className="px-1 text-2xl font-semibold text-[#0C2543]">{product.name}</h3>
-                <p className="px-1 text-[#BB9244] font-semibold py-4 text-2xl">{product.price}</p>
+  
+              <div className="p-3 md:p-4 bg-white">
+                <h3 className="px-1 text-xl md:text-2xl font-semibold text-[#0C2543]">
+                  {product.name}
+                </h3>
+                <p className="px-1 text-[#BB9244] font-semibold py-3 md:py-4 text-xl md:text-2xl">
+                  {product.price}
+                </p>
                 <div className="flex flex-col md:flex-row gap-2">
-                  <button className="mt-2 border-1 border-[#BB9244] bg-transparent text-[#BB9244] px-4 py-4 rounded-full w-[52%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-4 cursor-pointer">
-                    <FiShoppingCart size={20} />
-                    <span className="font-semibold text-sm">
+                  <button className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] px-3 py-3 md:px-4 md:py-4 rounded-full w-full md:w-[60%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer">
+                    <FiShoppingCart size={18} className="md:h-5 md:w-5" />
+                    <span className="font-semibold text-xs md:text-sm">
                       Thêm vào giỏ hàng
                     </span>
                   </button>
-                  <button className="mt-2 border-1 border-[#BB9244] bg-transparent text-[#BB9244] px-4 py-4 rounded-full w-[52%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-4 cursor-pointer">
-                    <FaBagShopping size={20} />
-                    <span className="font-semibold text-sm">
+                  <button className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] px-3 py-3 md:px-4 md:py-4 rounded-full w-full md:w-[52%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer">
+                    <FaBagShopping size={18} className="md:h-5 md:w-5" />
+                    <span className="font-semibold text-xs md:text-sm">
                       Mua ngay
                     </span>
                   </button>
@@ -191,19 +198,20 @@ const App = () => {
       </div>
     </section>
   );
+  
 
   const Footer = () => (
     <footer ref={aboutRef} className={`bg-[#0C2543] text-white py-12 md:py-24 px-6 ${arsenal.className}`}>
       <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 md:gap-32">
-        <div className="text-lg">
+        <div className="text-base md:text-lg">
           <h3 className="mb-4 uppercase">Trụ sở chính</h3>
-          <h1 className="text-2xl mb-4 font-semibold uppercase text-[#D4AF37]">Công ty TNHH Minh Long I</h1>
+          <h1 className="text-xl md:text-2xl mb-4 font-semibold uppercase text-[#D4AF37]">Công ty TNHH Minh Long I</h1>
           <p>Số 333 Đường Hưng Định 24, Khu Phố Hưng Lộc, Phường Hưng Định, Thành Phố Thuận An, Tỉnh Bình Dương, Việt Nam.</p>
           <p>Điện Thoại: (+84) 274 3668899</p>
           <p>Fax: (+84) 274 3724173</p>
         </div>
         <div>
-          <div className="text-lg">
+          <div className="text-base md:text-lg">
             <h3 className="mb-4 uppercase">Kết nối với chúng tôi</h3>
             <p>Hotline:&nbsp; 
               <Link href={'tel:0378044394'} className="hover:text-[#D4AF37]">
@@ -215,20 +223,38 @@ const App = () => {
                 eshop@minhlong.com
               </Link>
             </p>
-            <div className="flex space-x-6 mt-12">
-              <FaFacebookF className="text-3xl hover:text-[#D4AF37] cursor-pointer" onClick={() => router.push('https://www.facebook.com/minhlongcompany')} />
-              <FaInstagram className="text-3xl hover:text-[#D4AF37] cursor-pointer" onClick={() => router.push('https://www.instagram.com/minhlongporcelain/')} />
-              <FaYoutube className="text-3xl hover:text-[#D4AF37] cursor-pointer" onClick={() => router.push('https://www.youtube.com/@MinhLongPorcelain')} />
+            <div className="flex space-x-6 mt-10 md:mt-12">
+              <FaFacebookF className="text-2xl md:text-3xl hover:text-[#D4AF37] cursor-pointer" onClick={() => router.push('https://www.facebook.com/minhlongcompany')} />
+              <FaInstagram className="text-2xl md:text-3xl hover:text-[#D4AF37] cursor-pointer" onClick={() => router.push('https://www.instagram.com/minhlongporcelain/')} />
+              <FaYoutube className="text-2xl md:text-3xl hover:text-[#D4AF37] cursor-pointer" onClick={() => router.push('https://www.youtube.com/@MinhLongPorcelain')} />
             </div>
           </div>
         </div>
         <div>
-          <Image
-            src={'https://file.hstatic.net/200000532849/file/logothongbao_d4f8886efdb04dd3984bff803b418aa5.png'}
-            alt='Verified'
-            width={180}
-            height={80}
-          />
+          <div className="hidden md:block">
+            <Image
+              src={'https://file.hstatic.net/200000532849/file/logothongbao_d4f8886efdb04dd3984bff803b418aa5.png'}
+              alt='Verified'
+              width={180}
+              height={80}
+            />
+          </div>
+          <div className="md:hidden flex flex-row gap-x-8">
+            <Image
+              src={'https://file.hstatic.net/200000532849/file/logothongbao_d4f8886efdb04dd3984bff803b418aa5.png'}
+              alt='Verified'
+              width={120}
+              height={53}
+            />
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="cursor-pointer bg-transparent text-[#D4AF37] border border-[#D4AF37] px-4 py-2 rounded-full hover:bg-[#D4AF37] hover:text-white transition-colors"
+            >
+              <span className="font-semibold text-xs">
+                Quay về đầu trang
+              </span>
+            </button>
+          </div>
           <div className="hidden md:flex mt-16 mx-4 text-center justify-start">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
