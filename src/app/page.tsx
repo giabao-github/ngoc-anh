@@ -18,18 +18,18 @@ const arsenal = Arsenal({
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const collectionRef = useRef<HTMLDivElement>(null);
   const productsRef =useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
 
   const Header = () => (
