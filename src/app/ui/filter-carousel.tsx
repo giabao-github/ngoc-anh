@@ -93,7 +93,7 @@ export const FilterCarousel = ({
             const handleClick = () => {
               onSelect(item.value);
               if (isMobile) {
-                setShowInfo(prev => !prev); // Toggle info popup on mobile
+                setShowInfo(prev => !prev);
               }
             };
 
@@ -118,8 +118,8 @@ export const FilterCarousel = ({
                   <Image
                     src={item.image}
                     alt={item.label}
-                    width={344}
-                    height={246}
+                    width={286}
+                    height={204}
                     className={cn(
                       "md:hidden transition-transform duration-300 hover:scale-105",
                     )}
@@ -127,7 +127,7 @@ export const FilterCarousel = ({
 
                   {/* Info icon (mobile only) */}
                   {isMobile && (
-                    <div className="absolute bottom-2 right-2 z-10">
+                    <div className="absolute bottom-3 right-4 z-10">
                       <div className="bg-white/80 backdrop-blur-md rounded-full p-1 shadow-md">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -146,14 +146,14 @@ export const FilterCarousel = ({
 
                 {/* Info popup */}
                 <div className={cn(
-                  "absolute right-20 bottom-3 md:right-3 rounded-lg backdrop-blur-md bg-white/80 text-black shadow-lg w-64 md:w-80 transform transition-all duration-300 ease-in-out origin-bottom-right",
+                  "absolute right-14 bottom-3 md:right-3 rounded-lg backdrop-blur-md bg-white/80 text-black shadow-lg w-54 md:w-80 transform transition-all duration-300 ease-in-out origin-bottom-right",
                   showInfo
                     ? "opacity-100 scale-100 translate-x-0"
                     : "opacity-0 scale-95 -translate-x-3 pointer-events-none"
                 )}>
                   <div className="p-3 space-y-1">
                     <p className="font-semibold text-xs md:text-base truncate">{item.label}</p>
-                    <p className="text-xs md:text-sm text-gray-700 line-clamp-5">{item.description}</p>
+                    <p className="text-xs md:text-sm text-gray-700">{item.description}</p>
                   </div>
                 </div>
               </CarouselItem>

@@ -31,6 +31,7 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
+
   const Header = () => (
     <header className={`bg-[#0C2543] text-white py-4 px-6 ${arsenal.className}`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -107,6 +108,7 @@ const App = () => {
     </header>
   );
 
+
   const Hero = () => (
     <section className={`bg-[#0C2543] text-white ${arsenal.className}`}>
       <div className="max-w-[1340px] mx-auto grid md:grid-cols-2 gap-8 py-16 px-6">
@@ -114,7 +116,7 @@ const App = () => {
           <h2 className="text-4xl md:text-6xl mb-6 uppercase font-semibold tracking-wide text-[#BE984E]">TINH HOA TỪ ĐẤT
           TINH XẢO TỪ NGƯỜI</h2>
           <p className="mb-8 text-lg md:text-xl tracking-wide">55 năm cho một hành trình bền bỉ đưa gốm sứ Việt Nam vươn tầm thế giới, tạo nên những tuyệt tác vĩnh cửu</p>
-          <button className="bg-transparent text-[#BE984E] font-semibold text-base border-1 border-[#BE984E] px-8 py-4 rounded-full w-fit hover:bg-[#BE984E] hover:text-white cursor-pointer transition-colors select-none flex items-center flex-row gap-x-3">
+          <button className="bg-transparent text-[#BE984E] font-semibold text-base border-1 border-[#BE984E] px-6 py-[14px] md:px-8 md:py-4 rounded-full w-fit hover:bg-[#BE984E] hover:text-white cursor-pointer transition-colors select-none flex items-center flex-row gap-x-3">
             <span className="text-sm md:text-base">
               Tìm hiểu thêm
             </span>
@@ -139,6 +141,7 @@ const App = () => {
     description: collection.description,
   }));
 
+
   const Collection = () => (
     <section ref={collectionRef} className={`py-16 md:py-32 px-6 bg-white ${arsenal.className}`}>
       <div className="max-w-lg md:max-w-7xl mx-auto">
@@ -148,13 +151,14 @@ const App = () => {
     </section>
   );
 
+
   const NewProducts = () => (
     <section ref={productsRef} className={`py-16 md:py-32 px-6 bg-[#BB9244] ${arsenal.className}`}>
       <div className="max-w-lg md:max-w-7xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-semibold text-center mb-12 text-white">
           Khám phá cửa hàng trực tuyến MINH LONG
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 justify-center">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 justify-center">
           {products.map((product) => (
             <div
               key={product.id}
@@ -171,10 +175,10 @@ const App = () => {
               </div>
   
               <div className="p-3 md:p-4 bg-white">
-                <h3 className="px-1 text-xl md:text-2xl font-semibold text-[#0C2543]">
+                <h3 className="px-1 text-lg md:text-2xl font-semibold text-[#0C2543] line-clamp-2 min-h-[56px]">
                   {product.name}
                 </h3>
-                <p className="px-1 text-[#BB9244] font-semibold py-3 md:py-4 text-xl md:text-2xl">
+                <p className="px-3 text-[#BB9244] font-semibold py-3 md:py-4 text-xl md:text-2xl">
                   {product.price}
                 </p>
                 <div className="flex flex-col md:flex-row gap-2">
@@ -198,20 +202,20 @@ const App = () => {
       </div>
     </section>
   );
-  
+
 
   const Footer = () => (
     <footer ref={aboutRef} className={`bg-[#0C2543] text-white py-12 md:py-24 px-6 ${arsenal.className}`}>
       <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 md:gap-32">
-        <div className="text-base md:text-lg">
+        <div className="text-sm md:text-lg">
           <h3 className="mb-4 uppercase">Trụ sở chính</h3>
-          <h1 className="text-xl md:text-2xl mb-4 font-semibold uppercase text-[#D4AF37]">Công ty TNHH Minh Long I</h1>
+          <h1 className="text-lg md:text-2xl mb-4 font-semibold uppercase text-[#D4AF37]">Công ty TNHH Minh Long I</h1>
           <p>Số 333 Đường Hưng Định 24, Khu Phố Hưng Lộc, Phường Hưng Định, Thành Phố Thuận An, Tỉnh Bình Dương, Việt Nam.</p>
           <p>Điện Thoại: (+84) 274 3668899</p>
           <p>Fax: (+84) 274 3724173</p>
         </div>
         <div>
-          <div className="text-base md:text-lg">
+          <div className="text-sm md:text-lg">
             <h3 className="mb-4 uppercase">Kết nối với chúng tôi</h3>
             <p>Hotline:&nbsp; 
               <Link href={'tel:0378044394'} className="hover:text-[#D4AF37]">
@@ -224,9 +228,9 @@ const App = () => {
               </Link>
             </p>
             <div className="flex space-x-6 mt-10 md:mt-12">
-              <FaFacebookF className="text-2xl md:text-3xl hover:text-[#D4AF37] cursor-pointer" onClick={() => router.push('https://www.facebook.com/minhlongcompany')} />
-              <FaInstagram className="text-2xl md:text-3xl hover:text-[#D4AF37] cursor-pointer" onClick={() => router.push('https://www.instagram.com/minhlongporcelain/')} />
-              <FaYoutube className="text-2xl md:text-3xl hover:text-[#D4AF37] cursor-pointer" onClick={() => router.push('https://www.youtube.com/@MinhLongPorcelain')} />
+              <FaFacebookF className="text-xl md:text-3xl hover:text-[#D4AF37] cursor-pointer" onClick={() => router.push('https://www.facebook.com/minhlongcompany')} />
+              <FaInstagram className="text-xl md:text-3xl hover:text-[#D4AF37] cursor-pointer" onClick={() => router.push('https://www.instagram.com/minhlongporcelain/')} />
+              <FaYoutube className="text-xl md:text-3xl hover:text-[#D4AF37] cursor-pointer" onClick={() => router.push('https://www.youtube.com/@MinhLongPorcelain')} />
             </div>
           </div>
         </div>
@@ -248,7 +252,7 @@ const App = () => {
             />
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="cursor-pointer bg-transparent text-[#D4AF37] border border-[#D4AF37] px-4 py-2 rounded-full hover:bg-[#D4AF37] hover:text-white transition-colors"
+              className="cursor-pointer bg-transparent text-[#D4AF37] border border-[#D4AF37] px-4 py-2 rounded-full hover:bg-[#D4AF37] hover:text-white transition-colors flex items-center"
             >
               <span className="font-semibold text-xs">
                 Quay về đầu trang
@@ -258,7 +262,7 @@ const App = () => {
           <div className="hidden md:flex mt-16 mx-4 text-center justify-start">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="cursor-pointer bg-transparent text-[#D4AF37] border border-[#D4AF37] px-6 py-3 rounded-full hover:bg-[#D4AF37] hover:text-white transition-colors"
+              className="cursor-pointer bg-transparent text-[#D4AF37] border border-[#D4AF37] px-6 py-3 rounded-full hover:bg-[#D4AF37] hover:text-white transition-colors flex items-center"
             >
               <span className="font-semibold">
                 Quay về đầu trang
