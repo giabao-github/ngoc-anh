@@ -40,7 +40,7 @@ const App = () => {
           <h1 className="text-2xl font-semibold uppercase select-none hidden md:block">Ngọc Ánh</h1>
         </div>
 
-        <nav className="hidden md:flex space-x-6 items-center tracking-wide">
+        <nav className="hidden md:flex space-x-8 items-center tracking-wide">
           <Link 
             href="#" 
             onClick={(e) => {
@@ -72,7 +72,7 @@ const App = () => {
             Về chúng tôi
           </Link>
           <FiShoppingCart className="text-xl cursor-pointer hover:text-[#D4AF37]" />
-          <FiUser onClick={() => router.push('/login')} className="text-xl cursor-pointer hover:text-[#D4AF37]" />
+          <FiUser onClick={() => router.push('/login?method=email')} className="text-xl cursor-pointer hover:text-[#D4AF37]" />
           <Image 
             src={'/vn-flag.jpeg'}
             alt="Vietnam"
@@ -83,7 +83,9 @@ const App = () => {
           />
         </nav>
 
-        <div className="flex flex-row gap-x-4 md:hidden">
+        <div className="flex items-center flex-row gap-x-6 md:hidden">
+          <FiShoppingCart className="text-xl cursor-pointer hover:text-[#D4AF37]" />
+          <FiUser onClick={() => router.push('/login?method=email')} className="text-xl cursor-pointer hover:text-[#D4AF37]" />
           <Image 
             src={'https://static.vecteezy.com/system/resources/previews/016/328/942/large_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png'}
             alt="Vietnam"
