@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useRef, useLayoutEffect } from "react";
 import Image from "next/image";
@@ -72,7 +72,7 @@ const App = () => {
             Về chúng tôi
           </Link>
           <FiShoppingCart className="text-xl cursor-pointer hover:text-[#D4AF37]" />
-          <FiUser className="text-xl cursor-pointer hover:text-[#D4AF37]" />
+          <FiUser onClick={() => router.push('/login')} className="text-xl cursor-pointer hover:text-[#D4AF37]" />
           <Image 
             src={'/vn-flag.jpeg'}
             alt="Vietnam"
