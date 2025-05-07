@@ -16,6 +16,8 @@ const arsenal = Arsenal({
   subsets: ["cyrillic", "latin", "vietnamese"],
 });
 
+export const dynamic = "force-dynamic";
+
 const LoginPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
