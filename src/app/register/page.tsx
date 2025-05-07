@@ -1,29 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { Arsenal } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { Arsenal } from "next/font/google";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
 import { FiMenu, FiShoppingCart, FiUser, FiX } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebook, FaApple } from "react-icons/fa6";
+import { FaFacebook, FaApple, FaEye, FaEyeSlash } from "react-icons/fa6";
+import SkeletonLoader from "../components/SkeletonLoader";
+import EmailPhoneSwitch from "../components/Switch";
+
 
 const arsenal = Arsenal({
   weight: ["400", "700"],
   subsets: ["cyrillic", "latin", "vietnamese"],
 });
 
-
-const PasswordRecoveryPage = () => {
+const RegisterPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
+  const [method, setMethod] = useState<"email" | "phone">("email");
+  const [value, setValue] = useState("");
   const [inputError, setInputError] = useState("");
   const [isTouched, setIsTouched] = useState(false);
-  const searchParams = useSearchParams();
-  const method = searchParams.get('method');
-
+  const handleMethodChange = (newMethod: "email" | "phone") => {
+    setMethod(newMethod);
+    setValue("");
+    setInputError("");
+  };
+  
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const validatePhone = (value: string) => {
     if (value.length === 0) {
       setInputError("Vui lòng nhập số điện thoại");
@@ -44,10 +53,11 @@ const PasswordRecoveryPage = () => {
     return phoneRegex.test(value);
   };
 
-  const isPhoneValid = method === 'phone' && testPhone(email);
-  const isEmailValid = method === 'email' && validateEmail(email);
+  const isPhoneValid = method === "phone" && testPhone(value);
+  const isEmailValid = method === "email" && validateEmail(value);
+  const isPasswordValid = password.length >= 6;
 
-  const isFormValid = (isPhoneValid || isEmailValid);
+  const isFormValid = (isPhoneValid || isEmailValid) && isPasswordValid;
 
 
   const Header = () => (
@@ -132,9 +142,10 @@ const PasswordRecoveryPage = () => {
 
 
   return (
-    <div className={`${arsenal.className}`}>
-      <Header />
-      {isMenuOpen && (
+    <Suspense fallback={<SkeletonLoader />}>
+      <div className={`${arsenal.className}`}>
+        <Header />
+        {isMenuOpen && (
           <div className={`md:hidden bg-[#0C2543] text-white p-6 ${arsenal.className}`}>
             <nav className="flex flex-col space-y-4">
               <Link 
@@ -170,18 +181,20 @@ const PasswordRecoveryPage = () => {
             </nav>
           </div>
         )}
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
-          <div className="text-center flex flex-col gap-y-3">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Đặt lại mật khẩu
-            </h2>
-          </div>
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
+            <div className="text-center flex flex-col gap-y-3">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                Đăng ký tài khoản
+              </h2>
+            </div>
+
+            <EmailPhoneSwitch onMethodChange={handleMethodChange} />
 
             <form 
               onSubmit={(e) => {
                 e.preventDefault();
-                router.push(`/password-recovery?method=${method}`);
+                router.push(`/login?method=${method}`);
               }}
               className="mt-8 space-y-6"
             >
@@ -189,30 +202,29 @@ const PasswordRecoveryPage = () => {
                 {/* Phone or Email Field */}
                 <div className="relative">
                   <input
-                    aria-label={method === 'phone' ? "Số điện thoại" : "Email"}
-                    type={method === 'phone' ? 'tel' : 'email'}
-                    inputMode={method === 'phone' ? 'numeric' : 'email'}
-                    name={method === 'phone' ? 'tel' : 'email'}
-                    placeholder={method === 'phone' ? "Nhập số điện thoại" : "Nhập email của bạn"}
+                    aria-label={method === "email" ? "Email" : "Số điện thoại"}
+                    type={method === "email" ? "email" : "tel"}
+                    inputMode={method === "email" ? "email" : "numeric"}
+                    name={method === "email" ? "email" : "tel"}
                     autoComplete="username"
-                    value={email}
+                    value={value}
                     onChange={(e) => {
                       const value = e.target.value;
-                      if (method === 'phone') {
+                      if (method === "phone") {
                         const digitsOnly = value.replace(/\D/g, "");
-                        setEmail(digitsOnly);
+                        setValue(digitsOnly);
                         if (isTouched) validatePhone(digitsOnly);
                       } else {
-                        setEmail(value);
+                        setValue(value);
                         if (isTouched) validateEmail(value);
                       }
                     }}
                     onBlur={() => {
                       setIsTouched(true);
-                      if (method === 'phone') {
-                        validatePhone(email);
+                      if (method === "phone") {
+                        validatePhone(value);
                       } else {
-                        if (!validateEmail(email)) {
+                        if (!validateEmail(value)) {
                           setInputError("Email không hợp lệ. Vui lòng nhập đúng định dạng (ví dụ: ten@example.com)");
                         } else {
                           setInputError("");
@@ -226,20 +238,55 @@ const PasswordRecoveryPage = () => {
                     className={`appearance-none rounded-lg relative block w-full px-3 py-2 tracking-wide border ${
                       inputError ? 'border-rose-400' : 'border-gray-300'
                     } placeholder-gray-500 text-gray-900 font-semibold focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm`}
+                    placeholder={method === "email" ? "Email" : "Số điện thoại"}
                   />
 
                   {/* Phone tooltip */}
-                  {method === 'phone' && inputError && (
-                    <div className="absolute top-full mt-1 w-max max-w-[220px] bg-rose-500 text-white text-xs rounded px-2 py-1 shadow z-20">
+                  {method === "phone" && inputError && (
+                    <div className="absolute top-full mt-1 w-max max-w-full bg-rose-500 text-white text-xs rounded px-2 py-1 shadow z-20">
                       {inputError}
                       <div className="absolute top-0 left-3 w-2 h-2 bg-rose-500 transform rotate-45 -translate-y-1/2"></div>
                     </div>
                   )}
 
                   {/* Email tooltip */}
-                  {method === 'email' && email.length > 0 && !isEmailValid && (
+                  {method === "email" && value.length > 0 && !isEmailValid && (
                     <div className="absolute top-full mt-1 w-max max-w-full bg-rose-500 text-white text-xs rounded px-2 py-1 shadow z-20">
                       Email không hợp lệ. Vui lòng nhập đúng định dạng (ví dụ: ten@example.com)
+                      <div className="absolute top-0 left-3 w-2 h-2 bg-rose-500 transform rotate-45 -translate-y-1/2"></div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Password Field */}
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    className={`appearance-none rounded-lg relative block w-full px-3 py-2 tracking-wide border ${
+                      password.length > 0 && password.length < 6 ? 'border-rose-400' : 'border-gray-300'
+                    } placeholder-gray-500 text-gray-900 font-semibold focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm`}
+                    placeholder="Mật khẩu"
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    title={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center z-10"
+                  >
+                    {showPassword ? (
+                      <FaEyeSlash className="h-5 w-5 text-gray-700 cursor-pointer" />
+                    ) : (
+                      <FaEye className="h-5 w-5 text-gray-700 cursor-pointer" />
+                    )}
+                  </button>
+
+                  {/* Password tooltip */}
+                  {password.length > 0 && password.length < 6 && (
+                    <div className="absolute top-full mt-1 w-max max-w-[220px] bg-rose-500 text-white text-xs rounded px-2 py-1 shadow z-20">
+                      Mật khẩu phải chứa ít nhất 6 ký tự
                       <div className="absolute top-0 left-3 w-2 h-2 bg-rose-500 transform rotate-45 -translate-y-1/2"></div>
                     </div>
                   )}
@@ -269,32 +316,43 @@ const PasswordRecoveryPage = () => {
               </div>
 
               <button
+                type="submit"
                 disabled={!isFormValid}
                 title={
                   !isFormValid
-                    ? method === 'phone'
-                      ? 'Nhập số điện thoại hợp lệ (bắt đầu bằng 0, chứa ít nhất 10 chữ số)'
-                      : 'Nhập email hợp lệ (ví dụ: ten@example.com)'
+                    ? method === "phone"
+                      ? 'Nhập số điện thoại hợp lệ (bắt đầu bằng 0, chứa ít nhất 10 chữ số) và mật khẩu từ 6 ký tự'
+                      : 'Nhập email hợp lệ (ví dụ: ten@example.com) và mật khẩu từ 6 ký tự'
                     : ''
                 }
                 className={`group relative w-full flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-semibold rounded-lg tracking-wide text-white ${
                   isFormValid ? 'bg-[#D4AF37] hover:bg-[#D4AF37]/90 cursor-pointer' : 'bg-[#D4AF37]/50 cursor-not-allowed'
                 } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D4AF37] transition duration-200 select-none`}
               >
-                Gửi
+                Đăng ký
               </button>
 
-              <div className="flex justify-center space-x-1 text-sm font-semibold tracking-wide">
-                <a 
-                  onClick={() => {
-                    router.push(`/login?method=${method}`);
-                  }} 
-                  className="text-[#D4AF37] hover:text-[#D4AF37]/70 cursor-pointer"
-                >
-                  Quay về đăng nhập
-                </a>
-                <p className="text-gray-400 font-normal">hoặc</p>
-                <a href="/register" className="text-[#D4AF37] hover:text-[#D4AF37]/70 cursor-pointer">Đăng ký</a>
+              <div className="flex justify-center text-sm font-semibold tracking-wide">
+                <p className="text-[#0C2543]">
+                  Đăng nhập bằng&nbsp;
+                  <a 
+                    onClick={() => {
+                      router.push(`/login?method=email`);
+                    }}
+                    className="text-[#D4AF37] hover:underline cursor-pointer"
+                  >
+                    email
+                  </a>
+                  &nbsp;hoặc&nbsp;
+                  <a 
+                    onClick={() => {
+                      router.push(`/login?method=phone`);
+                    }}
+                    className="text-[#D4AF37] hover:underline cursor-pointer"
+                  >
+                    số điện thoại
+                  </a>
+                </p>
               </div>
 
               <div className="relative">
@@ -332,11 +390,12 @@ const PasswordRecoveryPage = () => {
                 </button>
               </div>
             </form>
+          </div>
         </div>
-      </div>
 
-    </div>
+      </div>
+    </Suspense>
   );
 }
 
-export default PasswordRecoveryPage ;
+export default RegisterPage;

@@ -23,7 +23,7 @@ const App = () => {
   const productsRef =useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   useEffect(() => {
     const hash = window.location.hash;
     if (hash === '#collection') {
@@ -33,7 +33,7 @@ const App = () => {
     } else if (hash === '#about') {
       aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
-  });
+  }, []);
 
 
   const Header = () => (
@@ -250,7 +250,7 @@ const App = () => {
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-center mt-8 md:mt-16 transition-opacity duration-300">
+          <div className="flex justify-center mt-8 md:mt-16 transition-all duration-300">
             {!isAllVisible ? (
               <button
                 onClick={showMore}
@@ -378,32 +378,35 @@ const App = () => {
         <div className={`md:hidden bg-[#0C2543] text-white p-6 ${arsenal.className}`}>
           <nav className="flex flex-col space-y-4">
             <Link 
-              href="#" 
+              href="#collection" 
               onClick={(e) => {
                 e.preventDefault();
                 collectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+                history.pushState(null, '', '#collection');
               }} 
-              className="hover:text-[#D4AF37] transition-colors select-none"
+              className="hover:text-[#D4AF37] transition-colors select-none w-fit"
             >
               Bộ sưu tập
             </Link>
             <Link 
-              href="#" 
+              href="#products" 
               onClick={(e) => {
                 e.preventDefault();
                 productsRef.current?.scrollIntoView({ behavior: 'smooth' });
+                history.pushState(null, '', '#products');
               }} 
-              className="hover:text-[#D4AF37] transition-colors select-none"
+              className="hover:text-[#D4AF37] transition-colors select-none w-fit"
             >
               Cửa hàng
             </Link>
             <Link 
-              href="#" 
+              href="#about" 
               onClick={(e) => {
                 e.preventDefault();
                 aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
+                history.pushState(null, '', '#about');
               }} 
-              className="hover:text-[#D4AF37] transition-colors select-none"
+              className="hover:text-[#D4AF37] transition-colors select-none w-fit"
             >
               Về chúng tôi
             </Link>
