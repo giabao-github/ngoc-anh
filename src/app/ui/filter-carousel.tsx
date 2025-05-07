@@ -22,7 +22,7 @@ const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768); // md = 768px
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -111,7 +111,7 @@ export const FilterCarousel = ({
                     width={1034}
                     height={740}
                     className={cn(
-                      "hidden md:block transition-transform duration-300 hover:scale-105",
+                      "hidden md:block transition-transform duration-300 hover:scale-105 select-none",
                     )}
                   />
                   {/* Mobile image */}
@@ -121,7 +121,7 @@ export const FilterCarousel = ({
                     width={286}
                     height={204}
                     className={cn(
-                      "md:hidden transition-transform duration-300 hover:scale-105",
+                      "md:hidden transition-transform duration-300 hover:scale-105 select-none",
                     )}
                   />
 

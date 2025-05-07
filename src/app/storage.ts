@@ -50,5 +50,53 @@ export const products = [
     name: "Ceramic Tea Set",
     price: "$199",
     image: "https://images.unsplash.com/photo-1525034687081-c702010cb70d"
+  },
+  {
+    id: 4,
+    name: "Royal Blue Vase",
+    price: "$299",
+    image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61"
+  },
+  {
+    id: 5,
+    name: "Golden Porcelain Set",
+    price: "$499",
+    image: "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9"
+  },
+  {
+    id: 6,
+    name: "Ceramic Tea Set",
+    price: "$199",
+    image: "https://images.unsplash.com/photo-1525034687081-c702010cb70d"
+  },
+  {
+    id: 7,
+    name: "Royal Blue Vase",
+    price: "$299",
+    image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61"
+  },
+  {
+    id: 8,
+    name: "Golden Porcelain Set",
+    price: "$499",
+    image: "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9"
+  },
+  {
+    id: 10,
+    name: "Ceramic Tea Set",
+    price: "$199",
+    image: "https://images.unsplash.com/photo-1525034687081-c702010cb70d"
+  },
+  {
+    id: 11,
+    name: "Golden Porcelain Set",
+    price: "$499",
+    image: "https://images.unsplash.com/photo-1490312278390-ab64016e0aa9"
+  },
+  {
+    id: 12,
+    name: "Ceramic Tea Set",
+    price: "$199",
+    image: "https://images.unsplash.com/photo-1525034687081-c702010cb70d"
   }
 ];
