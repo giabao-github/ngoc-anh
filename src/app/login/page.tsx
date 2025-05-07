@@ -9,18 +9,15 @@ import { FiMenu, FiShoppingCart, FiUser, FiX } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaApple, FaEye, FaEyeSlash } from "react-icons/fa6";
 
+
 const arsenal = Arsenal({
   weight: ["400", "700"],
   subsets: ["cyrillic", "latin", "vietnamese"],
 });
 
-
 const LoginPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
-  const collectionRef = useRef<HTMLDivElement>(null);
-  const productsRef =useRef<HTMLDivElement>(null);
-  const aboutRef = useRef<HTMLDivElement>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -84,7 +81,7 @@ const LoginPage = () => {
             href="#" 
             onClick={(e) => {
               e.preventDefault();
-              collectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+              router.push("/#collection");
             }} 
             className="hover:text-[#D4AF37] transition-colors text-lg"
           >
@@ -94,7 +91,7 @@ const LoginPage = () => {
             href="#" 
             onClick={(e) => {
               e.preventDefault();
-              productsRef.current?.scrollIntoView({ behavior: 'smooth' });
+              router.push("/#products");
             }} 
             className="hover:text-[#D4AF37] transition-colors text-lg"
           >
@@ -104,7 +101,7 @@ const LoginPage = () => {
             href="#" 
             onClick={(e) => {
               e.preventDefault();
-              aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
+              router.push("/#about");
             }} 
             className="hover:text-[#D4AF37] transition-colors text-lg"
           >
@@ -122,7 +119,9 @@ const LoginPage = () => {
           />
         </nav>
 
-        <div className="flex flex-row gap-x-4 md:hidden">
+        <div className="flex items-center flex-row gap-x-6 md:hidden">
+          <FiShoppingCart className="text-xl cursor-pointer hover:text-[#D4AF37]" />
+          <FiUser onClick={() => router.push('/login?method=email')} className="text-xl cursor-pointer hover:text-[#D4AF37]" />
           <Image 
             src={'https://static.vecteezy.com/system/resources/previews/016/328/942/large_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png'}
             alt="Vietnam"
@@ -296,7 +295,7 @@ const LoginPage = () => {
                 }
                 className={`group relative w-full flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-semibold rounded-lg tracking-wide text-white ${
                   isFormValid ? 'bg-[#D4AF37] hover:bg-[#D4AF37]/90 cursor-pointer' : 'bg-[#D4AF37]/50 cursor-not-allowed'
-                } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D4AF37] transition duration-200`}
+                } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D4AF37] transition duration-200 select-none`}
               >
                 Đăng nhập
               </button>
@@ -326,7 +325,7 @@ const LoginPage = () => {
               <div className="space-y-3 tracking-wide">
                 <button
                   type="button"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-semibold text-gray-700 bg-white hover:bg-gray-50 hover:shadow-md transition duration-200 cursor-pointer"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-semibold text-gray-700 bg-white hover:bg-gray-50 hover:shadow-md transition duration-200 cursor-pointer select-none"
                 >
                   <FcGoogle className="h-5 w-5 mr-3" />
                   Đăng nhập với Google
@@ -334,7 +333,7 @@ const LoginPage = () => {
 
                 <button
                   type="button"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-[#1877f2] hover:bg-[#166fe5] hover:shadow-md transition duration-200 cursor-pointer"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-[#1877f2] hover:bg-[#166fe5] hover:shadow-md transition duration-200 cursor-pointer select-none"
                 >
                   <FaFacebook className="h-5 w-5 mr-3" />
                   Đăng nhập với Facebook
@@ -342,7 +341,7 @@ const LoginPage = () => {
 
                 <button
                   type="button"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-black hover:bg-gray-900 hover:shadow-md transition duration-200 cursor-pointer"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-black hover:bg-gray-900 hover:shadow-md transition duration-200 cursor-pointer select-none"
                 >
                   <FaApple className="h-5 w-5 mr-3" />
                   Đăng nhập với Apple

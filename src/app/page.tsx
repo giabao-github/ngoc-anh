@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,11 +18,22 @@ const arsenal = Arsenal({
 });
 
 const App = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
   const collectionRef = useRef<HTMLDivElement>(null);
   const productsRef =useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash === '#collection') {
+      collectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    } else if (hash === '#products') {
+      productsRef.current?.scrollIntoView({ behavior: 'smooth' });
+    } else if (hash === '#about') {
+      aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
 
 
   const Header = () => (
@@ -42,30 +53,33 @@ const App = () => {
 
         <nav className="hidden md:flex space-x-8 items-center tracking-wide">
           <Link 
-            href="#" 
+            href="#collection" 
             onClick={(e) => {
               e.preventDefault();
               collectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+              history.pushState(null, '', '#collection');
             }} 
             className="hover:text-[#D4AF37] transition-colors text-lg"
           >
             Bộ sưu tập
           </Link>
           <Link 
-            href="#" 
+            href="#products" 
             onClick={(e) => {
               e.preventDefault();
               productsRef.current?.scrollIntoView({ behavior: 'smooth' });
+              history.pushState(null, '', '#products');
             }} 
             className="hover:text-[#D4AF37] transition-colors text-lg"
           >
             Cửa hàng
           </Link>
           <Link 
-            href="#" 
+            href="#about" 
             onClick={(e) => {
               e.preventDefault();
               aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
+              history.pushState(null, '', '#about');  
             }} 
             className="hover:text-[#D4AF37] transition-colors text-lg"
           >

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Arsenal } from "next/font/google";
@@ -18,9 +18,6 @@ const arsenal = Arsenal({
 const PasswordRecoveryPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
-  const collectionRef = useRef<HTMLDivElement>(null);
-  const productsRef =useRef<HTMLDivElement>(null);
-  const aboutRef = useRef<HTMLDivElement>(null);
   const [email, setEmail] = useState("");
   const [inputError, setInputError] = useState("");
   const [isTouched, setIsTouched] = useState(false);
@@ -73,7 +70,7 @@ const PasswordRecoveryPage = () => {
             href="#" 
             onClick={(e) => {
               e.preventDefault();
-              collectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+              router.push("/#collection");
             }} 
             className="hover:text-[#D4AF37] transition-colors text-lg"
           >
@@ -83,7 +80,7 @@ const PasswordRecoveryPage = () => {
             href="#" 
             onClick={(e) => {
               e.preventDefault();
-              productsRef.current?.scrollIntoView({ behavior: 'smooth' });
+              router.push("/#products");
             }} 
             className="hover:text-[#D4AF37] transition-colors text-lg"
           >
@@ -93,14 +90,14 @@ const PasswordRecoveryPage = () => {
             href="#" 
             onClick={(e) => {
               e.preventDefault();
-              aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
+              router.push("/#about");
             }} 
             className="hover:text-[#D4AF37] transition-colors text-lg"
           >
             Về chúng tôi
           </Link>
           <FiShoppingCart className="text-xl cursor-pointer hover:text-[#D4AF37]" />
-          <FiUser className="text-xl cursor-pointer hover:text-[#D4AF37]" />
+          <FiUser onClick={() => router.push('/login?method=email')} className="text-xl cursor-pointer hover:text-[#D4AF37]" />
           <Image 
             src={'/vn-flag.jpeg'}
             alt="Vietnam"
@@ -111,7 +108,9 @@ const PasswordRecoveryPage = () => {
           />
         </nav>
 
-        <div className="flex flex-row gap-x-4 md:hidden">
+        <div className="flex items-center flex-row gap-x-6 md:hidden">
+          <FiShoppingCart className="text-xl cursor-pointer hover:text-[#D4AF37]" />
+          <FiUser onClick={() => router.push('/login?method=email')} className="text-xl cursor-pointer hover:text-[#D4AF37]" />
           <Image 
             src={'https://static.vecteezy.com/system/resources/previews/016/328/942/large_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png'}
             alt="Vietnam"
@@ -244,7 +243,7 @@ const PasswordRecoveryPage = () => {
                 }
                 className={`group relative w-full flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-semibold rounded-lg tracking-wide text-white ${
                   isFormValid ? 'bg-[#D4AF37] hover:bg-[#D4AF37]/90 cursor-pointer' : 'bg-[#D4AF37]/50 cursor-not-allowed'
-                } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D4AF37] transition duration-200`}
+                } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D4AF37] transition duration-200 select-none`}
               >
                 Gửi
               </button>
@@ -274,7 +273,7 @@ const PasswordRecoveryPage = () => {
               <div className="space-y-3 tracking-wide">
                 <button
                   type="button"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-semibold text-gray-700 bg-white hover:bg-gray-50 hover:shadow-md transition duration-200 cursor-pointer"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-semibold text-gray-700 bg-white hover:bg-gray-50 hover:shadow-md transition duration-200 cursor-pointer select-none"
                 >
                   <FcGoogle className="h-5 w-5 mr-3" />
                   Đăng nhập với Google
@@ -282,7 +281,7 @@ const PasswordRecoveryPage = () => {
 
                 <button
                   type="button"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-[#1877f2] hover:bg-[#166fe5] hover:shadow-md transition duration-200 cursor-pointer"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-[#1877f2] hover:bg-[#166fe5] hover:shadow-md transition duration-200 cursor-pointer select-none"
                 >
                   <FaFacebook className="h-5 w-5 mr-3" />
                   Đăng nhập với Facebook
@@ -290,7 +289,7 @@ const PasswordRecoveryPage = () => {
 
                 <button
                   type="button"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-black hover:bg-gray-900 hover:shadow-md transition duration-200 cursor-pointer"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-black hover:bg-gray-900 hover:shadow-md transition duration-200 cursor-pointer select-none"
                 >
                   <FaApple className="h-5 w-5 mr-3" />
                   Đăng nhập với Apple
