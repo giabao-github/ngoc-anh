@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Arsenal, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import LoginPage from "./login/page";
-import PasswordRecoveryPage from "./password-recovery/page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,6 +11,12 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const arsenal = Arsenal({
+  weight: ["400", "700"],
+  subsets: ["cyrillic", "latin", "vietnamese"],
+});
+
 
 export const metadata: Metadata = {
   title: "I ❤️ Ngọc Ánh",
@@ -32,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${arsenal.className} antialiased`}
       >
         {children}
       </body>

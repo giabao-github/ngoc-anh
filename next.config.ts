@@ -27,6 +27,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'file.hstatic.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'product.hstatic.net',
+      },
     ],
   },
 };
