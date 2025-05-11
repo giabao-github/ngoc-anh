@@ -66,7 +66,8 @@ export const products = [
       },
     ],
     size: "35 cm",
-    quantity: 15
+    quantity: 15,
+    rating: [25, 50, 70, 500, 800]
   },
   {
     id: 2,
@@ -99,7 +100,8 @@ export const products = [
       },
     ],
     size: "35 cm",
-    quantity: 27
+    quantity: 27,
+    rating: [20, 40, 60, 400, 900]
   },
   {
     id: 3,
@@ -132,7 +134,8 @@ export const products = [
       }
     ],
     size: "45 cm",
-    quantity: 2
+    quantity: 2,
+    rating: [15, 25, 50, 320, 900]
   },
   {
     id: 4,
@@ -161,7 +164,8 @@ export const products = [
       }
     ],
     volume: "1.3 L",
-    quantity: 40
+    quantity: 40,
+    rating: [4, 8, 12, 190, 1256]
   },
   {
     id: 5,
@@ -189,7 +193,8 @@ export const products = [
       }
     ],
     volume: "1.3 L",
-    quantity: 9
+    quantity: 9,
+    rating: [3, 7, 10, 130, 1450]
   },
   {
     id: 6,
@@ -217,7 +222,8 @@ export const products = [
       }
     ],
     volume: "1.3 L",
-    quantity: 10
+    quantity: 10,
+    rating: [5, 10, 15, 180, 1290]
   },
   {
     id: 7,

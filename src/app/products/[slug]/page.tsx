@@ -16,6 +16,7 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Separator } from "@/app/ui/separator";
 import { cn } from "@/app/lib/utils";
 import RatingInput from "@/app/components/RatingInput";
+import RatingBar from "@/app/components/RatingBar";
 
 
 export const dynamic = "force-dynamic";
@@ -33,13 +34,28 @@ const ProductPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = product?.images ?? [];
 
+  const { totalReviews, averageRating } = useMemo(() => {
+    if (!product || !product.rating?.length) {
+      return { totalReviews: 0, averageRating: 0 };
+    }
+    const totalReviews = product.rating.reduce((sum, count) => sum + count, 0);
+    const weightedSum = product.rating.reduce(
+      (sum, count, index) => sum + count * (index + 1),
+      0
+    );
+    const averageRating = totalReviews > 0
+      ? parseFloat((weightedSum / totalReviews).toFixed(1))
+      : 0;
+    return { totalReviews, averageRating };
+  }, [product]);  
+
   const [showNotification, setShowNotification] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [isWishlisted, setIsWishlisted] = useState(false);
   const aboutRef = useRef<HTMLDivElement>(null);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = () => { 
     setCartQuantity(quantity);
     setShowNotification(true);
     if (timeoutRef.current) {
@@ -58,7 +74,7 @@ const ProductPage = () => {
       timeoutRef.current = null;
     }
   };
-  
+
   const handleQuantityChange = (type: string) => {
     if (type === "increment" &&  product?.quantity && (quantity ?? 1) < product?.quantity) {
       setQuantity((quantity ?? 1) + 1);
@@ -207,7 +223,7 @@ const ProductPage = () => {
               <p>{`Bộ sưu tập: ${product.collection}`}</p>
             </div>
 
-            <p className="text-4xl font-bold">{product.patterns[0].price.toLocaleString('en-US') + '₫'}</p>
+            <p className="text-4xl font-bold">{product.patterns[0]?.price?.toLocaleString('en-US') ?? 'Giá liên hệ'}₫</p>
 
             <Separator color="#BB9244" opacity={40} />
 
@@ -340,32 +356,39 @@ const ProductPage = () => {
                     <div className="space-y-3">
                       <div className="flex items-center gap-3">
                         <FaStar className="text-[#F3C63F] w-10 h-10" />
-                        <span className="text-3xl font-bold">0.0</span>
+                        <span className="text-3xl font-bold">{averageRating}</span>
                       </div>
-                      <p className="text-gray-700 text-center text-sm">0 đánh giá</p>
+                      <p className="text-gray-700 text-right text-sm">{totalReviews} đánh giá</p>
                     </div>
 
                     {/* Right: Ratings Breakdown */}
-                    <div className="space-y-2 w-full md:w-[60%]">
-                      {[5, 4, 3, 2, 1].map((rating) => (
-                        <div key={rating} className="flex items-center gap-2">
-                          {/* Stars */}
-                          <div className="flex gap-0.5">
-                            {Array.from({ length: 5 }).map((_, i) => (
-                              <FaStar
-                                key={i}
-                                className={`w-4 h-4 ${
-                                  i < rating ? 'text-[#F3C63F]' : 'text-gray-300'
-                                }`}
-                              />
-                            ))}
+                    <div className="space-y-2 w-full">
+                      {[5, 4, 3, 2, 1].map((star) => {
+                        const index = star - 1;
+                        const count = product?.rating?.[index] ?? 0;
+
+                        return (
+                          <div key={star} className="flex items-center gap-4">
+                            {/* Stars */}
+                            <div className="flex gap-0.5">
+                              {Array.from({ length: 5 }).map((_, i) => (
+                                <FaStar
+                                  key={i}
+                                  className={`w-4 h-4 ${i < star ? 'text-[#F3C63F]' : 'text-gray-300'}`}
+                                />
+                              ))}
+                            </div>
+
+                            {/* Progress Bar */}
+                            <div className="flex-1 h-[6px] min-w-[65%] bg-gray-200 rounded-full overflow-hidden">
+                              <RatingBar count={count} totalReviews={totalReviews} />
+                            </div>
+
+                            {/* Count */}
+                            <span className="text-sm text-gray-600">{count}</span>
                           </div>
-                          {/* Progress Bar */}
-                          <div className="flex-1 h-2 bg-gray-200 rounded-full"></div>
-                          {/* Count */}
-                          <span className="text-sm text-gray-600">0</span>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                   <RatingInput onRate={() => {}} />
@@ -381,7 +404,7 @@ const ProductPage = () => {
                   >
                     đăng nhập
                   </Link>
-                  để nhận xét và đánh giá sản phẩm
+                  để nhận xét và đánh giá sản phẩm này
                 </p>
                 <button
                   onClick={() => router.push('/login?method=email')}
