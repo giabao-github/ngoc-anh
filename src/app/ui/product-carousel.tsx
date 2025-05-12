@@ -89,7 +89,7 @@ export const ProductCarousel = ({
                     width={360}
                     height={360}
                     className={cn(
-                      "md:hidden object-cover transition-transform duration-300 select-none",
+                      "md:hidden w-[90vw] object-cover transition-transform duration-300 select-none",
                     )}
                   />
                 </div>
@@ -97,8 +97,8 @@ export const ProductCarousel = ({
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className='ml-2 left-0 z-20 bg-white/30 text-black/70 hover:bg-white hover:text-black' />
-        <CarouselNext className='mr-2 right-0 z-20 bg-white/30 text-black/70 hover:bg-white hover:text-black' />
+        <CarouselPrevious className='ml-3 md:ml-2 left-0 z-20 bg-white/30 text-black/70 hover:bg-white hover:text-black' />
+        <CarouselNext className='mr-3 md:mr-2 right-0 z-20 bg-white/30 text-black/70 hover:bg-white hover:text-black' />
       </Carousel>
     </div>
   );

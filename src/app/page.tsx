@@ -27,6 +27,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen">
+      <title>I ❤️ Ngọc Ánh</title>
       <Header hasSections collectionRef={collectionRef} productsRef={productsRef} aboutRef={aboutRef} />
       <Hero />
       <Collection collectionRef={collectionRef} />
