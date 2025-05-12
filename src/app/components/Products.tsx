@@ -42,9 +42,9 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   };
 
   return (
-    <section ref={productsRef} className={`py-12 md:py-32 px-6 bg-[#BB9244]`}>
+    <section ref={productsRef} className={`py-16 md:py-32 px-2 md:px-6 bg-[#BB9244]`}>
       <div className="max-w-lg md:max-w-7xl mx-auto transition-all duration-500">
-        <h2 className="text-2xl md:text-3xl font-semibold text-center mb-14 md:mb-20 text-white">
+        <h2 className="text-2xl md:text-3xl font-semibold text-center mb-16 md:mb-20 text-white">
           Khám phá cửa hàng trực tuyến MINH LONG
         </h2>
 
@@ -55,7 +55,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
         >
           <div
             ref={gridRef}
-            className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 justify-center transition-opacity duration-500"
+            className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8 justify-center transition-opacity duration-500"
           >
             {products.slice(0, itemsToShow).map((product) => (
               <div
@@ -76,13 +76,13 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                 </div>
 
                 <div className="p-3 md:p-4 bg-white">
-                  <h3 className="px-1 text-lg md:text-2xl font-semibold text-[#0C2543] line-clamp-2 min-h-[56px]">
+                  <h3 className="px-1 text-base md:text-2xl font-semibold text-[#0C2543] line-clamp-2 min-h-[56px]">
                     {product.name}
                   </h3>
-                  <p className="px-3 text-[#BB9244] font-semibold py-3 md:py-4 text-xl md:text-2xl">
+                  <p className="px-2 text-[#BB9244] font-semibold pb-1 md:py-4 text-lg md:text-2xl">
                     {product.patterns[0]?.price.toLocaleString('en-US') + '₫'}
                   </p>
-                  <div className="flex flex-col md:flex-row gap-2 mb-2">
+                  <div className="flex flex-col md:flex-row gap-0 md:gap-2 mb-2">
                     <button
                       onClick={() => router.push(`/products/${product.patterns[0].slug}`)}
                       className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"

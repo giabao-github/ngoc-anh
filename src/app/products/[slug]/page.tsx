@@ -130,7 +130,7 @@ const ProductPage = () => {
       <Header hasFooter aboutRef={aboutRef} />
       <div className="max-w-7xl mx-auto px-4 py-8 bg-white">
       {showNotification && (
-        <div className="fixed top-24 right-4 bg-white shadow-2xl rounded-xl p-4 w-80 z-50 border border-gray-200">
+        <div className="fixed top-4 right-4 md:top-24 md:right-4 bg-white shadow-2xl rounded-xl p-4 w-80 z-50 border border-gray-200">
           <div className="flex justify-between items-start mb-2">
             <h4 className="text-green-600 font-semibold text-sm">
               Đã thêm vào giỏ hàng thành công!
@@ -167,7 +167,7 @@ const ProductPage = () => {
         </div>
       )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:mt-12">
           {/* Image Section */}
           <div className="space-y-4">
             <div className="relative aspect-square overflow-hidden rounded-lg">
@@ -179,7 +179,7 @@ const ProductPage = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
-                  className={`aspect-square w-28 cursor-pointer rounded-lg overflow-hidden ${currentImageIndex === index ? "ring-2 ring-[#BB9244]" : "ring-1 ring-neutral-100"}`}
+                  className={`aspect-square w-20 md:w-28 cursor-pointer rounded-lg overflow-hidden ${currentImageIndex === index ? "ring-2 ring-[#BB9244]" : "ring-1 ring-neutral-100"}`}
                 >
                   <Image 
                     width={112} 
@@ -193,19 +193,19 @@ const ProductPage = () => {
               ))}
             </div>
 
-            <div className="mt-16 -mx-8">
+            <div className="mt-8 md:mt-16 md:-mx-8">
               <Separator color="#BB9244" opacity={100} />
             </div>
           </div>
 
           {/* Product Information */}
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6 mx-1 md:mx-0">
             <div className="flex justify-between items-start">
-              <h1 className="text-3xl font-bold">{product.name}</h1>
+              <h1 className="text-2xl md:text-3xl font-bold">{product.name}</h1>
               <button
                 title={`${isWishlisted ? 'Remove from Favorite' : 'Add to Favorite'}`}
                 onClick={() => setIsWishlisted(!isWishlisted)}
-                className={`group p-3 rounded-lg cursor-pointer hover:bg-red-50 ${isWishlisted ? "bg-red-50" : "bg-gray-50"}`}
+                className={`group p-0 md:p-3 rounded-lg cursor-pointer outline-none ring-0 focus:ring-0 focus:outline-none md:hover:bg-red-50 ${isWishlisted ? "md:bg-red-50" : "bg-transparent md:bg-gray-50"}`}
               >
                 <FiHeart
                   className={cn(
@@ -223,7 +223,7 @@ const ProductPage = () => {
               <p>{`Bộ sưu tập: ${product.collection}`}</p>
             </div>
 
-            <p className="text-4xl font-bold">{product.patterns[0]?.price?.toLocaleString('en-US') ?? 'Giá liên hệ'}₫</p>
+            <p className="text-2xl md:text-4xl font-bold text-orange-500">{product.patterns[0]?.price?.toLocaleString('en-US') ?? 'Giá liên hệ'}₫</p>
 
             <Separator color="#BB9244" opacity={40} />
 
@@ -294,7 +294,7 @@ const ProductPage = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-2 mb-8">
+            <div className="flex flex-row gap-2 mb-4 md:mb-8">
               <button
                 onClick={handleAddToCart}
                 className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[40%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
@@ -312,11 +312,11 @@ const ProductPage = () => {
           </div>
 
           {/* Product Details Section */}
-          <TabGroup>
+          <TabGroup className="mx-2 md:mx-0">
             <TabList className="flex border-b border-[#BB9244]/40 gap-x-10">
               {['CHI TIẾT SẢN PHẨM', 'HƯỚNG DẪN SỬ DỤNG'].map((tab) => (
                 <Tab key={tab} className={({ selected }) =>
-                  `py-3 text-lg font-semibold uppercase tracking-wide cursor-pointer border-b -mb-px transition outline-none ring-0 focus:ring-0 focus:outline-none ${
+                  `py-3 text-base md:text-lg font-semibold uppercase tracking-wide cursor-pointer border-b -mb-px transition outline-none ring-0 focus:ring-0 focus:outline-none ${
                     selected
                       ? 'border-[#BB9244] text-black'
                       : 'border-transparent text-gray-400 hover:border-[#BB9244] hover:text-black'
@@ -336,7 +336,7 @@ const ProductPage = () => {
               {/* Tab 2 - Usage Instructions */}
               <TabPanel className="space-y-4">
                 {product.instruction || (
-                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                  <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm md:text-base">
                     <li>Vệ sinh bằng khăn mềm, tránh va đập mạnh.</li>
                     <li>Không dùng hóa chất tẩy rửa mạnh.</li>
                     <li>Trưng bày nơi khô ráo, tránh ánh nắng trực tiếp.</li>
@@ -347,18 +347,18 @@ const ProductPage = () => {
           </TabGroup>
 
           {/* Ratings Section */}
-          <div className="px-16 pb-24">
-            <div className="grid md:grid-cols-1 gap-12">
-                <div className="space-y-8">
-                  <h3 className="text-3xl font-bold">Nhận xét và đánh giá</h3>
+          <div className="px-2 pt-10 md:pt-0 md:px-16 pb-12 md:pb-24">
+            <div className="grid md:grid-cols-1 gap-8 md:gap-12">
+                <div className="space-y-6 md:space-y-8">
+                  <h3 className="text-2xl md:text-3xl font-bold">Nhận xét và đánh giá</h3>
                   <div className="flex flex-col md:flex-row md:items-center md:justify-start space-y-6 md:space-y-0 md:space-x-10">
                     {/* Left: Overall Rating */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-3">
-                        <FaStar className="text-[#F3C63F] w-10 h-10" />
-                        <span className="text-3xl font-bold">{averageRating}</span>
+                        <FaStar className="text-[#F3C63F] h-8 w-8 md:w-10 md:h-10" />
+                        <span className="text-2xl md:text-3xl font-bold">{averageRating}</span>
                       </div>
-                      <p className="text-gray-700 text-right text-sm">{totalReviews} đánh giá</p>
+                      <p className="text-gray-700 text-left md:text-right text-sm">{totalReviews} đánh giá</p>
                     </div>
 
                     {/* Right: Ratings Breakdown */}
@@ -380,7 +380,7 @@ const ProductPage = () => {
                             </div>
 
                             {/* Progress Bar */}
-                            <div className="flex-1 h-[6px] min-w-[65%] bg-gray-200 rounded-full overflow-hidden">
+                            <div className="flex-1 h-1 md:h-[6px] min-w-[65%] bg-gray-200 rounded-full overflow-hidden">
                               <RatingBar count={count} totalReviews={totalReviews} />
                             </div>
 
@@ -395,8 +395,8 @@ const ProductPage = () => {
                 </div>
 
               <div className="space-y-5">
-                <h3 className="text-xl font-bold">Đánh giá sản phẩm</h3>
-                <p className="text-gray-600">
+                <h3 className="text-lg md:text-xl font-bold">Đánh giá sản phẩm</h3>
+                <p className="text-gray-600 text-sm md:text-base">
                   Bạn cần
                   <Link
                     href={'/login?method=email'}

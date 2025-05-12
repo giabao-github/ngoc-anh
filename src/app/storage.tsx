@@ -44,7 +44,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-xuan-ca_693564536-sm-04_5af9db21f7784c61a6656b8f10d58c54_grande.png?v=1746845545811"
     ],
     description: (
-      <div className="text-base text-gray-700 space-y-2">
+      <div className="text-sm md:text-base text-gray-700 space-y-2">
         <p>Dù ở bất cứ đâu, mỗi độ mai - đào khoe sắc, lòng người lại hân hoan trở về bên gia đình đón một mùa xuân mới. Tất thảy ý nghĩa của sự sum vầy ấm áp trong ngày Tết, được Minh Long gửi gắm trọn vẹn qua Bình hoa Xuân Ca. Vẻ đẹp của hai loài hoa đặc trưng hòa quyện như vũ điệu rộn ràng mùa xuân. Mai vàng rực rỡ từ phương Nam mang theo lời chúc thịnh vượng, trường thọ. Trong khi đào thắm tươi miền Bắc khẽ chạm đến an lành, hạnh phúc. Cổ bình điểm xuyết hoa sen, biểu trưng cho tâm hồn thuần khiết. Gam màu xanh cobalt dịu mát, kết hợp với viền vàng 24k lấp lánh, tạo nên nét trang nhã và quý phái, tô điểm không gian thêm sinh động.</p>
         <p>Bình hoa Xuân Ca gửi gắm lời chúc phúc vẹn toàn cho chủ sở hữu, gợi nhớ về những mùa Tết đoàn viên. Đồng thời thể hiện nghĩa tình gắn kết giữa hai miền, tạo nên bản hòa ca tuyệt diệu của đất trời trước thềm xuân mới.</p>
       </div>
@@ -78,7 +78,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-se-se-va-bong-hoa_693564545-sm-04_dfb3bb29cb2e4513ae81e9ac1e8c502f_grande.png?v=1746845410130"
     ],
     description: (
-      <div className="text-base text-gray-700 space-y-2">
+      <div className="text-sm md:text-base text-gray-700 space-y-2">
         <p>Bình Se Sẻ và Bông Hoa, nơi nghệ thuật truyền thống được tái sinh dưới góc nhìn tươi mới và hiện đại. Hình ảnh chim Se Sẻ nhẹ nhàng đậu trên cành hoa Mẫu Đơn tạo nên bức tranh thiên nhiên tươi đẹp và tràn đầy sức sống. Đồng thời gợi nhắc những cảm xúc mới mẻ về sự sum họp, hạnh phúc, thịnh vượng mà mọi gia đình đều mong ước trong năm mới. Đặc biệt, màu xanh cobalt nổi bật trên nền sứ trắng như sắc xuân đang trỗi dậy, khơi gợi cảm giác an lành. Điểm nhấn vàng 24k tinh tế tạo sự phá cách, giúp bình hoa trở nên nổi bật trong bất kỳ không gian nào.</p>
         <p>Bình Se Sẻ và Bông Hoa không chỉ gói gọn trong ý nghĩa trang trí mà còn mang thông điệp về sự khởi đầu mới suôn sẻ, nhiều hy vọng. Đây cũng là món quà ý nghĩa dành cho người thân, bạn bè, đối tác,… với lời chúc thành công, may mắn và phú quý.</p>
       </div>
@@ -110,13 +110,13 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/nh-hoa-luc-giac-45-cm-quai-rong-binh-hoa-thinh-vuong-vang_694535520-sm_c657df4ae5fe467aa8e5d72af09a765c_grande.png?v=1746852968839"
     ],
     description: (
-      <div className="text-base text-gray-700 space-y-2">
+      <div className="text-sm md:text-base text-gray-700 space-y-2">
         <p>Lộc Bình được thiết kế gồm 3 phần cổ bình, thân bình và đế bình, được trang trí với những họa tiết giàu ý nghĩa, mang đậm truyền thống Việt Nam như hoa sen, hoa mai, hoa đào, dương xỉ… Họa tiết chủ đạo trên 2 mặt chính của Lộc Bình là hình ảnh hoa sen được khắc họa đầy nghệ thuật và sống động. Hai mặt bên của thân bình còn được trang trí hình ảnh bốn linh vật long, lân, quy, phụng - tượng trưng cho sự thái bình và thịnh vượng đem đến nhiều may mắn, điềm lành. Phần cổ bình được trang trí bằng họa tiết hoa mai, hoa đào với vẻ đẹp rực rỡ, thắm tươi, đại diện cho tài lộc, phú quý nhằm gửi gắm thông điệp ý nghĩa về sự hưng thịnh, phát triển.</p>
         <p>Đặc biệt, hai bên cổ bình còn được trang trí thêm linh vật rồng Việt cách điệu - tượng trưng cho nòi giống Rồng – Tiên. Hình ảnh bốn con dơi tượng trưng cho sự may mắn, phước lộc, cùng những họa tiết khác như cá chép hay hoa dương xỉ, tượng trưng cho sự trường cửu (lâu dài) càng tôn lên nét sang trọng, ý nghĩa tinh tế của Lộc Bình. Hình ảnh hoa cúc ở đế bình tượng trưng cho kiết tường (an lành) cũng được thể hiện một cách khéo léo. Tất cả tạo nên bức tranh cảnh sắc mùa xuân, đầy sức sống và giàu nghệ thuật. Tuyệt tác được đội ngũ nghệ nhân tài hoa nhất của Minh Long kỳ công chế tác vừa có giá trị mỹ thuật cao, vừa mang thông điệp, lời chúc phước - lộc - thọ, may mắn, an lành đến chủ sở hữu.</p>
       </div>
     ),
     instruction: (
-      <div className="text-base text-gray-700 space-y-2">
+      <div className="text-sm md:text-base text-gray-700 space-y-2">
         <p>Bình hoa là dòng sản phẩm cao cấp không chỉ bởi sự tinh tế, kiểu dáng độc đáo mà còn hội tụ cả cái tâm, cái tài của từng nghệ nhân thực hiện. Mỗi tác phẩm được hình thành từ chính đôi tay tài hoa của người thợ xoay bình cần mẫn, nét cọ khéo léo, tinh tế của người thợ vẽ và sự góp sức miệt mài của bao nghệ nhân khác.</p>
         <p>Mỗi bình hoa mang một phong cách với những cảm xúc riêng, như đất đã được thổi vào hơi thở của chính những người tạo ra nó. Trên mỗi tác phẩm, thiên nhiên và cuộc sống được tái hiện sống động, có hồn với đầy đủ các màu sắc của tình yêu, quê hương, đất nước, con người, gắn với ước vọng bình an, sung túc, thịnh vượng,... Những phong cách ấy được phối kết hài hòa trên những kiểu dáng Đông – Tây, tạo nên bao không gian vừa cổ kính, ấm cúng mà vẫn hiện đại, sang trọng, phù hợp với nhiều cách bày trí ở những không gian khác nhau.</p>
         <p>Nhờ ứng dụng công nghệ nano và vẽ màu ở nhiệt độ cao nên màu chìm dưới men, những nét vẽ khéo léo còn được giữ nguyên vẹn, hình ảnh trên sản phẩm có chiều sâu và sống động như thật.</p>
@@ -148,7 +148,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/bo-tra-13-l-hoang-cung-sen-vang_01134034503-sm-04_1771b603443543158cf0d5c1e0d6ad6f_grande.jpg?v=1746856668850"
     ],
     description: (
-      <div className="text-base text-gray-700 space-y-2">
+      <div className="text-sm md:text-base text-gray-700 space-y-2">
         <p>Khoác lên vẻ truyền thống, nền nã của loài hoa Á Đông nhưng lại không kém phần tinh tế hiện đại, những cánh sen bung tròn, phúc hậu ôm lấy nhụy đã được tái hiện sống động bằng màu xanh cobalt đặc trưng của cung đình Huế. Bức tranh chân thực và sống động về lá, cỏ và hoa sen như đưa người ngắm về với một làng quê Việt Nam vốn yên bình, trù phú...  Nghệ nhân cũng khéo léo tạo nét vương giả bằng những chi tiết vẽ vàng 24k uyển chuyển trên từng cánh hoa, vành, tay cầm và nắp tạo nên sắc màu lấp lánh dưới sự phản chiếu của ánh sáng. Bộ sản phẩm thích hợp cho những buổi sum họp thân tình trong không gian yên bình, thư giãn vừa gần gũi vừa sang trọng.</p>
       </div>
     ),
@@ -177,7 +177,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/bo-tra-13-l-hoang-cung-quoc-sac_01134006803-sm-04_5d88a2a78c4145ef80cdffecc278679a_grande.jpg?v=1746857440318"
     ],
     description: (
-      <div className="text-base text-gray-700 space-y-2">
+      <div className="text-sm md:text-base text-gray-700 space-y-2">
         <p></p>
       </div>
     ),
@@ -206,7 +206,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/bo-tra-13-l-hoang-cung-huyen-lien_01134046703-sm-04_43409f460da04a1db7b3ab6704f911f9_grande.jpg?v=1746847177048"
     ],
     description: (
-      <div className="text-base text-gray-700 space-y-2">
+      <div className="text-sm md:text-base text-gray-700 space-y-2">
         <p>Bộ sản phẩm Huyền Liên lấy cảm hứng từ vẻ đẹp truyền thống nhưng không kém phần tinh tế của loài hoa Á Đông. Những cánh hoa sen bung tròn, thể hiện trọn vẹn sự sống động bằng sắc đen quý phái. Những chi tiết vẽ vàng 24k uyển chuyển trên từng cánh hoa, vành, tay cầm và nắp giúp sản phẩm thêm phần cao quý. Huyền Liên thích hợp cho những buổi đón tiếp khách mời quan trọng của gia đình. Sản phẩm giữ nhiệt ổn định, giúp thức uống nóng lâu và lưu giữ hương vị thơm ngon đặc trưng. Bộ trà Huyền Liên cũng là chế tác đặc biệt dành tặng Nguyên Thủ các quốc gia ASEAN 2020.</p>
       </div>
     ),

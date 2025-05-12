@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useState } from "react";
+import { RefObject, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
               className="h-9 w-9 rounded-full cursor-pointer select-none"
             />
             <button
-              className="cursor-pointer"
+              className="cursor-pointer outline-none ring-0 focus:ring-0 focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -137,7 +137,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                 href="#" 
                 onClick={(e) => {
                   e.preventDefault();
-                  collectionRef?.current?.scrollIntoView({ behavior: 'smooth' });
+                  productsRef?.current?.scrollIntoView({ behavior: 'smooth' });
                   if (hasSections) {
                     history.pushState(null, '', '#products');
                   } else {
