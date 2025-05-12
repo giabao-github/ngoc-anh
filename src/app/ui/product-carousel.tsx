@@ -76,8 +76,8 @@ export const ProductCarousel = ({
                   <Image
                     src={item.image}
                     alt={item.label ?? ''}
-                    width={648}
-                    height={648}
+                    width={608}
+                    height={608}
                     className={cn(
                       "hidden md:block object-cover transition-transform duration-300 select-none",
                     )}

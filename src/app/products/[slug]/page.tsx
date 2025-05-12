@@ -170,8 +170,10 @@ const ProductPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 md:mt-12">
           {/* Image Section */}
           <div className="space-y-4">
-            <div className="relative aspect-square overflow-hidden rounded-lg">
-              <ProductCarousel onSelect={(value) => setCurrentImageIndex(Number(value))} data={data} currentIndex={currentImageIndex} />
+            <div className="flex justify-center items-center">
+              <div className="relative aspect-square overflow-hidden rounded-lg">
+                <ProductCarousel onSelect={(value) => setCurrentImageIndex(Number(value))} data={data} currentIndex={currentImageIndex} />
+              </div>
             </div>
 
             <div className="flex justify-center gap-4 mx-auto">
