@@ -4,7 +4,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 const Hero = () => (
   <section className={`bg-[#0C2543] text-white`}>
     <div className="max-w-[1340px] mx-auto grid md:grid-cols-2 gap-8 py-16 px-6">
-      <div className="flex flex-col justify-center gap-y-4 md:gap-y-12">
+      <div className="flex flex-col justify-center md:gap-y-12">
         <h2 className="text-4xl md:text-6xl mb-6 uppercase font-semibold tracking-wide text-[#BE984E]">TINH HOA TỪ ĐẤT
         TINH XẢO TỪ NGƯỜI</h2>
         <p className="mb-8 text-lg md:text-xl tracking-wide">55 năm cho một hành trình bền bỉ đưa gốm sứ Việt Nam vươn tầm thế giới, tạo nên những tuyệt tác vĩnh cửu</p>

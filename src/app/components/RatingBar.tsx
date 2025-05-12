@@ -16,7 +16,7 @@ const RatingBar: React.FC<RatingBarProps> = ({ count, totalReviews }) => {
   }, [proportion]);
 
   return (
-    <div className="flex-1 h-1 md:h-[6px] bg-gray-200 rounded-full overflow-hidden">
+    <div className="flex-1 h-[2px] md:h-[6px] bg-gray-200 rounded-full overflow-hidden">
       <div
         className={`h-full bg-gradient-to-r from-yellow-400 to-orange-400 transition-all duration-700 ease-out rounded-full`}
         style={{ width: `${animatedWidth}%` }}

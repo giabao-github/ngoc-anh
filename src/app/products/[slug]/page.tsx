@@ -167,7 +167,7 @@ const ProductPage = () => {
         </div>
       )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 md:mt-12">
           {/* Image Section */}
           <div className="space-y-4">
             <div className="relative aspect-square overflow-hidden rounded-lg">
@@ -179,7 +179,7 @@ const ProductPage = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
-                  className={`aspect-square w-20 md:w-28 cursor-pointer rounded-lg overflow-hidden ${currentImageIndex === index ? "ring-2 ring-[#BB9244]" : "ring-1 ring-neutral-100"}`}
+                  className={`aspect-square w-16 md:w-28 cursor-pointer rounded-lg overflow-hidden ${currentImageIndex === index ? "ring-2 ring-[#BB9244]" : "ring-1 ring-neutral-100"}`}
                 >
                   <Image 
                     width={112} 
@@ -201,7 +201,7 @@ const ProductPage = () => {
           {/* Product Information */}
           <div className="space-y-4 md:space-y-6 mx-1 md:mx-0">
             <div className="flex justify-between items-start">
-              <h1 className="text-2xl md:text-3xl font-bold">{product.name}</h1>
+              <h1 className="text-xl md:text-3xl font-bold max-w-[90%]">{product.name}</h1>
               <button
                 title={`${isWishlisted ? 'Remove from Favorite' : 'Add to Favorite'}`}
                 onClick={() => setIsWishlisted(!isWishlisted)}
@@ -236,7 +236,9 @@ const ProductPage = () => {
                       key={pattern.name}
                       onClick={() => {
                         setSelectedPattern(pattern.name);
-                        router.push(`/products/${pattern.slug}`);
+                        if (slug !== pattern.slug) {
+                          router.push(`/products/${pattern.slug}`);
+                        }
                       }}
                       className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-[#BB9244] hover:bg-[#BB9244] hover:text-white transition-colors tracking-wide ${
                         selectedPattern === pattern.name
@@ -316,7 +318,7 @@ const ProductPage = () => {
             <TabList className="flex border-b border-[#BB9244]/40 gap-x-10">
               {['CHI TIẾT SẢN PHẨM', 'HƯỚNG DẪN SỬ DỤNG'].map((tab) => (
                 <Tab key={tab} className={({ selected }) =>
-                  `py-3 text-base md:text-lg font-semibold uppercase tracking-wide cursor-pointer border-b -mb-px transition outline-none ring-0 focus:ring-0 focus:outline-none ${
+                  `py-3 text-sm md:text-lg font-semibold uppercase tracking-wide cursor-pointer border-b -mb-px transition outline-none ring-0 focus:ring-0 focus:outline-none ${
                     selected
                       ? 'border-[#BB9244] text-black'
                       : 'border-transparent text-gray-400 hover:border-[#BB9244] hover:text-black'
@@ -349,43 +351,43 @@ const ProductPage = () => {
           {/* Ratings Section */}
           <div className="px-2 pt-10 md:pt-0 md:px-16 pb-12 md:pb-24">
             <div className="grid md:grid-cols-1 gap-8 md:gap-12">
-                <div className="space-y-6 md:space-y-8">
-                  <h3 className="text-2xl md:text-3xl font-bold">Nhận xét và đánh giá</h3>
+                <div className="space-y-4 md:space-y-8">
+                  <h3 className="text-xl md:text-3xl font-bold">Nhận xét và đánh giá</h3>
                   <div className="flex flex-col md:flex-row md:items-center md:justify-start space-y-6 md:space-y-0 md:space-x-10">
                     {/* Left: Overall Rating */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-3">
-                        <FaStar className="text-[#F3C63F] h-8 w-8 md:w-10 md:h-10" />
-                        <span className="text-2xl md:text-3xl font-bold">{averageRating}</span>
+                        <FaStar className="text-[#F3C63F] h-6 w-6 md:w-10 md:h-10" />
+                        <span className="text-xl md:text-3xl font-bold">{averageRating}</span>
                       </div>
                       <p className="text-gray-700 text-left md:text-right text-sm">{totalReviews} đánh giá</p>
                     </div>
 
                     {/* Right: Ratings Breakdown */}
-                    <div className="space-y-2 w-full">
+                    <div className="space-y-1 md:space-y-2 w-2/3 md:w-full">
                       {[5, 4, 3, 2, 1].map((star) => {
                         const index = star - 1;
                         const count = product?.rating?.[index] ?? 0;
 
                         return (
-                          <div key={star} className="flex items-center gap-4">
+                          <div key={star} className="flex items-center gap-3 md:gap-4">
                             {/* Stars */}
                             <div className="flex gap-0.5">
                               {Array.from({ length: 5 }).map((_, i) => (
                                 <FaStar
                                   key={i}
-                                  className={`w-4 h-4 ${i < star ? 'text-[#F3C63F]' : 'text-gray-300'}`}
+                                  className={`w-3 h-3 md:w-4 md:h-4 ${i < star ? 'text-[#F3C63F]' : 'text-gray-300'}`}
                                 />
                               ))}
                             </div>
 
                             {/* Progress Bar */}
-                            <div className="flex-1 h-1 md:h-[6px] min-w-[65%] bg-gray-200 rounded-full overflow-hidden">
+                            <div className="flex-1 h-[2px] md:h-[6px] min-w-[75%] md:min-w-[65%] bg-gray-200 rounded-full overflow-hidden">
                               <RatingBar count={count} totalReviews={totalReviews} />
                             </div>
 
                             {/* Count */}
-                            <span className="text-sm text-gray-600">{count}</span>
+                            <span className="text-xs md:text-sm text-gray-600">{count}</span>
                           </div>
                         );
                       })}

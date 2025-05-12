@@ -75,14 +75,17 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                   />
                 </div>
 
-                <div className="p-3 md:p-4 bg-white">
-                  <h3 className="px-1 text-base md:text-2xl font-semibold text-[#0C2543] line-clamp-2 min-h-[56px]">
+                <div
+                  onClick={() => router.push(`/products/${product.patterns[0].slug}`)}
+                  className="p-[10px] md:p-4 bg-white cursor-pointer hover:shadow transition-shadow"
+                >
+                  <h3 className="px-1 text-sm md:text-2xl font-semibold text-[#0C2543] line-clamp-2 min-h-[36px] md:min-h-20 leading-normal hover:underline">
                     {product.name}
                   </h3>
-                  <p className="px-2 text-[#BB9244] font-semibold pb-1 md:py-4 text-lg md:text-2xl">
+                  <p className="px-2 text-[#BB9244] font-semibold py-1 md:py-4 text-base md:text-2xl">
                     {product.patterns[0]?.price.toLocaleString('en-US') + '₫'}
                   </p>
-                  <div className="flex flex-col md:flex-row gap-0 md:gap-2 mb-2">
+                  <div className="hidden md:flex md:flex-row gap-0 md:gap-2 mb-2">
                     <button
                       onClick={() => router.push(`/products/${product.patterns[0].slug}`)}
                       className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"

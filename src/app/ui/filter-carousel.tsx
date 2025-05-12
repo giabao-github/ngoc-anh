@@ -57,13 +57,6 @@ export const FilterCarousel = ({
 
   return (
     <div className='relative w-full'>
-      {/* Left fade */}
-      <div
-        className={cn(
-          'absolute left-8 md:left-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none',
-          current === 1 && 'hidden'
-        )}
-      />
       <Carousel
         setApi={setApi}
         opts={{
@@ -163,14 +156,6 @@ export const FilterCarousel = ({
         <CarouselPrevious className='left-0 z-20' />
         <CarouselNext className='right-0 z-20' />
       </Carousel>
-
-      {/* Right fade */}
-      <div
-        className={cn(
-          'absolute right-8 md:right-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none',
-          current === count && 'hidden'
-        )}
-      />
     </div>
   );
 };

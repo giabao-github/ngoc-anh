@@ -28,8 +28,8 @@ const RatingInput = ({ onRate }: { onRate: (rating: number) => void }) => {
   return (
     <div className="inline-flex flex-col items-start gap-1">
       <div className="flex items-center gap-1">
-        <p className="font-semibold">Chất lượng sản phẩm</p>
-        <div className="mx-4">
+        <p className="font-semibold text-xs md:text-base">Chất lượng sản phẩm</p>
+        <div className="mx-2 md:mx-4">
           {[1, 2, 3, 4, 5].map((star) => (
             <button
               key={star}
@@ -38,17 +38,17 @@ const RatingInput = ({ onRate }: { onRate: (rating: number) => void }) => {
               onClick={() => handleClick(star)}
               onMouseEnter={() => setHovered(star)}
               onMouseLeave={() => setHovered(null)}
-              className="p-1 transition-transform duration-100 cursor-pointer hover:scale-125 focus:outline-none"
+              className="py-1 px-[2px] md:px-1 transition-transform duration-100 cursor-pointer hover:scale-125 focus:outline-none"
             >
               <FaStar
-                className={`w-7 h-7 transition-colors ${
+                className={`w-4 h-4 md:w-7 md:h-7 transition-colors ${
                   (hovered ?? selected) >= star ? 'text-[#F3C63F]' : 'text-gray-300'
                 }`}
               />
             </button>
           ))}
         </div>
-        <p className={`font-semibold ${selected < 3 ? 'text-orange-500' : selected >= 4 ? 'text-[#F4B400]' : 'text-neutral-500'}`}>{selected > 0 && quality}</p>
+        <p className={`font-semibold text-xs md:text-base ${selected < 3 ? 'text-orange-500' : selected >= 4 ? 'text-[#F4B400]' : 'text-neutral-500'}`}>{selected > 0 && quality}</p>
       </div>
       {selected > 0 && (
         <span className="py-4 px-1 text-sm text-gray-700 font-medium">
