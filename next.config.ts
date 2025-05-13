@@ -31,6 +31,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'product.hstatic.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.mahalaxmifoods.com',
+      },
     ],
   },
 };

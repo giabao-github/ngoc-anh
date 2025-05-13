@@ -14,7 +14,7 @@ const App = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const hash = window.location.hash;
+    const { hash } = window.location;
     if (hash === '#collection') {
       collectionRef.current?.scrollIntoView({ behavior: 'smooth' });
     } else if (hash === '#products') {
