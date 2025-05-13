@@ -96,32 +96,33 @@ export const FilterCarousel = ({
                 onClick={handleClick}
                 className='pl-3 basis-auto relative cursor-pointer group'
               >
-                <div className="relative overflow-hidden rounded-md">
-                  {/* Desktop image */}
+                {/* Desktop image */}
+                <div className="relative hidden md:block overflow-hidden rounded-md w-[1034px] h-[742px]">
                   <Image
                     src={item.image}
                     alt={item.label}
-                    width={1034}
-                    height={740}
+                    fill
+                    sizes="(min-width: 768px) 1034px"
                     className={cn(
-                      "hidden md:block transition-transform duration-300 hover:scale-105 select-none",
+                      "transition-transform duration-300 hover:scale-105 select-none",
                     )}
                   />
+                </div>
+                <div className="md:hidden relative overflow-hidden rounded-md w-[286px] h-[206px]">
                   {/* Mobile image */}
                   <Image
                     src={item.image}
                     alt={item.label}
-                    width={286}
-                    height={204}
+                    fill
+                    sizes="(max-width: 767px) 286px"
                     className={cn(
-                      "md:hidden transition-transform duration-300 hover:scale-105 select-none",
+                      "h-auto transition-transform duration-300 select-none",
                     )}
                   />
-
                   {/* Info icon (mobile only) */}
                   {isMobile && (
                     <div className="absolute bottom-3 right-4 z-10">
-                      <div className="bg-white/80 backdrop-blur-md rounded-full p-1 shadow-md">
+                      <div className="bg-white/80 h-auto backdrop-blur-md rounded-full p-1 shadow-md">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 text-black"

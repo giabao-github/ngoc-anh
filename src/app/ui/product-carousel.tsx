@@ -5,6 +5,7 @@ import { cn } from "../lib/utils";
 import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
 import Image from "next/image";
 
+
 interface ProductCarouselProps {
   value?: string | null;
   isLoading?: boolean;
@@ -16,7 +17,6 @@ interface ProductCarouselProps {
     image: string;
   }[];
 }
-
 
 export const ProductCarousel = ({
   value,
@@ -71,25 +71,27 @@ export const ProductCarousel = ({
                 onClick={() => onSelect(Number(item.value ?? + index).toString())}
                 className='pl-3 basis-auto relative cursor-pointer group'
               >
-                <div className="relative overflow-hidden rounded-md">
-                  {/* Desktop image */}
+                {/* Desktop image */}
+                <div className="hidden md:block relative overflow-hidden rounded-md w-[608px] aspect-square">
                   <Image
                     src={item.image}
                     alt={item.label ?? ''}
-                    width={608}
-                    height={608}
+                    fill
+                    sizes="(min-width: 768px) 608px"
                     className={cn(
-                      "hidden md:block object-cover transition-transform duration-300 select-none",
+                      "object-cover transition-transform duration-300 select-none",
                     )}
                   />
+                </div>
+                <div className="md:hidden w-[90vw] relative overflow-hidden rounded-md aspect-square">
                   {/* Mobile image */}
                   <Image
                     src={item.image}
                     alt={item.label ?? ''}
-                    width={360}
-                    height={360}
+                    fill
+                    sizes="(max-width: 767px) 90vw"
                     className={cn(
-                      "md:hidden w-[90vw] object-cover transition-transform duration-300 select-none",
+                      "object-cover transition-transform duration-300 select-none",
                     )}
                   />
                 </div>
