@@ -103,7 +103,11 @@ const ProductPage = () => {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, []);  
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
 
 
   if (!product) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaApple, FaEye, FaEyeSlash } from "react-icons/fa6";
 import SkeletonLoader from "../components/SkeletonLoader";
@@ -63,6 +63,10 @@ const LoginPage = () => {
   const isPasswordValid = password.length >= 6;
 
   const isFormValid = (isPhoneValid || isEmailValid) && isPasswordValid;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
 
   return (

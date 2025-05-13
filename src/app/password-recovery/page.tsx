@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import SkeletonLoader from "../components/SkeletonLoader";
 import Header from "../components/Header";
@@ -45,6 +45,10 @@ const PasswordRecoveryPage = () => {
   const isEmailValid = method === 'email' && validateEmail(email);
 
   const isFormValid = (isPhoneValid || isEmailValid);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
 
   return (
