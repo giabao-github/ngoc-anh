@@ -31,6 +31,7 @@ const SearchPage = () => {
 
   return (
     <Suspense fallback={<SkeletonLoader />}>
+      <title>Kết quả tìm kiếm</title>
       <Header hasFooter aboutRef={aboutRef} /> 
       <div className="px-4 sm:px-6 lg:px-16 pt-10 pb-20">
         {/* Heading */}

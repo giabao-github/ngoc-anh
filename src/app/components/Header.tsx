@@ -32,7 +32,6 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
 
   return (
     <>
-      <title>Kết quả tìm kiếm</title>
       {/* Desktop view */}
       <header className={`bg-[#0C2543] text-white py-2 px-6`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -130,8 +129,14 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                 )}
               </div>
             </div>
-            <FiShoppingCart className="text-xl cursor-pointer hover:text-[#D4AF37]" />
-            <FiUser onClick={() => router.push('/login?method=email')} className="text-xl cursor-pointer hover:text-[#D4AF37]" />
+            <FiShoppingCart 
+              onClick={() => router.push('/cart')}
+              className="text-xl cursor-pointer hover:text-[#D4AF37]" 
+            />
+            <FiUser 
+              onClick={() => router.push('/login?method=email')} 
+              className="text-xl cursor-pointer hover:text-[#D4AF37]" 
+            />
             <Image 
               src={'/vn-flag.jpeg'}
               alt="Vietnam"
@@ -143,8 +148,14 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
           </nav>
 
           <div className="flex items-center flex-row gap-x-6 md:hidden">
-            <FiShoppingCart className="text-xl cursor-pointer hover:text-[#D4AF37]" />
-            <FiUser onClick={() => router.push('/login?method=email')} className="text-xl cursor-pointer hover:text-[#D4AF37]" />
+            <FiShoppingCart 
+              onClick={() => router.push('/cart')}
+              className="text-xl cursor-pointer hover:text-[#D4AF37]"
+            />
+            <FiUser 
+              onClick={() => router.push('/login?method=email')} 
+              className="text-xl cursor-pointer hover:text-[#D4AF37]" 
+            />
             <Image 
               src={'https://static.vecteezy.com/system/resources/previews/016/328/942/large_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png'}
               alt="Vietnam"

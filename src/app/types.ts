@@ -7,3 +7,15 @@ export type ImageData = {
   label: string | undefined;
   image: string;
 };
+
+export type CartItem = {
+  id: number;
+  name: string;
+  pattern: string;
+  size?: string;
+  volume?: string;
+  slug: string;
+  price: number;
+  image: string;
+  quantity: number;
+};
