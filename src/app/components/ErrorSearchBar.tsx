@@ -3,37 +3,19 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BsSearchHeartFill } from "react-icons/bs";
+import { IoCloseCircle } from "react-icons/io5";
 import { Input } from "../ui/input";
+import { handleSearch } from "../lib/utils";
 
-
-const removeVietnameseTones = (str: string) => {
-  return str
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/đ/g, "d")
-    .replace(/Đ/g, "D")
-    .replace(/[^a-zA-Z0-9 ]/g, "")
-    .replace(/\s+/g, "-")
-    .toLowerCase();
-};
 
 const ErrorSearchBar = () => {
   const [query, setQuery] = useState("");
   const router = useRouter();
 
-  const handleSearch = () => {
-    if (!query.trim()) {
-      return;
-    }
-
-    const slug = removeVietnameseTones(query.trim());
-    router.push(`/products/${slug}`);
-  };
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      handleSearch();
+      handleSearch(query, router);
     }
   };
 
@@ -42,13 +24,15 @@ const ErrorSearchBar = () => {
       className="w-full max-w-sm mt-6"
       onSubmit={(e) => {
         e.preventDefault();
-        handleSearch();
+        handleSearch(query, router);
       }}
     >
       <div className="relative">
-        {/* Icon */}
+        {/* Search icon */}
         <button
-          type="submit"
+          title="Tìm kiếm"
+          type="button"
+          onClick={() => handleSearch(query, router)}
           className="absolute cursor-pointer inset-y-0 left-3 flex items-center text-rose-400 hover:text-rose-600 transition"
         >
           <BsSearchHeartFill size={18} />
@@ -63,6 +47,17 @@ const ErrorSearchBar = () => {
           placeholder="Tìm sản phẩm khác..."
           className="w-full pl-10 pr-4 py-2 border border-rose-300 rounded-full focus:ring-2 focus:ring-rose-400 focus:outline-none transition"
         />
+
+        {query.trim().length > 0 && (
+          <button
+            title="Xóa tìm kiếm"
+            type="button"
+            onClick={() => setQuery("")}
+            className="absolute cursor-pointer inset-y-0 right-3 flex items-center text-rose-400 hover:text-rose-600 transition"
+          >
+            <IoCloseCircle size={18} />
+          </button>
+        )}
       </div>
     </form>
   );

@@ -1,8 +1,11 @@
 import { clsx, type ClassValue } from "clsx";
+import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
+import { products } from "../storage";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 
-export function cn(...inputs: ClassValue[]) {
+export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
 }
 
@@ -14,3 +17,64 @@ export const formatDuration = (duration: number) => {
     ? `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
     : `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
+
+export const normalizeText = (str: string, forSlug: boolean = false) => {
+  let normalized = str
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .toLowerCase();
+
+  if (forSlug) {
+    return normalized
+      .replace(/[^a-zA-Z0-9]+/g, "-") 
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "")
+  } else {
+    return normalized
+      .replace(/[^a-zA-Z0-9 ]/g, " ")
+      .replace(/\s+/g, " ") 
+      .trim();
+  }
+};
+
+export const formatText = (text: string) => {
+  return text
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/\s*([+-])\s*/g, ' $1 ');
+};
+
+export const handleSearch = (query: string, router: AppRouterInstance) => {
+  const trimmed = query.trim();
+  if (!trimmed) {
+    return;
+  }
+
+  const formattedQuery = formatText(trimmed);
+  const normalizedQuery = normalizeText(formattedQuery);
+  const queryWords = normalizedQuery.split(" ");
+  const encoded = encodeURIComponent(formattedQuery);
+
+  const exactMatch = products.find(product =>
+    queryWords.every(word => normalizeText(product.name).includes(word))
+  );
+
+  if (!exactMatch) {
+    let bestMatch: typeof products[number] | null = null;
+    let maxScore = 0;
+
+    for (const product of products) {
+      const normalizedName = normalizeText(product.name);
+      const score = queryWords.filter(word => normalizedName.includes(word)).length;
+
+      if (score > maxScore) {
+        maxScore = score;
+        bestMatch = product;
+      }
+    }
+  }
+  router.push(`/search?query=${encoded}`);
+};

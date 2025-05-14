@@ -3,6 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FiMenu, FiShoppingCart, FiUser, FiX } from "react-icons/fi";
+import { IoCloseCircle } from "react-icons/io5";
+import { BsSearchHeart } from "react-icons/bs";
+import { Input } from "../ui/input";
+import { handleSearch } from "../lib/utils";
 
 
 interface HeaderProps {
@@ -15,26 +19,36 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, productsRef, aboutRef }) => {
   const router = useRouter();
+  const [query, setQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSearch(query, router);
+    }
+  };
+
 
   return (
     <>
+      <title>Kết quả tìm kiếm</title>
       {/* Desktop view */}
-      <header className={`bg-[#0C2543] text-white py-4 px-6`}>
+      <header className={`bg-[#0C2543] text-white py-2 px-6`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className={`flex items-center space-x-4`}>
             <Image
               src="https://www.zarla.com/images/zarla-sculpticon-1x1-2400x2400-20230210-9wkw87py43xdc9yhdpwq.png?crop=1:1,smart&width=250&dpr=2"
               alt="Logo"
-              width={40}
-              height={40}
+              width={80}
+              height={80}
               onClick={() => router.push('/')}
               className="object-cover rounded cursor-pointer bg-white select-none"
             />
             <h1 className="text-2xl font-semibold uppercase select-none hidden md:block">Ngọc Ánh</h1>
           </div>
 
-          <nav className="hidden md:flex space-x-6 items-center tracking-wide">
+          <nav className="hidden md:flex space-x-7 items-center tracking-wide">
             <Link 
               href="#" 
               onClick={(e) => {
@@ -82,6 +96,40 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
             >
               Về chúng tôi
             </Link>
+            <div className="px-4">
+              <div className="relative">
+                {/* Search icon */}
+                <button
+                  title="Tìm kiếm"
+                  type="button"
+                  onClick={() => handleSearch(query, router)}
+                  className="absolute cursor-pointer inset-y-0 left-4 flex items-center text-white hover:text-[#D4AF37]  transition"
+                >
+                  <BsSearchHeart size={18} />
+                </button>
+
+                {/* Input */}
+                <Input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Tìm kiếm sản phẩm..."
+                  className="w-96 pl-12 pr-4 py-2 border border-white rounded-full focus:ring-1 focus:ring-white focus:outline-none transition"
+                />
+
+                {query.trim().length > 0 && (
+                  <button
+                    title="Xóa tìm kiếm"
+                    type="button"
+                    onClick={() => setQuery("")}
+                    className="absolute cursor-pointer inset-y-0 right-3 flex items-center text-neutral-400 hover:text-white transition"
+                  >
+                    <IoCloseCircle size={18} />
+                  </button>
+                )}
+              </div>
+            </div>
             <FiShoppingCart className="text-xl cursor-pointer hover:text-[#D4AF37]" />
             <FiUser onClick={() => router.push('/login?method=email')} className="text-xl cursor-pointer hover:text-[#D4AF37]" />
             <Image 
@@ -116,57 +164,89 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
       </header>
       {/* Mobile view */}
       {isMenuOpen && (
-          <div className={`md:hidden bg-[#0C2543] text-white p-6`}>
-            <nav className="flex flex-col space-y-4">
-              <Link 
-                href="#" 
-                onClick={(e) => {
-                  e.preventDefault();
-                  collectionRef?.current?.scrollIntoView({ behavior: 'smooth' });
-                  if (hasSections) {
-                    history.pushState(null, '', '#collection');
-                  } else {
-                    router.push("/#collection");
-                  }
-                }} 
-                className="hover:text-[#D4AF37] transition-colors select-none w-fit"
+        <div className={`md:hidden bg-[#0C2543] text-white p-6`}>
+          <nav className="flex flex-col space-y-4">
+            <Link 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                collectionRef?.current?.scrollIntoView({ behavior: 'smooth' });
+                if (hasSections) {
+                  history.pushState(null, '', '#collection');
+                } else {
+                  router.push("/#collection");
+                }
+              }} 
+              className="hover:text-[#D4AF37] transition-colors select-none w-fit"
+            >
+              Bộ sưu tập
+            </Link>
+            <Link 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                productsRef?.current?.scrollIntoView({ behavior: 'smooth' });
+                if (hasSections) {
+                  history.pushState(null, '', '#products');
+                } else {
+                  router.push("/#products");
+                }
+              }} 
+              className="hover:text-[#D4AF37] transition-colors select-none w-fit"
+            >
+              Cửa hàng
+            </Link>
+            <Link 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                if (hasSections) {
+                  aboutRef?.current?.scrollIntoView({ behavior: 'smooth' });
+                  history.pushState(null, '', '#about');
+                } else if (hasFooter) {
+                  aboutRef?.current?.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  router.push("/#about");
+                }
+              }} 
+              className="hover:text-[#D4AF37] transition-colors select-none w-fit"
+            >
+              Về chúng tôi
+            </Link>
+            <div className="relative mt-4 mb-2">
+              {/* Search icon */}
+              <button
+                title="Tìm kiếm"
+                type="button"
+                onClick={() => handleSearch(query, router)}
+                className="absolute cursor-pointer inset-y-0 left-3 flex items-center text-white hover:text-[#D4AF37]  transition"
               >
-                Bộ sưu tập
-              </Link>
-              <Link 
-                href="#" 
-                onClick={(e) => {
-                  e.preventDefault();
-                  productsRef?.current?.scrollIntoView({ behavior: 'smooth' });
-                  if (hasSections) {
-                    history.pushState(null, '', '#products');
-                  } else {
-                    router.push("/#products");
-                  }
-                }} 
-                className="hover:text-[#D4AF37] transition-colors select-none w-fit"
-              >
-                Cửa hàng
-              </Link>
-              <Link 
-                href="#" 
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (hasSections) {
-                    aboutRef?.current?.scrollIntoView({ behavior: 'smooth' });
-                    history.pushState(null, '', '#about');
-                  } else if (hasFooter) {
-                    aboutRef?.current?.scrollIntoView({ behavior: 'smooth' });
-                  } else {
-                    router.push("/#about");
-                  }
-                }} 
-                className="hover:text-[#D4AF37] transition-colors select-none w-fit"
-              >
-                Về chúng tôi
-              </Link>
-            </nav>
-          </div>
+                <BsSearchHeart size={18} />
+              </button>
+
+              {/* Input */}
+              <Input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Tìm kiếm sản phẩm..."
+                className="w-full pl-10 pr-4 py-2 border border-white rounded-full focus:ring-1 focus:ring-white focus:outline-none transition"
+              />
+
+              {query.trim().length > 0 && (
+                <button
+                  title="Xóa tìm kiếm"
+                  type="button"
+                  onClick={() => setQuery("")}
+                  className="absolute cursor-pointer inset-y-0 right-3 flex items-center text-neutral-300 hover:text-white transition"
+                >
+                  <IoCloseCircle size={18} />
+                </button>
+              )}
+            </div>
+          </nav>
+        </div>
       )}
     </>
   );

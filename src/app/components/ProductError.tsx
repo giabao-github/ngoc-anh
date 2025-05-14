@@ -1,9 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { IoWarning } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa6";
-import { Input } from "../ui/input";
-import { BsSearchHeartFill } from "react-icons/bs";
 import ErrorSearchBar from "./ErrorSearchBar";
 
 const ProductError = () => {
@@ -27,18 +24,13 @@ const ProductError = () => {
       <Image
         src="https://www.mahalaxmifoods.com/include/no-product.png"
         alt="Product not found"
-        width={120}
-        height={120}
+        width={180}
+        height={180}
         className="animate-pulse"
       />
 
-      {/* Icon */}
-      <div className="bg-rose-200 p-3 rounded-full shadow-sm">
-        <IoWarning className="text-rose-500" size={36} />
-      </div>
-
       {/* Heading */}
-      <h1 className="text-3xl md:text-4xl font-bold text-center">Sản phẩm không tồn tại</h1>
+      <h1 className="mt-8 text-3xl md:text-4xl font-bold text-center">Sản phẩm không tồn tại</h1>
 
       {/* Description */}
       <p className="text-center text-rose-500 max-w-md">
@@ -49,14 +41,14 @@ const ProductError = () => {
       <div className="flex flex-col sm:flex-row gap-3 mt-4">
         <Link
           href="/"
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 text-white bg-rose-600 hover:bg-rose-700 rounded-full transition shadow-md"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 text-white bg-rose-600 hover:bg-rose-700 rounded-full transition shadow-md select-none"
         >
           <FaArrowLeft /> Quay về trang chủ
         </Link>
 
         <Link
           href="/#products"
-          className="inline-flex items-center justify-center px-6 py-3 text-rose-700 bg-white border border-rose-300 hover:bg-rose-100 rounded-full transition"
+          className="inline-flex items-center justify-center px-6 py-3 text-rose-700 bg-white border border-rose-300 hover:bg-rose-100 rounded-full transition shadow-md select-none"
         >
           Xem sản phẩm khác
         </Link>
