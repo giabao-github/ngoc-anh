@@ -19,3 +19,10 @@ export type CartItem = {
   image: string;
   quantity: number;
 };
+
+export type RawCartItem = {
+  id: number;
+  quantity: number;
+};
+
+export type SyncCartItem = Product & { quantity: number };

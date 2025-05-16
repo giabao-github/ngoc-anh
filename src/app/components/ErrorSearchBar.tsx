@@ -6,7 +6,13 @@ import { BsSearchHeartFill } from "react-icons/bs";
 import { IoCloseCircle } from "react-icons/io5";
 import { Input } from "../ui/input";
 import { handleSearch } from "../lib/utils";
+import { Montserrat } from "next/font/google";
 
+
+const montserrat = Montserrat({
+  subsets: ["cyrillic", "latin", "vietnamese"],
+  weight: ["200", "400","500", "600", "700", "800"]
+});
 
 const ErrorSearchBar = () => {
   const [query, setQuery] = useState("");
@@ -45,7 +51,7 @@ const ErrorSearchBar = () => {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Tìm sản phẩm khác..."
-          className="w-full pl-10 pr-4 py-2 border border-rose-300 rounded-full focus:ring-2 focus:ring-rose-400 focus:outline-none transition"
+          className={`w-full font-medium pl-10 pr-4 py-2 border border-rose-300 rounded-full focus:ring-2 focus:ring-rose-400 focus:outline-none transition ${montserrat.className}`}
         />
 
         {query.trim().length > 0 && (

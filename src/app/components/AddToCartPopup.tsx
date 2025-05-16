@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FiX } from "react-icons/fi";
 import { Product } from "../types";
+import { useRouter } from "next/navigation";
 
 
 interface AddToCartPopupProps {
@@ -10,9 +11,14 @@ interface AddToCartPopupProps {
   onClose: () => void;
 }
 const AddToCartPopup: React.FC<AddToCartPopupProps> = ({ show, product, cartQuantity, onClose }) => {
+  const router = useRouter();
+
   if (show) {
     return (
-      <div className="fixed top-4 right-4 md:top-24 md:right-4 bg-white shadow-2xl rounded-xl p-4 w-80 z-50 border border-gray-200">
+      <div
+        onClick={() => router.push('/cart')}
+        className="fixed cursor-pointer top-4 right-4 md:top-24 md:right-4 bg-white shadow-2xl rounded-xl p-4 w-80 z-50 border border-gray-200"
+      >
           <div className="flex justify-between items-start mb-2">
             <h4 className="text-green-600 font-semibold text-sm">
               Đã thêm vào giỏ hàng thành công!

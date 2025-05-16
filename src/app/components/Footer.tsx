@@ -92,7 +92,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="cursor-pointer select-none bg-transparent text-[#D4AF37] border border-[#D4AF37] px-4 py-2 rounded-full hover:bg-[#D4AF37] hover:text-white transition-colors flex items-center"
           >
-            <span className="font-semibold text-xs">
+            <span className="font-semibold text-xs tracking-wide">
               Quay về đầu trang
             </span>
           </button>
@@ -102,7 +102,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="cursor-pointer select-none bg-transparent text-[#D4AF37] border border-[#D4AF37] px-6 py-3 rounded-full hover:bg-[#D4AF37] hover:text-white transition-colors flex items-center"
           >
-            <span className="font-semibold">
+            <span className="font-semibold tracking-wide">
               Quay về đầu trang
             </span>
           </button>

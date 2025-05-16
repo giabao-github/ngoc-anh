@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import { products } from "../storage";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { RawCartItem } from "../types";
 
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -77,4 +78,16 @@ export const handleSearch = (query: string, router: AppRouterInstance) => {
     }
   }
   router.push(`/search?query=${encoded}`);
+};
+
+export const getLocalCart = (): RawCartItem[] => {
+  if (typeof window === "undefined") {
+    return [];
+  }
+  try {
+    const stored = localStorage.getItem("cart");
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
 };

@@ -9,7 +9,7 @@ const Hero = () => (
         TINH XẢO TỪ NGƯỜI</h2>
         <p className="mb-8 text-lg md:text-xl tracking-wide">55 năm cho một hành trình bền bỉ đưa gốm sứ Việt Nam vươn tầm thế giới, tạo nên những tuyệt tác vĩnh cửu</p>
         <button className="bg-transparent text-[#BE984E] font-semibold text-base border-1 border-[#BE984E] px-6 py-[14px] md:px-8 md:py-4 rounded-full w-fit hover:bg-[#BE984E] hover:text-white cursor-pointer transition-colors select-none flex items-center flex-row gap-x-3">
-          <span className="text-sm md:text-base">
+          <span className="text-sm tracking-wide md:text-base">
             Tìm hiểu thêm
           </span>
           <FaArrowRightLong size={20} />

@@ -78,7 +78,7 @@ const RatingSection: React.FC<RatingSectionProps> = ({ product, averageRating, t
             onClick={() => router.push('/login?method=email')}
             className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] px-6 py-3 rounded-full w-fit hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
           >
-            <span className="font-semibold text-xs md:text-sm">Viết đánh giá</span>
+            <span className="font-semibold tracking-wide text-xs md:text-sm">Viết đánh giá</span>
           </button>
         </div>
       </div>

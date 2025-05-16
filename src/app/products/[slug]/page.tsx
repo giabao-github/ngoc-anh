@@ -1,7 +1,7 @@
 "use client";
 
 import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import SkeletonLoader from "@/app/components/SkeletonLoader";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
@@ -13,6 +13,8 @@ import PurchaseSection from "@/app/components/PurchaseSection";
 import ProductDetails from "@/app/components/ProductDetails";
 import RatingSection from "@/app/components/RatingSection";
 import ProductError from "@/app/components/ProductError";
+import { CartItem } from "@/app/types";
+import { useCart } from "@/app/CartContext";
 
 
 export const dynamic = "force-dynamic";
@@ -46,9 +48,9 @@ const ProductPage = () => {
 
   const [showNotification, setShowNotification] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const [isFavorite, setIsFavorite] = useState(false);
   const aboutRef = useRef<HTMLDivElement>(null);
+
+  const { updateCartCount } = useCart();
 
   const handleAddToCart = () => { 
     setCartQuantity(quantity);
@@ -60,6 +62,38 @@ const ProductPage = () => {
       setShowNotification(false);
       timeoutRef.current = null;
     }, 5000);
+
+    if (product) {
+      const itemToAdd: CartItem = {
+        id: product.id,
+        name: product.name,
+        image: product.images[0],
+        pattern: product.patterns[0].name,
+        size: product.size,
+        volume: product.volume,
+        slug: product.patterns[0].slug,
+        price: product.patterns[0].price,
+        quantity,
+      };
+
+      const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+      const existingIndex = existingCart.findIndex(
+        (item: CartItem) => item.id === itemToAdd.id && item.pattern === itemToAdd.pattern
+      );
+
+      if (existingIndex !== -1) {
+        existingCart[existingIndex].quantity = Math.min(
+          existingCart[existingIndex].quantity + quantity,
+          product.quantity ?? 1
+        );
+      } else {
+        existingCart.push(itemToAdd);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(existingCart));
+      updateCartCount();
+    }
   };
 
   const handleCloseNotification = () => {
@@ -142,8 +176,6 @@ const ProductPage = () => {
           <div className="space-y-4 md:space-y-6 mx-1 md:mx-0">
             <ProductInfo
               product={product}
-              isFavorite={isFavorite}
-              setIsFavorite={setIsFavorite}
             />
             <PurchaseSection
               product={product}

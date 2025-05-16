@@ -1,23 +1,45 @@
+import { useEffect, useState } from "react";
+import { Montserrat } from "next/font/google";
 import { FiHeart } from "react-icons/fi";
 import { Product } from "../types";
 import { cn } from "../lib/utils";
 import { Separator } from "../ui/separator";
 
 
+const montserrat = Montserrat({
+  subsets: ["cyrillic", "latin", "vietnamese"],
+  weight: ["200", "400","500", "600", "700", "800"]
+});
+
 interface ProductInfoProps {
   product: Product;
-  isFavorite: boolean;
-  setIsFavorite: (value: boolean) => void;
 }
 
-const ProductInfo: React.FC<ProductInfoProps> = ({ product, isFavorite, setIsFavorite }) => {
+const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
+  const favoriteKey = `favorite-${product.id}`;
+  const [isFavorite, setIsFavorite] = useState(false);  
+
+  useEffect(() => {
+    const storedValue = localStorage.getItem(favoriteKey);
+    if (storedValue === "true") {
+      setIsFavorite(true);
+    }
+  }, [favoriteKey]);
+
+  const handleFavoriteToggle = () => {
+    const newState = !isFavorite;
+    setIsFavorite(newState);
+    localStorage.setItem(favoriteKey, newState.toString());
+  };
+
+
   return (
     <>
       <div className="flex justify-between items-start">
         <h1 className="text-xl md:text-3xl font-bold max-w-[90%]">{product.name}</h1>
         <button
           title={`${isFavorite ? 'Remove from Favorite' : 'Add to Favorite'}`}
-          onClick={() => setIsFavorite(!isFavorite)}
+          onClick={handleFavoriteToggle}
           className={`group p-0 md:p-3 rounded-lg cursor-pointer outline-none ring-0 focus:ring-0 focus:outline-none md:hover:bg-red-50 ${isFavorite ? "md:bg-red-50" : "bg-transparent md:bg-gray-50"}`}
         >
           <FiHeart
@@ -30,7 +52,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product, isFavorite, setIsFav
         </button>
       </div>
 
-      <div className="space-y-2 text-xs tracking-wide text-gray-700">
+      <div className={`space-y-2 text-xs text-gray-700 ${montserrat.className}`}>
         <p>{`Mã sản phẩm: ${product.code}`}</p>
         <p>{`Thương hiệu: ${product.brand}`}</p>
         <p>{`Bộ sưu tập: ${product.collection}`}</p>

@@ -33,7 +33,7 @@ const ProductError = () => {
       <h1 className="mt-8 text-3xl md:text-4xl font-bold text-center">Sản phẩm không tồn tại</h1>
 
       {/* Description */}
-      <p className="text-center text-rose-500 max-w-md">
+      <p className="text-center text-rose-500 tracking-wide max-w-md">
         Chúng tôi không thể tìm thấy sản phẩm bạn đang tìm kiếm. Có thể đường dẫn không đúng hoặc sản phẩm đã bị gỡ.
       </p>
 
@@ -41,7 +41,7 @@ const ProductError = () => {
       <div className="flex flex-col sm:flex-row gap-3 mt-4">
         <Link
           href="/"
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 text-white bg-rose-600 hover:bg-rose-700 rounded-full transition shadow-md select-none"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 text-white bg-rose-600 hover:bg-rose-400 rounded-full transition shadow-md select-none"
         >
           <FaArrowLeft /> Quay về trang chủ
         </Link>

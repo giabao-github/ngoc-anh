@@ -1,4 +1,4 @@
-import { RefObject, useState } from "react";
+import { RefObject, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -7,7 +7,14 @@ import { IoCloseCircle } from "react-icons/io5";
 import { BsSearchHeart } from "react-icons/bs";
 import { Input } from "../ui/input";
 import { handleSearch } from "../lib/utils";
+import { Montserrat } from "next/font/google";
+import { useCart } from "../CartContext";
 
+
+const montserrat = Montserrat({
+  subsets: ["cyrillic", "latin", "vietnamese"],
+  weight: ["200", "400","500", "600", "700", "800"]
+});
 
 interface HeaderProps {
   hasSections?: boolean;
@@ -21,6 +28,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { cartCount } = useCart();
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -114,7 +122,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="Tìm kiếm sản phẩm..."
-                  className="w-96 pl-12 pr-4 py-2 border border-white rounded-full focus:ring-1 focus:ring-white focus:outline-none transition"
+                  className={`w-96 font-medium pl-12 pr-4 py-2 border border-white rounded-full focus:ring-1 focus:ring-white focus:outline-none transition ${montserrat.className}`}
                 />
 
                 {query.trim().length > 0 && (
@@ -129,13 +137,26 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                 )}
               </div>
             </div>
-            <FiShoppingCart 
-              onClick={() => router.push('/cart')}
-              className="text-xl cursor-pointer hover:text-[#D4AF37]" 
-            />
-            <FiUser 
+            <div className="relative">
+              <FiShoppingCart 
+                size={24}
+                title="Đi đến giỏ hàng"
+                aria-label="Giỏ hàng"
+                onClick={() => router.push('/cart')}
+                className="cursor-pointer hover:text-[#D4AF37]"
+              />
+              {cartCount > 0 && (
+                <div className={`absolute bg-white text-orange-500 text-[10px] font-bold ${cartCount > 99 ? 'w-7 h-2/3 -top-2 -right-4' : 'w-5 h-5 -top-[10px] -right-2'} rounded-full flex items-center justify-center ${montserrat.className}`}>
+                  {cartCount > 99 ? '99+' : cartCount}
+                </div>
+              )}
+            </div>
+            <FiUser
+              size={24}
+              title="Tài khoản"
+              aria-label="Tài khoản" 
               onClick={() => router.push('/login?method=email')} 
-              className="text-xl cursor-pointer hover:text-[#D4AF37]" 
+              className="cursor-pointer hover:text-[#D4AF37]" 
             />
             <Image 
               src={'/vn-flag.jpeg'}
@@ -148,13 +169,26 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
           </nav>
 
           <div className="flex items-center flex-row gap-x-6 md:hidden">
-            <FiShoppingCart 
-              onClick={() => router.push('/cart')}
-              className="text-xl cursor-pointer hover:text-[#D4AF37]"
-            />
-            <FiUser 
+            <div className="relative">
+              <FiShoppingCart 
+                size={24}
+                title="Đi đến giỏ hàng"
+                aria-label="Giỏ hàng"
+                onClick={() => router.push('/cart')}
+                className="cursor-pointer hover:text-[#D4AF37]"
+              />
+              {cartCount > 0 && (
+                <div className={`absolute bg-white text-orange-500 text-[10px] font-bold ${cartCount > 99 ? 'w-7 h-2/3 -top-2 -right-4' : 'w-5 h-5 -top-[10px] -right-2'} rounded-full flex items-center justify-center ${montserrat.className}`}>
+                  {cartCount > 99 ? '99+' : cartCount}
+                </div>
+              )}
+            </div>
+            <FiUser
+              size={24}
+              title="Tài khoản"
+              aria-label="Tài khoản"
               onClick={() => router.push('/login?method=email')} 
-              className="text-xl cursor-pointer hover:text-[#D4AF37]" 
+              className="cursor-pointer hover:text-[#D4AF37]" 
             />
             <Image 
               src={'https://static.vecteezy.com/system/resources/previews/016/328/942/large_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png'}

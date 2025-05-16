@@ -35,6 +35,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'www.mahalaxmifoods.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'getillustrations.b-cdn.net',
+      },
     ],
   },
 };

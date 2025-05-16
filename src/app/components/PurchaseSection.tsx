@@ -1,9 +1,17 @@
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Montserrat } from "next/font/google";
 import { Product } from "../types";
 import { Separator } from "../ui/separator";
 import { FiMinus, FiPlus, FiShoppingCart } from "react-icons/fi";
 import { FaBagShopping } from "react-icons/fa6";
 import { Input } from "../ui/input";
+
+
+const montserrat = Montserrat({
+  subsets: ["cyrillic", "latin", "vietnamese"],
+  weight: ["200", "400","500", "600", "700", "800"]
+});
 
 interface PurchaseSectionProps {
   product: Product;
@@ -17,6 +25,21 @@ interface PurchaseSectionProps {
 
 const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, selectedPattern, quantity, setSelectedPattern, handleQuantityChange, handleAddToCart }) => {
   const router = useRouter();
+
+  const useIsMobile = () => {
+    const [isMobile, setIsMobile] = useState(false);
+  
+    useEffect(() => {
+      const checkMobile = () => setIsMobile(window.innerWidth < 768);
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+  
+    return isMobile;
+  };
+
+  const isMobile = useIsMobile();
 
   return (
     <>
@@ -34,11 +57,11 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
                     router.push(`/products/${pattern.slug}`);
                   }
                 }}
-                className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-[#BB9244] hover:bg-[#BB9244] hover:text-white transition-colors tracking-wide ${
+                className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-[#BB9244] hover:bg-[#BB9244] hover:text-white transition-colors ${
                   selectedPattern === pattern.name
                     ? "border-[#BB9244] bg-[#BB9244] text-white"
                     : "border-gray-300"
-                }`}
+                } ${montserrat.className}`}
               >
                 {pattern.name}
               </button>
@@ -51,7 +74,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
           >
             {`${product.size ? 'Kích thước' : product.volume ? 'Dung tích' : 'Kích thước/ Dung tích'}`}
           </p>
-          <div className="w-fit px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-[#BB9244] hover:bg-[#BB9244] hover:text-white transition-colors border-[#BB9244] bg-[#BB9244] text-white tracking-wide"
+          <div className={`w-fit px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-[#BB9244] hover:bg-[#BB9244] hover:text-white transition-colors border-[#BB9244] bg-[#BB9244] text-white ${montserrat.className}`}
           >
             {product.size || product.volume || 'Không xác định'}
           </div>
@@ -94,7 +117,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
                 }}
                 min={1}
                 max={product.quantity ?? 1}
-                className="w-12 text-center rounded-none border-none shadow-[2px_0_4px_-1px_rgba(0,0,0,0.1),-2px_0_4px_-1px_rgba(0,0,0,0.1)] text-sm input-no-spinner"
+                className={`w-12 p-0 text-center rounded-none border-none shadow-[2px_0_4px_-1px_rgba(0,0,0,0.1),-2px_0_4px_-1px_rgba(0,0,0,0.1)] text-sm input-no-spinner tracking-wide ${montserrat.className}`}
               />
               <button
                 onClick={() => product.quantity && quantity < product.quantity && handleQuantityChange("increment")}
@@ -107,7 +130,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
                 <FiPlus />
               </button>
             </div>
-            <p className="text-sm text-gray-600 tracking-wide">{`${product.quantity} sản phẩm còn lại`}</p>
+            <p className={`text-sm text-gray-600 tracking-wide ${montserrat.className}`}>{`${product.quantity} sản phẩm còn lại`}</p>
           </div>
         </div>
       </div>
@@ -118,14 +141,14 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
           onClick={handleAddToCart}
           className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[40%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
         >
-          <FiShoppingCart size={24} />
-          <span className="font-semibold text-sm md:text-base">Thêm vào giỏ hàng</span>
+          <FiShoppingCart size={isMobile ? 18: 24} />
+          <span className="font-semibold text-sm md:text-base md:tracking-wide">Thêm vào giỏ hàng</span>
         </button>
         <button 
           className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[60%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
         >
-          <FaBagShopping size={24} />
-          <span className="font-semibold text-sm md:text-base">Mua ngay</span>
+          <FaBagShopping size={isMobile ? 18: 24} />
+          <span className="font-semibold text-sm md:text-base md:tracking-wide">Mua ngay</span>
         </button>
       </div>
     </>
