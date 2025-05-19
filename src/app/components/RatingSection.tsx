@@ -68,7 +68,7 @@ const RatingSection: React.FC<RatingSectionProps> = ({ product, averageRating, t
             Bạn cần
             <Link
               href={'/login?method=email'}
-              className="font-semibold text-[#BB9244] hover:underline px-[6px]"
+              className="font-semibold text-[#BB9244] hover:underline active:text-[#BB9244]/70 px-[6px]"
             >
               đăng nhập
             </Link>
@@ -76,7 +76,7 @@ const RatingSection: React.FC<RatingSectionProps> = ({ product, averageRating, t
           </p>
           <button
             onClick={() => router.push('/login?method=email')}
-            className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] px-6 py-3 rounded-full w-fit hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
+            className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] px-6 py-3 rounded-full w-fit hover:bg-[#BB9244] hover:text-white active:bg-[#BB9244]/70 active:text-white/70 transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
           >
             <span className="font-semibold tracking-wide text-xs md:text-sm">Viết đánh giá</span>
           </button>

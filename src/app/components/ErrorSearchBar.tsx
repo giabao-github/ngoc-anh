@@ -39,7 +39,7 @@ const ErrorSearchBar = () => {
           title="Tìm kiếm"
           type="button"
           onClick={() => handleSearch(query, router)}
-          className="absolute cursor-pointer inset-y-0 left-3 flex items-center text-rose-400 hover:text-rose-600 transition"
+          className="absolute cursor-pointer inset-y-0 left-3 flex items-center text-rose-400 hover:text-rose-600 active:text-rose-400 transition"
         >
           <BsSearchHeartFill size={18} />
         </button>
@@ -51,7 +51,7 @@ const ErrorSearchBar = () => {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Tìm sản phẩm khác..."
-          className={`w-full font-medium pl-10 pr-4 py-2 border border-rose-300 rounded-full focus:ring-2 focus:ring-rose-400 focus:outline-none transition ${montserrat.className}`}
+          className={`w-full font-medium pl-10 pr-4 py-2 border border-rose-300 rounded-full focus:ring-2 focus:ring-rose-400 focus:outline-none placeholder:text-rose-300 transition ${montserrat.className}`}
         />
 
         {query.trim().length > 0 && (
@@ -59,7 +59,7 @@ const ErrorSearchBar = () => {
             title="Xóa tìm kiếm"
             type="button"
             onClick={() => setQuery("")}
-            className="absolute cursor-pointer inset-y-0 right-3 flex items-center text-rose-400 hover:text-rose-600 transition"
+            className="absolute cursor-pointer inset-y-0 right-3 flex items-center text-rose-400 hover:text-rose-600 active:text-rose-400 transition"
           >
             <IoCloseCircle size={18} />
           </button>

@@ -122,10 +122,10 @@ export const FilterCarousel = ({
                   {/* Info icon (mobile only) */}
                   {isMobile && (
                     <div className="absolute bottom-3 right-4 z-10">
-                      <div className="bg-white/80 h-auto backdrop-blur-md rounded-full p-1 shadow-md">
+                      <div className="bg-white/60 active:bg-white/80 h-auto backdrop-blur-md rounded-full p-1 shadow-md">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 text-black"
+                          className="h-5 w-5 text-black/60 active:text-black/80"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -154,8 +154,8 @@ export const FilterCarousel = ({
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className='left-0 z-20' />
-        <CarouselNext className='right-0 z-20' />
+        <CarouselPrevious className='left-0 z-20 active:bg-black/70 active:text-white/70' />
+        <CarouselNext className='right-0 z-20 active:bg-black/70 active:text-white/70' />
       </Carousel>
     </div>
   );

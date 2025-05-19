@@ -22,7 +22,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
           href="https://www.google.com/maps/place/Ltd+Minh+Long+1+-+MINH+LONG+I,+Co.+Ltd./@10.9464587,106.7023139,17z/data=!3m1!4b1!4m5!3m4!1s0x3174d7412f3fd84b:0x3820a91ad46687c9!8m2!3d10.9464534!4d106.7045026"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 w-fit flex items-center flex-row gap-x-1 md:gap-x-2 cursor-pointer font-semibold text-xs md:text-base hover:text-[#D4AF37]"
+          className="mt-4 w-fit flex items-center flex-row gap-x-1 md:gap-x-2 cursor-pointer font-semibold text-xs md:text-base hover:text-[#D4AF37] active:text-[#D4AF37]/70"
         >
           <HiOutlineMapPin className="text-base md:text-xl"/>
           Xem bản đồ
@@ -32,12 +32,12 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
         <div className="text-sm md:text-lg">
           <h3 className="mb-4 uppercase">Kết nối với chúng tôi</h3>
           <p>Hotline:&nbsp; 
-            <Link href={'tel:0378044394'} className="hover:text-[#D4AF37]">
+            <Link href={'tel:0378044394'} className="hover:text-[#D4AF37] active:text-[#D4AF37]/70">
               (+84) 915 047 339
             </Link>
           </p>
           <p>Email:&nbsp; 
-            <Link href={'mailto:eshop@minhlong.com'} className="hover:text-[#D4AF37]">
+            <Link href={'mailto:eshop@minhlong.com'} className="hover:text-[#D4AF37] active:text-[#D4AF37]/70">
               eshop@minhlong.com
             </Link>
           </p>
@@ -47,21 +47,21 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaFacebookF className="text-xl md:text-3xl hover:text-[#D4AF37] cursor-pointer" />
+              <FaFacebookF className="text-xl md:text-3xl hover:text-[#D4AF37] active:text-[#D4AF37]/70 cursor-pointer" />
             </a>
             <a
               href="https://www.instagram.com/minhlongporcelain"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaInstagram className="text-xl md:text-3xl hover:text-[#D4AF37] cursor-pointer" />
+              <FaInstagram className="text-xl md:text-3xl hover:text-[#D4AF37] active:text-[#D4AF37]/70 cursor-pointer" />
             </a>
             <a
               href="https://www.youtube.com/@MinhLongPorcelain"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaYoutube className="text-xl md:text-3xl hover:text-[#D4AF37] cursor-pointer" />
+              <FaYoutube className="text-xl md:text-3xl hover:text-[#D4AF37] active:text-[#D4AF37]/70 cursor-pointer" />
             </a>
           </div>
         </div>
@@ -90,7 +90,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
           </div>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="cursor-pointer select-none bg-transparent text-[#D4AF37] border border-[#D4AF37] px-4 py-2 rounded-full hover:bg-[#D4AF37] hover:text-white transition-colors flex items-center"
+            className="cursor-pointer select-none bg-transparent text-[#D4AF37] border border-[#D4AF37] px-4 py-2 rounded-full hover:bg-[#D4AF37] hover:text-white active:bg-[#D4AF37]/70 active:text-white/70 transition-colors flex items-center"
           >
             <span className="font-semibold text-xs tracking-wide">
               Quay về đầu trang
@@ -99,8 +99,9 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
         </div>
         <div className="hidden md:flex mt-16 mx-4 text-center justify-start">
           <button
+            type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="cursor-pointer select-none bg-transparent text-[#D4AF37] border border-[#D4AF37] px-6 py-3 rounded-full hover:bg-[#D4AF37] hover:text-white transition-colors flex items-center"
+            className="cursor-pointer select-none bg-transparent text-[#D4AF37] border border-[#D4AF37] px-6 py-3 rounded-full hover:bg-[#D4AF37] hover:text-white active:bg-[#D4AF37]/70 active:text-white/70 transition-colors flex items-center"
           >
             <span className="font-semibold tracking-wide">
               Quay về đầu trang

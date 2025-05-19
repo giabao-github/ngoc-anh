@@ -43,27 +43,42 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
 
   return (
     <>
-      {/* Patterns, size/volume, and quantity */}
+      {/* details, size/volume, and quantity */}
       <div className="space-y-4">
+        {product.details[0].color && product.details[0].color.length > 0 && (
+          <div className="space-y-2">
+            <p className="font-semibold">Màu sắc</p>
+            <div className="flex gap-4">
+              {product.details.map((detail) => (
+                <button
+                  key={detail.color}
+                  className={`w-fit px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-[#BB9244] hover:bg-[#BB9244] hover:text-white transition-colors border-[#BB9244] bg-[#BB9244] text-white ${montserrat.className}`}
+                >
+                  {detail.color}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="space-y-2">
           <p className="font-semibold">Hoa văn</p>
           <div className="flex gap-4">
-            {product.patterns.map((pattern) => (
+            {product.details.map((pattern) => (
               <button
-                key={pattern.name}
+                key={pattern.pattern}
                 onClick={() => {
-                  setSelectedPattern(pattern.name);
+                  setSelectedPattern(pattern.pattern);
                   if (slug !== pattern.slug) {
                     router.push(`/products/${pattern.slug}`);
                   }
                 }}
                 className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-[#BB9244] hover:bg-[#BB9244] hover:text-white transition-colors ${
-                  selectedPattern === pattern.name
+                  selectedPattern === pattern.pattern
                     ? "border-[#BB9244] bg-[#BB9244] text-white"
                     : "border-gray-300"
                 } ${montserrat.className}`}
               >
-                {pattern.name}
+                {pattern.pattern}
               </button>
             ))}
           </div>
@@ -90,7 +105,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
                 onClick={() => quantity > 1 && handleQuantityChange("decrement")}
                 className={`w-10 h-10 flex items-center justify-center rounded-tl-lg rounded-bl-lg transition ${
                   quantity > 1
-                    ? "cursor-pointer hover:bg-gray-100"
+                    ? "cursor-pointer hover:bg-gray-200 active:bg-gray-200/80"
                     : "cursor-default text-gray-400"
                 }`}
               >
@@ -123,7 +138,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
                 onClick={() => product.quantity && quantity < product.quantity && handleQuantityChange("increment")}
                 className={`w-10 h-10 flex items-center justify-center rounded-tr-lg rounded-br-lg transition ${
                   product.quantity && quantity < product.quantity
-                    ? "cursor-pointer hover:bg-gray-100"
+                    ? "cursor-pointer hover:bg-gray-200 active:bg-gray-200/80"
                     : "cursor-default text-gray-400"
                 }`}
               >
@@ -139,13 +154,13 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
       <div className="flex flex-row gap-2 mb-4 md:mb-8">
         <button
           onClick={handleAddToCart}
-          className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[40%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
+          className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[40%] hover:bg-[#BB9244] hover:text-white active:bg-[#BB9244]/80 active:text-white/80 transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
         >
           <FiShoppingCart size={isMobile ? 18: 24} />
           <span className="font-semibold text-sm md:text-base md:tracking-wide">Thêm vào giỏ hàng</span>
         </button>
         <button 
-          className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[60%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
+          className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[60%] hover:bg-[#BB9244] hover:text-white active:bg-[#BB9244]/80 active:text-white/80 transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
         >
           <FaBagShopping size={isMobile ? 18: 24} />
           <span className="font-semibold text-sm md:text-base md:tracking-wide">Mua ngay</span>

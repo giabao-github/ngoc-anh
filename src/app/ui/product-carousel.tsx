@@ -99,8 +99,8 @@ export const ProductCarousel = ({
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className='ml-3 md:ml-2 left-0 z-20 bg-white/30 text-black/70 hover:bg-white hover:text-black' />
-        <CarouselNext className='mr-3 md:mr-2 right-0 z-20 bg-white/30 text-black/70 hover:bg-white hover:text-black' />
+        <CarouselPrevious className='ml-3 md:ml-2 left-0 z-20 bg-white/30 text-black/70 hover:bg-white hover:text-black active:bg-white/70 active:text-black/70' />
+        <CarouselNext className='mr-3 md:mr-2 right-0 z-20 bg-white/30 text-black/70 hover:bg-white hover:text-black active:bg-white/70 active:text-black/70' />
       </Carousel>
     </div>
   );

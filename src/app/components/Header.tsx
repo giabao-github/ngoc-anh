@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                   router.push("/#collection");
                 }
               }} 
-              className="hover:text-[#D4AF37] transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
+              className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
             >
               Bộ sưu tập
             </Link>
@@ -82,7 +82,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                   router.push("/#products");
                 }
               }} 
-              className="hover:text-[#D4AF37] transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
+              className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
             >
               Cửa hàng
             </Link>
@@ -99,7 +99,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                   router.push("/#about");
                 }
               }} 
-              className="hover:text-[#D4AF37] transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
+              className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
             >
               Về chúng tôi
             </Link>
@@ -110,7 +110,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                   title="Tìm kiếm"
                   type="button"
                   onClick={() => handleSearch(query, router)}
-                  className="absolute cursor-pointer inset-y-0 left-4 flex items-center text-white hover:text-[#D4AF37]  transition"
+                  className="absolute cursor-pointer inset-y-0 left-4 flex items-center text-white hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition"
                 >
                   <BsSearchHeart size={18} />
                 </button>
@@ -130,23 +130,23 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                     title="Xóa tìm kiếm"
                     type="button"
                     onClick={() => setQuery("")}
-                    className="absolute cursor-pointer inset-y-0 right-3 flex items-center text-neutral-400 hover:text-white transition"
+                    className="absolute cursor-pointer inset-y-0 right-3 flex items-center text-neutral-400 hover:text-white active:text-white transition"
                   >
                     <IoCloseCircle size={18} />
                   </button>
                 )}
               </div>
             </div>
-            <div className="relative">
+            <div className="relative cursor-pointer group">
               <FiShoppingCart 
                 size={24}
                 title="Đi đến giỏ hàng"
                 aria-label="Giỏ hàng"
                 onClick={() => router.push('/cart')}
-                className="cursor-pointer hover:text-[#D4AF37]"
+                className="group-hover:text-[#D4AF37] group-active:text-[#D4AF37]/70"
               />
               {cartCount > 0 && (
-                <div className={`absolute bg-white text-orange-500 text-[10px] font-bold ${cartCount > 99 ? 'w-7 h-2/3 -top-2 -right-4' : 'w-5 h-5 -top-[10px] -right-2'} rounded-full flex items-center justify-center ${montserrat.className}`}>
+                <div className={`absolute bg-white/90 text-orange-500/90 group-hover:bg-white group-hover:text-orange-500 text-[10px] font-bold ${cartCount > 99 ? 'w-7 h-2/3 -top-2 -right-4' : 'w-5 h-5 -top-[10px] -right-2'} rounded-full flex items-center justify-center ${montserrat.className}`}>
                   {cartCount > 99 ? '99+' : cartCount}
                 </div>
               )}
@@ -156,7 +156,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
               title="Tài khoản"
               aria-label="Tài khoản" 
               onClick={() => router.push('/login?method=email')} 
-              className="cursor-pointer hover:text-[#D4AF37]" 
+              className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70" 
             />
             <Image 
               src={'/vn-flag.jpeg'}
@@ -169,16 +169,16 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
           </nav>
 
           <div className="flex items-center flex-row gap-x-6 md:hidden">
-            <div className="relative">
+          <div className="relative cursor-pointer group">
               <FiShoppingCart 
                 size={24}
                 title="Đi đến giỏ hàng"
                 aria-label="Giỏ hàng"
                 onClick={() => router.push('/cart')}
-                className="cursor-pointer hover:text-[#D4AF37]"
+                className="group-hover:text-[#D4AF37] group-active:text-[#D4AF37]/70"
               />
               {cartCount > 0 && (
-                <div className={`absolute bg-white text-orange-500 text-[10px] font-bold ${cartCount > 99 ? 'w-7 h-2/3 -top-2 -right-4' : 'w-5 h-5 -top-[10px] -right-2'} rounded-full flex items-center justify-center ${montserrat.className}`}>
+                <div className={`absolute bg-white/90 text-orange-500/90 group-hover:bg-white group-hover:text-orange-500 text-[10px] font-bold ${cartCount > 99 ? 'w-7 h-2/3 -top-2 -right-4' : 'w-5 h-5 -top-[10px] -right-2'} rounded-full flex items-center justify-center ${montserrat.className}`}>
                   {cartCount > 99 ? '99+' : cartCount}
                 </div>
               )}
@@ -188,7 +188,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
               title="Tài khoản"
               aria-label="Tài khoản"
               onClick={() => router.push('/login?method=email')} 
-              className="cursor-pointer hover:text-[#D4AF37]" 
+              className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70" 
             />
             <Image 
               src={'https://static.vecteezy.com/system/resources/previews/016/328/942/large_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png'}
@@ -222,7 +222,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                   router.push("/#collection");
                 }
               }} 
-              className="hover:text-[#D4AF37] transition-colors select-none w-fit"
+              className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors select-none w-fit"
             >
               Bộ sưu tập
             </Link>
@@ -237,7 +237,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                   router.push("/#products");
                 }
               }} 
-              className="hover:text-[#D4AF37] transition-colors select-none w-fit"
+              className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors select-none w-fit"
             >
               Cửa hàng
             </Link>
@@ -254,7 +254,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                   router.push("/#about");
                 }
               }} 
-              className="hover:text-[#D4AF37] transition-colors select-none w-fit"
+              className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors select-none w-fit"
             >
               Về chúng tôi
             </Link>
@@ -264,7 +264,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                 title="Tìm kiếm"
                 type="button"
                 onClick={() => handleSearch(query, router)}
-                className="absolute cursor-pointer inset-y-0 left-3 flex items-center text-white hover:text-[#D4AF37]  transition"
+                className="absolute cursor-pointer inset-y-0 left-3 flex items-center text-white hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition"
               >
                 <BsSearchHeart size={18} />
               </button>
@@ -284,7 +284,7 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
                   title="Xóa tìm kiếm"
                   type="button"
                   onClick={() => setQuery("")}
-                  className="absolute cursor-pointer inset-y-0 right-3 flex items-center text-neutral-300 hover:text-white transition"
+                  className="absolute cursor-pointer inset-y-0 right-3 flex items-center text-neutral-300 hover:text-white active:text-white transition"
                 >
                   <IoCloseCircle size={18} />
                 </button>

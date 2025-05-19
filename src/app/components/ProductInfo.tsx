@@ -4,6 +4,7 @@ import { FiHeart } from "react-icons/fi";
 import { Product } from "../types";
 import { cn } from "../lib/utils";
 import { Separator } from "../ui/separator";
+import { toast } from "sonner";
 
 
 const montserrat = Montserrat({
@@ -30,6 +31,15 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
     const newState = !isFavorite;
     setIsFavorite(newState);
     localStorage.setItem(favoriteKey, newState.toString());
+    if (!isFavorite) {
+      toast.success("Đã thêm vào danh sách yêu thích", {
+        description: "Đã thêm sản phẩm này vào danh sách yêu thích của bạn",
+      });
+    } else {
+      toast.success("Đã xóa khỏi danh sách yêu thích", {
+        description: "Đã xóa sản phẩm này khỏi danh sách yêu thích của bạn",
+      });
+    }
   };
 
 
@@ -58,7 +68,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
         <p>{`Bộ sưu tập: ${product.collection}`}</p>
       </div>
 
-      <p className="text-2xl md:text-4xl font-bold text-orange-500">{product.patterns[0]?.price?.toLocaleString('en-US') ?? 'Giá liên hệ'}₫</p>
+      <p className="text-2xl md:text-4xl font-bold text-orange-500">{product.details[0]?.price?.toLocaleString('en-US') ?? 'Giá liên hệ'}₫</p>
 
       <Separator color="#BB9244" opacity={40} />
     </>

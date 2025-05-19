@@ -68,8 +68,8 @@ const CartProduct = ({
       className="relative overflow-hidden mt-6"
 
     >
-      <div {...swipeHandlers} className="relative overflow-hidden min-h-[100px]">
-        {/* Slideable content */}
+      <div {...swipeHandlers} className="relative overflow-hidden min-h-24">
+        {/* Slide-able content */}
         <div
           className={`
             flex flex-row items-center gap-4 
@@ -84,21 +84,21 @@ const CartProduct = ({
             width={96}
             height={96}
             onClick={() => router.push(`/products/${item.slug}`)}
-            className="w-24 h-24 object-contain cursor-pointer shrink-0"
+            className="w-24 h-24 object-contain cursor-pointer shrink-0 border border-neutral-200 rounded-md"
           />
 
           {/* Right content */}
           <div className="flex-1 w-full flex flex-col md:flex-row md:items-center md:justify-between gap-2">
             {/* Name + Pattern */}
-            <div className="flex flex-col w-full overflow-hidden">
+            <div className="flex flex-col gap-y-1 w-full overflow-hidden">
               <h3
                 title={item.name}
                 onClick={() => router.push(`/products/${item.slug}`)}
-                className={`text-base md:w-fit max-w-full md:text-lg font-bold hover:text-[#BB9244] transition-colors cursor-pointer truncate`}
+                className={`text-base md:w-fit max-w-md md:text-lg font-bold hover:text-[#BB9244] active:text-[#BB9244]/70 transition-colors cursor-pointer line-clamp-2 max-h-[56px]`}
               >
-                {item.name.length > 34 && isMobile ? item.name.slice(0, 34) + '...' : item.name}
+                {item.name.length > 68 && isMobile ? item.name.slice(0, 68) + '...' : item.name.length > 112 ? item.name.slice(0, 112) + '...' : item.name}
               </h3>
-              <p className="text-sm md:text-base text-gray-500">{item.pattern} / {product.size || product.volume || "Không xác định"}</p>
+              <p className="text-sm md:text-base text-gray-500">{product.details[0].color.length > 0 && `${product.details[0].color} / `}{item.pattern} / {product.size || product.volume || "Không xác định"}</p>
             </div>
 
             {/* Quantity & Price */}
@@ -108,9 +108,9 @@ const CartProduct = ({
                   onClick={() =>
                     item.quantity > 1 && product && handleQuantityChange("decrement", product)
                   }
-                  className={`w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-l transition ${
+                  className={`w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-l transition ${
                     item.quantity > 1
-                      ? "cursor-pointer hover:bg-gray-200"
+                      ? "cursor-pointer hover:bg-gray-200 active:bg-gray-200/80"
                       : "cursor-default text-gray-400"
                   }`}
                 >
@@ -138,13 +138,13 @@ const CartProduct = ({
                     }
                   }}
                   min={1}
-                  className={`w-10 md:w-12 p-0 text-center border-none shadow ${item.quantity > 999 ? 'text-xs' : 'text-sm'} font-medium input-no-spinner ${montserrat.className}`}
+                  className={`w-8 md:w-12 p-0 text-center border-none shadow ${item.quantity > 999 ? 'text-xs' : 'text-sm'} font-medium input-no-spinner ${montserrat.className}`}
                 />
                 <button
                   onClick={() => product && handleQuantityChange("increment", product)}
-                  className={`w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-r transition ${
+                  className={`w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-r transition ${
                     product?.quantity && item.quantity < product.quantity
-                      ? "cursor-pointer hover:bg-gray-200"
+                      ? "cursor-pointer hover:bg-gray-200 active:bg-gray-200/80"
                       : "cursor-default text-gray-400"
                   }`}
                 >
@@ -152,7 +152,7 @@ const CartProduct = ({
                 </button>
               </div>
               <div
-                className={`w-[136px] md:w-36 text-right ${item.price * item.quantity > 10000000000 ? 'text-sm' : 'text-base'} tracking-wide font-semibold text-[#0C2543] ${montserrat.className}`}
+                className={`w-[136px] md:w-36 text-right text-sm tracking-wide font-semibold text-[#0C2543] ${montserrat.className}`}
               >
                 {(item.price * item.quantity).toLocaleString()}₫
               </div>
@@ -163,7 +163,7 @@ const CartProduct = ({
           <button
             title="Xóa khỏi giỏ hàng"
             onClick={() => handleRemove(item.id)}
-            className="absolute cursor-pointer top-0 right-0 text-neutral-400 hover:text-rose-500 hidden sm:block"
+            className="absolute cursor-pointer top-0 right-0 text-neutral-400 hover:text-rose-500 active:text-rose-400/70 hidden sm:block"
           >
             <FaTrashCan size={18} />
           </button>
@@ -174,7 +174,7 @@ const CartProduct = ({
           onClick={() => handleRemove(item.id)}
           className={`
             absolute h-full right-0 top-1/2 -translate-y-1/2 
-            bg-orange-500 text-white px-4 py-2 rounded-md shadow
+            bg-orange-500 text-white active:bg-orange-500/70 px-4 py-2 rounded-md shadow
             transition-all duration-300 ease-in-out
             ${showDelete ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10 pointer-events-none'}
           `}

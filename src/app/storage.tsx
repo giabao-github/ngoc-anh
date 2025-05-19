@@ -53,14 +53,16 @@ export const products = [
     brand: "Minh Long",
     collection: "Bình Hoa",
     type: "Bình hoa",
-    patterns: [
+    details: [
       {
-        name: "Xuân Ca",
+        color: "",
+        pattern: "Xuân Ca",
         slug: "binh-hoa-35-cm-xuan-ca",
         price: 7560000
       },
       {
-        name: "Se Sẻ Và Bông Hoa",
+        color: "",
+        pattern: "Se Sẻ Và Bông Hoa",
         slug: "binh-hoa-35-cm-se-se-va-bong-hoa",
         price: 8424000
       },
@@ -87,14 +89,16 @@ export const products = [
     brand: "Minh Long",
     collection: "Bình Hoa",
     type: "Bình hoa",
-    patterns: [
+    details: [
       {
-        name: "Se Sẻ Và Bông Hoa",
+        color: "",
+        pattern: "Se Sẻ Và Bông Hoa",
         slug: "binh-hoa-35-cm-se-se-va-bong-hoa",
         price: 8424000
       },
       {
-        name: "Xuân Ca",
+        color: "",
+        pattern: "Xuân Ca",
         slug: "binh-hoa-35-cm-xuan-ca",
         price: 7560000
       },
@@ -126,9 +130,10 @@ export const products = [
     brand: "Minh Long",
     collection: "Bình Hoa",
     type: "Bình hoa",
-    patterns: [
+    details: [
       {
-        name: "Thịnh Vượng (vàng)",
+        color: "",
+        pattern: "Thịnh Vượng (vàng)",
         slug: "binh-hoa-luc-giac-45-cm-quai-rong-thinh-vuong-vang",
         price: 39960000
       }
@@ -156,9 +161,10 @@ export const products = [
     brand: "Minh Long",
     collection: "Hoàng Cung",
     type: "Bộ trà 1.3 L",
-    patterns: [
+    details: [
       {
-        name: "Sen Vàng",
+        color: "",
+        pattern: "Sen Vàng",
         slug: "bo-tra-1-3-l-hoang-cung-sen-vang",
         price: 5821200
       }
@@ -185,9 +191,10 @@ export const products = [
     brand: "Minh Long",
     collection: "Hoàng Cung",
     type: "Bộ trà 1.3 L",
-    patterns: [
+    details: [
       {
-        name: "Quốc Sắc",
+        color: "",
+        pattern: "Quốc Sắc",
         slug: "bo-tra-1-3-l-hoang-cung-quoc-sac",
         price: 32076000
       }
@@ -214,10 +221,11 @@ export const products = [
     brand: "Minh Long",
     collection: "Hoàng Cung",
     type: "Bộ trà 1.3 L",
-    patterns:[ 
+    details:[ 
       {
+        color: "",
+        pattern: "Huyền Liên",
         slug: "bo-tra-1-3l-hoang-cung-huyen-lien",
-        name: "Huyền Liên",
         price: 61236000
       }
     ],
@@ -227,24 +235,116 @@ export const products = [
   },
   {
     id: 7,
-    name: "Bộ trà 1.3 L - Hoàng Cung - Huyền Liên",
+    name: "Tượng rồng Khải Đức 23.9 cm - Men Ngọc Sương Mờ",
     images: [
-      "https://product.hstatic.net/200000532849/product/bo-tra-13-l-hoang-cung-huyen-lien_01134046703-sm-01_28e1e21f102c48b38b19fbd0f17ca8a2_grande.png?v=1746847177048",
-      "https://product.hstatic.net/200000532849/product/bo-tra-13-l-hoang-cung-huyen-lien_01134046703-sm-02_fa1175e22d14441faff6dbbdb58078f6_grande.png?v=1746847177048",
-      "https://product.hstatic.net/200000532849/product/bo-tra-13-l-hoang-cung-huyen-lien_01134046703-sm-05_b81247d95958423f8c399d46dcde3fa3_grande.png?v=1746847177048",
-      "https://product.hstatic.net/200000532849/product/bo-tra-13-l-hoang-cung-huyen-lien_01134046703-sm-04_43409f460da04a1db7b3ab6704f911f9_grande.jpg?v=1746847177048"
+      "https://product.hstatic.net/200000532849/product/312357522v-sm_a28d3474e839462790ea790cf2dd9019_grande.png?v=1747677491867",
+      "https://product.hstatic.net/200000532849/product/312357522v-2-sm_c873e2104842404eb932de8e28306353_grande.png?v=1747677491867",
+      "https://product.hstatic.net/200000532849/product/312357522v-3-sm_57e351b07be24d389e4c2591f47f9cca_grande.png?v=1747677491867",
+      "https://product.hstatic.net/200000532849/product/312357522v-1-sm_1c0e61648fd447e0a1225d22a395479e_grande.png?v=1747677491867",
+      "https://product.hstatic.net/200000532849/product/313157522v-1-sm_c3f998d0af6b4dd8bc5ba5202ff08591_grande.png?v=1747677491867"
     ],
-    code: "A001_01134046703",
+    description: (
+      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+        <p className="italic">Tác phẩm cuốn hút trong vẻ đẹp kỳ diệu của men Celadon xanh ngọc - màu men khó chinh phục nhất trong lịch sử gốm sứ. Nay các nghệ nhân Minh Long ứng dụng thêm kỹ thuật chế tác phủ lớp sương mờ, tạo cảm giác mềm mượt như nhung. Khải Đức chạm đến sự sang trọng cho mọi không gian, tỏa sáng những giá trị đẹp của chủ sở hữu.</p>
+        <p>"Như thép đã tôi qua lửa” để hóa Rồng, Khải Đức có tạo hình nổi bật với vẻ đẹp trong như ngọc mà vẫn rạng ngời nét quyền quý và oai phong. Dáng Rồng uyển chuyển tựa một thước phim tái hiện hành trình vượt Vũ Môn của những chú cá chép tràn đầy năng lượng, sẵn sàng cuộc chinh phục mới. Từ bộ phận nâng đỡ như thân, đuôi đến các hình ảnh đắt giá được trang trí vàng ở phần đầu linh vật đều toát lên phong thái khỏe khoắn, khoan thai. “Hóa Rồng” thành công, Khải Đức không “ngủ quên” trong chiến thắng, vừa phun nước đem lại sức sống cho muôn loài, vừa chủ động với những chuyển biến mới.</p>
+        <p>Ánh sáng lấp lánh của viên châu càng tôn thêm giá trị của linh vật. Viên châu là tinh hoa của tạo hóa, tượng trưng cho thành quả đạt được sau khi vượt khó khăn, cũng là biểu tượng cho những phẩm chất cao quý của con người. Chi tiết này không chỉ trang trí, mà còn kết hợp với đôi mắt sáng long lanh của Rồng Khải Đức luôn hướng về viên châu, thể hiện tinh thần vươn lên phía trước, hướng đến những giá trị tốt đẹp trong cuộc sống.</p>
+        <p>Cá chép hóa Rồng phải vượt Vũ Môn, con người muốn thành công cần kiên trì, nhẫn nại, trau dồi kiến thức và rèn luyện kỹ năng. Khải Đức là lời chúc thăng tiến trong sự nghiệp, thịnh vượng trong cuộc sống, may mắn và tài lộc trong vạn sự. Mong tất cả thăng hoa, bay lên đẹp đẽ và kiêu hãnh như Cá Chép Hóa Rồng.</p>
+        <p className="flex flex-col">
+          <span className="font-semibold my-1">Thông tin kỹ thuật</span>
+          <span>Dài ~ 22 cm</span>
+          <span>Rộng ~ 9.02 cm</span>
+          <span>Cao ~ 23.86 cm</span>
+          <span>Cân nặng ~ 871 gr (sai số 10%)</span>
+        </p>
+      </div>
+    ),
+    code: "A001_312357522V",
     brand: "Minh Long",
-    collection: "Hoàng Cung",
-    type: "Bộ trà 1.3 L",
-    patterns: [
+    collection: "Tượng",
+    type: "Tượng 23.9 cm",
+    details: [
       {
-        name: "Huyền Liên",
-        slug: "bo-tra-1-3l-hoang-cung-huyen-lien",
-        price: 61236000
+        color: "",
+        pattern: "Men Ngọc Sương Mờ",
+        slug: "tuong-rong-khai-duc-23-9-cm-men-ngoc-suong-mo",
+        price: 37800000
       }
     ],
-    volume: "1.3 L"
+    size: "23.9 cm",
+    quantity: 100,
+    rating: [5, 10, 15, 180, 1290]
+  },
+  {
+    id: 8,
+    name: "Cặp Kỳ Lân 34 cm - Men Xanh Cổ",
+    images: [
+      "https://product.hstatic.net/200000532849/product/cap-ky-lan-men-xanh-co-khong-trang-tri-tuong-hoa-van_0001290503-sm-01_788b8735f5e2405d99110360f39960dd_grande.png?v=1747677935815"
+    ],
+    description: (
+      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+        <p>Kỳ lân là một trong tứ linh (long, lân, quy, phụng), vốn được xem là linh vật xua đuổi tà ma, hóa giải tam sát và mang đến điềm lành, được người phương Đông đặc biệt trân quý. Tượng kỳ lân tám màu của Minh Long I là tác phẩm mỹ nghệ hiện thực hóa sinh động nét văn hóa dân gian vốn có nhưng không kém phần vương giả, hiện đại.</p>
+        <p>Kỳ lân có đôi tai vểnh về phía sau, chân ôm quả cầu đầy uy phong. Miệng linh vật ngậm ngọc, há rộng, đôi mắt to tròn, sáng long lanh như thu vào tầm mắt mọi chuyển biến xung quanh, sẵn sàng chống lại cái ác. Những nét vẽ vàng ở chân, vành tai, khóe mắt, răng, vảy kết hợp với lối cách tân quyền quý bằng những đồng tiền vàng ở đai cổ kỳ lân đã nhân cách hóa một linh vật thiêng liêng mà gần gũi, uy dũng mà hiền hòa, cổ kính nhưng sang trọng.</p>
+        <p>Lấy ý tưởng từ thuyết ngũ hành tương sinh Kim, Mộc, Thủy, Hỏa, Thổ, bộ tượng kỳ lân tám màu (năm màu chính và ba màu phụ) của Minh Long I gồm: Vàng, trắng, xanh lá, xanh dương, đỏ, cam, nâu và đen được tô vẽ hoàn toàn thủ công, có màu sắc tươi tắn. Tác phẩm là khối chắc chắn, láng mịn, có kích thước nhỏ gọn nhằm đáp ứng nhu cầu đa dạng theo sở thích, lứa tuổi, ứng với từng cung mạng và lựa chọn bày trí của gia chủ.</p>
+        <p>Tượng kỳ lân mang đến điềm lành là lời chúc đất nước thái bình thịnh vượng, nhà nhà an yên, phúc lộc của Minh Long I.</p>
+      </div>
+    ),
+    instruction: (
+      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+        <p>Nghệ thuật hoàn mỹ đơn giản là thứ nghệ thuật có thể chạm tới với được, ai cũng hiểu dù là theo những tầng nghĩa khác nhau. Vì thế, Minh Long dù làm gì cũng không đi khỏi tiêu chí "Bốn không, bốn có", tức không biên giới, không thời gian, không giới tính, không tuổi tác và có văn hóa, có nghệ thuật, có phong cách, có hồn...</p>
+        <p>Tượng là dòng sản phẩm cao cấp không chỉ bởi sự tinh tế, kiểu dáng độc đáo mà còn hội tụ cả cái tâm, cái tài của từng nghệ nhân thực hiện. Mỗi tác phẩm được hình thành từ chính đôi tay tài hoa của người nghệ nhân cần mẫn, nét cọ khéo léo, tinh tế.</p>
+        <p>Những phong cách ấy được phối kết hài hòa trên những kiểu dáng Đông – Tây, tạo nên bao không gian vừa cổ kính, ấm cúng mà vẫn hiện đại, sang trọng, phù hợp với nhiều cách bày trí ở những không gian khác nhau.</p>
+        <p>Nhờ công nghệ vẽ màu ở nhiệt độ cao nên màu chìm dưới men, những nét vẽ khéo léo còn được giữ nguyên vẹn, hình ảnh trên sản phẩm có chiều sâu và sống động như thật.</p>
+      </div>
+    ),
+    code: "A001_0001290503",
+    brand: "Minh Long",
+    collection: "Tượng",
+    type: "Tượng 34 cm",
+    details: [
+      {
+        color: "Vàng 24K - Cobalt - Bạch kim",
+        pattern: "Không trang trí",
+        slug: "cap-ky-lan-34-cm-men-xanh-co",
+        price: 78440000
+      }
+    ],
+    size: "68 x 40 x 56 cm",
+    quantity: 100,
+    rating: [5, 10, 15, 180, 1290]
+  },
+  {
+    id: 9,
+    name: "Cặp Kỳ Lân cobalt trang trí vàng và bạch kim",
+    images: [
+      "https://product.hstatic.net/200000532849/product/ky-lan-cobalt-trang-tri-vang-va-bach-kim-tuong-la-kem_0001290103-sm-01_6af85a2670504e29bec77a5fa962d4ed_grande.png?v=1747683056907"
+    ],
+    description: (
+      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+        <p>Kỳ Lân, là một trong 4 linh vật (Tứ Linh) theo tín ngưỡng Phương Đông, tượng trưng cho sự thái bình và thịnh vượng, là con vật thiêng, là loài Nhân Thú bao hàm cả Đức Nhân và Đức Nghĩa, đi đứng, xoay chuyển đểu theo quy củ, chọn đất rồi mới đứng lên, không giẫm lên bất cứ vật gì đang sống, kể cả cỏ xanh. Tượng Kỳ Lân Minh Long chạm ngưỡng hoàn hảo, thần thái vô cùng sinh động, từng chi tiết được kỳ công chế tác, dáng uy dũng của Sư Tử, ánh mắt uy nghiêm của Rồng, mũi kì lạ của Lân, khuôn miệng hiền hoà, gương mặt chứa điềm lành, bộ lông chải chuốt ngay ngắn...Tất cả đều toát lên khí chất có thần, ẩn chứa trong đó một sức mạnh tâm linh lớn lao đủ tránh tà ngăn sát khí, hoá giải tam sát, có thể thay đổi gia vận, tài vận theo chiều hướng tốt như quan niệm tâm linh của người xưa. Tượng được chế tác hoàn toàn bằng thủ công, được tô vẽ với nhiều màu men khác nhau và được được trang trí thêm vàng, bạch kim làm cho sản phẩm tăng thêm vẻ uy nghi. Tượng Kỳ Lân Minh Long góp phần vào những tác phẩm gốm sứ mỹ nghệ có một không hai, được đánh giá cao bởi sự đẳng cấp và giá trị văn hoá tâm linh mang lại.</p>
+      </div>
+    ),
+    instruction: (
+      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+        <p>Nghệ thuật hoàn mỹ đơn giản là thứ nghệ thuật có thể chạm tới với được, ai cũng hiểu dù là theo những tầng nghĩa khác nhau. Vì thế, Minh Long dù làm gì cũng không đi khỏi tiêu chí "Bốn không, bốn có", tức không biên giới, không thời gian, không giới tính, không tuổi tác và có văn hóa, có nghệ thuật, có phong cách, có hồn...</p>
+        <p>Tượng là dòng sản phẩm cao cấp không chỉ bởi sự tinh tế, kiểu dáng độc đáo mà còn hội tụ cả cái tâm, cái tài của từng nghệ nhân thực hiện. Mỗi tác phẩm được hình thành từ chính đôi tay tài hoa của người nghệ nhân cần mẫn, nét cọ khéo léo, tinh tế.</p>
+        <p>Những phong cách ấy được phối kết hài hòa trên những kiểu dáng Đông – Tây, tạo nên bao không gian vừa cổ kính, ấm cúng mà vẫn hiện đại, sang trọng, phù hợp với nhiều cách bày trí ở những không gian khác nhau.</p>
+        <p>Nhờ công nghệ vẽ màu ở nhiệt độ cao nên màu chìm dưới men, những nét vẽ khéo léo còn được giữ nguyên vẹn, hình ảnh trên sản phẩm có chiều sâu và sống động như thật.</p>
+      </div>
+    ),
+    code: "A001_0001290103",
+    brand: "Minh Long",
+    collection: "Tượng",
+    type: "Tượng 34 cm",
+    details: [
+      {
+        color: "",
+        pattern: "Trang Trí Vàng & Bạch Kim",
+        slug: "cap-ky-lan-cobalt-trang-tri-vang-va-bach-kim",
+        price: 149688000
+      }
+    ],
+    size: "68 x 40 x 56 cm",
+    quantity: 100,
+    rating: [5, 10, 15, 180, 1290]
   },
 ];

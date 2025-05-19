@@ -10,6 +10,32 @@ export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs))
 }
 
+export const sanitizeInput = (input: string, maxLength = 255): string => {
+  // Remove potentially dangerous characters (like script tags)
+  input = input
+    .replace(/<[^>]*>?/gm, "")
+    .replace(/[\u0000-\u001F\u007F]/g, "");
+
+
+  // Remove emojis and kaomojis using supported Unicode ranges
+  const emojiRegex = /(?:\p{Emoji_Presentation}|\p{Emoji}\uFE0F|\d\uFE0F\u20E3)/gu;
+  const kaomojiRegex =
+  /(?:\([^\w\s]{1,20}\)|[^\x00-\x7F]{2,}|[☆★♥♡♪♫‼‼️]+|[oO0]?[^\w\s]{2,}[oO0]?)/g;
+  input = input.replace(emojiRegex, '');
+  input = input.replace(kaomojiRegex, '');
+
+  // Limit to max length
+  if (input.length > maxLength) {
+    input = input.slice(0, maxLength);
+  }
+
+  return input;
+}
+
+export const sanitizeInputOnBlur = (input: string): string => {
+  return input.trim().replace(/\s+/g, " ");
+};
+
 export const formatDuration = (duration: number) => {
   const seconds = Math.floor((duration % 60000) / 1000);
   const minutes = Math.floor(duration / 60000);

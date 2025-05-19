@@ -23,9 +23,9 @@ const ProductPage = () => {
   const params = useParams();
   const slug = params.slug as string;
   const product = useMemo(() => {
-    return products.find((item) => item.patterns[0].slug === slug);
+    return products.find((item) => item.details[0].slug === slug);
   }, [slug]);
-  const [selectedPattern, setSelectedPattern] = useState(product?.patterns[0].name || "Không tìm thấy hoa văn");
+  const [selectedPattern, setSelectedPattern] = useState(product?.details[0].pattern || "Không tìm thấy hoa văn");
   const [quantity, setQuantity] = useState(1);
   const [cartQuantity, setCartQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -68,11 +68,11 @@ const ProductPage = () => {
         id: product.id,
         name: product.name,
         image: product.images[0],
-        pattern: product.patterns[0].name,
+        pattern: product.details[0].pattern,
         size: product.size,
         volume: product.volume,
-        slug: product.patterns[0].slug,
-        price: product.patterns[0].price,
+        slug: product.details[0].slug,
+        price: product.details[0].price,
         quantity,
       };
 
@@ -125,7 +125,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     if (product) {
-      setSelectedPattern(product.patterns[0].name);
+      setSelectedPattern(product.details[0].pattern);
       setQuantity(1);
       setCurrentImageIndex(0);
     }

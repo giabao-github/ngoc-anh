@@ -15,9 +15,13 @@ import { Textarea } from "../ui/textarea";
 import { Montserrat } from "next/font/google";
 import EmptyCart from "../components/EmptyCart";
 import CartProduct from "../components/CartProduct";
-import { getLocalCart } from "../lib/utils";
+import { getLocalCart, sanitizeInput, sanitizeInputOnBlur } from "../lib/utils";
 import CartSkeleton from "../components/CartSkeleton";
 import { useCart } from "../CartContext";
+import { toast } from "sonner";
+import TaxCodeInput from "../components/TaxCodeInput";
+import EmailInput from "../components/EmailInput";
+import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 
 
 const montserrat = Montserrat({
@@ -28,11 +32,17 @@ const montserrat = Montserrat({
 const CartPage = () => {
   const router = useRouter();
   const aboutRef = useRef<HTMLDivElement>(null);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[] | undefined>(undefined);
   const [notes, setNotes] = useState("");
   const [invoiceOpen, setInvoiceOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
+  const [companyName, setCompanyName] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [taxCode, setTaxCode] = useState("");
+  const [taxCodeError, setTaxCodeError] = useState("");
+  const [address, setAddress] = useState("");
 
   useLayoutEffect(() => {
     if (invoiceOpen && contentRef.current) {
@@ -53,9 +63,9 @@ const CartPage = () => {
           return { 
             id: product.id,
             name: product.name,
-            pattern: product.patterns[0].name,
-            slug: product.patterns[0].slug,
-            price: product.patterns[0].price,
+            pattern: product.details[0].pattern,
+            slug: product.details[0].slug,
+            price: product.details[0].price,
             image: product.images[0],
             quantity: item.quantity,
             maxQuantity: product.quantity,
@@ -86,8 +96,8 @@ const CartPage = () => {
     value?: number
   ) => {
     setCartItems((prev) => {
-      const updated = prev.map((item) => {
-        if (item.id === product.id && item.pattern === product.patterns[0].name) {
+      const updated = prev?.map((item) => {
+        if (item.id === product.id && item.pattern === product.details[0].pattern) {
           let newQty = item.quantity;
   
           if (type === "increment" && product.quantity) {
@@ -118,9 +128,9 @@ const CartPage = () => {
   const { updateCartCount } = useCart();
 
   const handleRemove = (id: number) => {
-    const updated = cartItems.filter(item => item.id !== id);
+    const updated = cartItems?.filter(item => item.id !== id);
   
-    if (updated.length === 0) {
+    if (updated && updated.length === 0) {
       clearCart();
     } else {
       localStorage.setItem("cart", JSON.stringify(updated));
@@ -130,40 +140,119 @@ const CartPage = () => {
     updateCartCount();  
   };
 
-  const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const useIsMobile = () => {
+    const [isMobile, setIsMobile] = useState(false);
+  
+    useEffect(() => {
+      const checkMobile = () => setIsMobile(window.innerWidth < 768);
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+      return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+  
+    return isMobile;
+  };
+
+  const isMobile = useIsMobile();
+
+  const totalPrice = cartItems?.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const saveForm = () => {
+    if (companyName.trim().length === 0) {
+      toast.error("Vui lòng nhập tên công ty", {
+        description: "Tên công ty không được bỏ trống"
+      });
+    } else if (companyName.trim().length < 3) {
+      toast.error("Tên công ty quá ngắn", {
+        description: "Tên công ty phải chứa ít nhất 3 ký tự"
+      });
+    } else if (email.trim().length === 0) {
+      toast.error("Vui lòng nhập email", {
+        description: "Email không được bỏ trống"
+      });
+    } else if (emailError.length > 0) {
+      toast.error("Địa chỉ email không hợp lệ", {
+        description: "Vui lòng nhập đúng định dạng email"
+      });
+    } else if (taxCode.trim().length === 0) {
+      toast.error("Vui lòng nhập mã số thuế" , {
+        description: "Mã số thuế không được bỏ trống"
+      });
+    } else if (taxCodeError.length > 0) {
+      toast.error("Mã số thuế không hợp lệ" , {
+        description: "Mã số thuế chỉ chứa 10 hoặc 13 chữ số"
+      });
+    } else if (address.trim().length === 0) {
+      toast.error("Vui lòng nhập địa chỉ công ty", {
+        description: "Địa chỉ công ty không được bỏ trống"
+      });
+    } else if (address.trim().length < 11) {
+      toast.error("Địa chỉ công ty quá ngắn", {
+        description : "Vui lòng nhập đầy đủ địa chỉ công ty"
+      });
+    } else {
+      toast.success("Đã lưu thông tin", { 
+        description: "Thông tin đơn hàng của bạn đã được lưu"
+      });
+    }
+  }
 
   return (
     <Suspense fallback={<SkeletonLoader />}>
       <title>Giỏ hàng của bạn</title>
       <Header hasFooter aboutRef={aboutRef} /> 
-      <div className="mt-4 md:mt-16 max-w-7xl mx-auto p-4 flex flex-col md:flex-row gap-4 md:gap-10">
-        {/* Left Column */}
-        <div className="flex-1">
-          <h2 className="text-lg md:text-xl font-bold mb-2">THÔNG TIN ĐƠN HÀNG</h2>
+      <div className="mt-4 md:mt-16 max-w-[1400px] mx-auto py-4 px-3 md:p-4 flex flex-col md:flex-row gap-4 md:gap-6">
+        {/* Left column */}
+        <div className="flex-1 max-w-[920px]">
+          <h2 className="text-lg md:text-xl font-bold mb-2 mx-2">THÔNG TIN ĐƠN HÀNG</h2>
           <Separator color="#BB9244" opacity={40} />
-          {cartItems.length > 0 ? (
+          {cartItems && cartItems.length > 0 ? (
             <>
               <div className="bg-gray-50 rounded-lg my-2">
-                <div className="font-semibold text-sm md:text-base p-3 md:p-4 md:my-4 bg-orange-50 rounded tracking-wide">SẢN PHẨM BÁN LẺ</div>
-                <div className="mt-0 md:mt-8 space-y-2 md:space-y-6">
-                  {cartItems.map((item, index) => {
-                    const product = products.find((product) => product.id === item.id);
-                    if (!product) {
-                      return null;
-                    }
-                    
-                    return (
-                      <CartProduct
-                        key={item.slug}
-                        item={item}
-                        index={index}
-                        product={product}
-                        handleRemove={handleRemove}
-                        handleQuantityChange={handleQuantityChange}
-                      />
-                    );
-                  })}
-                </div>
+                <div className="font-semibold text-sm md:text-base p-3 md:p-4 md:my-4 mx-2 bg-orange-50 rounded tracking-wide">SẢN PHẨM BÁN LẺ</div>
+                {isMobile ? (
+                  <ScrollArea className="mt-0 space-y-2 h-[480px] px-3">
+                    {cartItems.map((item, index) => {
+                      const product = products.find((product) => product.id === item.id);
+                      if (!product) {
+                        return null;
+                      }
+                      
+                      return (
+                        <CartProduct
+                          key={item.slug}
+                          item={item}
+                          index={index}
+                          product={product}
+                          handleRemove={handleRemove}
+                          handleQuantityChange={handleQuantityChange}
+                        />
+                      );
+                    })}
+                    {isMobile && <ScrollBar orientation="vertical"  className="w-[2px]" />}
+                  </ScrollArea>
+                ) : (
+                  <ScrollArea className="mt-0 md:mt-8 space-y-2 md:space-y-6 h-[480px] px-4 md:px-8">
+                    {cartItems.map((item, index) => {
+                      const product = products.find((product) => product.id === item.id);
+                      if (!product) {
+                        return null;
+                      }
+                      
+                      return (
+                        <CartProduct
+                          key={item.slug}
+                          item={item}
+                          index={index}
+                          product={product}
+                          handleRemove={handleRemove}
+                          handleQuantityChange={handleQuantityChange}
+                        />
+                      );
+                    })}
+                    {!isMobile && <ScrollBar orientation="vertical" />}
+                  </ScrollArea>
+                )}
               </div>
               <Separator color="#BB9244" opacity={30} />
               <div className="mt-6 p-4 bg-orange-50">
@@ -201,26 +290,37 @@ const CartPage = () => {
                           <Input
                             type="text"
                             placeholder="Tên công ty"
+                            value={sanitizeInput(companyName)}
+                            onChange={(e) => setCompanyName(e.target.value)}
+                            onBlur={(e) => setCompanyName(sanitizeInputOnBlur(e.target.value))}
                             className={`w-full text-sm md:text-base bg-neutral-100 border border-gray-300 focus:border-black rounded md:tracking-wide ${montserrat.className}`}
                           />
                           <div className="flex flex-row gap-x-2">
-                            <Input
-                              type="text"
-                              placeholder="Email"
-                              className={`w-[70%] text-sm md:text-base bg-neutral-100 border border-gray-300 focus:border-black rounded md:tracking-wide ${montserrat.className}`}
+                            <EmailInput
+                              email={email}
+                              setEmail={setEmail}
+                              emailError={emailError}
+                              setEmailError={setEmailError}
                             />
-                            <Input
-                              type="text"
-                              placeholder="Mã số thuế"
-                              className={`w-1/3 md:w-[30%] text-sm md:text-base bg-neutral-100 border border-gray-300 focus:border-black rounded md:tracking-wide ${montserrat.className}`}
+                            <TaxCodeInput
+                              taxCode={taxCode}
+                              setTaxCode={setTaxCode}
+                              taxCodeError={taxCodeError}
+                              setTaxCodeError={setTaxCodeError}
                             />
                           </div>
                           <Input
                             type="text"
                             placeholder="Địa chỉ công ty"
+                            value={sanitizeInput(address)}
+                            onChange={(e) => setAddress(e.target.value)}
+                            onBlur={(e) => setAddress(sanitizeInputOnBlur(e.target.value))}
                             className={`w-full text-sm md:text-base bg-neutral-100 border border-gray-300 focus:border-black rounded md:tracking-wide ${montserrat.className}`}
                           />
-                          <button className="w-fit mt-4 bg-[#BB9244] hover:bg-[#BB9244]/80 cursor-pointer text-white px-6 py-3 rounded-full font-semibold select-none tracking-wide">
+                          <button
+                            onClick={saveForm}
+                            className="w-fit mt-4 bg-[#BB9244] hover:bg-[#BB9244]/80 active:bg-[#BB9244]/60 cursor-pointer text-white px-6 py-3 rounded-full font-semibold select-none tracking-wide"
+                          >
                             Lưu thông tin
                           </button>
                         </div>
@@ -230,33 +330,33 @@ const CartPage = () => {
                 </div>
               </div>
             </>
-          ) : cartItems.length === 0 ? (
+          ) : cartItems && cartItems.length === 0 ? (
             <EmptyCart />
           ) : (
             <CartSkeleton />
           )}
         </div>
 
-        {/* Right Column */}
+        {/* Right column */}
         <div className="w-full lg:w-1/3 md:mt-8">
           <div className="p-6 space-y-4">
             <Separator color="#BB9244" opacity={40} />
             <div className={`flex justify-between ${montserrat.className}`}>
               <span className="text-sm md:text-base tracking-wide text-gray-500 font-medium">Tạm tính</span>
-              <span className="text-sm md:text-base tracking-wider text-gray-500 font-semibold">{totalPrice.toLocaleString()}₫</span>
+              <span className="text-sm md:text-base tracking-wider text-gray-500 font-semibold">{totalPrice?.toLocaleString() || 0}₫</span>
             </div>
             <Separator color="#BB9244" opacity={40} />
             <div className={`flex justify-between font-bold pt-2 ${montserrat.className}`}>
               <span className="text-base md:text-lg tracking-wide">TỔNG CỘNG</span>
-              <span className="text-base md:text-lg tracking-wider">{totalPrice.toLocaleString()}₫</span>
+              <span className="text-base md:text-lg tracking-wider">{totalPrice?.toLocaleString() || 0}₫</span>
             </div>
             
-            <button className="w-full mt-6 bg-[#BB9244] hover:bg-[#BB9244]/80 cursor-pointer text-white py-3 rounded-full font-semibold select-none tracking-wide">
+            <button className="w-full mt-6 bg-[#BB9244] hover:bg-[#BB9244]/80 active:bg-[#BB9244]/60 cursor-pointer text-white py-3 rounded-full font-semibold select-none tracking-wide">
               Thanh toán
             </button>
             <button
               onClick={() => router.push('/#products')}
-              className="w-full text-center font-semibold text-[#BB9244] hover:border hover:border-[#BB9244] hover:bg-[#BB9244]/20 cursor-pointer py-3 flex flex-row gap-3 items-center justify-center rounded-full select-none tracking-wide"
+              className="w-full text-center font-semibold text-[#BB9244] hover:border hover:border-[#BB9244] hover:bg-[#BB9244]/20 active:border-[#BB9244] active:bg-[#BB9244]/40 cursor-pointer py-3 flex flex-row gap-3 items-center justify-center rounded-full select-none tracking-wide"
             >
               <FaArrowLeftLong size={18} />
               Mua thêm sản phẩm

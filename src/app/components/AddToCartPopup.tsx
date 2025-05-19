@@ -48,7 +48,7 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({ show, product, cartQuan
                 {new Intl.NumberFormat('vi-VN', {
                   style: 'currency',
                   currency: 'VND',
-                }).format(product.patterns[0].price * cartQuantity)}
+                }).format(product.details[0].price * cartQuantity)}
               </p>
             </div>
           </div>

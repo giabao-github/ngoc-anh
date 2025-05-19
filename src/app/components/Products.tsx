@@ -63,7 +63,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                 className="bg-white group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl mx-auto max-w-full md:min-w-[400px] transform transition-transform duration-500"
               >
                 <div 
-                  onClick={() => router.push(`/products/${product.patterns[0].slug}`)}
+                  onClick={() => router.push(`/products/${product.details[0].slug}`)}
                   className="flex bg-[#FFF3E5] overflow-hidden h-fit md:h-80 items-center justify-center"
                 >
                   <Image
@@ -76,26 +76,26 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                 </div>
 
                 <div
-                  onClick={() => router.push(`/products/${product.patterns[0].slug}`)}
+                  onClick={() => router.push(`/products/${product.details[0].slug}`)}
                   className="p-[10px] md:p-4 bg-white cursor-pointer hover:shadow transition-shadow"
                 >
                   <h3 className="px-1 text-sm md:text-2xl font-semibold text-[#0C2543] line-clamp-2 min-h-[36px] md:min-h-20 leading-normal hover:underline">
                     {product.name}
                   </h3>
                   <p className="px-2 text-[#BB9244] font-semibold py-1 md:py-4 text-base md:text-2xl">
-                    {product.patterns[0]?.price.toLocaleString('en-US') + '₫'}
+                    {product.details[0]?.price.toLocaleString('en-US') + '₫'}
                   </p>
                   <div className="hidden md:flex md:flex-row gap-0 md:gap-2 mb-2">
                     <button
-                      onClick={() => router.push(`/products/${product.patterns[0].slug}`)}
-                      className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
+                      onClick={() => router.push(`/products/${product.details[0].slug}`)}
+                      className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-[#BB9244] active:bg-[#BB9244]/70 hover:text-white active:text-white/70 transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
                     >
                       <FiShoppingCart size={18} />
                       <span className="font-semibold tracking-wide text-xs md:text-sm">Thêm vào giỏ hàng</span>
                     </button>
                     <button 
-                      onClick={() => router.push(`/products/${product.patterns[0].slug}`)}
-                      className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-[#BB9244] hover:text-white transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
+                      onClick={() => router.push(`/products/${product.details[0].slug}`)}
+                      className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-[#BB9244] active:bg-[#BB9244]/70 hover:text-white active:text-white/70  transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
                     >
                       <FaBagShopping size={18} />
                       <span className="font-semibold tracking-wide text-xs md:text-sm">Mua ngay</span>
@@ -112,14 +112,14 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
           {!isAllVisible ? (
             <button
               onClick={showMore}
-              className="select-none cursor-pointer px-6 py-3 md:px-8 md:py-4 text-xs md:text-base rounded-full bg-transparent text-white font-semibold border border-white hover:bg-white hover:text-[#BB9244] transition-colors tracking-wide"
+              className="select-none cursor-pointer px-6 py-3 md:px-8 md:py-4 text-xs md:text-base rounded-full bg-transparent text-white font-semibold border border-white hover:bg-white hover:text-[#BB9244] active:bg-white/70 active:text-[#BB9244]/70 transition-colors tracking-wide"
             >
               Xem thêm sản phẩm
             </button>
           ) : (
             <button
               onClick={collapse}
-              className="select-none cursor-pointer px-6 py-3 md:px-8 md:py-4 text-xs md:text-base rounded-full bg-transparent text-white font-semibold border border-white hover:bg-white hover:text-[#BB9244] transition-colors tracking-wide"
+              className="select-none cursor-pointer px-6 py-3 md:px-8 md:py-4 text-xs md:text-base rounded-full bg-transparent text-white font-semibold border border-white hover:bg-white hover:text-[#BB9244] active:bg-white/70 active:text-[#BB9244]/70 transition-colors tracking-wide"
             >
               Thu gọn
             </button>
