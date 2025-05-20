@@ -209,52 +209,56 @@ const CartPage = () => {
           {cartItems && cartItems.length > 0 ? (
             <>
               <div className="bg-gray-50 rounded-lg my-2">
-                <div className="font-semibold text-sm md:text-base p-3 md:p-4 md:my-4 mx-2 bg-orange-50 rounded tracking-wide">SẢN PHẨM BÁN LẺ</div>
+                <div className="font-semibold text-sm md:text-base p-3 md:p-4 md:mt-5 mx-2 bg-orange-50 rounded tracking-wide">SẢN PHẨM BÁN LẺ</div>
                 {isMobile ? (
-                  <ScrollArea className="mt-0 space-y-2 h-[480px] px-3">
-                    {cartItems.map((item, index) => {
-                      const product = products.find((product) => product.id === item.id);
-                      if (!product) {
-                        return null;
-                      }
-                      
-                      return (
-                        <CartProduct
-                          key={item.slug}
-                          item={item}
-                          index={index}
-                          product={product}
-                          handleRemove={handleRemove}
-                          handleQuantityChange={handleQuantityChange}
-                        />
-                      );
-                    })}
-                    {isMobile && <ScrollBar orientation="vertical"  className="w-[2px]" />}
+                  <ScrollArea className="px-3">
+                    <div className="space-y-2 max-h-[400px]">
+                      {cartItems.map((item, index) => {
+                        const product = products.find((product) => product.id === item.id);
+                        if (!product) {
+                          return null;
+                        }
+                        
+                        return (
+                          <CartProduct
+                            key={item.slug}
+                            item={item}
+                            index={index}
+                            product={product}
+                            handleRemove={handleRemove}
+                            handleQuantityChange={handleQuantityChange}
+                          />
+                        );
+                      })}
+                      {isMobile && <ScrollBar orientation="vertical" />}
+                    </div>
                   </ScrollArea>
                 ) : (
-                  <ScrollArea className="mt-0 md:mt-8 space-y-2 md:space-y-6 h-[480px] px-4 md:px-8">
-                    {cartItems.map((item, index) => {
-                      const product = products.find((product) => product.id === item.id);
-                      if (!product) {
-                        return null;
-                      }
-                      
-                      return (
-                        <CartProduct
-                          key={item.slug}
-                          item={item}
-                          index={index}
-                          product={product}
-                          handleRemove={handleRemove}
-                          handleQuantityChange={handleQuantityChange}
-                        />
-                      );
-                    })}
-                    {!isMobile && <ScrollBar orientation="vertical" />}
+                  <ScrollArea className="px-8">
+                    <div className="space-y-6 max-h-[480px]">
+                      {cartItems.map((item, index) => {
+                        const product = products.find((product) => product.id === item.id);
+                        if (!product) {
+                          return null;
+                        }
+                        
+                        return (
+                          <CartProduct
+                            key={item.slug}
+                            item={item}
+                            index={index}
+                            product={product}
+                            handleRemove={handleRemove}
+                            handleQuantityChange={handleQuantityChange}
+                          />
+                        );
+                      })}
+                      {!isMobile && <ScrollBar orientation="vertical" />}
+                    </div>
                   </ScrollArea>
                 )}
               </div>
-              <Separator color="#BB9244" opacity={30} />
+              <Separator color="#BB9244" opacity={30} className="mt-8 mb-8 md:mb-16" />
               <div className="mt-6 p-4 bg-orange-50">
                 <h3 className="font-semibold mb-3 md:text-lg">Ghi chú đơn hàng</h3>
                 <Textarea
