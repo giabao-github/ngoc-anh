@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Montserrat } from "next/font/google";
 import { FiHeart } from "react-icons/fi";
+import { toast } from "sonner";
 import { Product } from "../types";
 import { cn } from "../lib/utils";
 import { Separator } from "../ui/separator";
-import { toast } from "sonner";
 
 
 const montserrat = Montserrat({

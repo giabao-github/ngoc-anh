@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useMemo, useRef } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import Footer from "@/app/components/Footer";
@@ -9,6 +9,7 @@ import SkeletonLoader from "@/app/components/SkeletonLoader";
 import { products } from "@/app/storage";
 import { Product } from "@/app/types";
 import { normalizeText } from "../lib/utils";
+import useIsMobile from "../hooks/useIsMobile";
 
 
 const SearchPage = () => {
@@ -28,19 +29,6 @@ const SearchPage = () => {
     });
   }, [query]);
 
-  const useIsMobile = () => {
-    const [isMobile, setIsMobile] = useState(false);
-  
-    useEffect(() => {
-      const checkMobile = () => setIsMobile(window.innerWidth < 768);
-      checkMobile();
-      window.addEventListener('resize', checkMobile);
-      return () => window.removeEventListener('resize', checkMobile);
-    }, []);
-  
-    return isMobile;
-  };
-  
   const isMobile = useIsMobile();
 
 

@@ -1,15 +1,12 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook, FaApple, FaEye, FaEyeSlash } from "react-icons/fa6";
+import { useRouter, useSearchParams } from "next/navigation";
 import SkeletonLoader from "../components/SkeletonLoader";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FormFields from "../components/FormFields";
 import ProviderLogin from "../components/ProviderLogin";
-import { Disc } from "lucide-react";
 import Disclaimer from "../components/Disclaimer";
 
 

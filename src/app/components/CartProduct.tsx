@@ -5,6 +5,7 @@ import { useSwipeable } from 'react-swipeable';
 import { Montserrat } from 'next/font/google';
 import { FiMinus, FiPlus } from 'react-icons/fi';
 import { FaTrashCan } from 'react-icons/fa6';
+import useIsMobile from '../hooks/useIsMobile';
 import { Input } from '../ui/input';
 import { CartItem, Product } from '../types';
 
@@ -29,20 +30,6 @@ const CartProduct = ({
 }) => {
   const router = useRouter();
   const [showDelete, setShowDelete] = useState(false);
-
-  const useIsMobile = () => {
-    const [isMobile, setIsMobile] = useState(false);
-  
-    useEffect(() => {
-      const checkMobile = () => setIsMobile(window.innerWidth < 768);
-      checkMobile();
-      window.addEventListener('resize', checkMobile);
-      return () => window.removeEventListener('resize', checkMobile);
-    }, []);
-  
-    return isMobile;
-  };
-  
   const isMobile = useIsMobile();
 
   const swipeHandlers = useSwipeable({

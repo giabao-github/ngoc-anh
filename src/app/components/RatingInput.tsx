@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { FaStar } from 'react-icons/fa6';
 
+
 const RatingInput = ({ onRate }: { onRate: (rating: number) => void }) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const [selected, setSelected] = useState<number>(0);

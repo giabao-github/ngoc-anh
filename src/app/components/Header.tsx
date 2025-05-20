@@ -1,14 +1,14 @@
-import { RefObject, useCallback, useEffect, useState } from "react";
+import { RefObject, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Montserrat } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { FiMenu, FiShoppingCart, FiUser, FiX } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
 import { BsSearchHeart } from "react-icons/bs";
-import { Input } from "../ui/input";
 import { handleSearch } from "../lib/utils";
-import { Montserrat } from "next/font/google";
-import { useCart } from "../CartContext";
+import { Input } from "../ui/input";
+import { useCart } from "../hooks/useCart";
 
 
 const montserrat = Montserrat({

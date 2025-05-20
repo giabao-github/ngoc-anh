@@ -74,6 +74,16 @@ export const formatText = (text: string) => {
     .replace(/\s*([+-])\s*/g, ' $1 ');
 };
 
+export const validateEmail = (value: string) => {
+  const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return emailRegex.test(value);
+};
+
+export const testPhone = (value: string) => {
+  const phoneRegex = /^0\d{9,10}$/;
+  return phoneRegex.test(value);
+};
+
 export const handleSearch = (query: string, router: AppRouterInstance) => {
   const trimmed = query.trim();
   if (!trimmed) {

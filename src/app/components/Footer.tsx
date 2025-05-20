@@ -1,6 +1,6 @@
+import { RefObject } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { RefObject } from "react";
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa6";
 import { HiOutlineMapPin } from "react-icons/hi2";
 

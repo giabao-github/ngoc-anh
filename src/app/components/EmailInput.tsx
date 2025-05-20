@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Montserrat } from "next/font/google";
 import { Input } from "../ui/input";
 import {
@@ -7,6 +7,7 @@ import {
   TooltipContent,
   TooltipProvider,
 } from "../ui/tooltip";
+import useIsMobile from "../hooks/useIsMobile";
 
 
 const montserrat = Montserrat({
@@ -27,19 +28,6 @@ const EmailInput: React.FC<EmailInputProps> = ({
   emailError,
   setEmailError,
 }) => {
-  const useIsMobile = () => {
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-      const checkMobile = () => setIsMobile(window.innerWidth < 768);
-      checkMobile();
-      window.addEventListener("resize", checkMobile);
-      return () => window.removeEventListener("resize", checkMobile);
-    }, []);
-
-    return isMobile;
-  };
-
   const isMobile = useIsMobile();
 
   const validateEmail = (value: string) => {

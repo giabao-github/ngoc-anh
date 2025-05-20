@@ -14,7 +14,8 @@ import ProductDetails from "@/app/components/ProductDetails";
 import RatingSection from "@/app/components/RatingSection";
 import ProductError from "@/app/components/ProductError";
 import { CartItem } from "@/app/types";
-import { useCart } from "@/app/CartContext";
+import { useCart } from "@/app/hooks/useCart";
+
 
 
 export const dynamic = "force-dynamic";

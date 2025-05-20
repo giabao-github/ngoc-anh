@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FaArrowLeft } from "react-icons/fa6";
 import ErrorSearchBar from "./ErrorSearchBar";
 
+
 const ProductError = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-rose-50 text-rose-500 px-6 space-y-6">

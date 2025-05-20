@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Montserrat } from "next/font/google";
+import { FaBagShopping } from "react-icons/fa6";
+import { FiMinus, FiPlus, FiShoppingCart } from "react-icons/fi";
+import useIsMobile from "../hooks/useIsMobile";
 import { Product } from "../types";
 import { Separator } from "../ui/separator";
-import { FiMinus, FiPlus, FiShoppingCart } from "react-icons/fi";
-import { FaBagShopping } from "react-icons/fa6";
 import { Input } from "../ui/input";
 
 
@@ -25,20 +25,6 @@ interface PurchaseSectionProps {
 
 const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, selectedPattern, quantity, setSelectedPattern, handleQuantityChange, handleAddToCart }) => {
   const router = useRouter();
-
-  const useIsMobile = () => {
-    const [isMobile, setIsMobile] = useState(false);
-  
-    useEffect(() => {
-      const checkMobile = () => setIsMobile(window.innerWidth < 768);
-      checkMobile();
-      window.addEventListener('resize', checkMobile);
-      return () => window.removeEventListener('resize', checkMobile);
-    }, []);
-  
-    return isMobile;
-  };
-
   const isMobile = useIsMobile();
 
   return (

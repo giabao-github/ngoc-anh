@@ -4,6 +4,7 @@ import * as React from "react"
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area"
 
 import { cn } from "../lib/utils"
+import useIsMobile from "../hooks/useIsMobile"
 
 
 const ScrollArea = React.forwardRef<
@@ -28,19 +29,6 @@ const ScrollBar = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
   React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>
 >(({ className, orientation = "vertical", ...props }, ref) => {
-  const useIsMobile = () => {
-    const [isMobile, setIsMobile] = React.useState(false);
-  
-    React.useEffect(() => {
-      const checkMobile = () => setIsMobile(window.innerWidth < 768);
-      checkMobile();
-      window.addEventListener('resize', checkMobile);
-      return () => window.removeEventListener('resize', checkMobile);
-    }, []);
-  
-    return isMobile;
-  };
-  
   const isMobile = useIsMobile();
   
   return (
