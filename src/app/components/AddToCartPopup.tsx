@@ -1,7 +1,8 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { FiX } from "react-icons/fi";
 import { Product } from "../types";
-import { useRouter } from "next/navigation";
+import useIsMobile from "../hooks/useIsMobile";
 
 
 interface AddToCartPopupProps {
@@ -12,15 +13,16 @@ interface AddToCartPopupProps {
 }
 const AddToCartPopup: React.FC<AddToCartPopupProps> = ({ show, product, cartQuantity, onClose }) => {
   const router = useRouter();
+  const isMobile = useIsMobile();
 
   if (show) {
     return (
       <div
         onClick={() => router.push('/cart')}
-        className="fixed cursor-pointer top-4 right-4 md:top-24 md:right-4 bg-white shadow-2xl rounded-xl p-4 w-80 z-50 border border-gray-200"
+        className="fixed cursor-pointer top-4 right-4 md:top-24 bg-white shadow-2xl rounded-xl p-3 md:p-4 w-72 md:w-80 z-50 border border-gray-200"
       >
           <div className="flex justify-between items-start mb-2">
-            <h4 className="text-green-600 font-semibold text-sm">
+            <h4 className="text-green-600 font-semibold text-xs md:text-sm">
               Đã thêm vào giỏ hàng thành công!
             </h4>
             <button 
@@ -35,16 +37,16 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({ show, product, cartQuan
             <Image
               src={product.images[0]}
               alt={product.name}
-              width={64}
-              height={64}
-              className="w-16 h-16 border border-black object-cover rounded-lg"
+              width={isMobile ? 48 : 64}
+              height={isMobile ? 48 : 64}
+              className="w-12 h-12 md:w-16 md:h-16 border border-black object-cover rounded-lg"
             />
             <div className="flex-1 space-y-1">
-              <p className="font-medium text-gray-800 text-sm">{product.name}</p>
-              <p className="text-sm text-gray-600">
+              <p className="font-medium text-gray-800 text-xs md:text-sm">{product.name}</p>
+              <p className="text-xs md:text-sm text-gray-600">
                 {cartQuantity > 1 ? `Số lượng: ${cartQuantity}` : null}
               </p>
-              <p className="text-sm font-semibold text-gray-900 mt-1">
+              <p className="text-xs md:text-sm font-semibold text-gray-900 mt-1">
                 {new Intl.NumberFormat('vi-VN', {
                   style: 'currency',
                   currency: 'VND',

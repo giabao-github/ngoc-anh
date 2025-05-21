@@ -21,6 +21,7 @@ const CartDetails: React.FC<CartDetailsProps> = ({ invoiceOpen, setInvoiceOpen, 
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
   const isMobile = useIsMobile();
+  const sortedCartItems = cartItems ? [...cartItems].reverse() : [];
 
   useLayoutEffect(() => {
     if (invoiceOpen && contentRef.current) {
@@ -63,7 +64,7 @@ const CartDetails: React.FC<CartDetailsProps> = ({ invoiceOpen, setInvoiceOpen, 
           SẢN PHẨM BÁN LẺ
         </div>
         <ProductList 
-          cartItems={cartItems} 
+          cartItems={sortedCartItems} 
           handleRemove={handleRemove} 
           handleQuantityChange={handleQuantityChange} 
           isMobile={isMobile} 

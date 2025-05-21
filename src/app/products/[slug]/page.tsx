@@ -17,7 +17,6 @@ import { CartItem } from "@/app/types";
 import { useCart } from "@/app/hooks/useCart";
 
 
-
 export const dynamic = "force-dynamic";
 
 const ProductPage = () => {

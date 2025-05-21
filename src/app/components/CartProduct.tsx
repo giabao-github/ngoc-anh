@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useSwipeable } from 'react-swipeable';
@@ -8,6 +8,7 @@ import { FaTrashCan } from 'react-icons/fa6';
 import useIsMobile from '../hooks/useIsMobile';
 import { Input } from '../ui/input';
 import { CartItem, Product } from '../types';
+import Link from 'next/link';
 
 
 const montserrat = Montserrat({
@@ -31,6 +32,7 @@ const CartProduct = ({
   const router = useRouter();
   const [showDelete, setShowDelete] = useState(false);
   const isMobile = useIsMobile();
+  const [inputValue, setInputValue] = useState(item.quantity.toString());
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => setShowDelete(true),
@@ -47,6 +49,35 @@ const CartProduct = ({
       }, 500);
     }
   }, [isMobile, index]);
+
+  useEffect(() => {
+    setInputValue(item.quantity.toString());
+  }, [item.quantity]);
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    
+    if (newValue === '') {
+      setInputValue('');
+      return;
+    }
+    
+    if (/^\d*$/.test(newValue)) {
+      setInputValue(newValue);
+      // Only update actual quantity when we have a valid number
+      const parsedValue = parseInt(newValue, 10);
+      if (!isNaN(parsedValue)) {
+        handleQuantityChange("set", product, parsedValue);
+      }
+    }
+  };
+
+  const handleBlur = () => {
+    if (inputValue === '' || isNaN(parseInt(inputValue, 10))) {
+      setInputValue('1');
+      handleQuantityChange("set", product, 1);
+    }
+  };
 
 
   return (
@@ -80,10 +111,17 @@ const CartProduct = ({
             <div className="flex flex-col gap-y-1 w-full overflow-hidden">
               <h3
                 title={item.name}
-                onClick={() => router.push(`/products/${item.slug}`)}
-                className={`text-base md:w-fit max-w-md md:text-lg font-bold hover:text-[#BB9244] active:text-[#BB9244]/70 transition-colors cursor-pointer line-clamp-2 max-h-[56px]`}
+                className="text-base md:text-lg font-bold line-clamp-2 max-h-[56px]"
               >
-                {item.name.length > 68 && isMobile ? item.name.slice(0, 68) + '...' : item.name.length > 112 ? item.name.slice(0, 112) + '...' : item.name}
+                <Link href={`/products/${item.slug}`}>
+                  <span className="hover:text-[#BB9244] active:text-[#BB9244]/70 transition-colors cursor-pointer">
+                    {item.name.length > 68 && isMobile 
+                      ? item.name.slice(0, 68) + '...' 
+                      : item.name.length > 112 
+                        ? item.name.slice(0, 112) + '...' 
+                        : item.name}
+                  </span>
+                </Link>
               </h3>
               <p className="text-sm md:text-base text-gray-500">{product.details[0].color.length > 0 && `${product.details[0].color} / `}{item.pattern} / {product.size || product.volume || "Không xác định"}</p>
             </div>
@@ -104,31 +142,18 @@ const CartProduct = ({
                   <FiMinus />
                 </button>
                 <Input
-                  type="number"
+                  type="text"
                   inputMode="numeric"
                   pattern="[0-9]*"
-                  value={product.quantity && item.quantity > product.quantity ? product.quantity : item.quantity}
-                  onChange={(e) => {
-                    const value = parseInt(e.target.value, 10);
-                    if (isNaN(value) && product) {
-                      handleQuantityChange("set", product, 1);
-                    } else if (product && product.quantity) {
-                      const clamped = Math.min(Math.max(value, 1), product.quantity);
-                      handleQuantityChange("set", product, clamped);
-                    }
-                  }}
-                  onBlur={() => {
-                    if (item.quantity < 1 && product) {
-                      handleQuantityChange("set", product, 1);
-                    } else if (product.quantity && item.quantity > product.quantity) {
-                      handleQuantityChange("set", product, product.quantity);
-                    }
-                  }}
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
                   min={1}
+                  max={product.quantity}
                   className={`w-8 md:w-12 p-0 text-center border-none shadow ${item.quantity > 999 ? 'text-xs' : 'text-sm'} font-medium input-no-spinner ${montserrat.className}`}
                 />
                 <button
-                  onClick={() => product && handleQuantityChange("increment", product)}
+                  onClick={() => product && item.quantity < product.quantity && handleQuantityChange("increment", product)}
                   className={`w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-r transition ${
                     product?.quantity && item.quantity < product.quantity
                       ? "cursor-pointer hover:bg-gray-200 active:bg-gray-200/80"

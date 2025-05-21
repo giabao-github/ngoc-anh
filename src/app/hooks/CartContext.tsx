@@ -27,9 +27,15 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
 
   const updateCartCount = useCallback(() => {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const total = cart.length;
-    setCartCount(total);
+    try {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]") as CartItem[];
+      setCartCount(cart.length);
+      setCartItems(cart);
+    } catch (error) {
+      console.error("Error updating cart count:", error);
+      setCartCount(0);
+      setCartItems([]);
+    }
   }, []);
 
   useEffect(() => {
@@ -44,102 +50,114 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   }, [cartItems]);
 
   useEffect(() => {
-    const syncCartWithProducts = async () => {
-      const localCart = getLocalCart();
-      
-      const merged = localCart
-        .map((item) => {
-          const product = products.find((p) => p.id === item.id);
-          if (!product) {
-            return null;
-          } 
-          return { 
-            id: product.id,
-            name: product.name,
-            pattern: product.details[0].pattern,
-            slug: product.details[0].slug,
-            price: product.details[0].price,
-            image: product.images[0],
-            quantity: item.quantity,
-            maxQuantity: product.quantity,
-            size: product.size,
-            volume: product.volume,
-          };
-        })
-        .filter(Boolean)
-        .map(product => ({
-          id: product?.id,
-          name: product?.name,
-          pattern: product?.pattern,
-          slug: product?.slug,
-          price: product?.price,
-          image: product?.image,
-          quantity: product?.quantity
-        }));
-        setCartItems(merged as CartItem[]);
+    const syncCartWithProducts = () => {
+      try {
+        const localCart = getLocalCart();
+        
+        // Map cart items to products and filter out unavailable products
+        const updatedCart = localCart
+          .map((item) => {
+            const product = products.find((p) => p.id === item.id);
+            if (!product) {
+              return null;
+            }
+            
+            return {
+              id: product.id,
+              name: product.name,
+              pattern: product.details[0].pattern,
+              color: product.details[0].color,
+              slug: product.details[0].slug,
+              price: product.details[0].price,
+              image: product.images[0],
+              quantity: Math.min(item.quantity, product.quantity || 1),
+              maxQuantity: product.quantity,
+              size: product.size,
+              volume: product.volume,
+            } as CartItem;
+          })
+          .filter((item): item is CartItem => item !== null);
+        
+        // Only update if there are changes
+        if (JSON.stringify(updatedCart) !== JSON.stringify(cartItems)) {
+          setCartItems(updatedCart);
+          localStorage.setItem("cart", JSON.stringify(updatedCart));
+        }
+      } catch (error) {
+        console.error("Error syncing cart with products:", error);
+      }
     };
   
     syncCartWithProducts();
   }, []);
 
-  const handleQuantityChange = (
-    type: "increment" | "decrement" | "set",
-    product: Product,
-    value?: number
-  ) => {
-    setCartItems((prev) => {
-      const updated = prev?.map((item) => {
-        if (item.id === product.id && item.pattern === product.details[0].pattern) {
+  const updateLocalCart = useCallback((items: CartItem[]) => {
+    try {
+      localStorage.setItem("cart", JSON.stringify(items));
+      setCartItems(items);
+      setCartCount(items.length);
+    } catch (error) {
+      console.error("Error updating local cart:", error);
+    }
+  }, []);
+
+  const handleQuantityChange = useCallback(
+    (type: "increment" | "decrement" | "set", product: Product, value?: number) => {
+      const updated = [...cartItems!].map((item) => {
+        // Match by both id and pattern for variant products
+        if (item.id === product.id && item.slug === product.details[0].slug) {
           let newQty = item.quantity;
+          const maxQty = product.quantity || 1;
   
-          if (type === "increment" && product.quantity) {
-            newQty = Math.min(item.quantity + 1, product.quantity);
+          if (type === "increment") {
+            newQty = Math.min(item.quantity + 1, maxQty);
           }
           else if (type === "decrement") {
             newQty = Math.max(item.quantity - 1, 1);
           }
-          else if (type === "set" && value !== undefined && product.quantity) {
-            newQty = Math.min(Math.max(value, 1), product.quantity);
+          else if (type === "set" && value !== undefined) {
+            newQty = Math.min(Math.max(value, 1), maxQty);
           }
           return { ...item, quantity: newQty };
         }
         return item;
       });
 
-      localStorage.setItem("cart", JSON.stringify(updated));
+      updateLocalCart(updated);
+    }, [cartItems, updateLocalCart]);
 
-      return updated;
-    });
-  };
-
-  const clearCart = () => {
+  const clearCart = useCallback(() => {
     localStorage.removeItem("cart");
     setCartItems([]);
-  };
+    setCartCount(0);
+  }, []);
 
-  const handleRemove = (id: number) => {
-    const updated = cartItems?.filter(item => item.id !== id);
-  
+  const handleRemove = useCallback((id: number, slug?: string) => {
+    const updated = slug
+      // Remove by both id and slug if slug is provided
+      ? cartItems?.filter(item => !(item.id === id && item.slug === slug))
+      // Otherwise remove by id only
+      : cartItems?.filter(item => item.id !== id);
+
     if (updated && updated.length === 0) {
       clearCart();
-    } else {
-      localStorage.setItem("cart", JSON.stringify(updated));
-      setCartItems(updated);
+    } else if (updated) {
+      updateLocalCart(updated);
     }
-  
-    updateCartCount();  
-  };
+  }, [cartItems, clearCart, updateLocalCart]);
+
+  const contextValue = useMemo(() => ({
+    cartItems,
+    cartCount, 
+    totalPrice,
+    updateCartCount, 
+    handleQuantityChange, 
+    handleRemove, 
+    clearCart
+  }), [cartItems, cartCount, totalPrice, updateCartCount, handleQuantityChange, handleRemove, clearCart]);
 
   return (
-    <CartContext.Provider value={{ 
-      cartItems,
-      cartCount, 
-      totalPrice,
-      updateCartCount, 
-      handleQuantityChange, 
-      handleRemove, 
-      clearCart
-    }}>
+    <CartContext.Provider value={contextValue}>
       {children}
     </CartContext.Provider>
   );

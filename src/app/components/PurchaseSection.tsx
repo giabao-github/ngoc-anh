@@ -1,3 +1,4 @@
+import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Montserrat } from "next/font/google";
 import { FaBagShopping } from "react-icons/fa6";
@@ -26,10 +27,41 @@ interface PurchaseSectionProps {
 const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, selectedPattern, quantity, setSelectedPattern, handleQuantityChange, handleAddToCart }) => {
   const router = useRouter();
   const isMobile = useIsMobile();
+  const [inputValue, setInputValue] = useState(quantity.toString());
+
+  useEffect(() => {
+    setInputValue(quantity.toString());
+  }, [quantity]);
+  
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    
+    if (newValue === '') {
+      setInputValue('');
+      return;
+    }
+    
+    if (/^\d*$/.test(newValue)) {
+      setInputValue(newValue);
+      // Only update actual quantity when we have a valid number
+      const parsedValue = parseInt(newValue, 10);
+      if (!isNaN(parsedValue)) {
+        handleQuantityChange("set", parsedValue);
+      }
+    }
+  };
+
+  const handleBlur = () => {
+    if (inputValue === '' || isNaN(parseInt(inputValue, 10))) {
+      setInputValue('1');
+      handleQuantityChange("set", 1);
+    }
+  };
+
 
   return (
     <>
-      {/* details, size/volume, and quantity */}
+      {/* Details, size/volume, and quantity */}
       <div className="space-y-4">
         {product.details[0].color && product.details[0].color.length > 0 && (
           <div className="space-y-2">
@@ -98,26 +130,14 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
                 <FiMinus />
               </button>
               <Input
-                type="number"
+                type="text"
                 inputMode="numeric"
                 pattern="[0-9]*"
-                value={quantity}
-                onChange={(e) => {
-                  const value = parseInt(e.target.value, 10);
-                  if (isNaN(value)) {
-                    handleQuantityChange("set", 1);
-                  } else {
-                    const clamped = Math.min(Math.max(value, 1), product.quantity ?? 1);
-                    handleQuantityChange("set", clamped);
-                  }
-                }}
-                onBlur={() => {
-                  if (quantity < 1) {
-                    handleQuantityChange("set", 1);
-                  }
-                }}
+                value={inputValue}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
                 min={1}
-                max={product.quantity ?? 1}
+                max={product.quantity}
                 className={`w-12 p-0 text-center rounded-none border-none shadow-[2px_0_4px_-1px_rgba(0,0,0,0.1),-2px_0_4px_-1px_rgba(0,0,0,0.1)] text-sm input-no-spinner tracking-wide ${montserrat.className}`}
               />
               <button
@@ -142,13 +162,13 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
           onClick={handleAddToCart}
           className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[40%] hover:bg-[#BB9244] hover:text-white active:bg-[#BB9244]/80 active:text-white/80 transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
         >
-          <FiShoppingCart size={isMobile ? 18: 24} />
+          <FiShoppingCart size={isMobile ? 18 : 24} />
           <span className="font-semibold text-sm md:text-base md:tracking-wide">Thêm vào giỏ hàng</span>
         </button>
         <button 
           className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[60%] hover:bg-[#BB9244] hover:text-white active:bg-[#BB9244]/80 active:text-white/80 transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
         >
-          <FaBagShopping size={isMobile ? 18: 24} />
+          <FaBagShopping size={isMobile ? 18 : 24} />
           <span className="font-semibold text-sm md:text-base md:tracking-wide">Mua ngay</span>
         </button>
       </div>

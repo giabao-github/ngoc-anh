@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { testPhone, validateEmail } from "../lib/utils";
 import SkeletonLoader from "../components/SkeletonLoader";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -43,16 +44,6 @@ const LoginPage = () => {
     } else {
       setInputError("");
     }
-  };
-
-  const validateEmail = (value: string) => {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return emailRegex.test(value);
-  };
-
-  const testPhone = (value: string) => {
-    const phoneRegex = /^0\d{9,10}$/;
-    return phoneRegex.test(value);
   };
 
   const isPhoneValid = isPhoneLogin && testPhone(email);
