@@ -28,7 +28,7 @@ const CartSummary: React.FC<CartSummaryProps> = ({ router }) => {
           </span>
         </div>
         <Separator color="#BB9244" opacity={40} />
-        <div className={`flex justify-between font-bold pt-2 ${montserrat.className}`}>
+        <div className={`flex justify-between font-bold pt-2 text-orange-500 ${montserrat.className}`}>
           <span className="text-base md:text-lg tracking-wide">TỔNG CỘNG</span>
           <span className="text-base md:text-lg tracking-wider">{totalPrice?.toLocaleString() || 0}₫</span>
         </div>

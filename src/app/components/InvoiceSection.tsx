@@ -21,7 +21,7 @@ const InvoiceSection: React.FC<InvoiceSectionProps> = ({ invoiceOpen, setInvoice
   return (
     <div className="mx-2 mt-8 md:mb-16 flex items-center gap-3">
       <div className="flex flex-col gap-y-4 w-full">
-        <div className="flex items-center flex-row gap-3">
+        <div className="flex items-center flex-row gap-2 md:gap-3">
           <Input
             type="checkbox"
             id="invoice"

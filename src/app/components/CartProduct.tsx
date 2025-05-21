@@ -83,7 +83,7 @@ const CartProduct = ({
   return (
     <div
       {...swipeHandlers}
-      className="relative overflow-hidden mt-6"
+      className="relative overflow-hidden mt-4 md:mt-6"
 
     >
       <div {...swipeHandlers} className="relative overflow-hidden min-h-24">
@@ -128,18 +128,18 @@ const CartProduct = ({
 
             {/* Quantity & Price */}
             <div className="flex items-center justify-between gap-1 md:gap-4 flex-wrap sm:flex-nowrap">
-              <div className="flex items-center">
+              <div className="flex items-center border border-gray-300 rounded-lg">
                 <button
                   onClick={() =>
                     item.quantity > 1 && product && handleQuantityChange("decrement", product)
                   }
-                  className={`w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-l transition ${
+                  className={`w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-tl-lg rounded-bl-lg transition ${
                     item.quantity > 1
                       ? "cursor-pointer hover:bg-gray-200 active:bg-gray-200/80"
                       : "cursor-default text-gray-400"
                   }`}
                 >
-                  <FiMinus />
+                  <FiMinus size={isMobile ? 12 : 16} />
                 </button>
                 <Input
                   type="text"
@@ -150,21 +150,21 @@ const CartProduct = ({
                   onBlur={handleBlur}
                   min={1}
                   max={product.quantity}
-                  className={`w-8 md:w-12 p-0 text-center border-none shadow ${item.quantity > 999 ? 'text-xs' : 'text-sm'} font-medium input-no-spinner ${montserrat.className}`}
+                  className={`w-[34px] h-8 md:w-12 md:h-10 p-0 text-center font-medium rounded-none border-none shadow-[2px_0_4px_-1px_rgba(0,0,0,0.1),-2px_0_4px_-1px_rgba(0,0,0,0.1)] ${isMobile ? 'text-xs' : 'text-sm'} ${montserrat.className}`}
                 />
                 <button
                   onClick={() => product && item.quantity < product.quantity && handleQuantityChange("increment", product)}
-                  className={`w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-r transition ${
+                  className={`w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-tr-lg rounded-br-lg transition ${
                     product?.quantity && item.quantity < product.quantity
                       ? "cursor-pointer hover:bg-gray-200 active:bg-gray-200/80"
                       : "cursor-default text-gray-400"
                   }`}
                 >
-                  <FiPlus />
+                  <FiPlus size={isMobile ? 12 : 16} />
                 </button>
               </div>
               <div
-                className={`w-[136px] md:w-36 text-right text-sm tracking-wide font-semibold text-[#0C2543] ${montserrat.className}`}
+                className={`w-[134px] md:w-36 text-right text-sm tracking-wide font-semibold text-orange-500 ${montserrat.className}`}
               >
                 {(item.price * item.quantity).toLocaleString()}₫
               </div>

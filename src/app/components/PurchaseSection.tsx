@@ -138,7 +138,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
                 onBlur={handleBlur}
                 min={1}
                 max={product.quantity}
-                className={`w-12 p-0 text-center rounded-none border-none shadow-[2px_0_4px_-1px_rgba(0,0,0,0.1),-2px_0_4px_-1px_rgba(0,0,0,0.1)] text-sm input-no-spinner tracking-wide ${montserrat.className}`}
+                className={`w-12 p-0 text-center rounded-none border-none shadow-[2px_0_4px_-1px_rgba(0,0,0,0.1),-2px_0_4px_-1px_rgba(0,0,0,0.1)] text-sm tracking-wide ${montserrat.className}`}
               />
               <button
                 onClick={() => product.quantity && quantity < product.quantity && handleQuantityChange("increment")}
