@@ -34,7 +34,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
   }, [quantity]);
   
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
+    let newValue = e.target.value;
     
     if (newValue === '') {
       setInputValue('');
@@ -42,6 +42,10 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({ product, slug, select
     }
     
     if (/^\d*$/.test(newValue)) {
+      if (Number(newValue) < 1 || Number(newValue) > product.quantity || newValue.length > 1) {
+        const clampedValue = Math.min(Math.max(Number(newValue), 1), product.quantity);
+        newValue = Number(clampedValue).toString();
+      }
       setInputValue(newValue);
       // Only update actual quantity when we have a valid number
       const parsedValue = parseInt(newValue, 10);
