@@ -1,4 +1,5 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
+import { Input } from "../ui/input";
 
 
 interface FormFieldsProps {
@@ -40,7 +41,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
     <div className="rounded-md space-y-6">
       {/* Phone or email field */}
       <div className="relative">
-        <input
+        <Input
           aria-label={isPhoneLogin ? "Số điện thoại" : "Email"}
           type={isPhoneLogin ? "tel" : "email"}
           inputMode={isPhoneLogin ? "numeric" : "email"}
@@ -91,7 +92,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
           required
           className={`appearance-none rounded-lg relative block w-full px-3 py-2 tracking-wide border ${
             inputError ? 'border-rose-400' : 'border-gray-300'
-          } placeholder-gray-500 text-gray-900 font-semibold focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm`}
+          } placeholder:text-gray-500 text-gray-900 font-semibold placeholder:font-normal focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 text-sm`}
         />
 
         {/* Phone tooltip */}
@@ -121,7 +122,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
             required
             className={`appearance-none rounded-lg relative block w-full px-3 py-2 tracking-wide border ${
               password && password.length > 0 && password.length < 6 ? 'border-rose-400' : 'border-gray-300'
-            } placeholder-gray-500 text-gray-900 font-semibold focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 sm:text-sm`}
+            } placeholder:text-gray-500 text-gray-900 font-semibold placeholder:font-normal focus:outline-none focus:ring-amber-500 focus:border-amber-500 focus:z-10 text-sm`}
             placeholder="Mật khẩu"
           />
           <button

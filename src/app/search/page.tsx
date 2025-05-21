@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import Footer from "@/app/components/Footer";
@@ -20,6 +20,7 @@ const SearchPage = () => {
 
   const normalizedQuery = normalizeText(query);
   const queryWords = normalizedQuery.split(" ");
+  const isMobile = useIsMobile();
 
   const results = useMemo(() => {
     return products.filter((product) => {
@@ -29,7 +30,9 @@ const SearchPage = () => {
     });
   }, [query]);
 
-  const isMobile = useIsMobile();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
 
   return (
@@ -70,7 +73,7 @@ const SearchPage = () => {
                 >
                   {product.name.length > 70 && isMobile ? product.name.slice(0, 70) + '...' : product.name.length > 56 ? product.name.slice(0, 56) + '...' : product.name}
                 </h2>
-                <p className="px-3 pb-3 text-lg font-semibold mt-2">{product.details[0].price.toLocaleString()}₫</p>
+                <p className="text-[#BB9244] px-3 pb-3 text-lg font-semibold mt-2">{product.details[0].price.toLocaleString()}₫</p>
               </div>
             ))
           }

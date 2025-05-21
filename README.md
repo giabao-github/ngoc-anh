@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ngọc Ánh - Minh Long Porcelain E-commerce
+
+A modern e-commerce web application for Minh Long porcelain products, built with Next.js, React, and Tailwind CSS. The platform allows users to browse collections, view detailed product information, manage a shopping cart, register/login, and recover passwords. The UI is responsive and optimized for both desktop and mobile devices.
+
+
+## Features
+
+- **Product Catalog**: Browse a curated selection of Minh Long porcelain products with images, prices, and detailed descriptions.
+- **Collections**: Explore themed collections with a carousel interface.
+- **Search**: Quickly find products using the integrated search bar.
+- **Shopping Cart**: Add products to your cart, view details, and proceed to checkout.
+- **Authentication**: Register and log in using email or phone number. Password recovery is also supported.
+- **Responsive Design**: Fully responsive layout for seamless experience on all devices.
+- **Modern UI**: Built with Tailwind CSS and custom React components for a clean, elegant look.
+
+
+## Tech Stack
+
+- [Next.js 15](https://nextjs.org/) (App Router, TypeScript)
+- [React 19](https://react.dev/)
+- [Tailwind CSS 4](https://tailwindcss.com/) & Tailwind plugins
+- [Radix UI](https://www.radix-ui.com/) components
+- [Framer Motion](https://www.framer.com/motion/) for animations
+- [Embla Carousel](https://www.embla-carousel.com/) for carousels
+- [Lucide React](https://lucide.dev/) and [React Icons](https://react-icons.github.io/react-icons/)
+
+
+## Project Structure
+
+```
+ngoc-anh/
+├── src/
+│   └── app/
+│       ├── components/      # Reusable UI and page components
+│       ├── ui/              # UI primitives (buttons, inputs, carousels, etc.)
+│       ├── cart/            # Cart page and logic
+│       ├── search/          # Search page and logic
+│       ├── login/           # Login page and logic
+│       ├── register/        # Registration page and logic
+│       ├── password-recovery/ # Password recovery page
+│       ├── products/        # Product detail pages
+│       ├── storage.tsx      # Product and collection data
+│       ├── page.tsx         # Main landing page
+│       └── ...
+├── public/                  # Static assets
+├── package.json             # Project metadata and dependencies
+├── tailwind.config.js       # Tailwind CSS configuration
+├── next.config.ts           # Next.js configuration
+└── ...
+```
+
 
 ## Getting Started
 
-First, run the development server:
+**1. Install dependencies:**
+   ```bash
+   yarn install
+   # or
+   npm install
+   ```
+**2. Run the development server:**
+   ```bash
+   yarn dev
+   # or
+   npm run dev
+   ```
+**3. Application urls:** 
+   Open [http://localhost:3000](http://localhost:3000) in your browser (development mode).
+   Open [https://ngoc-anh.vercel.app](https://ngoc-anh.vercel.app) in your browser (production mode).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Customization
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Update product and collection data in `src/app/storage.tsx`.
+- Adjust styles via Tailwind CSS and the `tailwind.config.js` file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is for demonstration and educational purposes. Minh Long branding and product data are used for illustrative purposes only.

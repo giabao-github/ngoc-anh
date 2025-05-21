@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import SkeletonLoader from "../components/SkeletonLoader";
 import Footer from "../components/Footer";
@@ -14,7 +14,12 @@ const CartPage = () => {
   const aboutRef = useRef(null);
   const [invoiceOpen, setInvoiceOpen] = useState(false);
   const [notes, setNotes] = useState("");
-  
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+
   return (
     <Suspense fallback={<SkeletonLoader />}>
       <title>Giỏ hàng của bạn</title>

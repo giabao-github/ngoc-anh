@@ -35,11 +35,11 @@ const Toaster = ({ ...props }: ToasterProps) => {
           error:
             "border border-red-200 bg-red-200",
           warning:
-            "border-yellow-200 bg-yellow-50 text-yellow-900",
+            "border border-yellow-200 bg-yellow-200",
           info:
-            "border-blue-200 bg-blue-50 text-blue-900",
+            "border border-blue-200 bg-blue-200",
           default:
-            "border-zinc-200 bg-white text-zinc-900",
+            "border border-zinc-200 bg-white",
           title: 
             "text-sm font-semibold",
           description: 
