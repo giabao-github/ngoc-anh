@@ -19,7 +19,7 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({ show, product, cartQuan
     return (
       <div
         onClick={() => router.push('/cart')}
-        className="fixed cursor-pointer top-4 right-4 md:top-24 bg-white shadow-2xl rounded-xl p-3 md:p-4 w-72 md:w-80 z-50 border border-gray-200"
+        className="fixed cursor-pointer top-28 right-4 bg-white shadow-2xl rounded-xl p-3 md:p-4 w-72 md:w-80 z-50 border border-gray-200"
       >
           <div className="flex justify-between items-start mb-2">
             <h4 className="text-green-600 font-semibold text-xs md:text-sm">

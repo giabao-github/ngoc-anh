@@ -73,7 +73,7 @@ const SearchPage = () => {
                 >
                   {product.name.length > 70 && isMobile ? product.name.slice(0, 70) + '...' : product.name.length > 56 ? product.name.slice(0, 56) + '...' : product.name}
                 </h2>
-                <p className="text-[#BB9244] px-3 pb-3 text-lg font-semibold mt-2">{product.details[0].price.toLocaleString()}₫</p>
+                <p className="text-[#BB9244] px-3 pb-3 text-xl font-semibold mt-2">{product.details[0].price.toLocaleString()}₫</p>
               </div>
             ))
           }

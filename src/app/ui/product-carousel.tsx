@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 import { cn } from "../lib/utils";
 import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
 import Image from "next/image";
@@ -10,6 +10,7 @@ interface ProductCarouselProps {
   value?: string | null;
   isLoading?: boolean;
   currentIndex?: number;
+  imageRef?: RefObject<HTMLImageElement | null>;
   onSelect: (value: string | null) => void;
   data: {
     value?: string;
@@ -24,6 +25,7 @@ export const ProductCarousel = ({
   onSelect,
   data,
   currentIndex,
+  imageRef,
 }: ProductCarouselProps) => {
   const [api, setApi] = useState<CarouselApi>();
 
@@ -74,6 +76,7 @@ export const ProductCarousel = ({
                 {/* Desktop image */}
                 <div className="hidden md:block relative overflow-hidden rounded-md w-[608px] aspect-square">
                   <Image
+                    ref={index === currentIndex ? imageRef : null}
                     src={item.image}
                     alt={item.label ?? ''}
                     fill
@@ -86,6 +89,7 @@ export const ProductCarousel = ({
                 <div className="md:hidden w-[90vw] relative overflow-hidden rounded-md aspect-square">
                   {/* Mobile image */}
                   <Image
+                    ref={index === currentIndex ? imageRef : null}
                     src={item.image}
                     alt={item.label ?? ''}
                     fill

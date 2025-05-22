@@ -4,6 +4,8 @@ import { twMerge } from "tailwind-merge";
 import { products } from "../storage";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { RawCartItem } from "../types";
+import { RefObject } from "react";
+import useIsMobile from "../hooks/useIsMobile";
 
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -126,4 +128,168 @@ export const getLocalCart = (): RawCartItem[] => {
   } catch {
     return [];
   }
+};
+
+export const animateAddToCart = (
+  imageRef: RefObject<HTMLDivElement | null>,
+  cartIconRef: RefObject<HTMLDivElement | null>,
+  isMobile: boolean = false
+) => {
+  if (!cartIconRef.current || !imageRef.current) {
+    return;
+  }
+
+  let actualImageElement: HTMLImageElement | null = null;
+  const imgElement = imageRef.current.querySelector("img");
+  if (imgElement) {
+    actualImageElement = imgElement as HTMLImageElement;
+  }
+
+  if (!actualImageElement) {
+    return;
+  }
+
+  const sourceRect = imageRef.current.getBoundingClientRect();
+  const targetRect = cartIconRef.current.getBoundingClientRect();
+
+  // Use original X coordinate but standardized Y coordinate
+  const startX = isMobile ? window.innerWidth * 0.5 : sourceRect.left + sourceRect.width / 2;
+  const startY = window.innerHeight * 0.4;
+  const fallbackSize = Math.min(sourceRect.width, sourceRect.height, 200);
+
+  const adjustedSourceRect = {
+    left: startX - fallbackSize / 2,
+    top: startY - fallbackSize / 2,
+    right: startX + fallbackSize / 2,
+    bottom: startY + fallbackSize / 2,
+    width: fallbackSize,
+    height: fallbackSize,
+    x: startX - fallbackSize / 2,
+    y: startY - fallbackSize / 2,
+    toJSON: () => ({})
+  } as DOMRect;
+
+  const clone = document.createElement("img");
+  clone.src = actualImageElement.src;
+  clone.alt = "Product";
+  clone.style.position = "fixed";
+  clone.style.width = `${sourceRect.width}px`;
+  clone.style.height = `${sourceRect.height}px`;
+  clone.style.objectFit = "cover";
+  clone.style.borderRadius = "0%";
+  clone.style.zIndex = "9999";
+  clone.style.boxShadow = "0 12px 24px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.15)";
+  clone.style.border = "0px solid white";
+  clone.style.backgroundColor = "white";
+  clone.style.pointerEvents = "none";
+  clone.style.filter = "brightness(1.05) saturate(1.1)";
+  clone.style.willChange = "transform, left, top, width, height";
+  clone.style.backfaceVisibility = "hidden";
+  clone.style.left = `${sourceRect.left}px`;
+  clone.style.top = `${sourceRect.top}px`;
+
+  document.body.appendChild(clone);
+  clone.getBoundingClientRect();
+
+  clone.style.transition =
+    "width 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), height 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), left 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), top 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+
+  const circleSize = 120;
+  const centerX = adjustedSourceRect.left + adjustedSourceRect.width / 2;
+  const centerY = adjustedSourceRect.top + adjustedSourceRect.height / 2;
+
+  setTimeout(() => {
+    clone.style.width = `${circleSize}px`;
+    clone.style.height = `${circleSize}px`;
+    clone.style.borderRadius = "50%";
+    clone.style.left = `${centerX - circleSize / 2}px`;
+    clone.style.top = `${centerY - circleSize / 2}px`;
+    clone.style.border = "3px solid rgba(255, 255, 255, 0.9)";
+    clone.style.boxShadow = "0 16px 32px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+  }, 10);
+
+  const finalSize = 40;
+  const targetX = targetRect.left + targetRect.width / 2 - finalSize / 2;
+  const targetY = targetRect.top + targetRect.height / 2 - finalSize / 2;
+
+  setTimeout(() => {
+    clone.style.transition = "";
+
+    let startTime: number | null = null;
+    const duration = 1000;
+    const startSize = circleSize;
+    const endSize = finalSize;
+
+    const startPointX = centerX - startSize / 2;
+    const startPointY = centerY - startSize / 2;
+    
+    const horizontalDistance = targetX - startPointX;
+    const verticalDistance = targetY - startPointY;
+    const totalDistance = Math.sqrt(horizontalDistance * horizontalDistance + verticalDistance * verticalDistance);
+    
+    // Optimized curve for natural arc trajectory
+    const arcHeight = Math.min(totalDistance * 0.25, 100);
+    const midPointX = startPointX + horizontalDistance * 0.5;
+    const midPointY = Math.min(startPointY, targetY) - arcHeight;
+
+    const animate = (currentTime: number) => {
+      if (!startTime) {
+        startTime = currentTime;
+      }
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Smooth quadratic bezier curve
+      const t = progress;
+      const oneMinusT = 1 - t;
+      
+      const xPos = oneMinusT * oneMinusT * startPointX + 
+                    2 * oneMinusT * t * midPointX + 
+                    t * t * targetX;
+      
+      const yPos = oneMinusT * oneMinusT * startPointY + 
+                    2 * oneMinusT * t * midPointY + 
+                    t * t * targetY;
+
+      // Gradual size reduction with easing
+      const sizeProgress = 1 - Math.pow(1 - progress, 2);
+      const currentSize = startSize - (startSize - endSize) * sizeProgress;
+
+      // Subtle bounce without rotation
+      const bounceScale = 1 + Math.sin(progress * Math.PI) * 0.05 * (1 - progress);
+
+      clone.style.width = `${currentSize}px`;
+      clone.style.height = `${currentSize}px`;
+      clone.style.left = `${xPos}px`;
+      clone.style.top = `${yPos}px`;
+      clone.style.transform = `scale(${bounceScale})`;
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        clone.style.transform = "scale(0)";
+        clone.style.transition = "transform 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 300ms ease";
+        clone.style.opacity = "0";
+
+        setTimeout(() => {
+          if (clone.parentNode) {
+            clone.parentNode.removeChild(clone);
+          }
+        }, 300);
+
+        if (cartIconRef.current) {
+          cartIconRef.current.style.transform = "scale(1.3)";
+          cartIconRef.current.style.transition = "transform 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55)";
+
+          setTimeout(() => {
+            if (cartIconRef.current) {
+              cartIconRef.current.style.transform = "scale(1)";
+            }
+          }, 250);
+        }
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, 500);
 };

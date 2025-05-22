@@ -1,3 +1,4 @@
+import { RefObject } from "react";
 import Image from "next/image";
 import { ProductCarousel } from "../ui/product-carousel";
 import { ImageData, Product } from "../types";
@@ -9,15 +10,21 @@ interface ProductImagesProps {
   currentIndex: number;
   images: string[];
   data: ImageData[];
+  imageRef?: RefObject<HTMLImageElement | null>;
   setCurrentIndex: (index: number) => void;
 }
 
-const ProductImages: React.FC<ProductImagesProps> = ({ product, currentIndex, images, data, setCurrentIndex }) => {
+const ProductImages: React.FC<ProductImagesProps> = ({ product, currentIndex, images, data, imageRef, setCurrentIndex }) => {
   return (
     <div className="space-y-4">
       <div className="flex justify-center items-center">
-        <div className="relative aspect-square overflow-hidden rounded-lg">
-          <ProductCarousel onSelect={(value) => setCurrentIndex(Number(value))} data={data} currentIndex={currentIndex} />
+        <div ref={imageRef} className="relative aspect-square overflow-hidden rounded-lg">
+          <ProductCarousel
+            // imageRef={imageRef}
+            onSelect={(value) => setCurrentIndex(Number(value))} 
+            data={data} 
+            currentIndex={currentIndex}
+          />
         </div>
       </div>
 

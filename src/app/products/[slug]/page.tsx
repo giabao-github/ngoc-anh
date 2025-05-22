@@ -15,6 +15,8 @@ import RatingSection from "@/app/components/RatingSection";
 import ProductError from "@/app/components/ProductError";
 import { CartItem } from "@/app/types";
 import { useCart } from "@/app/hooks/useCart";
+import { animateAddToCart } from "@/app/lib/utils";
+import useIsMobile from "@/app/hooks/useIsMobile";
 
 
 export const dynamic = "force-dynamic";
@@ -30,7 +32,7 @@ const ProductPage = () => {
   const [cartQuantity, setCartQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = product?.images ?? [];
-
+  
   const { totalReviews, averageRating } = useMemo(() => {
     if (!product || !product.rating?.length) {
       return { totalReviews: 0, averageRating: 0 };
@@ -41,15 +43,17 @@ const ProductPage = () => {
       0
     );
     const averageRating = totalReviews > 0
-      ? parseFloat((weightedSum / totalReviews).toFixed(1))
-      : 0;
+    ? parseFloat((weightedSum / totalReviews).toFixed(1))
+    : 0;
     return { totalReviews, averageRating };
   }, [product]);  
-
+  
   const [showNotification, setShowNotification] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
-
+  const imageRef = useRef<HTMLImageElement | null>(null);
+  const cartIconRef = useRef<HTMLDivElement | null>(null);
+  const isMobile = useIsMobile();
   const { updateCartCount } = useCart();
 
   const handleAddToCart = () => { 
@@ -61,7 +65,7 @@ const ProductPage = () => {
     timeoutRef.current = setTimeout(() => {
       setShowNotification(false);
       timeoutRef.current = null;
-    }, 5000);
+    }, 3000);
 
     if (product) {
       const itemToAdd: CartItem = {
@@ -92,6 +96,7 @@ const ProductPage = () => {
       }
 
       localStorage.setItem("cart", JSON.stringify(existingCart));
+      animateAddToCart(imageRef, cartIconRef, isMobile);
       updateCartCount();
     }
   };
@@ -153,7 +158,7 @@ const ProductPage = () => {
   return (
     <Suspense fallback={<SkeletonLoader />}>
       <title>{product.name}</title>
-      <Header hasFooter aboutRef={aboutRef} />
+      <Header hasFooter aboutRef={aboutRef} cartIconRef={cartIconRef} />
       <div className="max-w-7xl mx-auto px-4 py-8 bg-white">
         <AddToCartPopup 
           show={showNotification} 
@@ -164,11 +169,12 @@ const ProductPage = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 md:mt-12">
           {/* Product images */}
-          <ProductImages 
+          <ProductImages
             product={product}
             currentIndex={currentImageIndex}
             images={images}
             data={data}
+            imageRef={imageRef}
             setCurrentIndex={setCurrentImageIndex}
           />
 
