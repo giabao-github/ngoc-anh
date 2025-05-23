@@ -56,7 +56,8 @@ const ProductPage = () => {
   const isMobile = useIsMobile();
   const { updateCartCount } = useCart();
 
-  const handleAddToCart = () => { 
+  const handleAddToCart = () => {
+    animateAddToCart(imageRef, cartIconRef, isMobile); 
     setCartQuantity(quantity);
     setShowNotification(true);
     if (timeoutRef.current) {
@@ -67,38 +68,39 @@ const ProductPage = () => {
       timeoutRef.current = null;
     }, 3000);
 
-    if (product) {
-      const itemToAdd: CartItem = {
-        id: product.id,
-        name: product.name,
-        image: product.images[0],
-        pattern: product.details[0].pattern,
-        size: product.size,
-        volume: product.volume,
-        slug: product.details[0].slug,
-        price: product.details[0].price,
-        quantity,
-      };
-
-      const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
-
-      const existingIndex = existingCart.findIndex(
-        (item: CartItem) => item.id === itemToAdd.id && item.pattern === itemToAdd.pattern
-      );
-
-      if (existingIndex !== -1) {
-        existingCart[existingIndex].quantity = Math.min(
-          existingCart[existingIndex].quantity + quantity,
-          product.quantity ?? 1
+    setTimeout(() => {
+      if (product) {
+        const itemToAdd: CartItem = {
+          id: product.id,
+          name: product.name,
+          image: product.images[0],
+          pattern: product.details[0].pattern,
+          size: product.size,
+          volume: product.volume,
+          slug: product.details[0].slug,
+          price: product.details[0].price,
+          quantity,
+        };
+  
+        const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+  
+        const existingIndex = existingCart.findIndex(
+          (item: CartItem) => item.id === itemToAdd.id && item.pattern === itemToAdd.pattern
         );
-      } else {
-        existingCart.push(itemToAdd);
+  
+        if (existingIndex !== -1) {
+          existingCart[existingIndex].quantity = Math.min(
+            existingCart[existingIndex].quantity + quantity,
+            product.quantity ?? 1
+          );
+        } else {
+          existingCart.push(itemToAdd);
+        }
+  
+        localStorage.setItem("cart", JSON.stringify(existingCart));
+        updateCartCount();
       }
-
-      localStorage.setItem("cart", JSON.stringify(existingCart));
-      animateAddToCart(imageRef, cartIconRef, isMobile);
-      updateCartCount();
-    }
+    }, 1600);
   };
 
   const handleCloseNotification = () => {

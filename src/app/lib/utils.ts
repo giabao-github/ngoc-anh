@@ -152,7 +152,7 @@ export const animateAddToCart = (
   const sourceRect = imageRef.current.getBoundingClientRect();
   const targetRect = cartIconRef.current.getBoundingClientRect();
 
-  // Use original X coordinate but standardized Y coordinate
+  // Calculate the final position for phase 1 (where the circle will be)
   const startX = isMobile ? window.innerWidth * 0.5 : sourceRect.left + sourceRect.width / 2;
   const startY = window.innerHeight * 0.4;
   const fallbackSize = Math.min(sourceRect.width, sourceRect.height, 200);
@@ -169,6 +169,11 @@ export const animateAddToCart = (
     toJSON: () => ({})
   } as DOMRect;
 
+  // Calculate circle position for phase 1
+  const circleSize = 120;
+  const centerX = adjustedSourceRect.left + adjustedSourceRect.width / 2;
+  const centerY = adjustedSourceRect.top + adjustedSourceRect.height / 2;
+
   const clone = document.createElement("img");
   clone.src = actualImageElement.src;
   clone.alt = "Product";
@@ -183,22 +188,24 @@ export const animateAddToCart = (
   clone.style.backgroundColor = "white";
   clone.style.pointerEvents = "none";
   clone.style.filter = "brightness(1.05) saturate(1.1)";
-  clone.style.willChange = "transform, left, top, width, height";
+  clone.style.willChange = "transform, left, top, width, height, opacity";
   clone.style.backfaceVisibility = "hidden";
-  clone.style.left = `${sourceRect.left}px`;
-  clone.style.top = `${sourceRect.top}px`;
+  
+  // Position the clone at the center of where it will end up in phase 1
+  clone.style.left = `${centerX - sourceRect.width / 2}px`;
+  clone.style.top = `${centerY - sourceRect.height / 2}px`;
+  clone.style.opacity = "0";
 
   document.body.appendChild(clone);
   clone.getBoundingClientRect();
 
+  // Set up transition for phase 1 (including opacity)
   clone.style.transition =
-    "width 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), height 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), left 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), top 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-
-  const circleSize = 120;
-  const centerX = adjustedSourceRect.left + adjustedSourceRect.width / 2;
-  const centerY = adjustedSourceRect.top + adjustedSourceRect.height / 2;
+    "width 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), height 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), left 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), top 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94)";
 
   setTimeout(() => {
+    // Phase 1: Fade in and transform to circle at the same position
+    clone.style.opacity = "1"; // Fade in
     clone.style.width = `${circleSize}px`;
     clone.style.height = `${circleSize}px`;
     clone.style.borderRadius = "50%";
@@ -213,6 +220,7 @@ export const animateAddToCart = (
   const targetY = targetRect.top + targetRect.height / 2 - finalSize / 2;
 
   setTimeout(() => {
+    // Phase 2: Animate to cart icon
     clone.style.transition = "";
 
     let startTime: number | null = null;

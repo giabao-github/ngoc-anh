@@ -68,7 +68,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 className="group-hover:text-[#D4AF37] group-active:text-[#D4AF37]/70"
               />
               {cartCount > 0 && (
-                <div className={`absolute bg-white/90 text-orange-500/90 group-hover:bg-white group-hover:text-orange-500 text-[10px] font-bold ${cartCount > 99 ? 'w-7 h-2/3 -top-2 -right-4' : 'w-5 h-5 -top-[10px] -right-2'} rounded-full flex items-center justify-center ${montserrat.className}`}>
+                <div className={`absolute bg-white text-orange-500 text-[10px] font-bold ${cartCount > 99 ? 'w-7 h-2/3 -top-2 -right-4' : 'w-5 h-5 -top-[10px] -right-2'} rounded-full flex items-center justify-center ${montserrat.className}`}>
                   {cartCount > 99 ? '99+' : cartCount}
                 </div>
               )}
