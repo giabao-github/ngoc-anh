@@ -1,14 +1,9 @@
-import React from "react";
 import { Montserrat } from "next/font/google";
-import { Input } from "../ui/input";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-} from "../ui/tooltip";
-import useIsMobile from "../hooks/useIsMobile";
+import React from "react";
 
+import useIsMobile from "../hooks/useIsMobile";
+import { Input } from "../ui/input";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],

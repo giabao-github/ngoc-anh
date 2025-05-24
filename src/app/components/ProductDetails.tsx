@@ -1,7 +1,7 @@
-import { Montserrat } from "next/font/google";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { Product } from "../types";
+import { Montserrat } from "next/font/google";
 
+import { Product } from "../types";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],

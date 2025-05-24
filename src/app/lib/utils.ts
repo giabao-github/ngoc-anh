@@ -1,11 +1,9 @@
 import { clsx, type ClassValue } from "clsx";
-import { useRouter } from "next/navigation";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { RefObject } from "react";
 import { twMerge } from "tailwind-merge";
 import { products } from "../storage";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { RawCartItem } from "../types";
-import { RefObject } from "react";
-import useIsMobile from "../hooks/useIsMobile";
 
 
 export const cn = (...inputs: ClassValue[]) => {

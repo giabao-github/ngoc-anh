@@ -14,9 +14,10 @@ const App = () => {
   const productsRef =useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
-  const { hash } = window.location;
-
+  
   useEffect(() => {
+    const { hash } = window.location;
+
     if (hash === '#collection') {
       if (collectionRef.current) {
         const elementPosition = collectionRef.current.offsetTop;
@@ -40,7 +41,7 @@ const App = () => {
     } else if (hash === '#about') {
       aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [isMobile, hash]);
+  }, [isMobile]);
 
 
   return (

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FiX } from "react-icons/fi";
-import { Product } from "../types";
-import useIsMobile from "../hooks/useIsMobile";
 
+import useIsMobile from "../hooks/useIsMobile";
+import { Product } from "../types";
 
 interface AddToCartPopupProps {
   show: boolean;
@@ -44,7 +44,9 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({ show, flag, product, qu
               className="w-12 h-12 md:w-16 md:h-16 border border-black object-cover rounded-lg"
             />
             <div className="flex-1 space-y-1">
-              <p className="font-medium text-gray-800 text-xs md:text-sm">{product.name}</p>
+              <p className="font-medium text-gray-800 text-xs md:text-sm">
+                {product.name}
+              </p>
               <p className="text-xs md:text-sm text-gray-600">
                 {`Số lượng: ${quantity} (tổng cộng: ${cartQuantity})`}
               </p>

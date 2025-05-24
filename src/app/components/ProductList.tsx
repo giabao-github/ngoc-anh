@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+
 import { products } from "../storage";
 import { CartItem } from "../types";
+import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import CartProduct from "./CartProduct";
-
 
 interface ProductListProps {
   cartItems: CartItem[],

@@ -1,8 +1,8 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
-import ErrorSearchBar from "./ErrorSearchBar";
 
+import ErrorSearchBar from "./ErrorSearchBar";
 
 const ProductError = () => {
   return (

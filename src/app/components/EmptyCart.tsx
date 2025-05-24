@@ -1,11 +1,11 @@
+import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Input } from "../ui/input";
-import { Montserrat } from "next/font/google";
-import { handleSearch } from "../lib/utils";
-import { IoCloseCircle, IoSearch } from "react-icons/io5";
 import { useState } from "react";
+import { IoCloseCircle, IoSearch } from "react-icons/io5";
 
+import { handleSearch } from "../lib/utils";
+import { Input } from "../ui/input";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -62,7 +62,7 @@ const EmptyCart = () => {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Tìm kiếm sản phẩm..."
-          className="w-full font-medium pl-12 pr-4 py-4 border border-neutral-300 rounded-md focus:ring-1 focus:ring-white focus:outline-none transition"
+          className="w-full font-medium pl-12 pr-4 py-4 border border-neutral-300 rounded-md shadow-md shadow-neutral-300 focus:border-neutral-400 focus:outline-none transition"
         />
 
         {query.trim().length > 0 && (

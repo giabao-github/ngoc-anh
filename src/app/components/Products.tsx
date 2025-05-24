@@ -1,10 +1,10 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { RefObject, useLayoutEffect, useRef, useState } from "react";
 import { FaBagShopping } from "react-icons/fa6";
 import { FiShoppingCart } from "react-icons/fi";
-import { products } from "../storage";
-import { useRouter } from "next/navigation";
 
+import { products } from "../storage";
 
 const ROWS_PER_CLICK = 2;
 

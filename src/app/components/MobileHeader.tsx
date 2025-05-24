@@ -1,15 +1,15 @@
-import { RefObject, useState } from "react";
+import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { Montserrat } from "next/font/google";
 import { useRouter } from "next/navigation";
+import { RefObject, useState } from "react";
+import { BsSearchHeart } from "react-icons/bs";
 import { FiMenu, FiShoppingCart, FiUser, FiX } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
-import { BsSearchHeart } from "react-icons/bs";
+
+import { useCart } from "../hooks/useCart";
 import { handleSearch } from "../lib/utils";
 import { Input } from "../ui/input";
-import { useCart } from "../hooks/useCart";
-
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -51,8 +51,8 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
             <Image
               src="https://www.zarla.com/images/zarla-sculpticon-1x1-2400x2400-20230210-9wkw87py43xdc9yhdpwq.png?crop=1:1,smart&width=250&dpr=2"
               alt="Logo"
-              width={80}
-              height={80}
+              width={64}
+              height={64}
               onClick={() => router.push('/')}
               className="object-cover rounded cursor-pointer bg-white select-none"
             />
@@ -98,7 +98,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         </div>
       </header>
       {isMenuOpen && (
-        <div className={`md:hidden sticky top-24 z-30 bg-[#0C2543] text-white p-6`}>
+        <div className={`md:hidden sticky top-20 z-30 bg-[#0C2543] text-white p-6`}>
           <nav className="flex flex-col space-y-4">
             <Link 
               href="#" 
@@ -163,7 +163,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
             >
               Về chúng tôi
             </Link>
-            <div className="relative mt-4 mb-2">
+            <div className="relative mt-4 mb-1">
               {/* Search icon */}
               <button
                 title="Tìm kiếm"
@@ -181,7 +181,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Tìm kiếm sản phẩm..."
-                className="w-full pl-10 pr-4 py-2 border border-white rounded-full focus:ring-1 focus:ring-white focus:outline-none transition"
+                className="header-input w-full pl-10 pr-4 py-2 border border-white rounded-full shadow-md shadow-white focus:ring-1 focus:ring-white focus:outline-none transition"
               />
 
               {query.trim().length > 0 && (

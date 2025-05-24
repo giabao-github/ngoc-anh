@@ -1,14 +1,14 @@
 "use client";
 
-import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { testPhone, validateEmail } from "../lib/utils";
-import SkeletonLoader from "../components/SkeletonLoader";
-import Header from "../components/Header";
+import { Suspense, useEffect, useRef, useState } from "react";
+import Disclaimer from "../components/Disclaimer";
 import Footer from "../components/Footer";
 import FormFields from "../components/FormFields";
+import Header from "../components/Header";
 import ProviderLogin from "../components/ProviderLogin";
-import Disclaimer from "../components/Disclaimer";
+import SkeletonLoader from "../components/SkeletonLoader";
+import { testPhone, validateEmail } from "../lib/utils";
 
 
 export const dynamic = "force-dynamic";
@@ -61,8 +61,8 @@ const LoginPage = () => {
     <Suspense fallback={<SkeletonLoader />}>
       <title>Đăng nhập</title>
       <Header hasFooter aboutRef={aboutRef} />
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
+      <div className="max-h-screen bg-gray-50 flex items-center justify-center px-1 lg:px-8 my-12">
+        <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-md shadow-[#D4AF37]">
           <div className="text-center flex flex-col gap-y-3">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               {isPhoneLogin ? "Đăng nhập bằng số điện thoại" : "Đăng nhập bằng email"}

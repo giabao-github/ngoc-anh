@@ -1,10 +1,10 @@
-import { RefObject, useState } from "react";
 import { useRouter } from "next/navigation";
-import { handleSearch } from "../lib/utils";
-import useIsMobile from "../hooks/useIsMobile";
-import MobileHeader from "./MobileHeader";
-import DesktopHeader from "./DesktopHeader";
+import { RefObject, useState } from "react";
 
+import useIsMobile from "../hooks/useIsMobile";
+import { handleSearch } from "../lib/utils";
+import DesktopHeader from "./DesktopHeader";
+import MobileHeader from "./MobileHeader";
 
 interface HeaderProps {
   hasSections?: boolean;

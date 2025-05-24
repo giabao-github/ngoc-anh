@@ -53,8 +53,8 @@ const RegisterPage = () => {
     <Suspense fallback={<SkeletonLoader />}>
       <title>Đăng ký tài khoản</title>
       <Header hasFooter aboutRef={aboutRef} />
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
+      <div className="max-h-screen bg-gray-50 flex items-center justify-center px-1 lg:px-8 my-12">
+        <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-md shadow-[#D4AF37]">
           <div className="text-center flex flex-col gap-y-3">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               Đăng ký tài khoản

@@ -1,16 +1,16 @@
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import useIsMobile from "../hooks/useIsMobile";
-import { useCart } from "../hooks/useCart";
-import CartSkeleton from "./CartSkeleton";
-import { Separator } from "../ui/separator";
-import ProductList from "./ProductList";
-import OrderNotes from "./OrderNotes";
-import InvoiceSection from "./InvoiceSection";
-import EmptyCart from "./EmptyCart";
-import { Button } from "../ui/button";
+import { useLayoutEffect, useRef, useState } from "react";
 import { FaTrash } from "react-icons/fa6";
-import ConfirmDialog from "./ConfirmDialog";
 
+import { useCart } from "../hooks/useCart";
+import useIsMobile from "../hooks/useIsMobile";
+import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
+import CartSkeleton from "./CartSkeleton";
+import ConfirmDialog from "./ConfirmDialog";
+import EmptyCart from "./EmptyCart";
+import InvoiceSection from "./InvoiceSection";
+import OrderNotes from "./OrderNotes";
+import ProductList from "./ProductList";
 
 interface CartDetailsProps {
   invoiceOpen: boolean;
@@ -68,7 +68,12 @@ const CartDetails: React.FC<CartDetailsProps> = ({ invoiceOpen, setInvoiceOpen, 
           <div className="font-semibold text-sm md:text-base p-3 md:p-4 md:mt-5 mx-2 bg-orange-50 rounded tracking-wide">
             SẢN PHẨM BÁN LẺ
           </div>
-          <CartSkeleton skeletonCount={4} />
+          <div className="skeleton-desktop">
+            <CartSkeleton skeletonCount={4} />
+          </div>
+          <div className="skeleton-mobile">
+            <CartSkeleton skeletonCount={3} />
+          </div>
         </div>
         <Separator color="#BB9244" opacity={30} className="mt-8 mb-8 md:mb-16" />
       </div>

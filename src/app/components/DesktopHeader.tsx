@@ -1,15 +1,15 @@
-import { RefObject } from "react";
+import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { Montserrat } from "next/font/google";
 import { useRouter } from "next/navigation";
+import { RefObject } from "react";
+import { BsSearchHeart } from "react-icons/bs";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
-import { BsSearchHeart } from "react-icons/bs";
+
+import { useCart } from "../hooks/useCart";
 import { handleSearch } from "../lib/utils";
 import { Input } from "../ui/input";
-import { useCart } from "../hooks/useCart";
-
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -49,8 +49,8 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           <Image
             src="https://www.zarla.com/images/zarla-sculpticon-1x1-2400x2400-20230210-9wkw87py43xdc9yhdpwq.png?crop=1:1,smart&width=250&dpr=2"
             alt="Logo"
-            width={80}
-            height={80}
+            width={64}
+            height={64}
             onClick={() => router.push('/')}
             className="object-cover rounded cursor-pointer bg-white select-none"
           />
@@ -124,7 +124,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Tìm kiếm sản phẩm..."
-                className={`w-96 font-medium pl-12 pr-4 py-2 border border-white rounded-full focus:ring-1 focus:ring-white focus:outline-none transition ${montserrat.className}`}
+                className={`header-input w-96 font-medium pl-12 pr-4 py-2 border border-white rounded-full shadow-md shadow-white focus:ring-1 focus:ring-white focus:outline-none transition ${montserrat.className}`}
               />
 
               {query.trim().length > 0 && (

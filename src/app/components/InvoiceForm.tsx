@@ -1,12 +1,12 @@
-import { RefObject, useState } from "react";
-import { Montserrat } from "next/font/google";
 import { motion } from "framer-motion";
+import { Montserrat } from "next/font/google";
+import { RefObject, useState } from "react";
 import { toast } from "sonner";
-import { sanitizeInput, sanitizeInputOnBlur } from "../lib/utils";
-import TaxCodeInput from "./TaxCodeInput";
-import EmailInput from "./EmailInput";
-import { Input } from "../ui/input";
 
+import { sanitizeInput, sanitizeInputOnBlur } from "../lib/utils";
+import { Input } from "../ui/input";
+import EmailInput from "./EmailInput";
+import TaxCodeInput from "./TaxCodeInput";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],

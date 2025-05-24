@@ -1,6 +1,7 @@
 import { FaTrash, FaTriangleExclamation } from "react-icons/fa6";
-import { Button } from "../ui/button";
 import { IoClose } from "react-icons/io5";
+
+import { Button } from "../ui/button";
 
 interface ConfirmDialogProps {
   isOpen: boolean;

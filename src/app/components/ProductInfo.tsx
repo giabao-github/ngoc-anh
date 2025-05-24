@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
 import { Montserrat } from "next/font/google";
+import { useEffect, useState } from "react";
 import { FiHeart } from "react-icons/fi";
 import { toast } from "sonner";
-import { Product } from "../types";
-import { cn } from "../lib/utils";
-import { Separator } from "../ui/separator";
 
+import { cn } from "../lib/utils";
+import { Product } from "../types";
+import { Separator } from "../ui/separator";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],

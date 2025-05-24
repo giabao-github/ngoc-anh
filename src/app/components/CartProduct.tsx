@@ -1,16 +1,16 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { useSwipeable } from 'react-swipeable';
 import { Montserrat } from 'next/font/google';
-import { FiMinus, FiPlus } from 'react-icons/fi';
-import { FaTrashCan } from 'react-icons/fa6';
-import useIsMobile from '../hooks/useIsMobile';
-import { Input } from '../ui/input';
-import { CartItem, Product } from '../types';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useCart } from '../hooks/useCart';
+import { useRouter } from 'next/navigation';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { FaTrashCan } from 'react-icons/fa6';
+import { FiMinus, FiPlus } from 'react-icons/fi';
+import { useSwipeable } from 'react-swipeable';
 
+import { useCart } from '../hooks/useCart';
+import useIsMobile from '../hooks/useIsMobile';
+import { CartItem, Product } from '../types';
+import { Input } from '../ui/input';
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],

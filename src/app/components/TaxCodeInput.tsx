@@ -1,7 +1,7 @@
 import { Montserrat } from "next/font/google";
 import useIsMobile from "../hooks/useIsMobile";
 import { Input } from "../ui/input";
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "../ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 
 const montserrat = Montserrat({

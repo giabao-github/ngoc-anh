@@ -1,9 +1,9 @@
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { Montserrat } from "next/font/google";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { Separator } from "../ui/separator";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { useCart } from "../hooks/useCart";
 
+import { useCart } from "../hooks/useCart";
+import { Separator } from "../ui/separator";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],

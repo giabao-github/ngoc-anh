@@ -139,3 +139,23 @@ input::-webkit-credentials-auto-fill-button {
     @apply bg-background text-foreground;
   }
 }
+
+@media (max-width: 767px) {
+  .skeleton-desktop { display: none; }
+  .skeleton-mobile { display: block; }
+}
+@media (min-width: 768px) {
+  .skeleton-desktop { display: block; }
+  .skeleton-mobile { display: none; }
+}
+
+input.header-input:-webkit-autofill {
+  background-color: #0C2543 !important;
+  -webkit-text-fill-color: white !important;
+  border: 1px solid white !important;
+  -webkit-box-shadow: 0 0 0px 1000px #0C2543 inset !important;
+  box-shadow: 0 0 0px 1000px #0C2543 inset !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+

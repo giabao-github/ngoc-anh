@@ -1,22 +1,22 @@
 "use client";
 
-import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
-import { useParams } from "next/navigation";
-import SkeletonLoader from "@/app/components/SkeletonLoader";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
-import { products } from "@/app/storage";
 import AddToCartPopup from "@/app/components/AddToCartPopup";
+import Footer from "@/app/components/Footer";
+import Header from "@/app/components/Header";
+import ProductDetails from "@/app/components/ProductDetails";
+import ProductError from "@/app/components/ProductError";
 import ProductImages from "@/app/components/ProductImages";
 import ProductInfo from "@/app/components/ProductInfo";
 import PurchaseSection from "@/app/components/PurchaseSection";
-import ProductDetails from "@/app/components/ProductDetails";
 import RatingSection from "@/app/components/RatingSection";
-import ProductError from "@/app/components/ProductError";
-import { CartItem } from "@/app/types";
+import SkeletonLoader from "@/app/components/SkeletonLoader";
 import { useCart } from "@/app/hooks/useCart";
-import { animateAddToCart } from "@/app/lib/utils";
 import useIsMobile from "@/app/hooks/useIsMobile";
+import { animateAddToCart } from "@/app/lib/utils";
+import { products } from "@/app/storage";
+import { CartItem } from "@/app/types";
+import { useParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 
 
