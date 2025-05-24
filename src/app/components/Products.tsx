@@ -44,7 +44,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   return (
     <section ref={productsRef} className={`py-16 md:py-32 px-2 md:px-6 bg-[#BB9244]`}>
       <div className="max-w-lg md:max-w-7xl mx-auto transition-all duration-500">
-        <h2 className="text-2xl md:text-3xl font-semibold text-center mb-16 md:mb-20 text-white">
+        <h2 className="text-2xl md:text-3xl font-semibold text-center mb-20 md:mb-24 text-white">
           Khám phá cửa hàng trực tuyến MINH LONG
         </h2>
 

@@ -9,6 +9,7 @@ import useIsMobile from '../hooks/useIsMobile';
 import { Input } from '../ui/input';
 import { CartItem, Product } from '../types';
 import Link from 'next/link';
+import { useCart } from '../hooks/useCart';
 
 
 const montserrat = Montserrat({
@@ -16,23 +17,18 @@ const montserrat = Montserrat({
   weight: ["200", "400","500", "600", "700", "800"]
 });
 
-const CartProduct = ({
-  item,
-  index,
-  product,
-  handleRemove,
-  handleQuantityChange,
-}: {
+interface CartProductProps {
   item: CartItem;
   index: number;
   product: Product;
-  handleRemove: (id: number) => void;
-  handleQuantityChange: (action: "increment" | "decrement" | "set", product: Product, value?: number) => void;
-}) => {
+}
+
+const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
   const router = useRouter();
   const [showDelete, setShowDelete] = useState(false);
   const isMobile = useIsMobile();
   const [inputValue, setInputValue] = useState(item.quantity.toString());
+  const { handleRemove, handleQuantityChange } = useCart();
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => setShowDelete(true),
@@ -87,7 +83,7 @@ const CartProduct = ({
   return (
     <div
       {...swipeHandlers}
-      className="relative overflow-hidden mt-4 md:mt-6"
+      className="relative overflow-hidden my-4 md:my-6"
 
     >
       <div {...swipeHandlers} className="relative overflow-hidden min-h-24">
@@ -178,7 +174,7 @@ const CartProduct = ({
           {/* Desktop trash icon */}
           <button
             title="Xóa khỏi giỏ hàng"
-            onClick={() => handleRemove(item.id)}
+            onClick={() => handleRemove(item)}
             className="absolute cursor-pointer top-0 right-0 text-neutral-400 hover:text-rose-500 active:text-rose-400/70 hidden sm:block"
           >
             <FaTrashCan size={18} />
@@ -187,7 +183,7 @@ const CartProduct = ({
 
         {/* Mobile swipe delete button */}
         <button
-          onClick={() => handleRemove(item.id)}
+          onClick={() => handleRemove(item)}
           className={`
             absolute h-full right-0 top-1/2 -translate-y-1/2 
             bg-orange-500 text-white active:bg-orange-500/70 px-4 py-2 rounded-md shadow

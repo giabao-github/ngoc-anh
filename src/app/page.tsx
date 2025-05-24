@@ -6,23 +6,41 @@ import Products from "./components/Products";
 import Collection from "./components/Collection";
 import Hero from "./components/Hero";
 import Header from "./components/Header";
+import useIsMobile from "./hooks/useIsMobile";
 
 
 const App = () => {
   const collectionRef = useRef<HTMLDivElement>(null);
   const productsRef =useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  const { hash } = window.location;
 
   useEffect(() => {
-    const { hash } = window.location;
     if (hash === '#collection') {
-      collectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+      if (collectionRef.current) {
+        const elementPosition = collectionRef.current.offsetTop;
+        const offsetPosition =  isMobile ? elementPosition - 100 : elementPosition;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
     } else if (hash === '#products') {
-      productsRef.current?.scrollIntoView({ behavior: 'smooth' });
+      if (productsRef.current) {
+        const elementPosition = productsRef.current.offsetTop;
+        const offsetPosition =  isMobile ? elementPosition - 100 : elementPosition;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
     } else if (hash === '#about') {
       aboutRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
-  }, []);
+  }, [isMobile, hash]);
 
 
   return (

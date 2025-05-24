@@ -98,13 +98,21 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         </div>
       </header>
       {isMenuOpen && (
-        <div className={`md:hidden bg-[#0C2543] text-white p-6`}>
+        <div className={`md:hidden sticky top-24 z-30 bg-[#0C2543] text-white p-6`}>
           <nav className="flex flex-col space-y-4">
             <Link 
               href="#" 
               onClick={(e) => {
                 e.preventDefault();
-                collectionRef?.current?.scrollIntoView({ behavior: 'smooth' });
+                if (collectionRef?.current) {
+                  const elementPosition = collectionRef.current.offsetTop;
+                  const offsetPosition =  elementPosition - 100;
+                  
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                  });
+                }
                 if (hasSections) {
                   history.pushState(null, '', '#collection');
                 } else {
@@ -119,7 +127,15 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               href="#" 
               onClick={(e) => {
                 e.preventDefault();
-                productsRef?.current?.scrollIntoView({ behavior: 'smooth' });
+                if (productsRef?.current) {
+                  const elementPosition = productsRef.current.offsetTop;
+                  const offsetPosition =  elementPosition - 100;
+                  
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                  });
+                }
                 if (hasSections) {
                   history.pushState(null, '', '#products');
                 } else {

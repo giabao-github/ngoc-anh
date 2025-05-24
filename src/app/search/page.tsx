@@ -60,9 +60,8 @@ const SearchPage = () => {
                   <Image
                     src={product.images[0]}
                     alt={product.name}
-                    layout="fill"
-                    objectFit="contain"
-                    className="rounded"
+                    fill
+                    className="rounded object-contain"
                   />
                 </div>
                 <p className="px-3 py-0.5 text-sm text-[#BE984E]">{product.brand}</p>

@@ -24,6 +24,7 @@ export type CartItem = {
 
 export type RawCartItem = {
   id: number;
+  name: string;
   quantity: number;
 };
 

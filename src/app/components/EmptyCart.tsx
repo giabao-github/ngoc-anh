@@ -33,7 +33,7 @@ const EmptyCart = () => {
       className="mb-4"
     />
     <p className="text-lg font-medium mb-4">Chưa có sản phẩm trong giỏ hàng...</p>
-    <p className="text-sm text-gray-600 mb-8 w-full md:w-[75%]">
+    <p className="text-sm md:text-center text-gray-600 mb-8 w-[96%] md:w-[75%]">
       Bạn có thể quay về 
       <span 
         className="font-bold mx-[6px] cursor-pointer text-black hover:underline" 

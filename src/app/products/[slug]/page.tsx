@@ -17,6 +17,7 @@ import { CartItem } from "@/app/types";
 import { useCart } from "@/app/hooks/useCart";
 import { animateAddToCart } from "@/app/lib/utils";
 import useIsMobile from "@/app/hooks/useIsMobile";
+import { toast } from "sonner";
 
 
 export const dynamic = "force-dynamic";
@@ -29,7 +30,6 @@ const ProductPage = () => {
   }, [slug]);
   const [selectedPattern, setSelectedPattern] = useState(product?.details[0].pattern || "Không tìm thấy hoa văn");
   const [quantity, setQuantity] = useState(1);
-  const [cartQuantity, setCartQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = product?.images ?? [];
   
@@ -49,17 +49,26 @@ const ProductPage = () => {
   }, [product]);  
   
   const [showNotification, setShowNotification] = useState(false);
+  const [notificationFlag, setNotificationFlag] = useState("");
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
   const cartIconRef = useRef<HTMLDivElement | null>(null);
   const isMobile = useIsMobile();
-  const { updateCartCount } = useCart();
+  const { cartItems, updateCartCount } = useCart();
+  const cartQuantity = useMemo(() => {
+    if (!product || !cartItems) {
+      return 0;
+    }
+    const cartItem = cartItems.find(item => 
+      item.id === product.id && item.name === product.name
+    );
+    return cartItem?.quantity || 0;
+  }, [product, cartItems]);
 
   const handleAddToCart = () => {
     animateAddToCart(imageRef, cartIconRef, isMobile); 
-    setCartQuantity(quantity);
-    setShowNotification(true);
+  
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -68,26 +77,30 @@ const ProductPage = () => {
       timeoutRef.current = null;
     }, 3000);
 
-    setTimeout(() => {
-      if (product) {
-        const itemToAdd: CartItem = {
-          id: product.id,
-          name: product.name,
-          image: product.images[0],
-          pattern: product.details[0].pattern,
-          size: product.size,
-          volume: product.volume,
-          slug: product.details[0].slug,
-          price: product.details[0].price,
-          quantity,
-        };
-  
-        const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
-  
-        const existingIndex = existingCart.findIndex(
-          (item: CartItem) => item.id === itemToAdd.id && item.pattern === itemToAdd.pattern
-        );
-  
+    if (product) {
+      const itemToAdd: CartItem = {
+        id: product.id,
+        name: product.name,
+        image: product.images[0],
+        pattern: product.details[0].pattern,
+        size: product.size,
+        volume: product.volume,
+        slug: product.details[0].slug,
+        price: product.details[0].price,
+        quantity,
+      };
+      
+      const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      
+      const existingIndex = existingCart.findIndex(
+        (item: CartItem) => item.id === itemToAdd.id && item.name === itemToAdd.name
+      );
+      
+      // Notification
+      setNotificationFlag(existingIndex !== -1 ? "update" : "add");
+      setShowNotification(true);
+    
+      setTimeout(() => {
         if (existingIndex !== -1) {
           existingCart[existingIndex].quantity = Math.min(
             existingCart[existingIndex].quantity + quantity,
@@ -99,8 +112,8 @@ const ProductPage = () => {
   
         localStorage.setItem("cart", JSON.stringify(existingCart));
         updateCartCount();
-      }
-    }, 1600);
+      }, 1600);
+    }
   };
 
   const handleCloseNotification = () => {
@@ -147,6 +160,12 @@ const ProductPage = () => {
   }, []);
 
   useEffect(() => {
+    if (product && quantity >= product.quantity) {
+      toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này");
+    }
+  }, [product, quantity]);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
 
@@ -163,8 +182,10 @@ const ProductPage = () => {
       <Header hasFooter aboutRef={aboutRef} cartIconRef={cartIconRef} />
       <div className="max-w-7xl mx-auto px-4 py-8 bg-white">
         <AddToCartPopup 
-          show={showNotification} 
+          show={showNotification}
+          flag={notificationFlag}
           product={product}
+          quantity={quantity}
           cartQuantity={cartQuantity} 
           onClose={handleCloseNotification}
         />

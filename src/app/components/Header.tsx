@@ -1,8 +1,6 @@
 import { RefObject, useState } from "react";
-import { Montserrat } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { handleSearch } from "../lib/utils";
-import { useCart } from "../hooks/useCart";
 import useIsMobile from "../hooks/useIsMobile";
 import MobileHeader from "./MobileHeader";
 import DesktopHeader from "./DesktopHeader";
@@ -20,8 +18,6 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, productsRef, aboutRef, cartIconRef }) => {
   const router = useRouter();
   const [query, setQuery] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { cartCount } = useCart();
   const isMobile = useIsMobile();
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

@@ -7,11 +7,13 @@ import useIsMobile from "../hooks/useIsMobile";
 
 interface AddToCartPopupProps {
   show: boolean;
+  flag: string;
   product: Product;
+  quantity: number;
   cartQuantity: number;
   onClose: () => void;
 }
-const AddToCartPopup: React.FC<AddToCartPopupProps> = ({ show, product, cartQuantity, onClose }) => {
+const AddToCartPopup: React.FC<AddToCartPopupProps> = ({ show, flag, product, quantity, cartQuantity, onClose }) => {
   const router = useRouter();
   const isMobile = useIsMobile();
 
@@ -19,11 +21,11 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({ show, product, cartQuan
     return (
       <div
         onClick={() => router.push('/cart')}
-        className="fixed cursor-pointer top-28 right-4 bg-white shadow-2xl rounded-xl p-3 md:p-4 w-72 md:w-80 z-50 border border-gray-200"
+        className="fixed cursor-pointer top-28 right-4 bg-white shadow-2xl rounded-xl p-3 md:p-4 w-[292px] md:w-[342px] z-50 border border-gray-200"
       >
-          <div className="flex justify-between items-start mb-2">
+          <div className="flex justify-between items-start mb-3">
             <h4 className="text-green-600 font-semibold text-xs md:text-sm">
-              Đã thêm vào giỏ hàng thành công!
+              {flag === "add" ? "Đã thêm sản phẩm vào giỏ hàng!" : "Đã cập nhật số lượng sản phẩm trong giỏ hàng!"}
             </h4>
             <button 
               onClick={onClose}
@@ -44,13 +46,13 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({ show, product, cartQuan
             <div className="flex-1 space-y-1">
               <p className="font-medium text-gray-800 text-xs md:text-sm">{product.name}</p>
               <p className="text-xs md:text-sm text-gray-600">
-                {cartQuantity > 1 ? `Số lượng: ${cartQuantity}` : null}
+                {`Số lượng: ${quantity} (tổng cộng: ${cartQuantity})`}
               </p>
               <p className="text-xs md:text-sm font-semibold text-gray-900 mt-1">
                 {new Intl.NumberFormat('vi-VN', {
                   style: 'currency',
                   currency: 'VND',
-                }).format(product.details[0].price * cartQuantity)}
+                }).format(product.details[0].price * quantity)}
               </p>
             </div>
           </div>
