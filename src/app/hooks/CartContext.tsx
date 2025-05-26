@@ -1,10 +1,10 @@
 "use client";
 
+import { getLocalCart } from '@/app/lib/utils';
+import { products } from '@/app/storage';
+import { CartItem, Product } from '@/app/types';
 import { createContext, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
-import { getLocalCart } from '../lib/utils';
-import { products } from '../storage';
-import { CartItem, Product } from '../types';
 
 
 interface CartContextType {

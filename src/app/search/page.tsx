@@ -1,15 +1,15 @@
 "use client";
 
-import Footer from "@/app/components/Footer";
-import Header from "@/app/components/Header";
-import SkeletonLoader from "@/app/components/SkeletonLoader";
+import Header from "@/app/components/header/Header";
+import Footer from "@/app/components/sections/Footer";
+import SkeletonLoader from "@/app/components/user/SkeletonLoader";
+import useIsMobile from "@/app/hooks/useIsMobile";
+import { normalizeText } from "@/app/lib/utils";
 import { products } from "@/app/storage";
 import { Product } from "@/app/types";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useRef } from "react";
-import useIsMobile from "../hooks/useIsMobile";
-import { normalizeText } from "../lib/utils";
 
 
 const SearchPage = () => {

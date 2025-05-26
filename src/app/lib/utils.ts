@@ -1,9 +1,9 @@
+import { products } from "@/app/storage";
+import { RawCartItem } from "@/app/types";
 import { clsx, type ClassValue } from "clsx";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { RefObject } from "react";
 import { twMerge } from "tailwind-merge";
-import { products } from "../storage";
-import { RawCartItem } from "../types";
 
 
 export const cn = (...inputs: ClassValue[]) => {
@@ -129,7 +129,7 @@ export const getLocalCart = (): RawCartItem[] => {
 };
 
 export const animateAddToCart = (
-  imageRef: RefObject<HTMLDivElement | null>,
+  imageRef: RefObject<HTMLElement | null>,
   cartIconRef: RefObject<HTMLDivElement | null>,
   isMobile: boolean = false
 ) => {

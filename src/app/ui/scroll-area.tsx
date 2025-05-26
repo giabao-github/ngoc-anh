@@ -1,10 +1,10 @@
 "use client"
 
-import * as React from "react"
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area"
+import * as React from "react"
 
-import { cn } from "../lib/utils"
-import useIsMobile from "../hooks/useIsMobile"
+import useIsMobile from "@/app/hooks/useIsMobile"
+import { cn } from "@/app/lib/utils"
 
 
 const ScrollArea = React.forwardRef<

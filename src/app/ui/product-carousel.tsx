@@ -1,9 +1,9 @@
 "use client";
 
-import { RefObject, useEffect, useState } from "react";
-import { cn } from "../lib/utils";
-import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
+import { cn } from "@/app/lib/utils";
+import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/app/ui/carousel";
 import Image from "next/image";
+import { RefObject, useEffect, useState } from "react";
 
 
 interface ProductCarouselProps {

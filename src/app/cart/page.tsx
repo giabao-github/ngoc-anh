@@ -1,12 +1,12 @@
 "use client";
 
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import CartDetails from "@/app/components/cart/CartDetails";
+import CartSummary from "@/app/components/cart/CartSummary";
+import Header from "@/app/components/header/Header";
+import Footer from "@/app/components/sections/Footer";
+import SkeletonLoader from "@/app/components/user/SkeletonLoader";
 import { useRouter } from "next/navigation";
-import SkeletonLoader from "../components/SkeletonLoader";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import CartDetails from "../components/CartDetails";
-import CartSummary from "../components/CartSummary";
+import { Suspense, useEffect, useRef, useState } from "react";
 
 
 const CartPage = () => {
@@ -31,7 +31,7 @@ const CartPage = () => {
           notes={notes}
           setNotes={setNotes}
         />
-        <CartSummary router={router} />
+        <CartSummary />
       </div>
       <Footer aboutRef={aboutRef} />
     </Suspense>

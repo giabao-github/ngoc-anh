@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import useIsMobile from "@/app/hooks/useIsMobile";
+import { cn } from "@/app/lib/utils";
+import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/app/ui/carousel";
 import Image from "next/image";
-import { cn } from "../lib/utils";
-import useIsMobile from "../hooks/useIsMobile";
-import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
+import { useEffect, useState } from "react";
 
 
 interface FilterCarouselProps {

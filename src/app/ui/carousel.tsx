@@ -1,12 +1,12 @@
 "use client"
 
-import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
+import * as React from "react"
 
-import { cn } from "../lib/utils"
-import { Button } from "./button"
+import { cn } from "@/app/lib/utils"
+import { Button } from "@/app/ui/button"
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6"
 
 type CarouselApi = UseEmblaCarouselType[1]
@@ -252,10 +252,8 @@ const CarouselNext = React.forwardRef<
 CarouselNext.displayName = "CarouselNext"
 
 export {
-  type CarouselApi,
   Carousel,
   CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
+  CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi
 }
+

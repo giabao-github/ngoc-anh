@@ -1,8 +1,8 @@
+import { CartProvider } from "@/app/hooks/CartContext";
+import { Toaster } from "@/app/ui/sonner";
 import type { Metadata } from "next";
 import { Arsenal, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { CartProvider } from "./hooks/CartContext";
-import { Toaster } from "./ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

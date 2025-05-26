@@ -1,14 +1,14 @@
 "use client";
 
+import Header from "@/app/components/header/Header";
+import Footer from "@/app/components/sections/Footer";
+import Disclaimer from "@/app/components/user/Disclaimer";
+import FormFields from "@/app/components/user/FormFields";
+import ProviderLogin from "@/app/components/user/ProviderLogin";
+import SkeletonLoader from "@/app/components/user/SkeletonLoader";
+import { testPhone, validateEmail } from "@/app/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
-import Disclaimer from "../components/Disclaimer";
-import Footer from "../components/Footer";
-import FormFields from "../components/FormFields";
-import Header from "../components/Header";
-import ProviderLogin from "../components/ProviderLogin";
-import SkeletonLoader from "../components/SkeletonLoader";
-import { testPhone, validateEmail } from "../lib/utils";
 
 
 export const dynamic = 'force-dynamic';

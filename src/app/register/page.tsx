@@ -1,15 +1,15 @@
 "use client";
 
-import { Suspense, useRef, useState } from "react";
+import Header from "@/app/components/header/Header";
+import Footer from "@/app/components/sections/Footer";
+import Disclaimer from "@/app/components/user/Disclaimer";
+import FormFields from "@/app/components/user/FormFields";
+import ProviderLogin from "@/app/components/user/ProviderLogin";
+import SkeletonLoader from "@/app/components/user/SkeletonLoader";
+import EmailPhoneSwitch from "@/app/components/user/Switch";
+import { testPhone, validateEmail } from "@/app/lib/utils";
 import { useRouter } from "next/navigation";
-import { testPhone, validateEmail } from "../lib/utils";
-import SkeletonLoader from "../components/SkeletonLoader";
-import EmailPhoneSwitch from "../components/Switch";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import FormFields from "../components/FormFields";
-import Disclaimer from "../components/Disclaimer";
-import ProviderLogin from "../components/ProviderLogin";
+import { Suspense, useRef, useState } from "react";
 
 
 export const dynamic = 'force-dynamic';

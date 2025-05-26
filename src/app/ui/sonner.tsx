@@ -1,14 +1,8 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { Josefin_Sans } from "next/font/google";
 import { Toaster as Sonner, ToasterProps } from "sonner";
 
-
-const josefin = Josefin_Sans({
-  subsets: ["latin", "vietnamese"],
-  weight: ["200", "300", "400","500", "600", "700"]
-});
 
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme();
@@ -28,7 +22,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
       toastOptions={{
         unstyled: true,
         className:
-          `w-full max-w-sm border-2 px-3 py-4 rounded-lg shadow-lg flex gap-2 justify-start items-center`,
+          `w-96 max-w-md border-2 px-3 py-4 rounded-lg shadow-lg flex gap-2 justify-start items-center`,
         classNames: {
           success:
             "border border-green-200 bg-green-200",
@@ -57,4 +51,4 @@ const Toaster = ({ ...props }: ToasterProps) => {
   )
 }
 
-export { Toaster }
+export { Toaster };

@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
-import Footer from "./components/Footer";
-import Products from "./components/Products";
-import Collection from "./components/Collection";
-import Hero from "./components/Hero";
-import Header from "./components/Header";
-import useIsMobile from "./hooks/useIsMobile";
+import Header from "@/app/components/header/Header";
+import Collection from "@/app/components/sections/Collection";
+import Footer from "@/app/components/sections/Footer";
+import Hero from "@/app/components/sections/Hero";
+import Products from "@/app/components/sections/Products";
+import useIsMobile from "@/app/hooks/useIsMobile";
+import { useEffect, useRef } from "react";
 
 
 const App = () => {
