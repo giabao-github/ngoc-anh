@@ -83,7 +83,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
   return (
     <div
       {...swipeHandlers}
-      className="relative overflow-hidden my-4 md:my-6"
+      className="relative overflow-hidden"
 
     >
       <div {...swipeHandlers} className="relative overflow-hidden min-h-24">
@@ -101,6 +101,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
             alt={item.name}
             width={96}
             height={96}
+            priority
             onClick={() => router.push(`/products/${item.slug}`)}
             className="w-24 h-24 object-contain cursor-pointer shrink-0 border border-neutral-200 rounded-md"
           />

@@ -96,7 +96,7 @@ const CartDetails: React.FC<CartDetailsProps> = ({ invoiceOpen, setInvoiceOpen, 
         <h2 className="text-lg md:text-xl font-bold mb-2 mx-2">THÔNG TIN ĐƠN HÀNG</h2>
         <Separator color="#BB9244" opacity={40} />
         <div className="rounded-lg my-2">
-          <div className="font-semibold text-sm md:text-base p-3 md:p-4 md:mt-5 mx-2 bg-orange-50 rounded tracking-wide">
+          <div className="font-semibold text-sm md:text-base p-3 md:p-4 md:mt-5 mb-5 md:mb-7 mx-2 bg-orange-50 rounded tracking-wide">
             SẢN PHẨM BÁN LẺ
           </div>
           <ProductList 
@@ -105,7 +105,7 @@ const CartDetails: React.FC<CartDetailsProps> = ({ invoiceOpen, setInvoiceOpen, 
           />
           <Button 
             onClick={handleClearCartClick}
-            className="mt-4 md:mt-2 mx-4 md:mx-8 py-4 md:py-5 space-x-1 bg-white border border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white active:bg-rose-400 active:text-white">
+            className="mt-6 md:mt-8 mx-4 md:mx-8 py-4 md:py-5 space-x-1 bg-white border border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white active:bg-rose-400 active:text-white">
             <FaTrash size={isMobile ? 16 : 20} />
             <span className="font-semibold text-sm md:text-base tracking-wide">
               Xóa tất cả sản phẩm
