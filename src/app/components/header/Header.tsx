@@ -41,7 +41,6 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
             cartIconRef={cartIconRef}
             query={query}
             setQuery={setQuery}
-            handleKeyDown={handleKeyDown}
           />
         </div>
       ) : (

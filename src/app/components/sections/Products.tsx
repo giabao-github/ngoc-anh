@@ -4,7 +4,9 @@ import { RefObject, useLayoutEffect, useRef, useState } from "react";
 import { FaBagShopping } from "react-icons/fa6";
 import { FiShoppingCart } from "react-icons/fi";
 
+import useIsMobile from "@/app/hooks/useIsMobile";
 import { products } from "@/app/storage";
+
 
 const ROWS_PER_CLICK = 2;
 
@@ -15,6 +17,7 @@ interface ProductsProps {
 const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   const router = useRouter();
   const [visibleRows, setVisibleRows] = useState(ROWS_PER_CLICK);
+  const isMobile = useIsMobile();
   const productsPerRow = { mobile: 2, desktop: 3 };
   const itemsToShow = visibleRows * productsPerRow.desktop;
   const isAllVisible = itemsToShow >= products.length;
@@ -43,28 +46,28 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
 
   return (
     <section ref={productsRef} className={`py-16 md:py-32 px-2 md:px-6 bg-[#BB9244]`}>
-      <div className="max-w-lg md:max-w-7xl mx-auto transition-all duration-500">
+      <div className="max-w-lg md:max-w-7xl mx-auto transition-all duration-400">
         <h2 className="text-2xl md:text-3xl font-semibold text-center mb-20 md:mb-24 text-white">
           Khám phá cửa hàng trực tuyến MINH LONG
         </h2>
 
         {/* Animated wrapper */}
         <div
-          className="overflow-hidden transition-all duration-500 ease-in-out"
+          className="overflow-hidden transition-all duration-400 ease-in-out"
           style={{ maxHeight: gridHeight ? `${gridHeight}px` : '9999px' }}
         >
           <div
             ref={gridRef}
-            className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8 justify-center transition-opacity duration-500"
+            className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8 justify-center transition-opacity duration-400"
           >
             {products.slice(0, itemsToShow).map((product) => (
               <div
                 key={product.id}
-                className="bg-white group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl mx-auto max-w-full md:min-w-[400px] transform transition-transform duration-500"
+                className="bg-white group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl mx-auto max-w-full md:min-w-[400px] transform transition-transform duration-400"
               >
                 <div 
                   onClick={() => router.push(`/products/${product.details[0].slug}`)}
-                  className="flex bg-[#FFF3E5] overflow-hidden h-fit md:h-80 items-center justify-center"
+                  className="flex bg-[#FFF3E5] overflow-hidden md:h-80 items-center justify-center mb-1 md:mb-0"
                 >
                   <Image
                     src={product.images[0]}
@@ -77,12 +80,12 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
 
                 <div
                   onClick={() => router.push(`/products/${product.details[0].slug}`)}
-                  className="p-[10px] md:p-4 bg-white cursor-pointer hover:shadow transition-shadow"
+                  className="p-[6px] md:p-4 bg-white cursor-pointer hover:shadow transition-shadow space-y-1"
                 >
-                  <h3 className="px-1 text-sm md:text-2xl font-semibold text-[#0C2543] line-clamp-2 min-h-[36px] md:min-h-20 leading-normal hover:underline">
+                  <h3 className={`px-1 text-sm md:text-xl font-semibold md:font-bold text-[#0C2543] line-clamp-2 min-h-[36px] md:min-h-[60px] leading-tight md:leading-normal hover:underline active:text-[#0C2543]/70`}>
                     {product.name}
                   </h3>
-                  <p className="px-2 text-[#BB9244] font-semibold py-1 md:py-4 text-base md:text-2xl">
+                  <p className={`px-1 text-orange-500 font-bold pt-1 md:py-4 md:text-2xl`}>
                     {product.details[0]?.price.toLocaleString('en-US') + '₫'}
                   </p>
                   <div className="hidden md:flex md:flex-row gap-0 md:gap-2 mb-2">
@@ -108,7 +111,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
         </div>
 
         {/* Buttons */}
-        <div className="flex justify-center mt-8 md:mt-16 transition-all duration-300">
+        <div className="flex justify-center mt-8 md:mt-16 transition-all duration-400">
           {!isAllVisible ? (
             <button
               onClick={showMore}

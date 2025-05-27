@@ -25,7 +25,6 @@ interface MobileHeaderProps {
   cartIconRef?: RefObject<HTMLDivElement | null>;
   query: string;
   setQuery: (query: string) => void;
-  handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
 const MobileHeader: React.FC<MobileHeaderProps> = ({
@@ -37,11 +36,18 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
   cartIconRef,
   query,
   setQuery,
-  handleKeyDown
 }) => {
   const router = useRouter();
   const { cartCount } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSearch(query, router);
+      setIsMenuOpen(false);
+    }
+  };
   
   return (
     <div className="fixed top-0 left-0 w-full z-20">
@@ -180,7 +186,10 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               <button
                 title="Tìm kiếm"
                 type="button"
-                onClick={() => handleSearch(query, router)}
+                onClick={() => {
+                  handleSearch(query, router);
+                  setIsMenuOpen(false);
+                }}
                 className="absolute cursor-pointer inset-y-0 left-3 flex items-center text-white hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition"
               >
                 <BsSearchHeart size={18} />
