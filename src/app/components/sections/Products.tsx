@@ -80,15 +80,15 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
 
                 <div
                   onClick={() => router.push(`/products/${product.details[0].slug}`)}
-                  className="p-[6px] md:p-4 bg-white cursor-pointer hover:shadow transition-shadow space-y-1"
+                  className="p-2 md:p-3 bg-white cursor-pointer"
                 >
-                  <h3 className={`px-1 text-sm md:text-xl font-semibold md:font-bold text-[#0C2543] line-clamp-2 min-h-[36px] md:min-h-[60px] leading-tight md:leading-normal hover:underline active:text-[#0C2543]/70`}>
+                  <h3 className={`px-1 md:px-2 text-sm md:text-xl font-semibold text-[#0C2543] line-clamp-2 min-h-[36px] md:min-h-[60px] leading-tight md:leading-normal hover:underline active:text-[#0C2543]/70`}>
                     {product.name}
                   </h3>
-                  <p className={`px-1 text-orange-500 font-bold pt-1 md:py-4 md:text-2xl`}>
+                  <p className={`px-1 md:px-2 text-orange-500 font-semibold pt-2 md:py-4 md:text-2xl`}>
                     {product.details[0]?.price.toLocaleString('en-US') + '₫'}
                   </p>
-                  <div className="hidden md:flex md:flex-row gap-0 md:gap-2 mb-2">
+                  <div className="hidden md:flex md:flex-row md:gap-2 mb-2">
                     <button
                       onClick={() => router.push(`/products/${product.details[0].slug}`)}
                       className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-[#BB9244] active:bg-[#BB9244]/70 hover:text-white active:text-white/70 transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
