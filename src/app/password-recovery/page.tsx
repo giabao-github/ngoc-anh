@@ -48,8 +48,8 @@ const PasswordRecoveryPage = () => {
     <Suspense fallback={<SkeletonLoader />}>
       <title>Đặt lại mật khẩu</title>
       <Header hasFooter aboutRef={aboutRef} />
-      <div className="max-h-screen bg-gray-50 flex items-center justify-center my-12 px-1 lg:px-8">
-        <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-md shadow-[#D4AF37]">
+      <div className="max-h-screen bg-gray-50 flex items-center justify-center lg:px-8 my-16 md:my-24">
+        <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-md shadow-[#D4AF37]/50 md:border-t md:border-[#D4AF37]/50 md:focus-within:border-t-2 focus-within:shadow-lg">
           <div className="text-center flex flex-col gap-y-3">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
               Đặt lại mật khẩu
@@ -90,8 +90,8 @@ const PasswordRecoveryPage = () => {
                     : ''
                 }
                 className={`group relative w-full flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-semibold rounded-lg tracking-wide text-white ${
-                  isFormValid ? 'bg-[#D4AF37] hover:bg-[#D4AF37]/90 cursor-pointer' : 'bg-[#D4AF37]/50 cursor-default'
-                } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D4AF37] transition duration-200 select-none`}
+                  isFormValid ? 'bg-[#D4AF37] hover:bg-[#D4AF37]/80 active:bg-[#D4AF37]/60 cursor-pointer' : 'bg-[#D4AF37]/50 cursor-default'
+                } focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-[#D4AF37] transition duration-200 select-none`}
               >
                 Gửi
               </button>

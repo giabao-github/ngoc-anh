@@ -44,8 +44,8 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   return (
-    <>
-      <header className={`sticky top-0 z-30 bg-[#0C2543] text-white py-2 px-6`}>
+    <div className="fixed top-0 left-0 w-full z-20">
+      <header className={`bg-[#0C2543] text-white py-2 px-6`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className={`flex items-center space-x-4`}>
             <Image
@@ -53,6 +53,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               alt="Logo"
               width={64}
               height={64}
+              priority
               onClick={() => router.push('/')}
               className="object-cover rounded cursor-pointer bg-white select-none"
             />
@@ -97,8 +98,16 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
           </div>
         </div>
       </header>
-      {isMenuOpen && (
-        <div className={`md:hidden sticky top-20 z-30 bg-[#0C2543] text-white p-6`}>
+      
+      {/* Animated dropdown menu */}
+      <div 
+        className={`bg-gradient-to-b from-[#0C2543] to-[#364F6D] rounded-b-2xl text-white overflow-hidden transition-all duration-400 ease-in-out ${
+          isMenuOpen 
+            ? 'max-h-96 opacity-100' 
+            : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="p-6">
           <nav className="flex flex-col space-y-4">
             <Link 
               href="#" 
@@ -118,6 +127,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 } else {
                   router.push("/#collection");
                 }
+                setIsMenuOpen(false);
               }} 
               className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors select-none w-fit"
             >
@@ -141,6 +151,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 } else {
                   router.push("/#products");
                 }
+                setIsMenuOpen(false);
               }} 
               className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors select-none w-fit"
             >
@@ -158,6 +169,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 } else {
                   router.push("/#about");
                 }
+                setIsMenuOpen(false);
               }} 
               className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors select-none w-fit"
             >
@@ -197,8 +209,8 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
             </div>
           </nav>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 }
 

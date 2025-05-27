@@ -43,7 +43,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
   const { cartCount } = useCart();
 
   return (
-    <header className={`sticky top-0 z-30 bg-[#0C2543] text-white py-2 px-6`}>
+    <header className={`sticky top-0 z-20 bg-[#0C2543] text-white py-2 px-6`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className={`flex items-center space-x-4`}>
           <Image
@@ -51,6 +51,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             alt="Logo"
             width={64}
             height={64}
+            priority
             onClick={() => router.push('/')}
             className="object-cover rounded cursor-pointer bg-white select-none"
           />

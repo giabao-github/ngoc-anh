@@ -142,8 +142,8 @@ export const FilterCarousel = ({
             );
           })}
         </CarouselContent>
-        <CarouselPrevious className='left-0 z-20 active:bg-black/70 active:text-white/70' />
-        <CarouselNext className='right-0 z-20 active:bg-black/70 active:text-white/70' />
+        <CarouselPrevious className='left-0 z-10 active:bg-black/70 active:text-white/70' />
+        <CarouselNext className='right-0 z-10 active:bg-black/70 active:text-white/70' />
       </Carousel>
     </div>
   );

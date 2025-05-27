@@ -31,17 +31,19 @@ const Header: React.FC<HeaderProps> = ({ hasSections, hasFooter, collectionRef, 
   return (
     <>
       {isMobile ? (
-        <MobileHeader
-          hasSections={hasSections}
-          hasFooter={hasFooter}
-          collectionRef={collectionRef}
-          productsRef={productsRef}
-          aboutRef={aboutRef}
-          cartIconRef={cartIconRef}
-          query={query}
-          setQuery={setQuery}
-          handleKeyDown={handleKeyDown}
-        />
+        <div className="pb-20">
+          <MobileHeader
+            hasSections={hasSections}
+            hasFooter={hasFooter}
+            collectionRef={collectionRef}
+            productsRef={productsRef}
+            aboutRef={aboutRef}
+            cartIconRef={cartIconRef}
+            query={query}
+            setQuery={setQuery}
+            handleKeyDown={handleKeyDown}
+          />
+        </div>
       ) : (
         <DesktopHeader
           hasSections={hasSections}
