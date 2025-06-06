@@ -1,5 +1,5 @@
-import { CartProvider } from "@/app/hooks/CartContext";
-import { Toaster } from "@/app/ui/sonner";
+import { CartProvider } from "@/hooks/CartContext";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Arsenal, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -19,15 +19,14 @@ const arsenal = Arsenal({
   subsets: ["cyrillic", "latin", "vietnamese"],
 });
 
-
 export const metadata: Metadata = {
   description: "Trang web của Ngọc Ánh dễ thương",
   icons: {
-    icon: '/src/app/favicon.ico',
+    icon: "/src/app/favicon.ico",
   },
 };
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default function RootLayout({
   children,

@@ -1,18 +1,17 @@
 "use client";
 
-import Header from "@/app/components/header/Header";
-import Footer from "@/app/components/sections/Footer";
-import Disclaimer from "@/app/components/user/Disclaimer";
-import FormFields from "@/app/components/user/FormFields";
-import ProviderLogin from "@/app/components/user/ProviderLogin";
-import SkeletonLoader from "@/app/components/user/SkeletonLoader";
-import EmailPhoneSwitch from "@/app/components/user/Switch";
-import { testPhone, validateEmail } from "@/app/lib/utils";
+import Header from "@/components/header/Header";
+import Footer from "@/components/sections/Footer";
+import Disclaimer from "@/components/user/Disclaimer";
+import FormFields from "@/components/user/FormFields";
+import ProviderLogin from "@/components/user/ProviderLogin";
+import SkeletonLoader from "@/components/user/SkeletonLoader";
+import EmailPhoneSwitch from "@/components/user/Switch";
+import { testPhone, validateEmail } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { Suspense, useRef, useState } from "react";
 
-
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -28,12 +27,12 @@ const RegisterPage = () => {
     setValue("");
     setInputError("");
   };
-  
+
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const validatePhone = (value: string) => {
     if (value.length === 0) {
       setInputError("Vui lòng nhập số điện thoại");
-    } else if (value.charAt(0) !== '0') {
+    } else if (value.charAt(0) !== "0") {
       setInputError("Số điện thoại phải bắt đầu bằng 0");
     } else if (value.length < 10 || value.length > 11) {
       setInputError("Số điện thoại phải chứa 10 hoặc 11 chữ số");
@@ -48,22 +47,21 @@ const RegisterPage = () => {
 
   const isFormValid = (isPhoneValid || isEmailValid) && isPasswordValid;
 
-
   return (
     <Suspense fallback={<SkeletonLoader />}>
       <title>Đăng ký tài khoản</title>
       <Header hasFooter aboutRef={aboutRef} />
-      <div className="max-h-screen bg-gray-50 flex items-center justify-center lg:px-8 my-16 md:my-24">
+      <div className="flex items-center justify-center max-h-screen my-16 bg-gray-50 lg:px-8 md:my-24">
         <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-md shadow-[#D4AF37]/50 md:border-t md:border-[#D4AF37]/50 md:focus-within:border-t-2 focus-within:shadow-lg">
-          <div className="text-center flex flex-col gap-y-3">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <div className="flex flex-col text-center gap-y-3">
+            <h2 className="mb-2 text-2xl font-bold text-gray-900">
               Đăng ký tài khoản
             </h2>
           </div>
 
           <EmailPhoneSwitch onMethodChange={handleMethodChange} />
 
-          <form 
+          <form
             onSubmit={(e) => {
               e.preventDefault();
               router.push(`/login?method=${method}`);
@@ -77,7 +75,7 @@ const RegisterPage = () => {
               showPassword={showPassword}
               isEmailValid={isEmailValid}
               inputError={inputError}
-              isPhoneLogin={method === 'phone'}
+              isPhoneLogin={method === "phone"}
               setEmail={setValue}
               setPassword={setPassword}
               setIsTouched={setIsTouched}
@@ -95,12 +93,14 @@ const RegisterPage = () => {
               title={
                 !isFormValid
                   ? method === "phone"
-                    ? 'Nhập số điện thoại hợp lệ (bắt đầu bằng 0, chứa ít nhất 10 chữ số) và mật khẩu từ 6 ký tự'
-                    : 'Nhập email hợp lệ (ví dụ: ten@example.com) và mật khẩu từ 6 ký tự'
-                  : ''
+                    ? "Nhập số điện thoại hợp lệ (bắt đầu bằng 0, chứa ít nhất 10 chữ số) và mật khẩu từ 6 ký tự"
+                    : "Nhập email hợp lệ (ví dụ: ten@example.com) và mật khẩu từ 6 ký tự"
+                  : ""
               }
               className={`group relative w-full flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-semibold rounded-lg tracking-wide text-white ${
-                isFormValid ? 'bg-[#D4AF37] hover:bg-[#D4AF37]/80 active:bg-[#D4AF37]/60 cursor-pointer' : 'bg-[#D4AF37]/50 cursor-default'
+                isFormValid
+                  ? "bg-[#D4AF37] hover:bg-[#D4AF37]/80 active:bg-[#D4AF37]/60 cursor-pointer"
+                  : "bg-[#D4AF37]/50 cursor-default"
               } focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-[#D4AF37] transition duration-200 select-none`}
             >
               Đăng ký
@@ -109,7 +109,7 @@ const RegisterPage = () => {
             <div className="flex justify-center text-sm font-semibold tracking-wide">
               <p className="text-[#0C2543]">
                 Đăng nhập bằng&nbsp;
-                <a 
+                <a
                   onClick={() => {
                     router.push(`/login?method=email`);
                   }}
@@ -118,7 +118,7 @@ const RegisterPage = () => {
                   email
                 </a>
                 &nbsp;hoặc&nbsp;
-                <a 
+                <a
                   onClick={() => {
                     router.push(`/login?method=phone`);
                   }}
@@ -134,7 +134,7 @@ const RegisterPage = () => {
                 <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm tracking-wide">
-                <span className="px-2 bg-white text-gray-500">Hoặc</span>
+                <span className="px-2 text-gray-500 bg-white">Hoặc</span>
               </div>
             </div>
 
@@ -145,6 +145,6 @@ const RegisterPage = () => {
       <Footer aboutRef={aboutRef} />
     </Suspense>
   );
-}
+};
 
 export default RegisterPage;
