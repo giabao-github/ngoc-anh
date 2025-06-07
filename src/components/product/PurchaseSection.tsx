@@ -163,19 +163,27 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
 
       {/* Pattern selection */}
       <div className="space-y-2">
-        <p className="font-semibold">Hoa văn</p>
+        <p className="font-semibold">
+          {"pattern" in product ? "Họa tiết" : "Màu sắc"}
+        </p>
         <div className="flex gap-4">
           {product.details.map((pattern) => (
             <button
-              key={pattern.pattern}
-              onClick={() => handlePatternChange(pattern.pattern, pattern.slug)}
+              key={"pattern" in pattern ? pattern.pattern : pattern.color}
+              onClick={() =>
+                handlePatternChange(
+                  "pattern" in pattern ? pattern.pattern : pattern.color,
+                  pattern.slug,
+                )
+              }
               className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-secondary hover:bg-secondary hover:text-white transition-colors ${
-                selectedPattern === pattern.pattern
+                selectedPattern ===
+                ("pattern" in pattern ? pattern.pattern : pattern.color)
                   ? "border-secondary bg-secondary text-white"
                   : "border-gray-300"
               } ${montserrat.className}`}
             >
-              {pattern.pattern}
+              {"pattern" in pattern ? pattern.pattern : pattern.color}
             </button>
           ))}
         </div>
