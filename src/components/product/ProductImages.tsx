@@ -26,10 +26,10 @@ const ProductImages: React.FC<ProductImagesProps> = ({
 }) => {
   return (
     <div className="space-y-4">
-      <div className="flex justify-center items-center">
+      <div className="flex items-center justify-center">
         <div
           ref={imageRef}
-          className="relative aspect-square overflow-hidden rounded-lg"
+          className="relative overflow-hidden rounded-lg aspect-square"
         >
           <ProductCarousel
             onSelect={(value) => setCurrentIndex(Number(value))}
@@ -56,7 +56,7 @@ const ProductImages: React.FC<ProductImagesProps> = ({
               src={img}
               quality={100}
               alt={product.name}
-              className="w-full h-full object-cover"
+              className="object-cover w-full h-full"
             />
           </button>
         ))}

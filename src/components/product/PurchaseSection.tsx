@@ -145,7 +145,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
   return (
     <>
       {/* Color selection */}
-      {product.details[0].color && product.details[0].color.length > 0 && (
+      {/* {product.details[0].color && product.details[0].color.length > 0 && (
         <div className="space-y-2">
           <p className="font-semibold">Màu sắc</p>
           <div className="flex gap-4">
@@ -159,7 +159,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
             ))}
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Pattern selection */}
       <div className="space-y-2">
@@ -176,10 +176,10 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
                   pattern.slug,
                 )
               }
-              className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-secondary hover:bg-secondary hover:text-white transition-colors ${
+              className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:bg-secondary hover:text-primary transition-colors ${
                 selectedPattern ===
                 ("pattern" in pattern ? pattern.pattern : pattern.color)
-                  ? "border-secondary bg-secondary text-white"
+                  ? "border-primary bg-secondary text-primary hover:border-primary"
                   : "border-gray-300"
               } ${montserrat.className}`}
             >
@@ -201,7 +201,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
           }`}
         </p>
         <div
-          className={`w-fit px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-secondary hover:bg-secondary hover:text-white transition-colors border-secondary bg-secondary text-white ${montserrat.className}`}
+          className={`w-fit px-4 py-2 rounded-lg cursor-pointer select-none border text-sm transition-colors border-primary bg-secondary text-primary ${montserrat.className}`}
         >
           {product.size || product.volume || "Không xác định"}
         </div>
@@ -284,10 +284,10 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
             <button
               onClick={handleAntiSpamAddToCart}
               disabled={isAddingToCart}
-              className={`mt-2 border border-secondary p-3 md:p-4 rounded-full w-full md:w-[40%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none ${
+              className={`mt-2 border border-primary p-3 md:p-4 rounded-full w-full md:w-[40%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none ${
                 isAddingToCart
                   ? "bg-gray-200 text-gray-400 cursor-default border border-gray-300"
-                  : "bg-transparent text-secondary hover:bg-secondary hover:text-white active:bg-secondary/80 active:text-white/80 cursor-pointer"
+                  : "text-primary hover:bg-secondary hover:text-primary active:bg-secondary/80 active:text-primary/80 cursor-pointer"
               }`}
             >
               <FiShoppingCart size={isMobile ? 18 : 24} />
@@ -295,7 +295,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
                 {isAddingToCart ? "Đang thêm..." : "Thêm vào giỏ hàng"}
               </span>
             </button>
-            <button className="mt-2 border border-secondary p-3 md:p-4 rounded-full w-full md:w-[60%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-transparent text-secondary hover:bg-secondary hover:text-white active:bg-secondary/80 active:text-white/80 cursor-pointer">
+            <button className="mt-2 border border-primary p-3 md:p-4 rounded-full w-full md:w-[60%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-transparent text-primary hover:bg-secondary hover:text-primary active:bg-secondary/80 active:text-primary/80 cursor-pointer">
               <FaBagShopping size={isMobile ? 18 : 24} />
               <span className="text-sm font-semibold md:text-base md:tracking-wide">
                 Mua ngay

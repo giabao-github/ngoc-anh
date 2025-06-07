@@ -80,9 +80,9 @@ export const FilterCarousel = ({
 
               const handleClick = () => {
                 onSelect(item.value);
-                if (isMobile) {
-                  setShowInfo((prev) => !prev);
-                }
+                // if (isMobile) {
+                //   setShowInfo((prev) => !prev);
+                // }
               };
 
               return (
@@ -92,18 +92,18 @@ export const FilterCarousel = ({
                   className="relative pl-3 cursor-pointer basis-auto group"
                 >
                   {/* Desktop image */}
-                  <div className="relative hidden border border-secondary hover:!border md:block overflow-hidden rounded-md w-[517px] h-[371px]">
+                  <div className="relative hidden border border-secondary md:block overflow-hidden rounded-md w-[558px] h-[400px]">
                     <Image
                       src={item.image}
                       alt={item.label}
                       fill
                       sizes="(min-width: 768px) 1034px"
                       className={cn(
-                        "transition-transform duration-300 hover:scale-105 select-none ",
+                        "transition-transform duration-300 hover:scale-105 select-none",
                       )}
                     />
                   </div>
-                  <div className="md:hidden relative overflow-hidden rounded-md w-[286px] h-[206px]">
+                  <div className="md:hidden relative overflow-hidden rounded-md w-[286px] h-[206px] border border-secondary">
                     {/* Mobile image */}
                     <Image
                       src={item.image}
@@ -111,7 +111,7 @@ export const FilterCarousel = ({
                       fill
                       sizes="(max-width: 767px) 286px"
                       className={cn(
-                        "h-auto transition-transform duration-300 select-none border border-secondary",
+                        "h-auto transition-transform duration-300 select-none",
                       )}
                     />
                     {/* Info icon (mobile only) */}

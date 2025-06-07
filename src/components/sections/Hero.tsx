@@ -4,12 +4,12 @@ import Image from "next/image";
 
 const Hero = () => (
   <section
-    className={`bg-contain text-white`}
+    className={`bg-cover text-white`}
     style={{
       backgroundImage: "url('/hero-background.jpeg')",
     }}
   >
-    <div className="max-w-[1340px] mx-auto grid py-44 md:grid-cols-2 gap-8 px-6">
+    <div className="max-w-[1340px] mx-auto grid py-32 md:grid-cols-2 gap-8 px-6">
       <div className="flex flex-col justify-center md:gap-y-12">
         <h2 className="mb-6 text-4xl font-semibold tracking-wide uppercase md:text-6xl text-secondary">
           ÂM VANG DI SẢN KHMER

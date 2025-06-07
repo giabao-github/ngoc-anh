@@ -51,8 +51,8 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
       className={`py-16 md:py-32 px-2 md:px-6 bg-secondary`}
     >
       <div className="max-w-lg mx-auto transition-all md:max-w-7xl duration-400">
-        <h2 className="mb-20 text-2xl font-semibold text-center text-white md:text-3xl md:mb-24">
-          Khám phá cửa hàng trực tuyến MINH LONG
+        <h2 className="mb-20 text-2xl font-semibold text-center text-primary md:text-3xl md:mb-24">
+          Khám phá cửa hàng trực tuyến THẠCH ÂM
         </h2>
 
         {/* Animated wrapper */}
@@ -78,8 +78,8 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                   <Image
                     src={product.images[0]}
                     alt={product.name}
-                    height={256}
-                    width={256}
+                    height={2048}
+                    width={2048}
                     className="object-contain w-full h-full transition-transform duration-300 transform cursor-pointer select-none group-hover:scale-105"
                   />
                 </div>
@@ -105,7 +105,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                       onClick={() =>
                         router.push(`/products/${product.details[0].slug}`)
                       }
-                      className="mt-2 border border-secondary bg-transparent text-secondary p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-secondary active:bg-secondary/70 hover:text-white active:text-white/70 transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
+                      className="mt-2 border border-primary bg-transparent text-primary p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-secondary active:bg-secondary/70 hover:text-primary active:text-primary/70 transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
                     >
                       <FiShoppingCart size={18} />
                       <span className="text-xs font-semibold tracking-wide md:text-sm">
@@ -116,7 +116,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                       onClick={() =>
                         router.push(`/products/${product.details[0].slug}`)
                       }
-                      className="mt-2 border border-secondary bg-transparent text-secondary p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-secondary active:bg-secondary/70 hover:text-white active:text-white/70  transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
+                      className="mt-2 border border-primary bg-transparent text-primary p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-secondary active:bg-secondary/70 hover:text-primary active:text-primary/70  transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
                     >
                       <FaBagShopping size={18} />
                       <span className="text-xs font-semibold tracking-wide md:text-sm">
@@ -135,14 +135,14 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
           {!isAllVisible ? (
             <button
               onClick={showMore}
-              className="px-6 py-3 text-xs font-semibold tracking-wide text-white transition-colors bg-transparent border border-white rounded-full cursor-pointer select-none md:px-8 md:py-4 md:text-base hover:bg-white hover:text-secondary active:bg-white/70 active:text-secondary/70"
+              className="px-6 py-3 text-xs font-semibold tracking-wide transition-colors bg-transparent border rounded-full cursor-pointer select-none text-primary border-primary md:px-8 md:py-4 md:text-base hover:bg-white hover:text-primary active:bg-white/70 active:text-primary/70"
             >
               Xem thêm sản phẩm
             </button>
           ) : (
             <button
               onClick={collapse}
-              className="px-6 py-3 text-xs font-semibold tracking-wide text-white transition-colors bg-transparent border border-white rounded-full cursor-pointer select-none md:px-8 md:py-4 md:text-base hover:bg-white hover:text-secondary active:bg-white/70 active:text-secondary/70"
+              className="px-6 py-3 text-xs font-semibold tracking-wide transition-colors bg-transparent border rounded-full cursor-pointer select-none text-primary border-primary md:px-8 md:py-4 md:text-base hover:bg-white hover:text-primary active:bg-white/70 active:text-primary/70"
             >
               Thu gọn
             </button>

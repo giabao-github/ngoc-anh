@@ -29,6 +29,13 @@ export const collections = [
       "Sản phẩm Minh Long được phối hợp theo nhiều phong cách màu sắc, chú trọng tính hài hòa, trang nhã nên phù hợp với mọi thời đại",
     image: "/badana-transparent.png",
   },
+  {
+    id: 5,
+    name: "Bộ Sưu Tập Minh Long",
+    description:
+      "Sản phẩm Minh Long được phối hợp theo nhiều phong cách màu sắc, chú trọng tính hài hòa, trang nhã nên phù hợp với mọi thời đại",
+    image: "/card-transparent.png",
+  },
 ];
 
 export const products = [
@@ -550,7 +557,7 @@ export const products = [
   },
   {
     id: 10,
-    name: "Huy hiệu Thạch Âm",
+    name: "Huy hiệu Thạch Âm - Xanh Rêu",
     images: ["/green-badge.png", "/green-badge.jpg"],
     description: (
       <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
@@ -598,53 +605,52 @@ export const products = [
     rating: [25, 50, 70, 500, 800],
   },
   {
-    id: 2,
-    name: "Bình hoa 35 cm - Se Sẻ Và Bông Hoa",
-    images: [
-      "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-se-se-va-bong-hoa_693564545-sm-01_4b050a2726b944a48a3b6ea83336239f_grande.png?v=1746845410130",
-      "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-se-se-va-bong-hoa_693564545-sm-03_e09a55a0b3ab4f5ab27375ca7edb2684_grande.png?v=1746845410130",
-      "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-se-se-va-bong-hoa_693564545-sm-04_dfb3bb29cb2e4513ae81e9ac1e8c502f_grande.png?v=1746845410130",
-    ],
+    id: 11,
+    name: "Huy hiệu Thạch Âm - Vàng",
+    images: ["/yellow-badge.png", "/yellow-badge.jpeg"],
     description: (
       <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
-          Bình Se Sẻ và Bông Hoa, nơi nghệ thuật truyền thống được tái sinh dưới
-          góc nhìn tươi mới và hiện đại. Hình ảnh chim Se Sẻ nhẹ nhàng đậu trên
-          cành hoa Mẫu Đơn tạo nên bức tranh thiên nhiên tươi đẹp và tràn đầy
-          sức sống. Đồng thời gợi nhắc những cảm xúc mới mẻ về sự sum họp, hạnh
-          phúc, thịnh vượng mà mọi gia đình đều mong ước trong năm mới. Đặc
-          biệt, màu xanh cobalt nổi bật trên nền sứ trắng như sắc xuân đang trỗi
-          dậy, khơi gợi cảm giác an lành. Điểm nhấn vàng 24k tinh tế tạo sự phá
-          cách, giúp bình hoa trở nên nổi bật trong bất kỳ không gian nào.
+          Huy hiệu này là một biểu tượng tinh tế của dự án Thạch Âm trong môn Đồ
+          án Vốn cổ Khmer, kết hợp giữa yếu tố văn hóa truyền thống và thiết kế
+          hiện đại.
         </p>
         <p>
-          Bình Se Sẻ và Bông Hoa không chỉ gói gọn trong ý nghĩa trang trí mà
-          còn mang thông điệp về sự khởi đầu mới suôn sẻ, nhiều hy vọng. Đây
-          cũng là món quà ý nghĩa dành cho người thân, bạn bè, đối tác,… với lời
-          chúc thành công, may mắn và phú quý.
+          Logo "THẠCH ÂM" được trình bày nổi bật, với chữ "THẠCH" nằm gọn trong
+          một khung hình chữ nhật và chữ "ÂM" đặt bên dưới, có thể được tạo hình
+          cách điệu với những đường nét uốn lượn mang đậm phong cách nghệ thuật
+          Khmer cổ điển. Một chi tiết đồ họa uốn lượn lấy cảm hứng từ các hoa
+          văn truyền thống Khmer, có thể là hình ảnh Naga hoặc Kinnari cách
+          điệu, được tích hợp khéo léo vào phần chữ hoặc bao quanh nó, tạo điểm
+          nhấn ấn tượng.
+        </p>
+        <p>
+          Phiên bản xanh đậm: Logo màu vàng đồng hoặc vàng gold nổi bật trên nền
+          xanh đậm, tạo cảm giác sang trọng, cổ kính và quyền quý. Phiên bản
+          vàng nhạt: Logo màu xanh đậm hoặc đen được đặt trên nền vàng nhạt,
+          mang lại cảm giác nhẹ nhàng, trang nhã nhưng vẫn giữ được nét cổ điển.
         </p>
       </div>
     ),
-    code: "A001_693564545",
-    brand: "Minh Long",
-    collection: "Bình Hoa",
-    type: "Bình hoa",
+    code: "A001_693564536",
+    brand: "Thạch Âm",
+    material: "Kim loại mạ bóng, in hình phủ nhựa bóng/mờ",
+    pin: "Ghim kim cài lưng (an toàn, dễ sử dụng)",
+    type: "Huy hiệu truyền thống",
     details: [
       {
-        color: "",
-        pattern: "Se Sẻ Và Bông Hoa",
-        slug: "binh-hoa-35-cm-se-se-va-bong-hoa",
-        price: 8424000,
+        color: "Nền vàng",
+        slug: "huy-hieu-truyen-thong-vang",
+        price: 20000,
       },
       {
-        color: "",
-        pattern: "Xuân Ca",
-        slug: "binh-hoa-35-cm-xuan-ca",
-        price: 7560000,
+        color: "Nền xanh rêu",
+        slug: "huy-hieu-truyen-thong-xanh-reu",
+        price: 20000,
       },
     ],
-    size: "35 cm",
-    quantity: 27,
-    rating: [20, 40, 60, 400, 900],
+    size: "10 cm",
+    quantity: 1500,
+    rating: [25, 50, 70, 500, 800],
   },
 ];

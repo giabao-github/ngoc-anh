@@ -78,7 +78,7 @@ const ProductPageLayout: React.FC<ProductPageLayoutProps> = ({
       <title>{product.name}</title>
       <Header hasFooter aboutRef={aboutRef} cartIconRef={cartIconRef} />
 
-      <div className="px-4 py-8 mx-auto bg-white max-w-7xl">
+      <div className="px-4 py-8 mx-auto max-w-7xl">
         <AddToCartPopup
           show={showNotification}
           flag={notificationFlag}

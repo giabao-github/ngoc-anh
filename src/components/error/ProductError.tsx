@@ -8,20 +8,21 @@ import ErrorSearchBar from "@/components/error/ErrorSearchBar";
 const ProductError = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 space-y-6 bg-rose-50 text-rose-500">
+      <title>Không tìm thấy sản phẩm</title>
       {/* App Logo */}
       <Link
         href="/"
         className="absolute top-6 text-primary hover:text-[#D4AF37] active:text-[#D4AF37]/70 left-6"
       >
-        <div className="flex items-center space-x-2 transition">
+        <div className="flex items-center p-4 space-x-4 transition rounded-2xl bg-primary">
           <Image
-            src="https://www.zarla.com/images/zarla-sculpticon-1x1-2400x2400-20230210-9wkw87py43xdc9yhdpwq.png?crop=1:1,smart&width=250&dpr=2"
+            src="/logo.png"
             alt="Logo"
-            width={40}
-            height={40}
-            className="object-cover bg-white rounded cursor-pointer select-none"
+            width={80}
+            height={80}
+            className="object-cover rounded cursor-pointer select-none"
           />
-          <h1 className="hidden text-2xl font-semibold uppercase select-none md:text-3xl md:block">
+          <h1 className="hidden text-2xl text-[#E6D280] font-semibold uppercase select-none md:text-3xl md:block">
             Thạch Âm
           </h1>
         </div>

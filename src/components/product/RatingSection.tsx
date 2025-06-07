@@ -91,7 +91,7 @@ const RatingSection: React.FC<RatingSectionProps> = ({
             Bạn cần
             <Link
               href={LOGIN_URL}
-              className="font-semibold text-secondary hover:underline active:text-secondary/70 px-[6px]"
+              className="font-semibold text-primary hover:underline active:text-primary/70 px-[6px]"
             >
               đăng nhập
             </Link>
@@ -99,7 +99,7 @@ const RatingSection: React.FC<RatingSectionProps> = ({
           </p>
           <button
             onClick={() => router.push(LOGIN_URL)}
-            className="mt-2 border border-secondary bg-transparent text-secondary px-6 py-3 rounded-full w-fit hover:bg-secondary hover:text-white active:bg-secondary/70 active:text-white/70 transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 cursor-pointer select-none"
+            className="flex items-center justify-center px-6 py-3 mt-2 transition-colors bg-transparent border rounded-full cursor-pointer select-none border-primary text-primary w-fit hover:bg-primary hover:text-white active:bg-primary/70 active:text-white/70 gap-x-2 md:gap-x-4"
           >
             <span className="text-xs font-semibold tracking-wide md:text-sm">
               Viết đánh giá

@@ -18,7 +18,7 @@ const data = collections.map((collection) => ({
 const Collection: React.FC<CollectionProps> = ({ collectionRef }) => (
   <section
     ref={collectionRef}
-    className={`py-12 md:py-60 px-6 bg-contain`}
+    className={`py-12 md:py-60 px-2 md:px-6 bg-cover`}
     style={{ backgroundImage: "url('/collection-background.jpg')" }}
   >
     <div className="max-w-lg mx-auto md:max-w-7xl">

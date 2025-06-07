@@ -3,7 +3,6 @@
 import { useParams } from "next/navigation";
 
 import ProductError from "@/components/error/ProductError";
-import SkeletonLoader from "@/components/user/SkeletonLoader";
 
 import { useProductPage } from "@/hooks/useProductPage";
 
