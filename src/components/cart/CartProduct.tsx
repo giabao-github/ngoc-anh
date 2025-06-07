@@ -120,7 +120,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                 className="text-base md:text-lg font-bold line-clamp-2 max-h-[56px]"
               >
                 <Link href={`/products/${item.slug}`}>
-                  <span className="hover:text-[#BB9244] active:text-[#BB9244]/70 transition-colors cursor-pointer">
+                  <span className="transition-colors cursor-pointer hover:text-secondary active:text-secondary/70">
                     {item.name.length > 68 && isMobile
                       ? item.name.slice(0, 68) + "..."
                       : item.name.length > 112

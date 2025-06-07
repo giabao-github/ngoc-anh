@@ -68,7 +68,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               className="object-contain w-16 h-16 rounded cursor-pointer select-none"
             />
             <h1 className="hidden text-2xl font-semibold uppercase select-none md:block">
-              Ngọc Ánh
+              Thạch Âm
             </h1>
           </div>
           <div className="flex flex-row items-center gap-x-6">

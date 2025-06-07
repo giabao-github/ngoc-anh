@@ -59,8 +59,8 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             onClick={() => router.push("/")}
             className="object-contain w-20 h-20 rounded cursor-pointer select-none"
           />
-          <h1 className="hidden text-2xl font-semibold uppercase select-none md:block">
-            Ngọc Ánh
+          <h1 className="hidden text-3xl font-semibold uppercase select-none md:block">
+            Thạch Âm
           </h1>
         </div>
 

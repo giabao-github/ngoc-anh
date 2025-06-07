@@ -38,12 +38,12 @@ const CartSummary = () => {
           </span>
         </div>
 
-        <button className="w-full mt-6 bg-[#BB9244] hover:bg-[#BB9244]/80 active:bg-[#BB9244]/60 cursor-pointer text-white py-3 rounded-full font-semibold select-none tracking-wide">
+        <button className="w-full py-3 mt-6 font-semibold tracking-wide text-white rounded-full cursor-pointer select-none bg-secondary hover:bg-secondary/80 active:bg-secondary/60">
           Thanh toán
         </button>
         <button
           onClick={() => router.push("/#products")}
-          className="w-full text-center font-semibold text-[#BB9244] hover:border hover:border-[#BB9244] hover:bg-[#BB9244]/20 active:border-[#BB9244] active:bg-[#BB9244]/40 cursor-pointer py-3 flex flex-row gap-3 items-center justify-center rounded-full select-none tracking-wide"
+          className="flex flex-row items-center justify-center w-full gap-3 py-3 font-semibold tracking-wide text-center rounded-full cursor-pointer select-none text-secondary hover:border hover:border-secondary hover:bg-secondary/20 active:border-secondary active:bg-secondary/40"
         >
           <FaArrowLeftLong size={18} />
           Mua thêm sản phẩm

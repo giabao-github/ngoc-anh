@@ -152,7 +152,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
             {product.details.map((detail) => (
               <button
                 key={detail.color}
-                className={`w-fit px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-[#BB9244] hover:bg-[#BB9244] hover:text-white transition-colors border-[#BB9244] bg-[#BB9244] text-white ${montserrat.className}`}
+                className={`w-fit px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-secondary hover:bg-secondary hover:text-white transition-colors border-secondary bg-secondary text-white ${montserrat.className}`}
               >
                 {detail.color}
               </button>
@@ -169,9 +169,9 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
             <button
               key={pattern.pattern}
               onClick={() => handlePatternChange(pattern.pattern, pattern.slug)}
-              className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-[#BB9244] hover:bg-[#BB9244] hover:text-white transition-colors ${
+              className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-secondary hover:bg-secondary hover:text-white transition-colors ${
                 selectedPattern === pattern.pattern
-                  ? "border-[#BB9244] bg-[#BB9244] text-white"
+                  ? "border-secondary bg-secondary text-white"
                   : "border-gray-300"
               } ${montserrat.className}`}
             >
@@ -193,7 +193,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
           }`}
         </p>
         <div
-          className={`w-fit px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-[#BB9244] hover:bg-[#BB9244] hover:text-white transition-colors border-[#BB9244] bg-[#BB9244] text-white ${montserrat.className}`}
+          className={`w-fit px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-secondary hover:bg-secondary hover:text-white transition-colors border-secondary bg-secondary text-white ${montserrat.className}`}
         >
           {product.size || product.volume || "Không xác định"}
         </div>
@@ -276,10 +276,10 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
             <button
               onClick={handleAntiSpamAddToCart}
               disabled={isAddingToCart}
-              className={`mt-2 border border-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[40%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none ${
+              className={`mt-2 border border-secondary p-3 md:p-4 rounded-full w-full md:w-[40%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none ${
                 isAddingToCart
                   ? "bg-gray-200 text-gray-400 cursor-default border border-gray-300"
-                  : "bg-transparent text-[#BB9244] hover:bg-[#BB9244] hover:text-white active:bg-[#BB9244]/80 active:text-white/80 cursor-pointer"
+                  : "bg-transparent text-secondary hover:bg-secondary hover:text-white active:bg-secondary/80 active:text-white/80 cursor-pointer"
               }`}
             >
               <FiShoppingCart size={isMobile ? 18 : 24} />
@@ -287,7 +287,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
                 {isAddingToCart ? "Đang thêm..." : "Thêm vào giỏ hàng"}
               </span>
             </button>
-            <button className="mt-2 border border-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[60%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-transparent text-[#BB9244] hover:bg-[#BB9244] hover:text-white active:bg-[#BB9244]/80 active:text-white/80 cursor-pointer">
+            <button className="mt-2 border border-secondary p-3 md:p-4 rounded-full w-full md:w-[60%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-transparent text-secondary hover:bg-secondary hover:text-white active:bg-secondary/80 active:text-white/80 cursor-pointer">
               <FaBagShopping size={isMobile ? 18 : 24} />
               <span className="text-sm font-semibold md:text-base md:tracking-wide">
                 Mua ngay

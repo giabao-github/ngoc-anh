@@ -48,21 +48,21 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   return (
     <section
       ref={productsRef}
-      className={`py-16 md:py-32 px-2 md:px-6 bg-[#BB9244]`}
+      className={`py-16 md:py-32 px-2 md:px-6 bg-secondary`}
     >
-      <div className="max-w-lg md:max-w-7xl mx-auto transition-all duration-400">
-        <h2 className="text-2xl md:text-3xl font-semibold text-center mb-20 md:mb-24 text-white">
+      <div className="max-w-lg mx-auto transition-all md:max-w-7xl duration-400">
+        <h2 className="mb-20 text-2xl font-semibold text-center text-white md:text-3xl md:mb-24">
           Khám phá cửa hàng trực tuyến MINH LONG
         </h2>
 
         {/* Animated wrapper */}
         <div
-          className="overflow-hidden transition-all duration-400 ease-in-out"
+          className="overflow-hidden transition-all ease-in-out duration-400"
           style={{ maxHeight: gridHeight ? `${gridHeight}px` : "9999px" }}
         >
           <div
             ref={gridRef}
-            className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8 justify-center transition-opacity duration-400"
+            className="grid justify-center grid-cols-2 gap-2 transition-opacity md:grid-cols-3 md:gap-8 duration-400"
           >
             {products.slice(0, itemsToShow).map((product) => (
               <div
@@ -80,7 +80,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                     alt={product.name}
                     height={256}
                     width={256}
-                    className="w-full h-full object-contain transition-transform duration-300 transform group-hover:scale-105 cursor-pointer select-none"
+                    className="object-contain w-full h-full transition-transform duration-300 transform cursor-pointer select-none group-hover:scale-105"
                   />
                 </div>
 
@@ -88,7 +88,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                   onClick={() =>
                     router.push(`/products/${product.details[0].slug}`)
                   }
-                  className="p-2 md:p-3 bg-white cursor-pointer"
+                  className="p-2 bg-white cursor-pointer md:p-3"
                 >
                   <h3
                     className={`px-1 md:px-2 text-sm md:text-xl font-semibold text-primary line-clamp-2 min-h-[36px] md:min-h-[60px] leading-tight md:leading-normal hover:underline active:text-primary/70`}
@@ -100,15 +100,15 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                   >
                     {product.details[0]?.price.toLocaleString("en-US") + "₫"}
                   </p>
-                  <div className="hidden md:flex md:flex-row md:gap-2 mb-2">
+                  <div className="hidden mb-2 md:flex md:flex-row md:gap-2">
                     <button
                       onClick={() =>
                         router.push(`/products/${product.details[0].slug}`)
                       }
-                      className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-[#BB9244] active:bg-[#BB9244]/70 hover:text-white active:text-white/70 transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
+                      className="mt-2 border border-secondary bg-transparent text-secondary p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-secondary active:bg-secondary/70 hover:text-white active:text-white/70 transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
                     >
                       <FiShoppingCart size={18} />
-                      <span className="font-semibold tracking-wide text-xs md:text-sm">
+                      <span className="text-xs font-semibold tracking-wide md:text-sm">
                         Thêm vào giỏ hàng
                       </span>
                     </button>
@@ -116,10 +116,10 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                       onClick={() =>
                         router.push(`/products/${product.details[0].slug}`)
                       }
-                      className="mt-2 border border-[#BB9244] bg-transparent text-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-[#BB9244] active:bg-[#BB9244]/70 hover:text-white active:text-white/70  transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
+                      className="mt-2 border border-secondary bg-transparent text-secondary p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-secondary active:bg-secondary/70 hover:text-white active:text-white/70  transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
                     >
                       <FaBagShopping size={18} />
-                      <span className="font-semibold tracking-wide text-xs md:text-sm">
+                      <span className="text-xs font-semibold tracking-wide md:text-sm">
                         Mua ngay
                       </span>
                     </button>
@@ -131,18 +131,18 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
         </div>
 
         {/* Buttons */}
-        <div className="flex justify-center mt-8 md:mt-16 transition-all duration-400">
+        <div className="flex justify-center mt-8 transition-all md:mt-16 duration-400">
           {!isAllVisible ? (
             <button
               onClick={showMore}
-              className="select-none cursor-pointer px-6 py-3 md:px-8 md:py-4 text-xs md:text-base rounded-full bg-transparent text-white font-semibold border border-white hover:bg-white hover:text-[#BB9244] active:bg-white/70 active:text-[#BB9244]/70 transition-colors tracking-wide"
+              className="px-6 py-3 text-xs font-semibold tracking-wide text-white transition-colors bg-transparent border border-white rounded-full cursor-pointer select-none md:px-8 md:py-4 md:text-base hover:bg-white hover:text-secondary active:bg-white/70 active:text-secondary/70"
             >
               Xem thêm sản phẩm
             </button>
           ) : (
             <button
               onClick={collapse}
-              className="select-none cursor-pointer px-6 py-3 md:px-8 md:py-4 text-xs md:text-base rounded-full bg-transparent text-white font-semibold border border-white hover:bg-white hover:text-[#BB9244] active:bg-white/70 active:text-[#BB9244]/70 transition-colors tracking-wide"
+              className="px-6 py-3 text-xs font-semibold tracking-wide text-white transition-colors bg-transparent border border-white rounded-full cursor-pointer select-none md:px-8 md:py-4 md:text-base hover:bg-white hover:text-secondary active:bg-white/70 active:text-secondary/70"
             >
               Thu gọn
             </button>

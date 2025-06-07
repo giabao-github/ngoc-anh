@@ -16,10 +16,10 @@ const data = collections.map((collection) => ({
 }));
 
 const Collection: React.FC<CollectionProps> = ({ collectionRef }) => (
-  <section ref={collectionRef} className={`py-12 md:py-32 px-6 bg-white`}>
-    <div className="max-w-lg md:max-w-7xl mx-auto">
-      <h2 className="text-2xl md:text-3xl font-semibold text-center mb-14 md:mb-20 text-black">
-        Bộ Sưu Tập Minh Long
+  <section ref={collectionRef} className={`py-12 md:py-32 px-6 bg-primary`}>
+    <div className="max-w-lg mx-auto md:max-w-7xl">
+      <h2 className="text-2xl font-semibold text-center text-white md:text-3xl mb-14 md:mb-20">
+        Bộ Sưu Tập Thạch Âm
       </h2>
     </div>
     <FilterCarousel onSelect={() => {}} data={data} />
