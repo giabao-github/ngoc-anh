@@ -6,37 +6,28 @@ export const collections = [
     name: "Nồi sứ dưỡng sinh",
     description:
       "Sứ dưỡng sinh được thiết kế với đa dạng kiểu dáng, kích cỡ khác nhau, phù hợp với mọi phương pháp nấu ăn như xào, kho, nấu cơm, luộc/hấp, nấu canh, chiên, rang, nấu chậm,...và mọi loại bếp chuyên dụng như bếp gas, bếp hồng ngoại, bếp từ, lò nướng.",
-    image: "/featured-card.png",
+    image: "/featured-card-transparent.png",
   },
   {
     id: 2,
     name: "Bộ Sưu Tập Minh Long",
     description:
       "Sản phẩm Minh Long được phối hợp theo nhiều phong cách màu sắc, chú trọng tính hài hòa, trang nhã nên phù hợp với mọi thời đại",
-    image: "/featured-badge.jpg",
+    image: "/yellow-badge-transparent.png",
   },
   {
     id: 3,
     name: "Bộ Sưu Tập Minh Long",
     description:
       "Sản phẩm Minh Long được phối hợp theo nhiều phong cách màu sắc, chú trọng tính hài hòa, trang nhã nên phù hợp với mọi thời đại",
-    image:
-      "https://file.hstatic.net/200000532849/file/banner_home_page_pc_1058x758px_7_3a6734b4aa374afd9225c6a91935b9ec.png",
+    image: "/green-badge-transparent.png",
   },
   {
     id: 4,
     name: "Bộ Sưu Tập Minh Long",
     description:
       "Sản phẩm Minh Long được phối hợp theo nhiều phong cách màu sắc, chú trọng tính hài hòa, trang nhã nên phù hợp với mọi thời đại",
-    image:
-      "https://file.hstatic.net/200000532849/file/banner_home_page_pc_1058x758px_8_ad7e3a1e46464d59aa546b4a10351924.png",
-  },
-  {
-    id: 5,
-    name: "Bộ Sưu Tập Minh Long",
-    description:
-      "Sản phẩm Minh Long được phối hợp theo nhiều phong cách màu sắc, chú trọng tính hài hòa, trang nhã nên phù hợp với mọi thời đại",
-    image: "https://file.hstatic.net/200000532849/file/desktop.png",
+    image: "/badana-transparent.png",
   },
 ];
 
@@ -560,11 +551,7 @@ export const products = [
   {
     id: 10,
     name: "Huy hiệu Thạch Âm",
-    images: [
-      "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-xuan-ca_693564536-sm-01_5fe99ccf497b41bb8870c389519de331_grande.png?v=1746845545811",
-      "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-xuan-ca_693564536-sm-03_65cbd37dfbd14d73b19dea9b407d905d_grande.png?v=1746845545811",
-      "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-xuan-ca_693564536-sm-04_5af9db21f7784c61a6656b8f10d58c54_grande.png?v=1746845545811",
-    ],
+    images: ["/green-badge.png", "/green-badge.jpg"],
     description: (
       <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>

@@ -74,7 +74,11 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       >
         <p>{`Mã sản phẩm: ${product.code}`}</p>
         <p>{`Thương hiệu: ${product.brand}`}</p>
-        <p>{`Bộ sưu tập: ${product.collection}`}</p>
+        {"collection" in product ? (
+          <p>{`Bộ sưu tập: ${product.collection}`}</p>
+        ) : (
+          <p>{`Chất liệu: ${product.material}`}</p>
+        )}
       </div>
 
       <p className="text-2xl font-bold text-orange-500 md:text-4xl">

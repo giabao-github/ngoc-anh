@@ -16,10 +16,14 @@ const data = collections.map((collection) => ({
 }));
 
 const Collection: React.FC<CollectionProps> = ({ collectionRef }) => (
-  <section ref={collectionRef} className={`py-12 md:py-32 px-6 bg-primary`}>
+  <section
+    ref={collectionRef}
+    className={`py-12 md:py-60 px-6 bg-contain`}
+    style={{ backgroundImage: "url('/collection-background.jpg')" }}
+  >
     <div className="max-w-lg mx-auto md:max-w-7xl">
       <h2 className="text-2xl font-semibold text-center text-white md:text-3xl mb-14 md:mb-20">
-        Bộ Sưu Tập Thạch Âm
+        Sản phẩm nổi bật
       </h2>
     </div>
     <FilterCarousel onSelect={() => {}} data={data} />

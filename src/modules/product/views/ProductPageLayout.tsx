@@ -78,7 +78,7 @@ const ProductPageLayout: React.FC<ProductPageLayoutProps> = ({
       <title>{product.name}</title>
       <Header hasFooter aboutRef={aboutRef} cartIconRef={cartIconRef} />
 
-      <div className="max-w-7xl mx-auto px-4 py-8 bg-white">
+      <div className="px-4 py-8 mx-auto bg-white max-w-7xl">
         <AddToCartPopup
           show={showNotification}
           flag={notificationFlag}
@@ -88,7 +88,7 @@ const ProductPageLayout: React.FC<ProductPageLayoutProps> = ({
           onClose={handleCloseNotification}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 md:mt-12">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-12 md:mt-12">
           <ProductImages
             product={product}
             currentIndex={currentImageIndex}
@@ -98,7 +98,7 @@ const ProductPageLayout: React.FC<ProductPageLayoutProps> = ({
             setCurrentIndex={setCurrentImageIndex}
           />
 
-          <div className="space-y-4 md:space-y-6 mx-1 md:mx-0">
+          <div className="mx-1 space-y-4 md:space-y-6 md:mx-0">
             <ProductInfo product={product} />
             <PurchaseSection
               product={product}

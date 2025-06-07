@@ -67,16 +67,16 @@ export const FilterCarousel = ({
               const [showInfo, setShowInfo] = useState(false);
 
               // Handle automatic show on desktop only
-              useEffect(() => {
-                if (!isMobile && isActive) {
-                  const timeout = setTimeout(() => {
-                    setShowInfo(true);
-                  }, 500);
-                  return () => clearTimeout(timeout);
-                } else if (!isMobile) {
-                  setShowInfo(false);
-                }
-              }, [isActive, isMobile]);
+              // useEffect(() => {
+              //   if (!isMobile && isActive) {
+              //     const timeout = setTimeout(() => {
+              //       setShowInfo(true);
+              //     }, 500);
+              //     return () => clearTimeout(timeout);
+              //   } else if (!isMobile) {
+              //     setShowInfo(false);
+              //   }
+              // }, [isActive, isMobile]);
 
               const handleClick = () => {
                 onSelect(item.value);
@@ -92,14 +92,14 @@ export const FilterCarousel = ({
                   className="relative pl-3 cursor-pointer basis-auto group"
                 >
                   {/* Desktop image */}
-                  <div className="relative hidden md:block overflow-hidden rounded-md w-[517px] h-[371px]">
+                  <div className="relative hidden border border-secondary hover:!border md:block overflow-hidden rounded-md w-[517px] h-[371px]">
                     <Image
                       src={item.image}
                       alt={item.label}
                       fill
                       sizes="(min-width: 768px) 1034px"
                       className={cn(
-                        "transition-transform duration-300 hover:scale-105 select-none",
+                        "transition-transform duration-300 hover:scale-105 select-none ",
                       )}
                     />
                   </div>
@@ -111,11 +111,11 @@ export const FilterCarousel = ({
                       fill
                       sizes="(max-width: 767px) 286px"
                       className={cn(
-                        "h-auto transition-transform duration-300 select-none",
+                        "h-auto transition-transform duration-300 select-none border border-secondary",
                       )}
                     />
                     {/* Info icon (mobile only) */}
-                    {isMobile && (
+                    {/* {isMobile && (
                       <div className="absolute z-10 bottom-3 right-4">
                         <div className="h-auto p-1 rounded-full shadow-md bg-white/60 active:bg-white/80 backdrop-blur-md">
                           <svg
@@ -134,7 +134,7 @@ export const FilterCarousel = ({
                           </svg>
                         </div>
                       </div>
-                    )}
+                    )} */}
                   </div>
 
                   {/* Info popup */}
