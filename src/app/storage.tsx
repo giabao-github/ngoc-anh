@@ -6,16 +6,14 @@ export const collections = [
     name: "Nồi sứ dưỡng sinh",
     description:
       "Sứ dưỡng sinh được thiết kế với đa dạng kiểu dáng, kích cỡ khác nhau, phù hợp với mọi phương pháp nấu ăn như xào, kho, nấu cơm, luộc/hấp, nấu canh, chiên, rang, nấu chậm,...và mọi loại bếp chuyên dụng như bếp gas, bếp hồng ngoại, bếp từ, lò nướng.",
-    image:
-      "https://file.hstatic.net/200000532849/file/banner_home_page_pc_1058x758px_6_fe76c86bb70b4f70a2631f859f15f45b.png",
+    image: "/featured-card.png",
   },
   {
     id: 2,
     name: "Bộ Sưu Tập Minh Long",
     description:
       "Sản phẩm Minh Long được phối hợp theo nhiều phong cách màu sắc, chú trọng tính hài hòa, trang nhã nên phù hợp với mọi thời đại",
-    image:
-      "https://file.hstatic.net/200000532849/file/banner_home_page_pc_1058x758px_5_f6da3bfa993a4387a3fe85d3adf35011.png",
+    image: "/featured-badge.jpg",
   },
   {
     id: 3,
@@ -52,7 +50,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-xuan-ca_693564536-sm-04_5af9db21f7784c61a6656b8f10d58c54_grande.png?v=1746845545811",
     ],
     description: (
-      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
           Dù ở bất cứ đâu, mỗi độ mai - đào khoe sắc, lòng người lại hân hoan
           trở về bên gia đình đón một mùa xuân mới. Tất thảy ý nghĩa của sự sum
@@ -104,7 +102,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-se-se-va-bong-hoa_693564545-sm-04_dfb3bb29cb2e4513ae81e9ac1e8c502f_grande.png?v=1746845410130",
     ],
     description: (
-      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
           Bình Se Sẻ và Bông Hoa, nơi nghệ thuật truyền thống được tái sinh dưới
           góc nhìn tươi mới và hiện đại. Hình ảnh chim Se Sẻ nhẹ nhàng đậu trên
@@ -152,7 +150,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/nh-hoa-luc-giac-45-cm-quai-rong-binh-hoa-thinh-vuong-vang_694535520-sm_c657df4ae5fe467aa8e5d72af09a765c_grande.png?v=1746852968839",
     ],
     description: (
-      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
           Lộc Bình được thiết kế gồm 3 phần cổ bình, thân bình và đế bình, được
           trang trí với những họa tiết giàu ý nghĩa, mang đậm truyền thống Việt
@@ -181,7 +179,7 @@ export const products = [
       </div>
     ),
     instruction: (
-      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
           Bình hoa là dòng sản phẩm cao cấp không chỉ bởi sự tinh tế, kiểu dáng
           độc đáo mà còn hội tụ cả cái tâm, cái tài của từng nghệ nhân thực
@@ -233,7 +231,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/bo-tra-13-l-hoang-cung-sen-vang_01134034503-sm-04_1771b603443543158cf0d5c1e0d6ad6f_grande.jpg?v=1746856668850",
     ],
     description: (
-      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
           Khoác lên vẻ truyền thống, nền nã của loài hoa Á Đông nhưng lại không
           kém phần tinh tế hiện đại, những cánh sen bung tròn, phúc hậu ôm lấy
@@ -274,7 +272,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/bo-tra-13-l-hoang-cung-quoc-sac_01134006803-sm-04_5d88a2a78c4145ef80cdffecc278679a_grande.jpg?v=1746857440318",
     ],
     description: (
-      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p></p>
       </div>
     ),
@@ -304,7 +302,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/bo-tra-13-l-hoang-cung-huyen-lien_01134046703-sm-04_43409f460da04a1db7b3ab6704f911f9_grande.jpg?v=1746847177048",
     ],
     description: (
-      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
           Bộ sản phẩm Huyền Liên lấy cảm hứng từ vẻ đẹp truyền thống nhưng không
           kém phần tinh tế của loài hoa Á Đông. Những cánh hoa sen bung tròn,
@@ -345,7 +343,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/313157522v-1-sm_c3f998d0af6b4dd8bc5ba5202ff08591_grande.png?v=1747677491867",
     ],
     description: (
-      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p className="italic">
           Tác phẩm cuốn hút trong vẻ đẹp kỳ diệu của men Celadon xanh ngọc - màu
           men khó chinh phục nhất trong lịch sử gốm sứ. Nay các nghệ nhân Minh
@@ -381,7 +379,7 @@ export const products = [
           kiêu hãnh như Cá Chép Hóa Rồng.
         </p>
         <p className="flex flex-col">
-          <span className="font-semibold my-1">Thông tin kỹ thuật</span>
+          <span className="my-1 font-semibold">Thông tin kỹ thuật</span>
           <span>Dài ~ 22 cm</span>
           <span>Rộng ~ 9.02 cm</span>
           <span>Cao ~ 23.86 cm</span>
@@ -412,7 +410,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/cap-ky-lan-men-xanh-co-khong-trang-tri-tuong-hoa-van_0001290503-sm-01_788b8735f5e2405d99110360f39960dd_grande.png?v=1747677935815",
     ],
     description: (
-      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
           Kỳ lân là một trong tứ linh (long, lân, quy, phụng), vốn được xem là
           linh vật xua đuổi tà ma, hóa giải tam sát và mang đến điềm lành, được
@@ -445,7 +443,7 @@ export const products = [
       </div>
     ),
     instruction: (
-      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
           Nghệ thuật hoàn mỹ đơn giản là thứ nghệ thuật có thể chạm tới với
           được, ai cũng hiểu dù là theo những tầng nghĩa khác nhau. Vì thế, Minh
@@ -494,7 +492,7 @@ export const products = [
       "https://product.hstatic.net/200000532849/product/ky-lan-cobalt-trang-tri-vang-va-bach-kim-tuong-la-kem_0001290103-sm-01_6af85a2670504e29bec77a5fa962d4ed_grande.png?v=1747683056907",
     ],
     description: (
-      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
           Kỳ Lân, là một trong 4 linh vật (Tứ Linh) theo tín ngưỡng Phương Đông,
           tượng trưng cho sự thái bình và thịnh vượng, là con vật thiêng, là
@@ -517,7 +515,7 @@ export const products = [
       </div>
     ),
     instruction: (
-      <div className="text-sm tracking-normal md:tracking-wide text-gray-700 space-y-2">
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
           Nghệ thuật hoàn mỹ đơn giản là thứ nghệ thuật có thể chạm tới với
           được, ai cũng hiểu dù là theo những tầng nghĩa khác nhau. Vì thế, Minh
@@ -558,5 +556,108 @@ export const products = [
     size: "68 x 40 x 56 cm",
     quantity: 100,
     rating: [5, 10, 15, 180, 1290],
+  },
+  {
+    id: 10,
+    name: "Huy hiệu Thạch Âm",
+    images: [
+      "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-xuan-ca_693564536-sm-01_5fe99ccf497b41bb8870c389519de331_grande.png?v=1746845545811",
+      "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-xuan-ca_693564536-sm-03_65cbd37dfbd14d73b19dea9b407d905d_grande.png?v=1746845545811",
+      "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-xuan-ca_693564536-sm-04_5af9db21f7784c61a6656b8f10d58c54_grande.png?v=1746845545811",
+    ],
+    description: (
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
+        <p>
+          Huy hiệu này là một biểu tượng tinh tế của dự án Thạch Âm trong môn Đồ
+          án Vốn cổ Khmer, kết hợp giữa yếu tố văn hóa truyền thống và thiết kế
+          hiện đại.
+        </p>
+        <p>
+          Logo "THẠCH ÂM" được trình bày nổi bật, với chữ "THẠCH" nằm gọn trong
+          một khung hình chữ nhật và chữ "ÂM" đặt bên dưới, có thể được tạo hình
+          cách điệu với những đường nét uốn lượn mang đậm phong cách nghệ thuật
+          Khmer cổ điển. Một chi tiết đồ họa uốn lượn lấy cảm hứng từ các hoa
+          văn truyền thống Khmer, có thể là hình ảnh Naga hoặc Kinnari cách
+          điệu, được tích hợp khéo léo vào phần chữ hoặc bao quanh nó, tạo điểm
+          nhấn ấn tượng.
+        </p>
+        <p>
+          Phiên bản xanh đậm: Logo màu vàng đồng hoặc vàng gold nổi bật trên nền
+          xanh đậm, tạo cảm giác sang trọng, cổ kính và quyền quý. Phiên bản
+          vàng nhạt: Logo màu xanh đậm hoặc đen được đặt trên nền vàng nhạt,
+          mang lại cảm giác nhẹ nhàng, trang nhã nhưng vẫn giữ được nét cổ điển.
+        </p>
+      </div>
+    ),
+    code: "A001_693564536",
+    brand: "Thạch Âm",
+    material: "Kim loại mạ bóng, in hình phủ nhựa bóng/mờ",
+    pin: "Ghim kim cài lưng (an toàn, dễ sử dụng)",
+    type: "Huy hiệu truyền thống",
+    details: [
+      {
+        color: "Nền xanh rêu",
+        slug: "huy-hieu-truyen-thong-xanh-reu",
+        price: 20000,
+      },
+      {
+        color: "Nền vàng",
+        slug: "huy-hieu-truyen-thong-vang",
+        price: 20000,
+      },
+    ],
+    size: "10 cm",
+    quantity: 1500,
+    rating: [25, 50, 70, 500, 800],
+  },
+  {
+    id: 2,
+    name: "Bình hoa 35 cm - Se Sẻ Và Bông Hoa",
+    images: [
+      "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-se-se-va-bong-hoa_693564545-sm-01_4b050a2726b944a48a3b6ea83336239f_grande.png?v=1746845410130",
+      "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-se-se-va-bong-hoa_693564545-sm-03_e09a55a0b3ab4f5ab27375ca7edb2684_grande.png?v=1746845410130",
+      "https://product.hstatic.net/200000532849/product/binh-hoa-35-cm-binh-hoa-se-se-va-bong-hoa_693564545-sm-04_dfb3bb29cb2e4513ae81e9ac1e8c502f_grande.png?v=1746845410130",
+    ],
+    description: (
+      <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
+        <p>
+          Bình Se Sẻ và Bông Hoa, nơi nghệ thuật truyền thống được tái sinh dưới
+          góc nhìn tươi mới và hiện đại. Hình ảnh chim Se Sẻ nhẹ nhàng đậu trên
+          cành hoa Mẫu Đơn tạo nên bức tranh thiên nhiên tươi đẹp và tràn đầy
+          sức sống. Đồng thời gợi nhắc những cảm xúc mới mẻ về sự sum họp, hạnh
+          phúc, thịnh vượng mà mọi gia đình đều mong ước trong năm mới. Đặc
+          biệt, màu xanh cobalt nổi bật trên nền sứ trắng như sắc xuân đang trỗi
+          dậy, khơi gợi cảm giác an lành. Điểm nhấn vàng 24k tinh tế tạo sự phá
+          cách, giúp bình hoa trở nên nổi bật trong bất kỳ không gian nào.
+        </p>
+        <p>
+          Bình Se Sẻ và Bông Hoa không chỉ gói gọn trong ý nghĩa trang trí mà
+          còn mang thông điệp về sự khởi đầu mới suôn sẻ, nhiều hy vọng. Đây
+          cũng là món quà ý nghĩa dành cho người thân, bạn bè, đối tác,… với lời
+          chúc thành công, may mắn và phú quý.
+        </p>
+      </div>
+    ),
+    code: "A001_693564545",
+    brand: "Minh Long",
+    collection: "Bình Hoa",
+    type: "Bình hoa",
+    details: [
+      {
+        color: "",
+        pattern: "Se Sẻ Và Bông Hoa",
+        slug: "binh-hoa-35-cm-se-se-va-bong-hoa",
+        price: 8424000,
+      },
+      {
+        color: "",
+        pattern: "Xuân Ca",
+        slug: "binh-hoa-35-cm-xuan-ca",
+        price: 7560000,
+      },
+    ],
+    size: "35 cm",
+    quantity: 27,
+    rating: [20, 40, 60, 400, 900],
   },
 ];

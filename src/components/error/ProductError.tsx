@@ -7,7 +7,7 @@ import ErrorSearchBar from "@/components/error/ErrorSearchBar";
 
 const ProductError = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-rose-50 text-rose-500 px-6 space-y-6">
+    <div className="flex flex-col items-center justify-center min-h-screen px-6 space-y-6 bg-rose-50 text-rose-500">
       {/* App Logo */}
       <Link
         href="/"
@@ -19,10 +19,10 @@ const ProductError = () => {
             alt="Logo"
             width={40}
             height={40}
-            className="object-cover rounded cursor-pointer bg-white select-none"
+            className="object-cover bg-white rounded cursor-pointer select-none"
           />
-          <h1 className="text-2xl font-semibold uppercase select-none hidden md:block">
-            Ngọc Ánh
+          <h1 className="hidden text-2xl font-semibold uppercase select-none md:text-3xl md:block">
+            Thạch Âm
           </h1>
         </div>
       </Link>
@@ -37,28 +37,28 @@ const ProductError = () => {
       />
 
       {/* Heading */}
-      <h1 className="mt-8 text-3xl md:text-4xl font-bold text-center">
+      <h1 className="mt-8 text-3xl font-bold text-center md:text-4xl">
         Sản phẩm không tồn tại
       </h1>
 
       {/* Description */}
-      <p className="text-center text-rose-500 tracking-wide max-w-md">
+      <p className="max-w-md tracking-wide text-center text-rose-500">
         Chúng tôi không thể tìm thấy sản phẩm bạn đang tìm kiếm. Có thể đường
         dẫn không đúng hoặc sản phẩm đã bị gỡ.
       </p>
 
       {/* Action buttons */}
-      <div className="flex flex-col sm:flex-row gap-3 mt-4">
+      <div className="flex flex-col gap-3 mt-4 sm:flex-row">
         <Link
           href="/"
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 text-white bg-rose-600 hover:bg-rose-500/75 active:bg-rose-400 rounded-full transition shadow-md select-none"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 text-white transition rounded-full shadow-md select-none bg-rose-600 hover:bg-rose-500/75 active:bg-rose-400"
         >
           <FaArrowLeft /> Quay về trang chủ
         </Link>
 
         <Link
           href="/#products"
-          className="inline-flex items-center justify-center px-6 py-3 text-rose-600 bg-white border border-rose-600 hover:bg-rose-200/70 active:bg-rose-100 rounded-full transition shadow-md select-none"
+          className="inline-flex items-center justify-center px-6 py-3 transition bg-white border rounded-full shadow-md select-none text-rose-600 border-rose-600 hover:bg-rose-200/70 active:bg-rose-100"
         >
           Xem sản phẩm khác
         </Link>

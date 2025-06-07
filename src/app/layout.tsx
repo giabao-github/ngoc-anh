@@ -13,7 +13,7 @@ const arsenal = Arsenal({
 });
 
 export const metadata: Metadata = {
-  description: "Trang web của Ngọc Ánh dễ thương",
+  description: "Trang web của Thạch Âm",
   icons: {
     icon: "/favicon.ico",
   },

@@ -15,15 +15,15 @@ interface ProductDetailsProps {
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   return (
     <TabGroup className="mx-2 md:mx-0">
-      <TabList className="flex border-b border-[#BB9244]/40 gap-x-10">
+      <TabList className="flex border-b border-secondary/40 gap-x-10">
         {["CHI TIẾT SẢN PHẨM", "HƯỚNG DẪN SỬ DỤNG"].map((tab) => (
           <Tab
             key={tab}
             className={({ selected }) =>
               `py-3 text-sm md:text-lg font-semibold uppercase tracking-wide cursor-pointer border-b -mb-px transition outline-none ring-0 focus:ring-0 focus:outline-none ${
                 selected
-                  ? "border-[#BB9244] text-black"
-                  : "border-transparent text-gray-400 hover:border-[#BB9244] hover:text-black"
+                  ? "border-secondary text-black"
+                  : "border-transparent text-gray-400 hover:border-secondary hover:text-black"
               }`
             }
           >

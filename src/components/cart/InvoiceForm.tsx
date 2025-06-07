@@ -122,7 +122,7 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({
         />
         <button
           onClick={saveForm}
-          className="w-fit mt-4 bg-[#BB9244] hover:bg-[#BB9244]/80 active:bg-[#BB9244]/60 cursor-pointer text-white px-6 py-3 rounded-full font-semibold select-none tracking-wide"
+          className="w-fit mt-4 bg-secondary hover:bg-secondary/80 active:bg-secondary/60 cursor-pointer text-white px-6 py-3 rounded-full font-semibold select-none tracking-wide"
         >
           Lưu thông tin
         </button>

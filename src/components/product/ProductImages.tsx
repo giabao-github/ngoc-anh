@@ -46,7 +46,7 @@ const ProductImages: React.FC<ProductImagesProps> = ({
             onClick={() => setCurrentIndex(index)}
             className={`aspect-square w-16 md:w-28 cursor-pointer rounded-lg overflow-hidden ${
               currentIndex === index
-                ? "ring-2 ring-[#BB9244]"
+                ? "ring-2 ring-secondary"
                 : "ring-1 ring-neutral-100"
             }`}
           >
