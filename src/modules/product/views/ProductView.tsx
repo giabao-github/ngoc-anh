@@ -1,7 +1,5 @@
 "use client";
 
-import { Suspense } from "react";
-
 import { useParams } from "next/navigation";
 
 import ProductError from "@/components/error/ProductError";
@@ -21,9 +19,5 @@ export const ProductView = () => {
     return <ProductError />;
   }
 
-  return (
-    <Suspense fallback={<SkeletonLoader />}>
-      <ProductPageLayout {...productPageData} slug={slug} />
-    </Suspense>
-  );
+  return <ProductPageLayout {...productPageData} slug={slug} />;
 };

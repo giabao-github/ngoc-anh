@@ -20,7 +20,7 @@ export const LoginView = () => {
   const [password, setPassword] = useState("");
   const searchParams = useSearchParams();
   const method = searchParams.get("method");
-  const [isPhoneLogin, setIsPhoneLogin] = useState(!!(method === "phone"));
+  const isPhoneLogin = method === "phone";
   const [inputError, setInputError] = useState("");
   const [isTouched, setIsTouched] = useState(false);
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -28,7 +28,6 @@ export const LoginView = () => {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   const toggleLoginMethod = () => {
-    setIsPhoneLogin((prev) => !prev);
     setEmail("");
     setInputError("");
     router.push(`/login?method=${method === "phone" ? "email" : "phone"}`);

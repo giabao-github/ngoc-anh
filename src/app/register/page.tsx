@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { RegisterView } from "@/modules/auth/reigster/views/RegisterView";
+import { RegisterView } from "@/modules/auth/register/views/RegisterView";
 
 export const dynamic = "force-dynamic";
 
