@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Hero = () => (
   <section
-    className={`bg-cover text-white`}
+    className={`bg-cover bg-center text-white`}
     style={{
       backgroundImage: "url('/hero-background.jpeg')",
     }}
