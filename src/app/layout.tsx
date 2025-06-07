@@ -1,18 +1,11 @@
-import { CartProvider } from "@/hooks/CartContext";
-import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
-import { Arsenal, Geist, Geist_Mono } from "next/font/google";
+import { Arsenal } from "next/font/google";
+
+import { Toaster } from "@/components/ui/sonner";
+
+import { CartProvider } from "@/hooks/CartContext";
+
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const arsenal = Arsenal({
   weight: ["400", "700"],
@@ -22,7 +15,7 @@ const arsenal = Arsenal({
 export const metadata: Metadata = {
   description: "Trang web của Ngọc Ánh dễ thương",
   icons: {
-    icon: "/src/app/favicon.ico",
+    icon: "/favicon.ico",
   },
 };
 
@@ -36,11 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <CartProvider>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} ${arsenal.className} antialiased`}
-        >
-          {children}
-        </body>
+        <body className={`${arsenal.className} antialiased`}>{children}</body>
         <Toaster />
       </CartProvider>
     </html>

@@ -1,6 +1,7 @@
+import { RefObject } from "react";
+
 import { AnimatePresence } from "framer-motion";
 import { Montserrat } from "next/font/google";
-import { RefObject } from "react";
 
 import InvoiceForm from "@/components/cart/InvoiceForm";
 import { Input } from "@/components/ui/input";
@@ -24,15 +25,15 @@ const InvoiceSection: React.FC<InvoiceSectionProps> = ({
   contentHeight,
 }) => {
   return (
-    <div className="mx-2 mt-8 md:mb-16 flex items-center gap-3">
-      <div className="flex flex-col gap-y-4 w-full">
-        <div className="flex items-center flex-row gap-2 md:gap-3">
+    <div className="flex items-center gap-3 mx-2 mt-8 md:mb-16">
+      <div className="flex flex-col w-full gap-y-4">
+        <div className="flex flex-row items-center gap-2 md:gap-3">
           <Input
             type="checkbox"
             id="invoice"
             checked={invoiceOpen}
             onChange={() => setInvoiceOpen(!invoiceOpen)}
-            className="h-4 w-4 cursor-pointer"
+            className="w-4 h-4 cursor-pointer"
           />
           <label
             htmlFor="invoice"

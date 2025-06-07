@@ -1,9 +1,11 @@
-import Image from "next/image";
 import { RefObject } from "react";
 
-import { ImageData, Product } from "@/app/types";
+import Image from "next/image";
+
 import { ProductCarousel } from "@/components/ui/product-carousel";
 import { Separator } from "@/components/ui/separator";
+
+import { ImageData, Product } from "@/app/types";
 
 interface ProductImagesProps {
   product: Product;

@@ -1,7 +1,8 @@
 import { RefObject } from "react";
 
-import { collections } from "@/app/storage";
 import { FilterCarousel } from "@/components/ui/filter-carousel";
+
+import { collections } from "@/app/storage";
 
 interface CollectionProps {
   collectionRef?: RefObject<HTMLDivElement | null>;

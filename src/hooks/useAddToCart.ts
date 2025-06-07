@@ -1,16 +1,19 @@
+import { RefObject, useCallback, useMemo } from "react";
+
+import { toast } from "sonner";
+
 import { useCart } from "@/hooks/useCart";
 import useIsMobile from "@/hooks/useIsMobile";
+
+import { CartItem, Product } from "@/app/types";
 import { createCartItem, getCartFromStorage } from "@/lib/productUtils";
 import { animateAddToCart } from "@/lib/utils";
-import { CartItem, Product } from "@/app/types";
-import { RefObject, useCallback, useMemo } from "react";
-import { toast } from "sonner";
 
 export const useAddToCart = (
   product: Product | undefined,
   imageRef: RefObject<HTMLDivElement | null>,
   cartIconRef: RefObject<HTMLDivElement | null>,
-  showNotificationWithTimeout: (flag: string) => void
+  showNotificationWithTimeout: (flag: string) => void,
 ) => {
   const { cartItems, updateCartCount } = useCart();
   const isMobile = useIsMobile();
@@ -21,7 +24,7 @@ export const useAddToCart = (
       return 0;
     }
     const cartItem = cartItems.find(
-      (item) => item.id === product.id && item.name === product.name
+      (item) => item.id === product.id && item.name === product.name,
     );
     return cartItem?.quantity || 0;
   }, [product, cartItems]);
@@ -35,7 +38,7 @@ export const useAddToCart = (
 
   const isOutOfStock = useMemo(
     () => availableQuantity === 0,
-    [availableQuantity]
+    [availableQuantity],
   );
 
   const addToCart = useCallback(
@@ -65,7 +68,7 @@ export const useAddToCart = (
         const existingCart = getCartFromStorage();
         const existingIndex = existingCart.findIndex(
           (item: CartItem) =>
-            item.id === product.id && item.name === product.name
+            item.id === product.id && item.name === product.name,
         );
         const itemToAdd = createCartItem(product, quantity);
 
@@ -78,7 +81,7 @@ export const useAddToCart = (
           if (existingIndex !== -1) {
             existingCart[existingIndex].quantity = Math.min(
               existingCart[existingIndex].quantity + quantity,
-              product.quantity
+              product.quantity,
             );
           } else {
             existingCart.push(itemToAdd);
@@ -86,7 +89,7 @@ export const useAddToCart = (
 
           localStorage.setItem("cart", JSON.stringify(existingCart));
           updateCartCount();
-        }, 1600);
+        }, 1000);
       } catch (error) {
         console.error("Error adding to cart:", error);
         toast.error("Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng");
@@ -101,7 +104,7 @@ export const useAddToCart = (
       imageRef,
       cartIconRef,
       showNotificationWithTimeout,
-    ]
+    ],
   );
 
   return {

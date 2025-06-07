@@ -5,25 +5,28 @@ import { Product } from "@/app/types";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["200", "400","500", "600", "700", "800"]
+  weight: ["200", "400", "500", "600", "700", "800"],
 });
 
 interface ProductDetailsProps {
   product: Product;
 }
 
-const ProductDetails: React.FC<ProductDetailsProps> = ({ product}) => {
+const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   return (
     <TabGroup className="mx-2 md:mx-0">
       <TabList className="flex border-b border-[#BB9244]/40 gap-x-10">
-        {['CHI TIẾT SẢN PHẨM', 'HƯỚNG DẪN SỬ DỤNG'].map((tab) => (
-          <Tab key={tab} className={({ selected }) =>
-            `py-3 text-sm md:text-lg font-semibold uppercase tracking-wide cursor-pointer border-b -mb-px transition outline-none ring-0 focus:ring-0 focus:outline-none ${
-              selected
-                ? 'border-[#BB9244] text-black'
-                : 'border-transparent text-gray-400 hover:border-[#BB9244] hover:text-black'
-            }`
-          }>
+        {["CHI TIẾT SẢN PHẨM", "HƯỚNG DẪN SỬ DỤNG"].map((tab) => (
+          <Tab
+            key={tab}
+            className={({ selected }) =>
+              `py-3 text-sm md:text-lg font-semibold uppercase tracking-wide cursor-pointer border-b -mb-px transition outline-none ring-0 focus:ring-0 focus:outline-none ${
+                selected
+                  ? "border-[#BB9244] text-black"
+                  : "border-transparent text-gray-400 hover:border-[#BB9244] hover:text-black"
+              }`
+            }
+          >
             {tab}
           </Tab>
         ))}
@@ -31,9 +34,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product}) => {
 
       <TabPanels className={`pt-6 ${montserrat.className}`}>
         {/* Tab 1 - Product Details */}
-        <TabPanel className="space-y-4">
-          {product.description || ""}
-        </TabPanel>
+        <TabPanel className="space-y-4">{product.description || ""}</TabPanel>
 
         {/* Tab 2 - Usage Instructions */}
         <TabPanel className="space-y-4">
@@ -48,6 +49,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product}) => {
       </TabPanels>
     </TabGroup>
   );
-}
+};
 
 export default ProductDetails;

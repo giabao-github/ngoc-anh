@@ -1,16 +1,17 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { FaTrash } from "react-icons/fa6";
 
-import { useCart } from "@/hooks/useCart";
-import useIsMobile from "@/hooks/useIsMobile";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import CartSkeleton from "@/components/cart/CartSkeleton";
 import ConfirmDialog from "@/components/cart/ConfirmDialog";
 import EmptyCart from "@/components/cart/EmptyCart";
 import InvoiceSection from "@/components/cart/InvoiceSection";
 import OrderNotes from "@/components/cart/OrderNotes";
 import ProductList from "@/components/cart/ProductList";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+
+import { useCart } from "@/hooks/useCart";
+import useIsMobile from "@/hooks/useIsMobile";
 
 interface CartDetailsProps {
   invoiceOpen: boolean;
@@ -18,6 +19,17 @@ interface CartDetailsProps {
   notes: string;
   setNotes: (notes: string) => void;
 }
+
+const CartDetailsHeader = () => {
+  return (
+    <>
+      <h2 className="mx-2 mb-2 text-lg font-bold md:text-xl">
+        THÔNG TIN ĐƠN HÀNG
+      </h2>
+      <Separator color="#BB9244" opacity={40} />
+    </>
+  );
+};
 
 const CartDetails: React.FC<CartDetailsProps> = ({
   invoiceOpen,
@@ -66,10 +78,7 @@ const CartDetails: React.FC<CartDetailsProps> = ({
   if (!cartItems) {
     return (
       <div className="flex-1 max-w-[920px]">
-        <h2 className="mx-2 mb-2 text-lg font-bold md:text-xl">
-          THÔNG TIN ĐƠN HÀNG
-        </h2>
-        <Separator color="#BB9244" opacity={40} />
+        <CartDetailsHeader />
         <div className="my-2 rounded-lg bg-gray-50">
           <div className="p-3 mx-2 text-sm font-semibold tracking-wide rounded md:text-base md:p-4 md:mt-5 bg-orange-50">
             SẢN PHẨM BÁN LẺ
@@ -93,10 +102,7 @@ const CartDetails: React.FC<CartDetailsProps> = ({
   if (cartItems.length === 0) {
     return (
       <div className="flex-1 max-w-[920px]">
-        <h2 className="mx-2 mb-2 text-lg font-bold md:text-xl">
-          THÔNG TIN ĐƠN HÀNG
-        </h2>
-        <Separator color="#BB9244" opacity={40} />
+        <CartDetailsHeader />
         <EmptyCart />
       </div>
     );
@@ -105,10 +111,7 @@ const CartDetails: React.FC<CartDetailsProps> = ({
   return (
     <>
       <div className="flex-1 max-w-[920px]">
-        <h2 className="mx-2 mb-2 text-lg font-bold md:text-xl">
-          THÔNG TIN ĐƠN HÀNG
-        </h2>
-        <Separator color="#BB9244" opacity={40} />
+        <CartDetailsHeader />
         <div className="my-2 rounded-lg">
           <div className="p-3 mx-2 mb-5 text-sm font-semibold tracking-wide rounded md:text-base md:p-4 md:mt-5 md:mb-7 bg-orange-50">
             SẢN PHẨM BÁN LẺ

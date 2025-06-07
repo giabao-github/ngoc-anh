@@ -7,20 +7,21 @@ const SkeletonBox = ({
 }: {
   className?: string;
   rounded?: string;
-}) => (
-  <div className={`bg-gray-200 animate-pulse ${rounded} ${className}`} />
-);
+}) => <div className={`bg-gray-200 animate-pulse ${rounded} ${className}`} />;
 
 interface CartSkeletonProps {
   isMobile?: boolean;
   skeletonCount: number;
 }
 
-const CartSkeleton: React.FC<CartSkeletonProps> = ({ isMobile, skeletonCount = 4 }) => {
+const CartSkeleton: React.FC<CartSkeletonProps> = ({
+  isMobile,
+  skeletonCount = 4,
+}) => {
   return (
     <>
       {Array.from({ length: skeletonCount }).map((_, i) => (
-        <div key={i} className="relative overflow-hidden my-4 md:my-6">
+        <div key={i} className="relative my-4 overflow-hidden md:my-6">
           <div className="relative overflow-hidden min-h-24">
             <div
               className={`
@@ -29,28 +30,26 @@ const CartSkeleton: React.FC<CartSkeletonProps> = ({ isMobile, skeletonCount = 4
               `}
             >
               {/* Skeleton Image */}
-              <SkeletonBox className="w-24 h-24 rounded-md border border-neutral-200 shrink-0" />
-    
+              <SkeletonBox className="w-24 h-24 border rounded-md border-neutral-200 shrink-0" />
+
               {/* Right content */}
-              <div className="flex-1 w-full flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+              <div className="flex flex-col flex-1 w-full gap-2 md:flex-row md:items-center md:justify-between">
                 {/* Name + Pattern */}
-                <div className="flex flex-col gap-y-1 w-full overflow-hidden">
+                <div className="flex flex-col w-full overflow-hidden gap-y-1">
                   {/* Skeleton Title */}
                   <SkeletonBox
                     className={`h-6 ${isMobile ? "w-3/5" : "w-4/5"} rounded mb-2`}
                   />
                   {/* Skeleton Pattern/Details */}
-                  <SkeletonBox
-                    className={`h-4 w-2/5 rounded`}
-                  />
+                  <SkeletonBox className={`h-4 w-2/5 rounded`} />
                 </div>
-    
+
                 {/* Quantity & Price */}
-                <div className="flex items-center justify-between gap-1 md:gap-4 flex-wrap sm:flex-nowrap">
+                <div className="flex flex-wrap items-center justify-between gap-1 md:gap-4 sm:flex-nowrap">
                   {/* Quantity Selector Skeleton */}
                   <div className="flex items-center border border-gray-300 rounded-lg">
                     <button
-                      className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-tl-lg rounded-bl-lg text-gray-300"
+                      className="flex items-center justify-center text-gray-300 rounded-tl-lg rounded-bl-lg w-7 h-7 md:w-10 md:h-10"
                       disabled
                     >
                       <FiMinus size={isMobile ? 12 : 16} />
@@ -59,7 +58,7 @@ const CartSkeleton: React.FC<CartSkeletonProps> = ({ isMobile, skeletonCount = 4
                       className={`w-[34px] h-8 md:w-12 md:h-10 rounded-none`}
                     />
                     <button
-                      className="w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-tr-lg rounded-br-lg text-gray-300"
+                      className="flex items-center justify-center text-gray-300 rounded-tr-lg rounded-br-lg w-7 h-7 md:w-10 md:h-10"
                       disabled
                     >
                       <FiPlus size={isMobile ? 12 : 16} />
@@ -71,13 +70,13 @@ const CartSkeleton: React.FC<CartSkeletonProps> = ({ isMobile, skeletonCount = 4
                   />
                 </div>
               </div>
-    
+
               {/* Desktop trash icon */}
-              <span className="absolute cursor-pointer top-0 right-0 text-neutral-300 hidden sm:block">
+              <span className="absolute top-0 right-0 hidden cursor-pointer text-neutral-300 sm:block">
                 <FaTrashCan size={18} />
               </span>
             </div>
-    
+
             {/* Mobile swipe delete button skeleton */}
             <SkeletonBox
               className={`

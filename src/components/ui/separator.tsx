@@ -1,7 +1,8 @@
 "use client";
 
-import * as SeparatorPrimitive from "@radix-ui/react-separator";
 import * as React from "react";
+
+import * as SeparatorPrimitive from "@radix-ui/react-separator";
 
 import { cn } from "@/lib/utils";
 
@@ -10,6 +11,25 @@ interface SeparatorProps
   color?: string;
   opacity?: number;
 }
+
+// Helper: convert hex to rgba
+const hexToRgba = (hex: string, alpha: number) => {
+  let c = hex;
+  if (c.startsWith("#")) {
+    c = c.slice(1);
+  }
+  if (c.length === 3) {
+    c = c
+      .split("")
+      .map((char) => char + char)
+      .join("");
+  }
+  const bigint = parseInt(c, 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
 
 const Separator = React.forwardRef<
   React.ElementRef<typeof SeparatorPrimitive.Root>,
@@ -25,29 +45,10 @@ const Separator = React.forwardRef<
       style,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Compute final backgroundColor with opacity
     const normalizedOpacity = Math.max(0, Math.min(opacity, 100)) / 100;
-
-    // Helper: convert hex to rgba
-    const hexToRgba = (hex: string, alpha: number) => {
-      let c = hex;
-      if (c.startsWith("#")) {
-        c = c.slice(1);
-      }
-      if (c.length === 3) {
-        c = c
-          .split("")
-          .map((char) => char + char)
-          .join("");
-      }
-      const bigint = parseInt(c, 16);
-      const r = (bigint >> 16) & 255;
-      const g = (bigint >> 8) & 255;
-      const b = bigint & 255;
-      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-    };
 
     const backgroundColor = color.startsWith("#")
       ? hexToRgba(color, normalizedOpacity)
@@ -65,12 +66,12 @@ const Separator = React.forwardRef<
         className={cn(
           "shrink-0",
           orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
-          className
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
 
 Separator.displayName = SeparatorPrimitive.Root.displayName;

@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
+
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { useState } from "react";
 
 interface EmailPhoneSwitchProps {
   onMethodChange: (method: "email" | "phone") => void;
@@ -28,7 +29,6 @@ export default function EmailPhoneSwitch({
       >
         <Switch
           checked={method === "email"}
-          onCheckedChange={() => toggleMethod("email")}
           className="bg-gray-300 data-[state=checked]:bg-blue-500 pointer-events-none"
         />
         <Label

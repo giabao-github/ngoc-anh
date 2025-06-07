@@ -70,8 +70,10 @@ input::-webkit-credentials-auto-fill-button {
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
+  /* (original) --primary: oklch(0.208 0.042 265.755); */
+  --primary: #103330;
   --primary-foreground: oklch(0.984 0.003 247.858);
+  /* (original) --secondary: oklch(0.968 0.007 247.896); */
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
   --muted: oklch(0.968 0.007 247.896);
@@ -141,20 +143,32 @@ input::-webkit-credentials-auto-fill-button {
 }
 
 @media (max-width: 767px) {
-  .skeleton-desktop { display: none; }
-  .skeleton-mobile { display: block; }
+  .skeleton-desktop {
+    display: none;
+  }
+  .skeleton-mobile {
+    display: block;
+  }
 }
 @media (min-width: 768px) {
-  .skeleton-desktop { display: block; }
-  .skeleton-mobile { display: none; }
+  .skeleton-desktop {
+    display: block;
+  }
+  .skeleton-mobile {
+    display: none;
+  }
 }
 
 /* Custom autofill styles to override browser defaults */
 /* Long transition method */
 input.header-input:-webkit-autofill {
-  -webkit-transition: background-color 999999s ease-in-out 0s, color 999999s ease-in-out 0s !important;
-  transition: background-color 999999s ease-in-out 0s, color 999999s ease-in-out 0s !important;
-  background-color: #0C2543 !important;
+  -webkit-transition:
+    background-color 999999s ease-in-out 0s,
+    color 999999s ease-in-out 0s !important;
+  transition:
+    background-color 999999s ease-in-out 0s,
+    color 999999s ease-in-out 0s !important;
+  background-color: #0c2543 !important;
   color: white !important;
   -webkit-text-fill-color: white !important;
 }
@@ -165,26 +179,26 @@ input.header-input:-webkit-autofill:hover,
 input.header-input:-webkit-autofill:focus,
 input.header-input:-webkit-autofill:active {
   /* Override background color with box-shadow */
-  -webkit-box-shadow: 0 0 0 30px #0C2543 inset !important;
-  box-shadow: 0 0 0 30px #0C2543 inset !important;
-  
+  -webkit-box-shadow: 0 0 0 30px #0c2543 inset !important;
+  box-shadow: 0 0 0 30px #0c2543 inset !important;
+
   /* Force text color to stay white on all states */
   -webkit-text-fill-color: white !important;
   color: white !important;
-  
+
   /* Preserve border styles */
   border: 1px solid white !important;
   border-radius: 9999px !important;
-  
+
   /* Maintain font properties */
   font-weight: 500 !important;
-  
+
   /* Preserve padding */
   padding-left: 3rem !important;
   padding-right: 1rem !important;
   padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important;
-  
+
   /* Ensure cursor is visible */
   caret-color: white !important;
 }
@@ -193,33 +207,39 @@ input.header-input:-webkit-autofill:active {
 input.header-input:-webkit-autofill:not(:focus):not(:hover) {
   -webkit-text-fill-color: white !important;
   color: white !important;
-  background-color: #0C2543 !important;
-  -webkit-box-shadow: 0 0 0 30px #0C2543 inset !important;
-  box-shadow: 0 0 0 30px #0C2543 inset !important;
+  background-color: #0c2543 !important;
+  -webkit-box-shadow: 0 0 0 30px #0c2543 inset !important;
+  box-shadow: 0 0 0 30px #0c2543 inset !important;
 }
 
 /* For Firefox */
 input.header-input:-moz-autofill {
-  background-color: #0C2543 !important;
+  background-color: #0c2543 !important;
   color: white !important;
   border: 1px solid white !important;
   border-radius: 9999px !important;
-  box-shadow: 0 1px 3px 0 rgba(255, 255, 255, 0.1), 0 1px 2px 0 rgba(255, 255, 255, 0.06) !important;
+  box-shadow:
+    0 1px 3px 0 rgba(255, 255, 255, 0.1),
+    0 1px 2px 0 rgba(255, 255, 255, 0.06) !important;
   caret-color: white !important;
 }
 
 /* Firefox hover state */
 input.header-input:-moz-autofill:hover {
   color: white !important;
-  background-color: #0C2543 !important;
+  background-color: #0c2543 !important;
 }
 
 /* Enhanced focus states with proper cursor */
 input.header-input:-webkit-autofill:focus {
   outline: none !important;
   border-color: white !important;
-  -webkit-box-shadow: 0 0 0 30px #0C2543 inset, 0 0 0 1px white !important;
-  box-shadow: 0 0 0 30px #0C2543 inset, 0 0 0 1px white !important;
+  -webkit-box-shadow:
+    0 0 0 30px #0c2543 inset,
+    0 0 0 1px white !important;
+  box-shadow:
+    0 0 0 30px #0c2543 inset,
+    0 0 0 1px white !important;
   -webkit-text-fill-color: white !important;
   color: white !important;
   caret-color: white !important;

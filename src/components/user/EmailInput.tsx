@@ -1,7 +1,7 @@
-import { Montserrat } from "next/font/google";
 import React from "react";
 
-import useIsMobile from "@/hooks/useIsMobile";
+import { Montserrat } from "next/font/google";
+
 import { Input } from "@/components/ui/input";
 import {
   Tooltip,
@@ -9,6 +9,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+
+import useIsMobile from "@/hooks/useIsMobile";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -49,7 +51,7 @@ const EmailInput: React.FC<EmailInputProps> = ({
       setEmailError(
         isMobile
           ? "Email không hợp lệ"
-          : "Email không hợp lệ, vui lòng nhập đúng định dạng (ví dụ: ten@example.com)"
+          : "Email không hợp lệ, vui lòng nhập đúng định dạng (ví dụ: ten@example.com)",
       );
     } else {
       setEmailError("");

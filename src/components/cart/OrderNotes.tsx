@@ -1,4 +1,5 @@
 import { Montserrat } from "next/font/google";
+
 import { Textarea } from "@/components/ui/textarea";
 
 const montserrat = Montserrat({
@@ -12,8 +13,8 @@ interface OrderNotesProps {
 }
 
 const OrderNotes: React.FC<OrderNotesProps> = ({ notes, setNotes }) => (
-  <div className="mt-6 p-4 bg-orange-50">
-    <h3 className="font-semibold mb-3 md:text-lg">Ghi chú đơn hàng</h3>
+  <div className="p-4 mt-6 bg-orange-50">
+    <h3 className="mb-3 font-semibold md:text-lg">Ghi chú đơn hàng</h3>
     <Textarea
       className={`w-full text-sm placeholder:text-sm md:text-base md:placeholder:text-base p-3 mb-2 border border-neutral-300 rounded-md font-medium ${montserrat.className}`}
       rows={5}

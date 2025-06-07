@@ -1,18 +1,20 @@
 "use client";
 
-import { getLocalCart } from "@/lib/utils";
-import { products } from "@/app/storage";
-import { CartItem, Product } from "@/app/types";
 import {
-  createContext,
   ReactNode,
+  createContext,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
+
 import { toast } from "sonner";
+
+import { products } from "@/app/storage";
+import { CartItem, Product } from "@/app/types";
+import { getLocalCart } from "@/lib/utils";
 
 interface CartContextType {
   cartItems: CartItem[] | undefined;
@@ -20,10 +22,11 @@ interface CartContextType {
   totalPrice: number;
   totalCount: number;
   updateCartCount: () => void;
+  isLoading: boolean;
   handleQuantityChange: (
     type: "increment" | "decrement" | "set",
     product: Product,
-    value?: number
+    value?: number,
   ) => void;
   handleRemove: (item: CartItem) => void;
   clearCart: () => void;
@@ -78,7 +81,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       setCartItems(newItems);
       updateLocalStorage(newItems);
     },
-    [updateLocalStorage]
+    [updateLocalStorage],
   );
 
   const initializeCart = useCallback(() => {
@@ -89,7 +92,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       const validatedCart = localCart
         .map((item) => {
           const product = products.find(
-            (p) => p.id === item.id && p.name === item.name
+            (p) => p.id === item.id && p.name === item.name,
           );
           if (!product) {
             return null;
@@ -137,13 +140,13 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     // Listen for custom cart update events (cross-tab sync)
     window.addEventListener(
       "cartUpdated",
-      handleStorageChange as EventListener
+      handleStorageChange as EventListener,
     );
 
     return () => {
       window.removeEventListener(
         "cartUpdated",
-        handleStorageChange as EventListener
+        handleStorageChange as EventListener,
       );
       if (syncTimeoutRef.current) {
         clearTimeout(syncTimeoutRef.current);
@@ -165,7 +168,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     (
       type: "increment" | "decrement" | "set",
       product: Product,
-      value?: number
+      value?: number,
     ) => {
       const itemKey = getCartItemKey(product);
 
@@ -196,7 +199,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
       updateCart(newItems || []);
     },
-    [cartItems, updateCart]
+    [cartItems, updateCart],
   );
 
   const handleRemove = useCallback(
@@ -211,7 +214,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         description: item.name,
       });
     },
-    [cartItems, updateCart]
+    [cartItems, updateCart],
   );
 
   // Clear cart handler
@@ -253,7 +256,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       handleQuantityChange,
       handleRemove,
       clearCart,
-    ]
+    ],
   );
 
   return (

@@ -2,7 +2,7 @@
 
 A modern, full-featured e-commerce web application for Minh Long porcelain products, built with Next.js, React, and Tailwind CSS. The platform enables users to browse curated collections, view detailed product information, manage a shopping cart, register/login, and recover passwords. The UI is responsive, elegant, and optimized for both desktop and mobile devices.
 
-------------------------------------------------------------------------------------
+---
 
 ## Features
 
@@ -16,7 +16,7 @@ A modern, full-featured e-commerce web application for Minh Long porcelain produ
 - **Animations**: Smooth transitions and interactive elements powered by Framer Motion.
 - **Extensible Architecture**: Modular components, hooks, and utilities for easy customization and scalability.
 
-------------------------------------------------------------------------------------
+---
 
 ## Tech Stack
 
@@ -28,7 +28,7 @@ A modern, full-featured e-commerce web application for Minh Long porcelain produ
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **Utilities**: `clsx`, `class-variance-authority`, `tailwind-merge`, `next-themes`, and more
 
-------------------------------------------------------------------------------------
+---
 
 ## Project Structure
 
@@ -58,7 +58,7 @@ ngoc-anh/
 └── ...
 ```
 
-------------------------------------------------------------------------------------
+---
 
 ## Getting Started
 
@@ -78,7 +78,7 @@ ngoc-anh/
    - Development: [http://localhost:3000](http://localhost:3000)
    - Production: [https://ngoc-anh.vercel.app](https://ngoc-anh.vercel.app)
 
-------------------------------------------------------------------------------------
+---
 
 ## Customization & Extensibility
 
@@ -92,7 +92,7 @@ ngoc-anh/
 - **Image Domains:**
   - To allow images from new domains, update the `images.remotePatterns` array in `next.config.ts`.
 
-------------------------------------------------------------------------------------
+---
 
 ## Contribution Guidelines
 
@@ -102,7 +102,7 @@ ngoc-anh/
 4. Test your changes locally before submitting a pull request.
 5. Open a pull request with a detailed description of your changes.
 
-------------------------------------------------------------------------------------
+---
 
 ## License
 

@@ -1,14 +1,17 @@
-import { Montserrat } from "next/font/google";
-import { useRouter } from "next/navigation";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { FaBagShopping } from "react-icons/fa6";
 import { FiMinus, FiPlus, FiShoppingCart } from "react-icons/fi";
 import { LuPackageX } from "react-icons/lu";
 
-import useIsMobile from "@/hooks/useIsMobile";
-import { Product } from "@/app/types";
+import { Montserrat } from "next/font/google";
+import { useRouter } from "next/navigation";
+
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+
+import useIsMobile from "@/hooks/useIsMobile";
+
+import { Product } from "@/app/types";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -28,7 +31,7 @@ interface PurchaseSectionProps {
   setSelectedPattern: (pattern: string) => void;
   handleQuantityChange: (
     type: "increment" | "decrement" | "set",
-    value?: number
+    value?: number,
   ) => void;
   handleAddToCart: () => void;
 }
@@ -50,6 +53,22 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
   const router = useRouter();
   const isMobile = useIsMobile();
   const [inputValue, setInputValue] = useState(quantity.toString());
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+
+  // Handle add to cart with cool down
+  const handleAntiSpamAddToCart = useCallback(() => {
+    if (isAddingToCart) {
+      return;
+    }
+
+    setIsAddingToCart(true);
+    handleAddToCart();
+
+    // Reset after 1 second
+    setTimeout(() => {
+      setIsAddingToCart(false);
+    }, 1000);
+  }, [handleAddToCart, isAddingToCart]);
 
   useEffect(() => {
     if (isOutOfStock && quantity !== 0) {
@@ -103,7 +122,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
         }
       }
     },
-    [availableQuantity, handleQuantityChange]
+    [availableQuantity, handleQuantityChange],
   );
 
   const handleBlur = useCallback(() => {
@@ -120,7 +139,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
         router.push(`/products/${patternSlug}`);
       }
     },
-    [slug, router, setSelectedPattern]
+    [slug, router, setSelectedPattern],
   );
 
   return (
@@ -163,14 +182,14 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
       </div>
 
       {/* Size/Volume selection */}
-      <div className="space-y-2 mb-6">
+      <div className="mb-6 space-y-2">
         <p className="font-semibold">
           {`${
             product.size
               ? "Kích thước"
               : product.volume
-              ? "Dung tích"
-              : "Kích thước/ Dung tích"
+                ? "Dung tích"
+                : "Kích thước/ Dung tích"
           }`}
         </p>
         <div
@@ -241,31 +260,36 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
       </div>
 
       {/* Action buttons */}
-      <div className="flex flex-row gap-2 mt-6 md:mt-12 mb-8">
+      <div className="flex flex-row gap-2 mt-6 mb-8 md:mt-12">
         {isOutOfStock ? (
           <button
             disabled
-            className="mt-2 border border-gray-300 p-3 md:p-4 rounded-full w-full transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-gray-200 text-gray-400 cursor-default"
+            className="flex items-center justify-center w-full p-3 mt-2 text-gray-400 transition-colors bg-gray-200 border border-gray-300 rounded-full cursor-default select-none md:p-4 gap-x-2 md:gap-x-4"
           >
             <LuPackageX size={isMobile ? 18 : 24} />
-            <span className="font-semibold text-sm md:text-base md:tracking-wide">
+            <span className="text-sm font-semibold md:text-base md:tracking-wide">
               Số lượng sản phẩm trong giỏ đạt giới hạn
             </span>
           </button>
         ) : (
           <>
             <button
-              onClick={handleAddToCart}
-              className="mt-2 border border-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[40%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-transparent text-[#BB9244] hover:bg-[#BB9244] hover:text-white active:bg-[#BB9244]/80 active:text-white/80 cursor-pointer"
+              onClick={handleAntiSpamAddToCart}
+              disabled={isAddingToCart}
+              className={`mt-2 border border-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[40%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none ${
+                isAddingToCart
+                  ? "bg-gray-200 text-gray-400 cursor-default border border-gray-300"
+                  : "bg-transparent text-[#BB9244] hover:bg-[#BB9244] hover:text-white active:bg-[#BB9244]/80 active:text-white/80 cursor-pointer"
+              }`}
             >
               <FiShoppingCart size={isMobile ? 18 : 24} />
-              <span className="font-semibold text-sm md:text-base md:tracking-wide">
-                Thêm vào giỏ hàng
+              <span className="text-sm font-semibold md:text-base md:tracking-wide">
+                {isAddingToCart ? "Đang thêm..." : "Thêm vào giỏ hàng"}
               </span>
             </button>
             <button className="mt-2 border border-[#BB9244] p-3 md:p-4 rounded-full w-full md:w-[60%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-transparent text-[#BB9244] hover:bg-[#BB9244] hover:text-white active:bg-[#BB9244]/80 active:text-white/80 cursor-pointer">
               <FaBagShopping size={isMobile ? 18 : 24} />
-              <span className="font-semibold text-sm md:text-base md:tracking-wide">
+              <span className="text-sm font-semibold md:text-base md:tracking-wide">
                 Mua ngay
               </span>
             </button>

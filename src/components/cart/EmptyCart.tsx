@@ -1,16 +1,24 @@
-import { Montserrat } from "next/font/google";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { IoCloseCircle, IoSearch } from "react-icons/io5";
 
-import { handleSearch } from "@/lib/utils";
+import { Montserrat } from "next/font/google";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 import { Input } from "@/components/ui/input";
+
+import { handleSearch } from "@/lib/utils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
   weight: ["200", "400", "500", "600", "700", "800"],
 });
+
+const MESSAGES = {
+  emptyCart: "Chưa có sản phẩm trong giỏ hàng...",
+  returnHome: "trang chủ",
+  searchPrompt: "hoặc nhập từ khoá sản phẩm bạn cần tìm ở đây:",
+};
 
 const EmptyCart = () => {
   const router = useRouter();
@@ -25,27 +33,26 @@ const EmptyCart = () => {
 
   return (
     <div
-      className={`flex flex-col items-center justify-center pt-12 pb-24 ${montserrat.className}`}
+      className={`flex flex-col gap-y-2 items-center justify-center pt-12 pb-24 ${montserrat.className}`}
     >
       <Image
-        src="https://getillustrations.b-cdn.net//packs/essential-illustrations/scenes/_1x/shopping,%20e-commerce%20_%20shopping%20cart,%20cart,%20empty,%20not%20found,%20basket,%20shop_demo.png"
+        src="/empty-cart.jpeg"
         alt="Empty Cart"
-        width={256}
-        height={256}
-        className="mb-4"
+        width={2160}
+        height={2160}
+        quality={100}
+        className="w-64 h-64 mb-4 rounded-full"
       />
-      <p className="text-lg font-medium mb-4">
-        Chưa có sản phẩm trong giỏ hàng...
-      </p>
+      <p className="mb-4 text-lg font-medium">{MESSAGES.emptyCart}</p>
       <p className="text-sm md:text-center text-gray-600 mb-8 w-[96%] md:w-[75%]">
         Bạn có thể quay về
         <span
           className="font-bold mx-[6px] cursor-pointer text-black hover:underline"
           onClick={() => router.push("/")}
         >
-          trang chủ
+          {MESSAGES.returnHome}
         </span>
-        hoặc nhập từ khoá sản phẩm bạn cần tìm ở đây:
+        {MESSAGES.searchPrompt}
       </p>
       <div className="w-full max-w-md">
         <div className="relative w-full">
@@ -54,7 +61,7 @@ const EmptyCart = () => {
             title="Tìm kiếm"
             type="button"
             onClick={() => handleSearch(query, router)}
-            className="absolute cursor-pointer inset-y-0 left-3 flex items-center text-neutral-400 hover:text-black transition"
+            className="absolute inset-y-0 flex items-center transition cursor-pointer left-3 text-neutral-400 hover:text-black"
           >
             <IoSearch size={24} />
           </button>
@@ -66,7 +73,9 @@ const EmptyCart = () => {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Tìm kiếm sản phẩm..."
-            className="w-full font-medium pl-12 pr-4 py-4 border border-neutral-300 rounded-md shadow-md shadow-neutral-300 focus:border-neutral-400 focus:outline-none transition"
+            aria-label="Tìm kiếm sản phẩm"
+            aria-describedby="search-help"
+            className="w-full py-4 pl-12 pr-4 font-medium transition border rounded-md shadow-md border-neutral-300 shadow-neutral-300 focus:ring-neutral-400 focus:ring-1 focus:outline-none"
           />
 
           {query.trim().length > 0 && (
@@ -74,7 +83,7 @@ const EmptyCart = () => {
               title="Xóa tìm kiếm"
               type="button"
               onClick={() => setQuery("")}
-              className="absolute cursor-pointer inset-y-0 right-3 flex items-center text-neutral-400 hover:text-black transition"
+              className="absolute inset-y-0 flex items-center transition cursor-pointer right-3 text-neutral-400 hover:text-black"
             >
               <IoCloseCircle size={18} />
             </button>

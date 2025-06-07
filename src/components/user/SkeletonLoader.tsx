@@ -1,9 +1,9 @@
 const SkeletonLoader = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 animate-pulse px-4">
-      <div className="space-y-6 w-full max-w-md">
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-gray-50 animate-pulse">
+      <div className="w-full max-w-md space-y-6">
         {/* Skeleton for Header */}
-        <div className="h-6 bg-gray-300 rounded w-1/2 mx-auto"></div>
+        <div className="w-1/2 h-6 mx-auto bg-gray-300 rounded"></div>
 
         {/* Skeleton for Input fields */}
         <div className="space-y-4">
@@ -12,7 +12,7 @@ const SkeletonLoader = () => {
         </div>
 
         {/* Skeleton for Button */}
-        <div className="h-12 bg-amber-200/60 rounded-lg"></div>
+        <div className="h-12 rounded-lg bg-amber-200/60"></div>
 
         {/* Skeleton for Social Buttons */}
         <div className="space-y-3">
@@ -22,7 +22,7 @@ const SkeletonLoader = () => {
         </div>
 
         {/* Skeleton for small text (e.g., reCAPTCHA notice) */}
-        <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
+        <div className="w-3/4 h-4 mx-auto bg-gray-200 rounded"></div>
       </div>
     </div>
   );

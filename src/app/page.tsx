@@ -1,12 +1,14 @@
 "use client";
 
+import { RefObject, useEffect, useRef } from "react";
+
 import Header from "@/components/header/Header";
 import Collection from "@/components/sections/Collection";
 import Footer from "@/components/sections/Footer";
 import Hero from "@/components/sections/Hero";
 import Products from "@/components/sections/Products";
+
 import useIsMobile from "@/hooks/useIsMobile";
-import { useEffect, useRef } from "react";
 
 const App = () => {
   const collectionRef = useRef<HTMLDivElement>(null);
@@ -14,32 +16,28 @@ const App = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
+  const handleScroll = (ref: RefObject<HTMLDivElement | null>) => {
+    if (ref.current) {
+      const elementPosition = ref.current.offsetTop;
+      const offsetPosition = isMobile ? elementPosition - 100 : elementPosition;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   useEffect(() => {
     const { hash } = window.location;
 
     if (hash === "#collection") {
       if (collectionRef.current) {
-        const elementPosition = collectionRef.current.offsetTop;
-        const offsetPosition = isMobile
-          ? elementPosition - 100
-          : elementPosition;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
+        handleScroll(collectionRef);
       }
     } else if (hash === "#products") {
       if (productsRef.current) {
-        const elementPosition = productsRef.current.offsetTop;
-        const offsetPosition = isMobile
-          ? elementPosition - 100
-          : elementPosition;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
+        handleScroll(productsRef);
       }
     } else if (hash === "#about") {
       aboutRef.current?.scrollIntoView({ behavior: "smooth" });

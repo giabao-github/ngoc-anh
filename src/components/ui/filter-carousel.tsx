@@ -1,7 +1,9 @@
 "use client";
 
-import useIsMobile from "@/hooks/useIsMobile";
-import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+
+import Image from "next/image";
+
 import {
   Carousel,
   CarouselApi,
@@ -10,8 +12,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+
+import useIsMobile from "@/hooks/useIsMobile";
+
+import { cn } from "@/lib/utils";
 
 interface FilterCarouselProps {
   value?: string | null;
@@ -35,6 +39,11 @@ export const FilterCarousel = ({
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
   const isMobile = useIsMobile();
+  const [showInfoStates, setShowInfoStates] = useState<boolean[]>([]);
+
+  useEffect(() => {
+    setShowInfoStates(new Array(data.length).fill(false));
+  }, [data.length]);
 
   useEffect(() => {
     if (!api) {
@@ -48,6 +57,16 @@ export const FilterCarousel = ({
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
+
+  useEffect(() => {
+    if (!isMobile) {
+      const newStates = showInfoStates.map((_, index) => {
+        const isActive = index === current - 1;
+        return isActive;
+      });
+      setShowInfoStates(newStates);
+    }
+  }, [current, isMobile, showInfoStates.length]);
 
   return (
     <div className="relative w-full">
@@ -63,25 +82,12 @@ export const FilterCarousel = ({
         <CarouselContent className="-ml-3">
           {!isLoading &&
             data.map((item, index) => {
-              const isActive = index === current - 1;
-              const [showInfo, setShowInfo] = useState(false);
-
-              // Handle automatic show on desktop only
-              useEffect(() => {
-                if (!isMobile && isActive) {
-                  const timeout = setTimeout(() => {
-                    setShowInfo(true);
-                  }, 500);
-                  return () => clearTimeout(timeout);
-                } else if (!isMobile) {
-                  setShowInfo(false);
-                }
-              }, [isActive, isMobile]);
-
               const handleClick = () => {
                 onSelect(item.value);
                 if (isMobile) {
-                  setShowInfo((prev) => !prev);
+                  setShowInfoStates((prev) =>
+                    prev.map((state, i) => (i === index ? !state : state)),
+                  );
                 }
               };
 
@@ -89,7 +95,7 @@ export const FilterCarousel = ({
                 <CarouselItem
                   key={item.value}
                   onClick={handleClick}
-                  className="pl-3 basis-auto relative cursor-pointer group"
+                  className="relative pl-3 cursor-pointer basis-auto group"
                 >
                   {/* Desktop image */}
                   <div className="relative hidden md:block overflow-hidden rounded-md w-[1034px] h-[742px]">
@@ -99,7 +105,7 @@ export const FilterCarousel = ({
                       fill
                       sizes="(min-width: 768px) 1034px"
                       className={cn(
-                        "transition-transform duration-300 hover:scale-105 select-none"
+                        "transition-transform duration-300 hover:scale-105 select-none",
                       )}
                     />
                   </div>
@@ -111,16 +117,16 @@ export const FilterCarousel = ({
                       fill
                       sizes="(max-width: 767px) 286px"
                       className={cn(
-                        "h-auto transition-transform duration-300 select-none"
+                        "h-auto transition-transform duration-300 select-none",
                       )}
                     />
                     {/* Info icon (mobile only) */}
                     {isMobile && (
-                      <div className="absolute bottom-3 right-4 z-10">
-                        <div className="bg-white/60 active:bg-white/80 h-auto backdrop-blur-md rounded-full p-1 shadow-md">
+                      <div className="absolute z-10 bottom-3 right-4">
+                        <div className="h-auto p-1 rounded-full shadow-md bg-white/60 active:bg-white/80 backdrop-blur-md">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 text-black/60 active:text-black/80"
+                            className="w-5 h-5 text-black/60 active:text-black/80"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -141,16 +147,16 @@ export const FilterCarousel = ({
                   <div
                     className={cn(
                       "absolute right-14 bottom-3 md:right-3 rounded-lg backdrop-blur-md bg-white/80 text-black shadow-lg w-54 md:w-80 transform transition-all duration-300 ease-in-out origin-bottom-right",
-                      showInfo
+                      showInfoStates[index]
                         ? "opacity-100 scale-100 translate-x-0"
-                        : "opacity-0 scale-95 -translate-x-3 pointer-events-none"
+                        : "opacity-0 scale-95 -translate-x-3 pointer-events-none",
                     )}
                   >
                     <div className="p-3 space-y-1">
-                      <p className="font-semibold text-xs md:text-base truncate">
+                      <p className="text-xs font-semibold truncate md:text-base">
                         {item.label}
                       </p>
-                      <p className="text-xs md:text-sm text-gray-700">
+                      <p className="text-xs text-gray-700 md:text-sm">
                         {item.description}
                       </p>
                     </div>

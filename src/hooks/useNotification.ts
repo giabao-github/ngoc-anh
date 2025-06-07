@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export const useNotification = () => {
   const [showNotification, setShowNotification] = useState(false);
@@ -12,16 +12,19 @@ export const useNotification = () => {
     }
   }, []);
 
-  const showNotificationWithTimeout = useCallback((flag: string) => {
-    clearNotificationTimeout();
-    setNotificationFlag(flag);
-    setShowNotification(true);
-    
-    timeoutRef.current = setTimeout(() => {
-      setShowNotification(false);
-      timeoutRef.current = null;
-    }, 3000);
-  }, [clearNotificationTimeout]);
+  const showNotificationWithTimeout = useCallback(
+    (flag: string) => {
+      clearNotificationTimeout();
+      setNotificationFlag(flag);
+      setShowNotification(true);
+
+      timeoutRef.current = setTimeout(() => {
+        setShowNotification(false);
+        timeoutRef.current = null;
+      }, 3000);
+    },
+    [clearNotificationTimeout],
+  );
 
   const hideNotification = useCallback(() => {
     setShowNotification(false);

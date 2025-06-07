@@ -1,9 +1,11 @@
-import { Montserrat } from "next/font/google";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
-import { useCart } from "@/hooks/useCart";
-import { Separator } from "@/components/ui/separator";
+import { Montserrat } from "next/font/google";
 import { useRouter } from "next/navigation";
+
+import { Separator } from "@/components/ui/separator";
+
+import { useCart } from "@/hooks/useCart";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -19,10 +21,10 @@ const CartSummary = () => {
       <div className="p-6 space-y-4">
         <Separator color="#BB9244" opacity={40} />
         <div className={`flex justify-between ${montserrat.className}`}>
-          <span className="text-sm md:text-base tracking-wide text-gray-500 font-medium">
+          <span className="text-sm font-medium tracking-wide text-gray-500 md:text-base">
             Tạm tính
           </span>
-          <span className="text-sm md:text-base tracking-wider text-gray-500 font-semibold">
+          <span className="text-sm font-semibold tracking-wider text-gray-500 md:text-base">
             {totalPrice?.toLocaleString() || 0}₫
           </span>
         </div>
@@ -30,8 +32,8 @@ const CartSummary = () => {
         <div
           className={`flex justify-between font-bold pt-2 text-orange-500 ${montserrat.className}`}
         >
-          <span className="text-base md:text-lg tracking-wide">TỔNG CỘNG</span>
-          <span className="text-base md:text-lg tracking-wider">
+          <span className="text-base tracking-wide md:text-lg">TỔNG CỘNG</span>
+          <span className="text-base tracking-wider md:text-lg">
             {totalPrice?.toLocaleString() || 0}₫
           </span>
         </div>

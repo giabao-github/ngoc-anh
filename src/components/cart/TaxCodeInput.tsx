@@ -1,4 +1,5 @@
-import useIsMobile from "@/hooks/useIsMobile";
+import { Montserrat } from "next/font/google";
+
 import { Input } from "@/components/ui/input";
 import {
   Tooltip,
@@ -6,7 +7,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Montserrat } from "next/font/google";
+
+import useIsMobile from "@/hooks/useIsMobile";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -87,7 +89,7 @@ const TaxCodeInput: React.FC<TaxCodeInputProps> = ({
           </TooltipTrigger>
           <TooltipContent
             align="start"
-            className="bg-rose-500 text-white text-xs p-2 rounded shadow"
+            className="p-2 text-xs text-white rounded shadow bg-rose-500"
           >
             {taxCodeError}
           </TooltipContent>

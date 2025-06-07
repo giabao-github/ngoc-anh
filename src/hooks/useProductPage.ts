@@ -1,18 +1,20 @@
+import { useEffect, useMemo, useRef } from "react";
+
 import { useAddToCart } from "@/hooks/useAddToCart";
 import { useNotification } from "@/hooks/useNotification";
 import { useProductState } from "@/hooks/useProductState";
+
+import { Product } from "@/app/types";
 import {
   calculateRatingStats,
   createImageData,
   findProductBySlug,
 } from "@/lib/productUtils";
-import { Product } from "@/app/types";
-import { useEffect, useMemo, useRef } from "react";
 
 export const useProductPage = (slug: string) => {
   const product: Product | undefined = useMemo(
     () => findProductBySlug(slug),
-    [slug]
+    [slug],
   );
 
   // Refs
@@ -26,22 +28,22 @@ export const useProductPage = (slug: string) => {
     product,
     imageRef,
     cartIconRef,
-    notification.showNotificationWithTimeout
+    notification.showNotificationWithTimeout,
   );
   const productState = useProductState(
     product,
-    addToCartHook.availableQuantity
+    addToCartHook.availableQuantity,
   );
 
   // Memoized values
   const images = useMemo(() => product?.images ?? [], [product?.images]);
   const ratingStats = useMemo(
     () => calculateRatingStats(product?.rating),
-    [product?.rating]
+    [product?.rating],
   );
   const imageData = useMemo(
     () => createImageData(images, product?.name || ""),
-    [images, product?.name]
+    [images, product?.name],
   );
 
   // Scroll to top when slug changes

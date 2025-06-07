@@ -1,5 +1,6 @@
-import { Input } from "@/components/ui/input";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
+
+import { Input } from "@/components/ui/input";
 
 interface FormFieldsProps {
   email: string;
@@ -36,8 +37,16 @@ const FormFields: React.FC<FormFieldsProps> = ({
   validateEmail,
   togglePasswordVisibility,
 }) => {
+  const placeholderCheck = !hasPasswordField
+    ? isPhoneLogin
+      ? "Nhập số điện thoại"
+      : "Nhập email của bạn"
+    : isPhoneLogin
+      ? "Số điện thoại"
+      : "Email";
+
   return (
-    <div className="rounded-md space-y-6">
+    <div className="space-y-6 rounded-md">
       {/* Phone or email field */}
       <div className="relative">
         <Input
@@ -45,15 +54,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
           type={isPhoneLogin ? "tel" : "email"}
           inputMode={isPhoneLogin ? "numeric" : "email"}
           name={isPhoneLogin ? "tel" : "email"}
-          placeholder={
-            !hasPasswordField
-              ? isPhoneLogin
-                ? "Nhập số điện thoại"
-                : "Nhập email của bạn"
-              : isPhoneLogin
-              ? "Số điện thoại"
-              : "Email"
-          }
+          placeholder={placeholderCheck}
           autoComplete="username"
           value={email}
           onChange={(e) => {
@@ -77,7 +78,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
               validatePhone(email);
             } else if (!validateEmail(email)) {
               setInputError(
-                "Email không hợp lệ. Vui lòng nhập đúng định dạng (ví dụ: ten@example.com)"
+                "Email không hợp lệ. Vui lòng nhập đúng định dạng (ví dụ: ten@example.com)",
               );
             } else {
               setInputError("");
@@ -98,16 +99,16 @@ const FormFields: React.FC<FormFieldsProps> = ({
         {isPhoneLogin && inputError && (
           <div className="absolute top-full mt-1 w-max max-w-[220px] bg-rose-500 text-white text-xs rounded px-2 py-1 shadow z-20">
             {inputError}
-            <div className="absolute top-0 left-3 w-2 h-2 bg-rose-500 transform rotate-45 -translate-y-1/2"></div>
+            <div className="absolute top-0 w-2 h-2 transform rotate-45 -translate-y-1/2 left-3 bg-rose-500"></div>
           </div>
         )}
 
         {/* Email tooltip */}
         {!isPhoneLogin && email.length > 0 && !isEmailValid && (
-          <div className="absolute top-full mt-1 w-max max-w-full bg-rose-500 text-white text-xs rounded px-2 py-1 shadow z-20">
+          <div className="absolute z-20 max-w-full px-2 py-1 mt-1 text-xs text-white rounded shadow top-full w-max bg-rose-500">
             Email không hợp lệ. Vui lòng nhập đúng định dạng (ví dụ:
             ten@example.com)
-            <div className="absolute top-0 left-3 w-2 h-2 bg-rose-500 transform rotate-45 -translate-y-1/2"></div>
+            <div className="absolute top-0 w-2 h-2 transform rotate-45 -translate-y-1/2 left-3 bg-rose-500"></div>
           </div>
         )}
       </div>
@@ -131,12 +132,12 @@ const FormFields: React.FC<FormFieldsProps> = ({
             type="button"
             onClick={togglePasswordVisibility}
             title={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
-            className="absolute inset-y-0 right-0 pr-3 flex items-center z-10"
+            className="absolute inset-y-0 right-0 z-10 flex items-center pr-3"
           >
             {showPassword ? (
-              <FaEyeSlash className="h-5 w-5 text-gray-700 cursor-pointer" />
+              <FaEyeSlash className="w-5 h-5 text-gray-700 cursor-pointer" />
             ) : (
-              <FaEye className="h-5 w-5 text-gray-700 cursor-pointer" />
+              <FaEye className="w-5 h-5 text-gray-700 cursor-pointer" />
             )}
           </button>
 
@@ -144,7 +145,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
           {password && password.length > 0 && password.length < 6 && (
             <div className="absolute top-full mt-1 w-max max-w-[220px] bg-rose-500 text-white text-xs rounded px-2 py-1 shadow z-20">
               Mật khẩu phải chứa ít nhất 6 ký tự
-              <div className="absolute top-0 left-3 w-2 h-2 bg-rose-500 transform rotate-45 -translate-y-1/2"></div>
+              <div className="absolute top-0 w-2 h-2 transform rotate-45 -translate-y-1/2 left-3 bg-rose-500"></div>
             </div>
           )}
         </div>

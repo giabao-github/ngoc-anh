@@ -1,16 +1,19 @@
-import { Montserrat } from "next/font/google";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { FaTrashCan } from "react-icons/fa6";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { useSwipeable } from "react-swipeable";
 
+import { Montserrat } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { Input } from "@/components/ui/input";
+
 import { useCart } from "@/hooks/useCart";
 import useIsMobile from "@/hooks/useIsMobile";
+
 import { CartItem, Product } from "@/app/types";
-import { Input } from "@/components/ui/input";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -66,7 +69,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
       ) {
         const clampedValue = Math.min(
           Math.max(Number(newValue), 1),
-          product.quantity
+          product.quantity,
         );
         newValue = Number(clampedValue).toString();
       }
@@ -105,13 +108,13 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
             height={96}
             priority
             onClick={() => router.push(`/products/${item.slug}`)}
-            className="w-24 h-24 object-contain cursor-pointer shrink-0 border border-neutral-200 rounded-md"
+            className="object-contain w-24 h-24 border rounded-md cursor-pointer shrink-0 border-neutral-200"
           />
 
           {/* Right content */}
-          <div className="flex-1 w-full flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+          <div className="flex flex-col flex-1 w-full gap-2 md:flex-row md:items-center md:justify-between">
             {/* Name + Pattern */}
-            <div className="flex flex-col gap-y-1 w-full overflow-hidden">
+            <div className="flex flex-col w-full overflow-hidden gap-y-1">
               <h3
                 title={item.name}
                 className="text-base md:text-lg font-bold line-clamp-2 max-h-[56px]"
@@ -121,12 +124,12 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                     {item.name.length > 68 && isMobile
                       ? item.name.slice(0, 68) + "..."
                       : item.name.length > 112
-                      ? item.name.slice(0, 112) + "..."
-                      : item.name}
+                        ? item.name.slice(0, 112) + "..."
+                        : item.name}
                   </span>
                 </Link>
               </h3>
-              <p className="text-sm md:text-base text-gray-500">
+              <p className="text-sm text-gray-500 md:text-base">
                 {product.details[0].color.length > 0 &&
                   `${product.details[0].color} / `}
                 {item.pattern} /{" "}
@@ -135,7 +138,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
             </div>
 
             {/* Quantity & Price */}
-            <div className="flex items-center justify-between gap-1 md:gap-4 flex-wrap sm:flex-nowrap">
+            <div className="flex flex-wrap items-center justify-between gap-1 md:gap-4 sm:flex-nowrap">
               <div className="flex items-center border border-gray-300 rounded-lg">
                 <button
                   onClick={() =>
@@ -191,7 +194,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
           <button
             title="Xóa khỏi giỏ hàng"
             onClick={() => handleRemove(item)}
-            className="absolute cursor-pointer top-0 right-0 text-neutral-400 hover:text-rose-500 active:text-rose-400/70 hidden sm:block"
+            className="absolute top-0 right-0 hidden cursor-pointer text-neutral-400 hover:text-rose-500 active:text-rose-400/70 sm:block"
           >
             <FaTrashCan size={18} />
           </button>

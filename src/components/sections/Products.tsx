@@ -1,10 +1,12 @@
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { RefObject, useLayoutEffect, useRef, useState } from "react";
 import { FaBagShopping } from "react-icons/fa6";
 import { FiShoppingCart } from "react-icons/fi";
 
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 import useIsMobile from "@/hooks/useIsMobile";
+
 import { products } from "@/app/storage";
 
 const ROWS_PER_CLICK = 2;
@@ -89,7 +91,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                   className="p-2 md:p-3 bg-white cursor-pointer"
                 >
                   <h3
-                    className={`px-1 md:px-2 text-sm md:text-xl font-semibold text-[#0C2543] line-clamp-2 min-h-[36px] md:min-h-[60px] leading-tight md:leading-normal hover:underline active:text-[#0C2543]/70`}
+                    className={`px-1 md:px-2 text-sm md:text-xl font-semibold text-primary line-clamp-2 min-h-[36px] md:min-h-[60px] leading-tight md:leading-normal hover:underline active:text-primary/70`}
                   >
                     {product.name}
                   </h3>

@@ -1,12 +1,14 @@
+import { RefObject, useState } from "react";
+
 import { motion } from "framer-motion";
 import { Montserrat } from "next/font/google";
-import { RefObject, useState } from "react";
 import { toast } from "sonner";
 
 import TaxCodeInput from "@/components/cart/TaxCodeInput";
-import EmailInput from "@/components/user/EmailInput";
-import { sanitizeInput, sanitizeInputOnBlur } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
+import EmailInput from "@/components/user/EmailInput";
+
+import { sanitizeInput, sanitizeInputOnBlur } from "@/lib/utils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -83,7 +85,7 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className="overflow-hidden"
     >
-      <div ref={contentRef} className="flex flex-col gap-y-2 font-medium">
+      <div ref={contentRef} className="flex flex-col font-medium gap-y-2">
         <Input
           type="text"
           placeholder="Tên công ty"

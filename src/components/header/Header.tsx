@@ -1,9 +1,12 @@
-import { useRouter } from "next/navigation";
 import { RefObject, useState } from "react";
+
+import { useRouter } from "next/navigation";
 
 import DesktopHeader from "@/components/header/DesktopHeader";
 import MobileHeader from "@/components/header/MobileHeader";
+
 import useIsMobile from "@/hooks/useIsMobile";
+
 import { handleSearch } from "@/lib/utils";
 
 interface HeaderProps {

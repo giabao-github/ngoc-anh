@@ -1,15 +1,18 @@
-import { Montserrat } from "next/font/google";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { RefObject } from "react";
 import { BsSearchHeart } from "react-icons/bs";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
 
-import { useCart } from "@/hooks/useCart";
-import { handleSearch } from "@/lib/utils";
+import { Montserrat } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import { Input } from "@/components/ui/input";
+
+import { useCart } from "@/hooks/useCart";
+
+import { handleSearch } from "@/lib/utils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -43,17 +46,18 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
   const { cartCount } = useCart();
 
   return (
-    <header className={`sticky top-0 z-20 bg-[#0C2543] text-white py-2 px-6`}>
+    <header className={`sticky top-0 z-20 bg-primary text-white py-2 px-6`}>
       <div className="flex items-center justify-between mx-auto max-w-7xl">
         <div className={`flex items-center space-x-4`}>
           <Image
             src="/logo.png"
             alt="Logo"
-            width={64}
-            height={64}
+            width={1024}
+            height={1024}
+            quality={100}
             priority
             onClick={() => router.push("/")}
-            className="object-cover bg-white rounded cursor-pointer select-none"
+            className="object-contain w-20 h-20 rounded cursor-pointer select-none"
           />
           <h1 className="hidden text-2xl font-semibold uppercase select-none md:block">
             Ngọc Ánh
@@ -171,14 +175,15 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             onClick={() => router.push("/login?method=email")}
             className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70"
           />
-          <Image
-            src={"/vn-flag.jpeg"}
-            alt="Vietnam"
-            width={2160}
-            height={2160}
-            quality={100}
-            className="w-10 h-10 rounded-full cursor-pointer select-none"
-          />
+          <div className="relative w-12 h-12 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_20px_rgba(255,255,255,0.8)] hover:shadow-[0_0_20px_rgba(255,255,255,1)]">
+            <Image
+              src="/avatar.jpeg"
+              alt="Avatar"
+              fill
+              quality={100}
+              className="object-cover cursor-pointer select-none"
+            />
+          </div>
         </nav>
       </div>
     </header>

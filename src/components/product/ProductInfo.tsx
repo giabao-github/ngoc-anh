@@ -1,11 +1,15 @@
-import { Montserrat } from "next/font/google";
+"use client";
+
 import { useEffect, useState } from "react";
 import { FiHeart } from "react-icons/fi";
+
+import { Montserrat } from "next/font/google";
 import { toast } from "sonner";
 
-import { cn } from "@/lib/utils";
-import { Product } from "@/app/types";
 import { Separator } from "@/components/ui/separator";
+
+import { Product } from "@/app/types";
+import { cn } from "@/lib/utils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -44,7 +48,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
 
   return (
     <>
-      <div className="flex justify-between items-start">
+      <div className="flex items-start justify-between">
         <h1 className="text-xl md:text-3xl font-bold max-w-[90%]">
           {product.name}
         </h1>
@@ -59,7 +63,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
             className={cn(
               "w-6 h-6",
               isFavorite ? "fill-rose-500 stroke-rose-500" : "stroke-gray-500",
-              "group-hover:fill-rose-500 group-hover:stroke-rose-500"
+              "group-hover:fill-rose-500 group-hover:stroke-rose-500",
             )}
           />
         </button>
@@ -73,7 +77,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
         <p>{`Bộ sưu tập: ${product.collection}`}</p>
       </div>
 
-      <p className="text-2xl md:text-4xl font-bold text-orange-500">
+      <p className="text-2xl font-bold text-orange-500 md:text-4xl">
         {product.details[0]?.price?.toLocaleString("en-US") ?? "Giá liên hệ"}₫
       </p>
 

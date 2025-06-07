@@ -1,15 +1,18 @@
-import { Montserrat } from "next/font/google";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { RefObject, useState } from "react";
 import { BsSearchHeart } from "react-icons/bs";
 import { FiMenu, FiShoppingCart, FiUser, FiX } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
 
-import { useCart } from "@/hooks/useCart";
-import { handleSearch } from "@/lib/utils";
+import { Montserrat } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import { Input } from "@/components/ui/input";
+
+import { useCart } from "@/hooks/useCart";
+
+import { handleSearch } from "@/lib/utils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -51,17 +54,18 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
 
   return (
     <div className="fixed top-0 left-0 z-20 w-full">
-      <header className={`bg-[#0C2543] text-white py-2 px-6`}>
+      <header className={`bg-primary text-white py-2 px-6`}>
         <div className="flex items-center justify-between mx-auto max-w-7xl">
           <div className={`flex items-center space-x-4`}>
             <Image
               src="/logo.png"
               alt="Logo"
-              width={64}
-              height={64}
+              width={1024}
+              height={1024}
+              quality={100}
               priority
               onClick={() => router.push("/")}
-              className="object-cover bg-white rounded cursor-pointer select-none"
+              className="object-contain w-16 h-16 rounded cursor-pointer select-none"
             />
             <h1 className="hidden text-2xl font-semibold uppercase select-none md:block">
               Ngọc Ánh
@@ -97,16 +101,15 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               onClick={() => router.push("/login?method=email")}
               className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70"
             />
-            <Image
-              src={
-                "https://static.vecteezy.com/system/resources/previews/016/328/942/large_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
-              }
-              alt="Vietnam"
-              width={2160}
-              height={2160}
-              quality={100}
-              className="rounded-full cursor-pointer select-none h-9 w-9"
-            />
+            <div className="relative w-10 h-10 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_16px_rgba(255,255,255,0.8)] active:shadow-[0_0_16px_rgba(255,255,255,1)]">
+              <Image
+                src="/avatar.jpeg"
+                alt="Avatar"
+                fill
+                quality={100}
+                className="object-cover cursor-pointer select-none"
+              />
+            </div>
             <button
               className="outline-none cursor-pointer ring-0 focus:ring-0 focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -119,7 +122,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
 
       {/* Animated dropdown menu */}
       <div
-        className={`bg-gradient-to-b from-[#0C2543] to-[#364F6D] rounded-b-2xl text-white overflow-hidden transition-all duration-400 ease-in-out ${
+        className={`bg-gradient-to-b from-primary to-[#364F6D] rounded-b-2xl text-white overflow-hidden transition-all duration-400 ease-in-out ${
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >

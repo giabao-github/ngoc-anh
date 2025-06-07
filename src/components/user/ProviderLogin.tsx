@@ -29,6 +29,6 @@ const ProviderLogin = () => {
       </button>
     </div>
   );
-}
+};
 
 export default ProviderLogin;

@@ -1,9 +1,11 @@
 "use client";
 
-import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 import * as React from "react";
 
+import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
+
 import useIsMobile from "@/hooks/useIsMobile";
+
 import { cn } from "@/lib/utils";
 
 const ScrollArea = React.forwardRef<
@@ -44,7 +46,7 @@ const ScrollBar = React.forwardRef<
           `${
             isMobile ? "h-1.5" : "h-2.5"
           } flex-col border-t border-t-transparent p-[1px]`,
-        className
+        className,
       )}
       {...props}
     >

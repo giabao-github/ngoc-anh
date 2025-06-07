@@ -1,6 +1,7 @@
+import { FaArrowLeft } from "react-icons/fa6";
+
 import Image from "next/image";
 import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa6";
 
 import ErrorSearchBar from "@/components/error/ErrorSearchBar";
 
@@ -10,7 +11,7 @@ const ProductError = () => {
       {/* App Logo */}
       <Link
         href="/"
-        className="absolute top-6 text-[#0C2543] hover:text-[#D4AF37] active:text-[#D4AF37]/70 left-6"
+        className="absolute top-6 text-primary hover:text-[#D4AF37] active:text-[#D4AF37]/70 left-6"
       >
         <div className="flex items-center space-x-2 transition">
           <Image
