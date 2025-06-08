@@ -97,6 +97,7 @@ export const FilterCarousel = ({
                       src={item.image}
                       alt={item.label}
                       fill
+                      quality={100}
                       sizes="(min-width: 768px) 1034px"
                       className={cn(
                         "transition-transform duration-300 hover:scale-105 select-none",
@@ -109,6 +110,7 @@ export const FilterCarousel = ({
                       src={item.image}
                       alt={item.label}
                       fill
+                      quality={100}
                       sizes="(max-width: 767px) 286px"
                       className={cn(
                         "h-auto transition-transform duration-300 select-none",

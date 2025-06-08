@@ -8,7 +8,7 @@ export const useProductState = (
   product: Product | undefined,
   availableQuantity: number,
 ) => {
-  const [selectedPattern, setSelectedPattern] = useState("");
+  const [activeSelector, setActiveSelector] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -45,11 +45,11 @@ export const useProductState = (
   // Initialize state when product changes
   useEffect(() => {
     if (product) {
-      const pattern =
+      const selector =
         "pattern" in product.details[0]
           ? product.details[0].pattern
           : product.details[0].color;
-      setSelectedPattern(pattern);
+      setActiveSelector(selector);
       setQuantity(1);
       setCurrentImageIndex(0);
     }
@@ -67,8 +67,8 @@ export const useProductState = (
   }, [isAtMaxQuantity, availableQuantity]);
 
   return {
-    selectedPattern,
-    setSelectedPattern,
+    activeSelector,
+    setActiveSelector,
     quantity,
     currentImageIndex,
     setCurrentImageIndex,

@@ -6,12 +6,12 @@ const Hero = () => (
   <section
     className={`bg-cover bg-center text-white`}
     style={{
-      backgroundImage: "url('/hero-background.jpeg')",
+      backgroundImage: "url('/backgrounds/hero-background.jpeg')",
     }}
   >
     <div className="max-w-[1340px] mx-auto grid py-32 md:grid-cols-2 gap-8 px-6">
       <div className="flex flex-col justify-center md:gap-y-12">
-        <h2 className="mb-6 text-4xl font-semibold tracking-wide uppercase md:text-6xl text-secondary">
+        <h2 className="mb-6 text-4xl font-semibold tracking-wide uppercase text-outline-primary md:text-6xl text-secondary">
           ÂM VANG DI SẢN KHMER
         </h2>
         <p className="mb-8 text-lg tracking-wide md:text-xl">
@@ -27,7 +27,7 @@ const Hero = () => (
       </div>
       <div className="relative h-[300px] md:h-[500px]">
         <Image
-          src="/dragon.jpeg"
+          src="/illustrations/dragon.jpeg"
           alt="Dragon"
           fill
           className="object-cover rounded-lg select-none"

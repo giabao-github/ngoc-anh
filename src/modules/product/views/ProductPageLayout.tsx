@@ -22,8 +22,8 @@ interface ProductPageLayoutProps {
   cartIconRef: RefObject<HTMLDivElement | null>;
 
   // State
-  selectedPattern: string;
-  setSelectedPattern: (pattern: string) => void;
+  activeSelector: string;
+  setActiveSelector: (pattern: string) => void;
   quantity: number;
   currentImageIndex: number;
   setCurrentImageIndex: (index: number) => void;
@@ -57,8 +57,8 @@ const ProductPageLayout: React.FC<ProductPageLayoutProps> = ({
   aboutRef,
   imageRef,
   cartIconRef,
-  selectedPattern,
-  setSelectedPattern,
+  activeSelector,
+  setActiveSelector,
   quantity,
   currentImageIndex,
   setCurrentImageIndex,
@@ -103,14 +103,14 @@ const ProductPageLayout: React.FC<ProductPageLayoutProps> = ({
             <PurchaseSection
               product={product}
               slug={slug}
-              selectedPattern={selectedPattern}
+              activeSelector={activeSelector}
               quantity={quantity}
               availableQuantity={availableQuantity}
               cartQuantity={cartQuantity}
               canDecrement={canDecrement}
               canIncrement={canIncrement}
               isOutOfStock={isOutOfStock}
-              setSelectedPattern={setSelectedPattern}
+              setActiveSelector={setActiveSelector}
               handleQuantityChange={handleQuantityChange}
               handleAddToCart={handleAddToCart}
             />

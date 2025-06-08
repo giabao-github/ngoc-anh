@@ -48,10 +48,10 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   return (
     <section
       ref={productsRef}
-      className={`py-16 md:py-32 px-2 md:px-6 bg-secondary`}
+      className={`py-16 md:py-32 xl:py-40 px-2 md:px-6 bg-secondary`}
     >
       <div className="max-w-lg mx-auto transition-all md:max-w-7xl duration-400">
-        <h2 className="mb-20 text-2xl font-semibold text-center text-primary md:text-3xl md:mb-24">
+        <h2 className="mb-20 text-2xl font-semibold text-center text-primary md:text-3xl xl:text-4xl md:mb-24">
           Khám phá cửa hàng trực tuyến THẠCH ÂM
         </h2>
 
@@ -80,7 +80,8 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                     alt={product.name}
                     height={2048}
                     width={2048}
-                    className="object-contain w-full h-full transition-transform duration-300 transform cursor-pointer select-none group-hover:scale-105"
+                    quality={100}
+                    className="object-contain w-full transition-transform duration-300 transform cursor-pointer select-none h-36 md:h-80 group-hover:scale-105"
                   />
                 </div>
 

@@ -32,6 +32,7 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-logo: var(--logo);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -76,6 +77,7 @@ input::-webkit-credentials-auto-fill-button {
   /* (original) --secondary: oklch(0.968 0.007 247.896); */
   --secondary: #fbd885;
   --secondary-foreground: oklch(0.208 0.042 265.755);
+  --logo: #e6d280;
   --muted: oklch(0.968 0.007 247.896);
   --muted-foreground: oklch(0.554 0.046 257.417);
   --accent: oklch(0.968 0.007 247.896);
@@ -271,4 +273,18 @@ input.header-input:-webkit-autofill:active {
 input.header-input:-webkit-autofill * {
   color: white !important;
   -webkit-text-fill-color: white !important;
+}
+
+@layer utilities {
+  .text-outline-primary {
+    text-shadow:
+      -1px -1px 0 #e97451,
+      1px -1px 0 #e97451,
+      -1px 1px 0 #e97451,
+      1px 1px 0 #e97451,
+      -1px 0 0 #e97451,
+      1px 0 0 #e97451,
+      0 -1px 0 #e97451,
+      0 1px 0 #e97451;
+  }
 }

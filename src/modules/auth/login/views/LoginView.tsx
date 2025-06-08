@@ -59,7 +59,7 @@ export const LoginView = () => {
     <Suspense fallback={<SkeletonLoader />}>
       <Header hasFooter aboutRef={aboutRef} />
       <div className="flex items-center justify-center max-h-screen my-16 lg:px-8 md:my-24">
-        <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-xl shadow-md shadow-[#D4AF37]/50 md:border-t md:border-[#D4AF37]/50 md:focus-within:border-t-2 focus-within:shadow-lg">
+        <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-xl shadow-md shadow-[#D4AF37]/50 md:border-t md:border-[#D4AF37]/50 focus-within:shadow-lg">
           <div className="flex flex-col text-center gap-y-3">
             <h2 className="mb-2 text-2xl font-bold text-gray-900">
               {isPhoneLogin

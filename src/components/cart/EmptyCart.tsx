@@ -36,7 +36,7 @@ const EmptyCart = () => {
       className={`flex flex-col gap-y-2 items-center justify-center pt-12 pb-24 ${montserrat.className}`}
     >
       <Image
-        src="/empty-cart.jpeg"
+        src="/illustrations/empty-cart.jpeg"
         alt="Empty Cart"
         width={2160}
         height={2160}

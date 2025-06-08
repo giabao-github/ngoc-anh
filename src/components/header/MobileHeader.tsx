@@ -67,7 +67,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               onClick={() => router.push("/")}
               className="object-contain w-16 h-16 rounded cursor-pointer select-none"
             />
-            <h1 className="hidden text-[#E6D280] text-2xl font-semibold uppercase select-none md:block">
+            <h1 className="hidden text-logo text-2xl font-semibold uppercase select-none md:block">
               Thạch Âm
             </h1>
           </div>
