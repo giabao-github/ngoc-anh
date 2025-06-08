@@ -92,7 +92,7 @@ export const FilterCarousel = ({
                   className="relative pl-3 cursor-pointer basis-auto group"
                 >
                   {/* Desktop image */}
-                  <div className="relative hidden border border-secondary md:block overflow-hidden rounded-md w-[558px] h-[400px]">
+                  <div className="relative hidden border border-secondary md:block overflow-hidden rounded-md w-[372px] h-[266px] xl:w-[558px] xl:h-[400px]">
                     <Image
                       src={item.image}
                       alt={item.label}

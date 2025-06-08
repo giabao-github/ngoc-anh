@@ -59,7 +59,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
         >
           <div
             ref={gridRef}
-            className="grid justify-center grid-cols-2 gap-2 transition-opacity md:grid-cols-3 md:gap-8 duration-400"
+            className="grid justify-center grid-cols-2 gap-2 transition-opacity md:grid-cols-3 md:gap-4 2xl:gap-8 duration-400"
           >
             {products.slice(0, itemsToShow).map((product) => (
               <div

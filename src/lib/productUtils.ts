@@ -38,6 +38,7 @@ export const createCartItem = (
   id: product.id,
   name: product.name,
   image: product.images[0],
+  background: "background" in product ? product.background : undefined,
   color: "color" in product.details ? product.details[0].color : undefined,
   size: product.size,
   slug: product.details[0].slug,

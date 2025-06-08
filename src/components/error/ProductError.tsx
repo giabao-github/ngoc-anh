@@ -2,31 +2,33 @@ import { FaArrowLeft } from "react-icons/fa6";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import ErrorSearchBar from "@/components/error/ErrorSearchBar";
 
 const ProductError = () => {
+  const router = useRouter();
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 space-y-6 bg-rose-50 text-rose-500">
       <title>Không tìm thấy sản phẩm</title>
       {/* App Logo */}
-      <Link
-        href="/"
-        className="absolute top-6 text-primary hover:text-[#D4AF37] active:text-[#D4AF37]/70 left-6"
-      >
-        <div className="flex items-center p-4 space-x-4 transition rounded-2xl bg-primary">
-          <Image
-            src="/logo.png"
-            alt="Logo"
-            width={80}
-            height={80}
-            className="object-cover rounded cursor-pointer select-none"
-          />
-          <h1 className="hidden text-2xl font-semibold uppercase select-none text-logo md:text-3xl md:block">
-            Thạch Âm
-          </h1>
-        </div>
-      </Link>
+
+      <div className="absolute flex items-center space-x-4 transition top-6 left-6">
+        <Image
+          src="/dark-logo.png"
+          alt="Logo"
+          width={1024}
+          height={1024}
+          quality={100}
+          priority
+          onClick={() => router.push("/")}
+          className="object-contain w-20 h-20 cursor-pointer select-none"
+        />
+        <h1 className="hidden text-2xl font-semibold uppercase select-none text-primary md:text-3xl md:block">
+          Thạch Âm
+        </h1>
+      </div>
 
       {/* Illustration */}
       <Image
