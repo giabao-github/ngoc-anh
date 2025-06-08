@@ -99,7 +99,7 @@ const RatingSection: React.FC<RatingSectionProps> = ({
           </p>
           <button
             onClick={() => router.push(LOGIN_URL)}
-            className="flex items-center justify-center px-6 py-3 mt-2 transition-colors bg-transparent border rounded-full cursor-pointer select-none border-primary text-primary w-fit hover:bg-primary hover:text-white active:bg-primary/70 active:text-white/70 gap-x-2 md:gap-x-4"
+            className="flex items-center justify-center px-6 py-3 mt-2 transition-colors bg-transparent border rounded-full cursor-pointer select-none hover:border-primary active:border-primary/70 border-primary text-primary w-fit hover:bg-primary hover:text-white active:bg-primary/70 active:text-white/70 gap-x-2 md:gap-x-4"
           >
             <span className="text-xs font-semibold tracking-wide md:text-sm">
               Viết đánh giá

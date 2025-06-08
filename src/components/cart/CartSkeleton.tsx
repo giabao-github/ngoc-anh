@@ -34,13 +34,13 @@ const CartSkeleton: React.FC<CartSkeletonProps> = ({
 
               {/* Right content */}
               <div className="flex flex-col flex-1 w-full gap-2 md:flex-row md:items-center md:justify-between">
-                {/* Name + Pattern */}
+                {/* Name */}
                 <div className="flex flex-col w-full overflow-hidden gap-y-1">
                   {/* Skeleton Title */}
                   <SkeletonBox
                     className={`h-6 ${isMobile ? "w-3/5" : "w-4/5"} rounded mb-2`}
                   />
-                  {/* Skeleton Pattern/Details */}
+                  {/* Skeleton Details */}
                   <SkeletonBox className={`h-4 w-2/5 rounded`} />
                 </div>
 

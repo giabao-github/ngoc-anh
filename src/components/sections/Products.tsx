@@ -5,8 +5,6 @@ import { FiShoppingCart } from "react-icons/fi";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import useIsMobile from "@/hooks/useIsMobile";
-
 import { products } from "@/app/storage";
 
 const ROWS_PER_CLICK = 2;
@@ -18,7 +16,6 @@ interface ProductsProps {
 const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   const router = useRouter();
   const [visibleRows, setVisibleRows] = useState(ROWS_PER_CLICK);
-  const isMobile = useIsMobile();
   const productsPerRow = { mobile: 2, desktop: 3 };
   const itemsToShow = visibleRows * productsPerRow.desktop;
   const isAllVisible = itemsToShow >= products.length;
@@ -73,7 +70,11 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                   onClick={() =>
                     router.push(`/products/${product.details[0].slug}`)
                   }
-                  className="flex bg-[#FFF3E5] overflow-hidden md:h-80 items-center justify-center mb-1 md:mb-0"
+                  className="flex items-center justify-center mb-1 overflow-hidden h-36 md:h-72 md:mb-2"
+                  style={{
+                    backgroundColor:
+                      "background" in product ? product.background : "#FDF8F5",
+                  }}
                 >
                   <Image
                     src={product.images[0]}
@@ -81,7 +82,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                     height={2048}
                     width={2048}
                     quality={100}
-                    className="object-contain w-full transition-transform duration-300 transform cursor-pointer select-none h-36 md:h-80 group-hover:scale-105"
+                    className="object-contain w-full h-auto transition-transform duration-300 transform cursor-pointer select-none group-hover:scale-105"
                   />
                 </div>
 
@@ -106,7 +107,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                       onClick={() =>
                         router.push(`/products/${product.details[0].slug}`)
                       }
-                      className="mt-2 border border-primary bg-transparent text-primary p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-secondary active:bg-secondary/70 hover:text-primary active:text-primary/70 transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
+                      className="mt-2 border border-primary bg-transparent text-primary p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-primary active:bg-primary/70 hover:text-white active:text-white/70 hover:border-none active:border-none transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
                     >
                       <FiShoppingCart size={18} />
                       <span className="text-xs font-semibold tracking-wide md:text-sm">
@@ -117,7 +118,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                       onClick={() =>
                         router.push(`/products/${product.details[0].slug}`)
                       }
-                      className="mt-2 border border-primary bg-transparent text-primary p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-secondary active:bg-secondary/70 hover:text-primary active:text-primary/70  transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
+                      className="mt-2 border border-primary bg-transparent text-primary p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-primary active:bg-primary/70 hover:text-white active:text-white/70 hover:border-none active:border-none transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
                     >
                       <FaBagShopping size={18} />
                       <span className="text-xs font-semibold tracking-wide md:text-sm">
@@ -132,23 +133,25 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
         </div>
 
         {/* Buttons */}
-        <div className="flex justify-center mt-8 transition-all md:mt-16 duration-400">
-          {!isAllVisible ? (
-            <button
-              onClick={showMore}
-              className="px-6 py-3 text-xs font-semibold tracking-wide transition-colors bg-transparent border rounded-full cursor-pointer select-none text-primary border-primary md:px-8 md:py-4 md:text-base hover:bg-white hover:text-primary active:bg-white/70 active:text-primary/70"
-            >
-              Xem thêm sản phẩm
-            </button>
-          ) : (
-            <button
-              onClick={collapse}
-              className="px-6 py-3 text-xs font-semibold tracking-wide transition-colors bg-transparent border rounded-full cursor-pointer select-none text-primary border-primary md:px-8 md:py-4 md:text-base hover:bg-white hover:text-primary active:bg-white/70 active:text-primary/70"
-            >
-              Thu gọn
-            </button>
-          )}
-        </div>
+        {products.length > ROWS_PER_CLICK * productsPerRow.desktop && (
+          <div className="flex justify-center mt-8 transition-all md:mt-16 duration-400">
+            {!isAllVisible ? (
+              <button
+                onClick={showMore}
+                className="px-6 py-3 text-xs font-semibold tracking-wide transition-colors bg-transparent border rounded-full cursor-pointer select-none text-primary border-primary md:px-8 md:py-4 md:text-base hover:bg-white hover:text-primary active:bg-white/70 active:text-primary/70"
+              >
+                Xem thêm sản phẩm
+              </button>
+            ) : (
+              <button
+                onClick={collapse}
+                className="px-6 py-3 text-xs font-semibold tracking-wide transition-colors bg-transparent border rounded-full cursor-pointer select-none text-primary border-primary md:px-8 md:py-4 md:text-base hover:bg-white hover:text-primary active:bg-white/70 active:text-primary/70"
+              >
+                Thu gọn
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

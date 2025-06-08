@@ -31,7 +31,7 @@ export const useNotification = () => {
     clearNotificationTimeout();
   }, [clearNotificationTimeout]);
 
-  // Cleanup effect
+  // Clean-up effect
   useEffect(() => {
     return clearNotificationTimeout;
   }, [clearNotificationTimeout]);

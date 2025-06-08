@@ -45,10 +45,7 @@ export const useProductState = (
   // Initialize state when product changes
   useEffect(() => {
     if (product) {
-      const selector =
-        "pattern" in product.details[0]
-          ? product.details[0].pattern
-          : product.details[0].color;
+      const selector = product.details[0].color;
       setActiveSelector(selector);
       setQuantity(1);
       setCurrentImageIndex(0);

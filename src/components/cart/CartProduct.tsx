@@ -113,7 +113,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
 
           {/* Right content */}
           <div className="flex flex-col flex-1 w-full gap-2 md:flex-row md:items-center md:justify-between">
-            {/* Name + Pattern */}
+            {/* Name */}
             <div className="flex flex-col w-full overflow-hidden gap-y-1">
               <h3
                 title={item.name}
@@ -132,8 +132,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
               <p className="text-sm text-gray-500 md:text-base">
                 {product.details[0].color.length > 0 &&
                   `${product.details[0].color} / `}
-                {item.pattern} /{" "}
-                {product.size || product.volume || "Không xác định"}
+                {product.size || "Không xác định"}
               </p>
             </div>
 
