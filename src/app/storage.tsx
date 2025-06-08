@@ -6,35 +6,35 @@ export const collections = [
     name: "Nồi sứ dưỡng sinh",
     description:
       "Sứ dưỡng sinh được thiết kế với đa dạng kiểu dáng, kích cỡ khác nhau, phù hợp với mọi phương pháp nấu ăn như xào, kho, nấu cơm, luộc/hấp, nấu canh, chiên, rang, nấu chậm,...và mọi loại bếp chuyên dụng như bếp gas, bếp hồng ngoại, bếp từ, lò nướng.",
-    image: "/featured-card-transparent.png",
+    image: "/products/featured-card-transparent.png",
   },
   {
     id: 2,
     name: "Bộ Sưu Tập Minh Long",
     description:
       "Sản phẩm Minh Long được phối hợp theo nhiều phong cách màu sắc, chú trọng tính hài hòa, trang nhã nên phù hợp với mọi thời đại",
-    image: "/yellow-badge-transparent.png",
+    image: "/products/yellow-badge-transparent.png",
   },
   {
     id: 3,
     name: "Bộ Sưu Tập Minh Long",
     description:
       "Sản phẩm Minh Long được phối hợp theo nhiều phong cách màu sắc, chú trọng tính hài hòa, trang nhã nên phù hợp với mọi thời đại",
-    image: "/green-badge-transparent.png",
+    image: "/products/green-badge-transparent.png",
   },
   {
     id: 4,
     name: "Bộ Sưu Tập Minh Long",
     description:
       "Sản phẩm Minh Long được phối hợp theo nhiều phong cách màu sắc, chú trọng tính hài hòa, trang nhã nên phù hợp với mọi thời đại",
-    image: "/badana-transparent.png",
+    image: "/products/badana-transparent.png",
   },
   {
     id: 5,
     name: "Bộ Sưu Tập Minh Long",
     description:
       "Sản phẩm Minh Long được phối hợp theo nhiều phong cách màu sắc, chú trọng tính hài hòa, trang nhã nên phù hợp với mọi thời đại",
-    image: "/card-transparent.png",
+    image: "/products/card-transparent.png",
   },
 ];
 
@@ -558,7 +558,7 @@ export const products = [
   {
     id: 10,
     name: "Huy hiệu Thạch Âm - Xanh Rêu",
-    images: ["/green-badge.png", "/green-badge.jpg"],
+    images: ["/products/green-badge.png", "/products/green-badge.jpg"],
     description: (
       <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
@@ -607,7 +607,7 @@ export const products = [
   {
     id: 11,
     name: "Huy hiệu Thạch Âm - Vàng",
-    images: ["/yellow-badge.png", "/yellow-badge.jpeg"],
+    images: ["/products/yellow-badge.jpeg", "/products/yellow-badge.png"],
     description: (
       <div className="space-y-2 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>

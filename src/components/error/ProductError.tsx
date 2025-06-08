@@ -22,7 +22,7 @@ const ProductError = () => {
             height={80}
             className="object-cover rounded cursor-pointer select-none"
           />
-          <h1 className="hidden text-2xl text-[#E6D280] font-semibold uppercase select-none md:text-3xl md:block">
+          <h1 className="hidden text-2xl font-semibold uppercase select-none text-logo md:text-3xl md:block">
             Thạch Âm
           </h1>
         </div>

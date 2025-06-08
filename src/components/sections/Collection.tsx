@@ -19,10 +19,10 @@ const Collection: React.FC<CollectionProps> = ({ collectionRef }) => (
   <section
     ref={collectionRef}
     className={`py-12 md:py-60 px-2 md:px-6 bg-cover bg-center`}
-    style={{ backgroundImage: "url('/collection-background.jpg')" }}
+    style={{ backgroundImage: "url('/backgrounds/collection-background.jpg')" }}
   >
     <div className="max-w-lg mx-auto md:max-w-7xl">
-      <h2 className="text-2xl font-semibold text-center text-white md:text-3xl mb-14 md:mb-20">
+      <h2 className="text-2xl font-semibold text-center text-white md:text-3xl xl:text-4xl mb-14 md:mb-20">
         Sản phẩm nổi bật
       </h2>
     </div>

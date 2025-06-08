@@ -21,14 +21,14 @@ const montserrat = Montserrat({
 interface PurchaseSectionProps {
   product: Product;
   slug: string;
-  selectedPattern: string;
+  activeSelector: string;
   quantity: number;
   availableQuantity: number;
   cartQuantity: number;
   canIncrement: boolean;
   canDecrement: boolean;
   isOutOfStock: boolean;
-  setSelectedPattern: (pattern: string) => void;
+  setActiveSelector: (pattern: string) => void;
   handleQuantityChange: (
     type: "increment" | "decrement" | "set",
     value?: number,
@@ -39,14 +39,14 @@ interface PurchaseSectionProps {
 const PurchaseSection: React.FC<PurchaseSectionProps> = ({
   product,
   slug,
-  selectedPattern,
+  activeSelector,
   quantity,
   availableQuantity,
   cartQuantity,
   canIncrement,
   canDecrement,
   isOutOfStock,
-  setSelectedPattern,
+  setActiveSelector,
   handleQuantityChange,
   handleAddToCart,
 }) => {
@@ -132,19 +132,24 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
     }
   }, [inputValue, handleQuantityChange]);
 
-  const handlePatternChange = useCallback(
-    (pattern: string, patternSlug: string) => {
-      setSelectedPattern(pattern);
-      if (slug !== patternSlug) {
-        router.push(`/products/${patternSlug}`);
+  const getPatternValue = useCallback((pattern: any) => {
+    return "pattern" in pattern ? pattern.pattern : pattern.color;
+  }, []);
+
+  const handleVariantChange = useCallback(
+    (variant: string, variantSlug: string) => {
+      setActiveSelector(variant);
+      const newUrl = `/products/${variantSlug}`;
+      if (slug !== variantSlug && window.location.pathname !== newUrl) {
+        router.replace(newUrl);
       }
     },
-    [slug, router, setSelectedPattern],
+    [slug, router, setActiveSelector],
   );
 
   return (
     <>
-      {/* Color selection */}
+      {/* Color selection (legacy) */}
       {/* {product.details[0].color && product.details[0].color.length > 0 && (
         <div className="space-y-2">
           <p className="font-semibold">Màu sắc</p>
@@ -161,7 +166,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
         </div>
       )} */}
 
-      {/* Pattern selection */}
+      {/* Variant selector */}
       <div className="space-y-2">
         <p className="font-semibold">
           {"pattern" in product ? "Họa tiết" : "Màu sắc"}
@@ -169,21 +174,17 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
         <div className="flex gap-4">
           {product.details.map((pattern) => (
             <button
-              key={"pattern" in pattern ? pattern.pattern : pattern.color}
+              key={getPatternValue(pattern)}
               onClick={() =>
-                handlePatternChange(
-                  "pattern" in pattern ? pattern.pattern : pattern.color,
-                  pattern.slug,
-                )
+                handleVariantChange(getPatternValue(pattern), pattern.slug)
               }
               className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:bg-secondary hover:text-primary transition-colors ${
-                selectedPattern ===
-                ("pattern" in pattern ? pattern.pattern : pattern.color)
+                activeSelector === getPatternValue(pattern)
                   ? "border-primary bg-secondary text-primary hover:border-primary"
                   : "border-gray-300"
               } ${montserrat.className}`}
             >
-              {"pattern" in pattern ? pattern.pattern : pattern.color}
+              {getPatternValue(pattern)}
             </button>
           ))}
         </div>

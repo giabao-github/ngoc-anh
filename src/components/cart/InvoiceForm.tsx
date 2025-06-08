@@ -82,7 +82,7 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({
       initial={{ height: 0, opacity: 0 }}
       animate={{ height: contentHeight || "auto", opacity: 1 }}
       exit={{ height: 0, opacity: 0 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
       className="overflow-hidden"
     >
       <div ref={contentRef} className="flex flex-col font-medium gap-y-2">
@@ -122,7 +122,7 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({
         />
         <button
           onClick={saveForm}
-          className="w-fit mt-4 bg-secondary hover:bg-secondary/80 active:bg-secondary/60 cursor-pointer text-white px-6 py-3 rounded-full font-semibold select-none tracking-wide"
+          className="px-6 py-3 mt-4 font-semibold tracking-wide text-white rounded-full cursor-pointer select-none w-fit bg-primary hover:bg-primary/80 active:bg-primary/60"
         >
           Lưu thông tin
         </button>

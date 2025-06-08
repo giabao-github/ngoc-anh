@@ -111,6 +111,7 @@ export const ProductCarousel = ({
                       src={item.image}
                       alt={item.label ?? ""}
                       fill
+                      quality={100}
                       sizes={`(min-width: 768px) ${DESKTOP_IMAGE_WIDTH}px`}
                       className={cn(
                         "object-cover transition-transform duration-300 select-none",
@@ -127,6 +128,7 @@ export const ProductCarousel = ({
                       src={item.image}
                       alt={item.label ?? ""}
                       fill
+                      quality={100}
                       sizes={`(max-width: 767px) ${MOBILE_IMAGE_WIDTH}`}
                       className={cn(
                         "object-cover transition-transform duration-300 select-none",
