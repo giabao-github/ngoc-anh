@@ -18,7 +18,7 @@ const Hero = () => (
           Không chỉ là di sản, mà là nguồn cảm hứng vô tận cho những sản phẩm
           ứng dụng sáng tạo, đậm chất văn hóa.
         </p>
-        <button className="bg-transparent text-secondary font-semibold text-base border-1 border-secondary px-6 py-[14px] md:px-8 md:py-4 rounded-full w-fit hover:bg-secondary hover:text-primary active:bg-secondary/80 active:text-primary/80 cursor-pointer transition-colors select-none flex items-center flex-row gap-x-3">
+        <button className="bg-transparent text-secondary font-semibold text-base border border-secondary px-6 py-3.5 md:px-8 md:py-4 rounded-full w-fit hover:bg-secondary hover:text-primary active:bg-secondary/80 active:text-primary/80 cursor-pointer transition-colors select-none flex items-center flex-row gap-x-3">
           <span className="text-sm tracking-wide md:text-base">
             Tìm hiểu thêm
           </span>
