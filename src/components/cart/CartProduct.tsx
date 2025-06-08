@@ -7,6 +7,7 @@ import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import { Input } from "@/components/ui/input";
 
@@ -79,6 +80,9 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
       if (!isNaN(parsedValue)) {
         handleQuantityChange("set", product, parsedValue);
       }
+      if (Number(newValue) >= product.quantity) {
+        toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này");
+      }
     }
   };
 
@@ -104,11 +108,16 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
           <Image
             src={item.image}
             alt={item.name}
-            width={96}
-            height={96}
+            width={1024}
+            height={1024}
+            quality={100}
             priority
             onClick={() => router.push(`/products/${item.slug}`)}
-            className="object-contain w-24 h-24 border rounded-md cursor-pointer shrink-0 border-neutral-200"
+            className="object-cover w-24 h-24 border rounded-md cursor-pointer shrink-0 border-neutral-200"
+            style={{
+              backgroundColor:
+                "background" in product ? product.background : "transparent",
+            }}
           />
 
           {/* Right content */}
@@ -120,7 +129,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                 className="text-base md:text-lg font-bold line-clamp-2 max-h-[56px]"
               >
                 <Link href={`/products/${item.slug}`}>
-                  <span className="transition-colors cursor-pointer hover:text-secondary active:text-secondary/70">
+                  <span className="transition-colors cursor-pointer hover:text-primary/90 active:text-primary/70">
                     {item.name.length > 68 && isMobile
                       ? item.name.slice(0, 68) + "..."
                       : item.name.length > 112

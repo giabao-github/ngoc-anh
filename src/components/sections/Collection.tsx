@@ -18,11 +18,11 @@ const data = collections.map((collection) => ({
 const Collection: React.FC<CollectionProps> = ({ collectionRef }) => (
   <section
     ref={collectionRef}
-    className={`py-28 md:py-48 px-2 md:px-6 bg-cover bg-center`}
+    className={`py-20 md:pt-36 md:pb-[160px] 2xl:pt-60 2xl:pb-[300px] px-2 md:px-6 bg-no-repeat bg-center bg-cover relative`}
     style={{ backgroundImage: "url('/backgrounds/collection-background.jpg')" }}
   >
     <div className="max-w-lg mx-auto md:max-w-7xl">
-      <h2 className="text-2xl font-semibold text-center text-white md:text-3xl xl:text-4xl mb-14 md:mb-32">
+      <h2 className="mb-12 text-2xl font-semibold text-center text-white md:text-3xl xl:text-4xl md:mb-24 xl:mb-32">
         Sản phẩm nổi bật
       </h2>
     </div>

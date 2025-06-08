@@ -180,6 +180,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
         switch (type) {
           case "increment":
+            if (newQty + 1 >= maxQty) {
+              toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này");
+            }
             newQty = Math.min(item.quantity + 1, maxQty);
             break;
           case "decrement":
@@ -191,7 +194,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
             }
             break;
         }
-
         return { ...item, quantity: newQty };
       });
 
