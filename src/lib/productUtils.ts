@@ -1,5 +1,5 @@
 import { products } from "@/app/storage";
-import { CartItem } from "@/app/types";
+import { CartItem, Product } from "@/app/types";
 
 export const findProductBySlug = (slug: string) =>
   products.find((item) => item.details[0].slug === slug);
@@ -31,13 +31,15 @@ export const getCartFromStorage = (): CartItem[] => {
   }
 };
 
-export const createCartItem = (product: any, quantity: number): CartItem => ({
+export const createCartItem = (
+  product: Product,
+  quantity: number,
+): CartItem => ({
   id: product.id,
   name: product.name,
   image: product.images[0],
-  pattern: product.details[0].pattern,
+  color: "color" in product.details ? product.details[0].color : undefined,
   size: product.size,
-  volume: product.volume,
   slug: product.details[0].slug,
   price: product.details[0].price,
   quantity,

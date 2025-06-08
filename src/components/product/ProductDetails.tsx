@@ -39,10 +39,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         {/* Tab 2 - Usage Instructions */}
         <TabPanel className="space-y-4">
           {product.instruction || (
-            <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
+            <ul className="space-y-1 text-sm text-gray-700 list-disc list-inside">
               <li>Vệ sinh bằng khăn mềm, tránh va đập mạnh.</li>
               <li>Không dùng hóa chất tẩy rửa mạnh.</li>
-              <li>Trưng bày nơi khô ráo, tránh ánh nắng trực tiếp.</li>
+              <li>Bảo quản nơi khô ráo, tránh ánh nắng trực tiếp.</li>
             </ul>
           )}
         </TabPanel>

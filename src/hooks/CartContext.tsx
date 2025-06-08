@@ -101,10 +101,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
           return {
             id: product.id,
             name: product.name,
-            pattern:
-              "pattern" in product.details[0]
-                ? product.details[0].pattern
-                : null,
             color: product.details[0].color,
             slug: product.details[0].slug,
             price: product.details[0].price,
@@ -112,7 +108,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
             quantity: Math.min(item.quantity, product.quantity || 1),
             maxQuantity: product.quantity,
             size: product.size,
-            volume: product.volume,
           } as CartItem;
         })
         .filter((item): item is CartItem => item !== null);

@@ -23,7 +23,7 @@ interface ProductPageLayoutProps {
 
   // State
   activeSelector: string;
-  setActiveSelector: (pattern: string) => void;
+  setActiveSelector: (selector: string) => void;
   quantity: number;
   currentImageIndex: number;
   setCurrentImageIndex: (index: number) => void;

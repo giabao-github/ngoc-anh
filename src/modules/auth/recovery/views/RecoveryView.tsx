@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useRef, useState } from "react";
 
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Header from "@/components/header/Header";
@@ -96,21 +97,19 @@ export const RecoveryView = () => {
             </button>
 
             <div className="flex justify-center space-x-1 text-sm font-semibold tracking-wide">
-              <a
-                onClick={() => {
-                  router.push(`/login?method=${method}`);
-                }}
+              <Link
+                href={`/login?method=${method}`}
                 className="text-[#D4AF37] hover:text-[#D4AF37]/70 cursor-pointer"
               >
                 Quay về đăng nhập
-              </a>
+              </Link>
               <p className="font-normal text-gray-400">hoặc</p>
-              <a
+              <Link
                 href="/register"
                 className="text-[#D4AF37] hover:text-[#D4AF37]/70 cursor-pointer"
               >
                 Đăng ký
-              </a>
+              </Link>
             </div>
 
             <div className="relative">

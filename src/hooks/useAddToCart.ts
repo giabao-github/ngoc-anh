@@ -45,7 +45,7 @@ export const useAddToCart = (
     (quantity: number) => {
       if (!product) {
         toast.error("Không thể thêm sản phẩm vào giỏ hàng", {
-          description: "Sản phẩm này hiện không tồn tại hoặc đã bị xóa",
+          description: "Sản phẩm này hiện không còn tồn tại hoặc đã bị xóa",
         });
         return;
       }

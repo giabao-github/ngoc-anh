@@ -11,7 +11,6 @@ export type ImageData = {
 export type CartItem = {
   id: number;
   name: string;
-  pattern: string;
   color?: string;
   size?: string;
   volume?: string;

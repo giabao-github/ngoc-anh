@@ -68,7 +68,7 @@ export const SearchView = () => {
                   width={2048}
                   height={2048}
                   quality={100}
-                  className="object-contain w-full rounded"
+                  className="object-contain w-full rounded-t"
                 />
               </div>
               <div

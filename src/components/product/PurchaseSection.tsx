@@ -28,7 +28,7 @@ interface PurchaseSectionProps {
   canIncrement: boolean;
   canDecrement: boolean;
   isOutOfStock: boolean;
-  setActiveSelector: (pattern: string) => void;
+  setActiveSelector: (selector: string) => void;
   handleQuantityChange: (
     type: "increment" | "decrement" | "set",
     value?: number,
@@ -132,8 +132,8 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
     }
   }, [inputValue, handleQuantityChange]);
 
-  const getPatternValue = useCallback((pattern: any) => {
-    return "pattern" in pattern ? pattern.pattern : pattern.color;
+  const getSelectorValue = useCallback((selector: { color: string }) => {
+    return selector.color;
   }, []);
 
   const handleVariantChange = useCallback(
@@ -168,43 +168,33 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
 
       {/* Variant selector */}
       <div className="space-y-2">
-        <p className="font-semibold">
-          {"pattern" in product ? "Họa tiết" : "Màu sắc"}
-        </p>
+        <p className="font-semibold">{"Màu sắc"}</p>
         <div className="flex gap-4">
-          {product.details.map((pattern) => (
+          {product.details.map((detail) => (
             <button
-              key={getPatternValue(pattern)}
+              key={getSelectorValue(detail)}
               onClick={() =>
-                handleVariantChange(getPatternValue(pattern), pattern.slug)
+                handleVariantChange(getSelectorValue(detail), detail.slug)
               }
               className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:bg-secondary hover:text-primary transition-colors ${
-                activeSelector === getPatternValue(pattern)
+                activeSelector === getSelectorValue(detail)
                   ? "border-primary bg-secondary text-primary hover:border-primary"
                   : "border-gray-300"
               } ${montserrat.className}`}
             >
-              {getPatternValue(pattern)}
+              {getSelectorValue(detail)}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Size/Volume selection */}
+      {/* Size card */}
       <div className="mb-6 space-y-2">
-        <p className="font-semibold">
-          {`${
-            product.size
-              ? "Kích thước"
-              : product.volume
-                ? "Dung tích"
-                : "Kích thước/ Dung tích"
-          }`}
-        </p>
+        <p className="font-semibold">Kích thước</p>
         <div
-          className={`w-fit px-4 py-2 rounded-lg cursor-pointer select-none border text-sm transition-colors border-primary bg-secondary text-primary ${montserrat.className}`}
+          className={`w-fit px-4 py-2 rounded-lg select-none border text-sm transition-colors border-primary bg-secondary text-primary ${montserrat.className}`}
         >
-          {product.size || product.volume || "Không xác định"}
+          {product.size || "Không xác định"}
         </div>
       </div>
 
@@ -285,10 +275,10 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
             <button
               onClick={handleAntiSpamAddToCart}
               disabled={isAddingToCart}
-              className={`mt-2 border border-primary p-3 md:p-4 rounded-full w-full md:w-[40%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none ${
+              className={`mt-2 border border-primary p-3 md:p-4 bg-white rounded-full w-full md:w-[40%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none ${
                 isAddingToCart
                   ? "bg-gray-200 text-gray-400 cursor-default border border-gray-300"
-                  : "text-primary hover:bg-secondary hover:text-primary active:bg-secondary/80 active:text-primary/80 cursor-pointer"
+                  : "text-primary hover:bg-primary hover:text-white active:bg-primary/80 active:text-white/80 cursor-pointer hover:border-none active:border-none"
               }`}
             >
               <FiShoppingCart size={isMobile ? 18 : 24} />
@@ -296,7 +286,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
                 {isAddingToCart ? "Đang thêm..." : "Thêm vào giỏ hàng"}
               </span>
             </button>
-            <button className="mt-2 border border-primary p-3 md:p-4 rounded-full w-full md:w-[60%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-transparent text-primary hover:bg-secondary hover:text-primary active:bg-secondary/80 active:text-primary/80 cursor-pointer">
+            <button className="mt-2 border border-primary p-3 md:p-4 rounded-full w-full md:w-[60%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-white text-primary hover:bg-primary hover:text-white active:bg-primary/80 active:text-white/80 cursor-pointer hover:border-none active:border-none">
               <FaBagShopping size={isMobile ? 18 : 24} />
               <span className="text-sm font-semibold md:text-base md:tracking-wide">
                 Mua ngay

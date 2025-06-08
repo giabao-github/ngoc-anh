@@ -2,6 +2,7 @@
 
 import { Suspense, useRef, useState } from "react";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import Header from "@/components/header/Header";
@@ -109,23 +110,19 @@ export const RegisterView = () => {
             <div className="flex justify-center text-sm font-semibold tracking-wide">
               <p className="text-primary">
                 Đăng nhập bằng&nbsp;
-                <a
-                  onClick={() => {
-                    router.push(`/login?method=email`);
-                  }}
+                <Link
+                  href={"/login?method=email"}
                   className="text-[#D4AF37] hover:underline cursor-pointer"
                 >
                   email
-                </a>
+                </Link>
                 &nbsp;hoặc&nbsp;
-                <a
-                  onClick={() => {
-                    router.push(`/login?method=phone`);
-                  }}
+                <Link
+                  href={"/login?method=phone"}
                   className="text-[#D4AF37] hover:underline cursor-pointer"
                 >
                   số điện thoại
-                </a>
+                </Link>
               </p>
             </div>
 
