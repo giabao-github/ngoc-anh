@@ -3,7 +3,7 @@ import React from "react";
 export const collections = [
   {
     id: 1,
-    name: "Card Visit Thạch Âm",
+    name: "Card Visit Thạch Âm (card)",
     description: "",
     image: "/products/featured-card-transparent.png",
   },
@@ -27,7 +27,7 @@ export const collections = [
   },
   {
     id: 5,
-    name: "Card Visit Thạch Âm",
+    name: "Card Visit Thạch Âm (hộp)",
     description: "",
     image: "/products/card-transparent.png",
   },

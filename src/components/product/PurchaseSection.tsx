@@ -132,7 +132,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
     }
   }, [inputValue, handleQuantityChange]);
 
-  const getSelectorValue = useCallback((selector: any) => {
+  const getSelectorValue = useCallback((selector: { color: string }) => {
     return selector.color;
   }, []);
 
@@ -192,7 +192,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
       <div className="mb-6 space-y-2">
         <p className="font-semibold">Kích thước</p>
         <div
-          className={`w-fit px-4 py-2 rounded-lg cursor-pointer select-none border text-sm transition-colors border-primary bg-secondary text-primary ${montserrat.className}`}
+          className={`w-fit px-4 py-2 rounded-lg select-none border text-sm transition-colors border-primary bg-secondary text-primary ${montserrat.className}`}
         >
           {product.size || "Không xác định"}
         </div>
