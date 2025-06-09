@@ -50,7 +50,7 @@ export const animateAddToCart = (
   imageRef: RefObject<HTMLElement | null>,
   cartIconRef: RefObject<HTMLDivElement | null>,
   isMobile: boolean = false,
-): (() => void) | void => {
+): (() => void) | undefined => {
   // Early validation
   if (!cartIconRef.current || !imageRef.current) {
     return;
