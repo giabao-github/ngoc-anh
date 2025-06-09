@@ -52,14 +52,22 @@ export const useScrollAnimation = (options: ScrollAnimationOptions = {}) => {
     return () => {
       if (observerRef.current) {
         try {
-          // Optional: unobserve elements first for clarity
-          const elements = document.querySelectorAll(".animate-on-scroll");
-          elements.forEach((el) => observerRef.current?.unobserve(el));
           observerRef.current.disconnect();
         } catch (error) {
           console.warn("Failed to clean up scroll animations:", error);
         }
       }
     };
-  }, [threshold, rootMargin, animationClass, ...dependencies]);
+  }, [threshold, rootMargin, animationClass]);
+
+  useEffect(() => {
+    if (observerRef.current) {
+      try {
+        const elements = document.querySelectorAll(".animate-on-scroll");
+        elements.forEach((el) => observerRef.current?.observe(el));
+      } catch (error) {
+        console.warn("Failed to re-observe elements:", error);
+      }
+    }
+  }, dependencies);
 };

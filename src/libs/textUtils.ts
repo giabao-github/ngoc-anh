@@ -80,7 +80,7 @@ export const sanitizeInputConservative = (
     // Remove other HTML tags
     .replace(/<[^>]*>/g, "")
     // Remove null bytes and most control characters
-    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "")
+    .replace(/\p{Cc}/gu, "")
     // Remove only obvious emoji (not all Unicode symbols)
     .replace(
       /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]/gu,
@@ -152,12 +152,6 @@ export const normalizeText = (
     .trim();
 };
 
-export const normalizedProducts =
-  products?.map((product) => ({
-    ...product,
-    normalizedName: normalizeText(product.name),
-  })) || [];
-
 export const formatText = (text: string) => {
   return text
     .trim()
@@ -203,7 +197,13 @@ export const validateEmail = (value: string): boolean => {
   return emailRegex.test(trimmedValue);
 };
 
-export const testPhone = (value: string) => {
-  const phoneRegex = /^0\d{9,10}$/;
-  return phoneRegex.test(value);
+export const testPhone = (
+  value: string,
+  format: "vn" | "international" = "vn",
+) => {
+  const patterns = {
+    vn: /^0\d{9,10}$/,
+    international: /^\+?[1-9]\d{1,14}$/,
+  };
+  return patterns[format].test(value);
 };

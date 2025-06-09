@@ -46,9 +46,14 @@ export const createCartItem = (
   quantity,
 });
 
-export const createImageData = (images: string[], productName: string) =>
+export const createImageData = (
+  images: string[],
+  productName: string,
+  background?: string,
+) =>
   images.map((image, index) => ({
     value: index.toString(),
     label: productName,
     image: image,
+    background: background,
   }));

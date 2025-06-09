@@ -7,6 +7,7 @@ import {
   EASING,
   FINAL_SIZE,
   PHASE1_DURATION,
+  PHASE1_TO_PHASE2_DELAY,
   PHASE2_DURATION,
 } from "@/constants/cart";
 
@@ -88,7 +89,7 @@ export const animateAddToCart = (
 
   document.body.appendChild(clone);
 
-  // Force reflow once
+  // Force reflow to ensure styles are applied before animation
   clone.offsetHeight;
 
   // Phase 1: Transform to circle
@@ -214,7 +215,7 @@ export const animateAddToCart = (
       });
 
       setTimeout(() => {
-        if (cartIcon && cartIcon.isConnected) {
+        if (cartIcon?.isConnected) {
           cartIcon.style.transform = "scale(1)";
         }
       }, CLEANUP_DELAY);
@@ -224,6 +225,6 @@ export const animateAddToCart = (
   // Execute animation phases
   requestAnimationFrame(() => {
     animateToCircle();
-    setTimeout(animateToCart, 300);
+    setTimeout(animateToCart, PHASE1_TO_PHASE2_DELAY);
   });
 };

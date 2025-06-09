@@ -1,16 +1,19 @@
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
+import { products } from "@/app/storage";
 import { Product } from "@/app/types";
-import {
-  formatText,
-  normalizeText,
-  normalizedProducts,
-} from "@/libs/textUtils";
+import { formatText, normalizeText } from "@/libs/textUtils";
 
 export interface SearchResult {
   products: Product[];
   query: string;
 }
+
+const normalizedProducts =
+  products?.map((product) => ({
+    ...product,
+    normalizedName: normalizeText(product.name),
+  })) || [];
 
 export const searchProducts = (query: string): SearchResult => {
   const formattedQuery = formatText(query);

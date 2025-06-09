@@ -42,7 +42,12 @@ export const useProductPage = (slug: string) => {
     [product?.rating],
   );
   const imageData = useMemo(
-    () => createImageData(images, product?.name || ""),
+    () =>
+      createImageData(
+        images,
+        product?.name || "",
+        product?.background || "transparent",
+      ),
     [images, product?.name],
   );
 
