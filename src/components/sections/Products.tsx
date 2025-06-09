@@ -48,7 +48,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
       className={`py-16 md:py-32 xl:py-40 px-2 md:px-6 bg-secondary`}
     >
       <div className="max-w-lg mx-auto transition-all md:max-w-7xl duration-400">
-        <h2 className="mb-20 text-2xl font-semibold text-center text-primary md:text-3xl xl:text-4xl md:mb-24">
+        <h2 className="mb-20 text-xl font-semibold text-center text-primary md:text-3xl xl:text-4xl md:mb-24 2xl:mb-32">
           Khám phá cửa hàng trực tuyến THẠCH ÂM
         </h2>
 
@@ -70,7 +70,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                   onClick={() =>
                     router.push(`/products/${product.details[0].slug}`)
                   }
-                  className="flex items-center justify-center mb-1 overflow-hidden h-36 md:h-72 md:mb-2"
+                  className="flex items-center justify-center h-[138px] mb-1 overflow-hidden md:h-72 md:mb-2"
                   style={{
                     backgroundColor:
                       "background" in product ? product.background : "#FDF8F5",

@@ -48,10 +48,7 @@ export const useProductPage = (slug: string) => {
 
   // Scroll to top when slug changes
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo(0, 0);
   }, [slug]);
 
   // Main add to cart handler
