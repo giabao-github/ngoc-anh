@@ -27,7 +27,7 @@ export const sanitizeInputAggressive = (
     .replace(/<[^>]*>/g, "");
 
   // Remove control characters (keep newlines and tabs if needed)
-  input = input.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "");
+  input = input.replace(/\p{Cc}/gu, "");
 
   // Remove emojis using comprehensive Unicode properties
   const emojiRegex =
@@ -108,7 +108,6 @@ export const sanitizeInputWithLevel = (
     case "name":
       return sanitizeInput(input, maxLength);
     case "moderate":
-    default:
       // Remove HTML and obvious emojis, keep other Unicode
       return input
         .replace(/<[^>]*>/g, "")

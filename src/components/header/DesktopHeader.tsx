@@ -61,12 +61,12 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             onClick={() => router.push("/")}
             className="object-contain w-20 h-20 cursor-pointer select-none"
           />
-          <h1 className="hidden text-3xl font-semibold uppercase select-none text-logo md:block">
+          <h1 className="hidden text-2xl font-semibold uppercase select-none 2xl:text-3xl text-logo md:block">
             Thạch Âm
           </h1>
         </div>
 
-        <nav className="items-center hidden tracking-wide md:flex space-x-7">
+        <nav className="items-center hidden tracking-wide md:flex md:space-x-5 xl:space-x-7">
           <Link
             href="#"
             onClick={(e) => {
@@ -134,7 +134,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Tìm kiếm sản phẩm..."
-                className={`header-input w-96 font-medium pl-12 pr-4 py-2 border border-white rounded-full shadow-md shadow-white focus:ring-1 focus:ring-white focus:outline-none transition ${montserrat.className}`}
+                className={`header-input w-80 2xl:w-96 font-medium pl-12 pr-4 py-2 border border-white rounded-full shadow-md shadow-white focus:ring-1 focus:ring-white focus:outline-none transition ${montserrat.className}`}
               />
 
               {query.trim().length > 0 && (
@@ -178,7 +178,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             onClick={() => router.push("/login?method=email")}
             className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70"
           />
-          <div className="relative w-12 h-12 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_20px_rgba(255,255,255,0.8)] hover:shadow-[0_0_20px_rgba(255,255,255,1)]">
+          <div className="relative w-10 h-10 2xl:w-12 2xl:h-12 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_20px_rgba(255,255,255,0.8)] hover:shadow-[0_0_20px_rgba(255,255,255,1)]">
             <Image
               src="/avatar.jpeg"
               alt="Avatar"

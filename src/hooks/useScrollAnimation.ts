@@ -4,6 +4,8 @@ interface ScrollAnimationOptions {
   threshold?: number;
   rootMargin?: string;
   dependencies?: unknown[];
+  scrollToTop?: boolean;
+  animationClass?: string;
 }
 
 export const useScrollAnimation = (options: ScrollAnimationOptions = {}) => {
@@ -11,11 +13,15 @@ export const useScrollAnimation = (options: ScrollAnimationOptions = {}) => {
     threshold = 0.1,
     rootMargin = "0px 0px -50px 0px",
     dependencies = [],
+    scrollToTop = true,
+    animationClass = "animate-fade-in-up",
   } = options;
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (scrollToTop) {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   useEffect(() => {
@@ -27,9 +33,9 @@ export const useScrollAnimation = (options: ScrollAnimationOptions = {}) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fade-in-up");
+            entry.target.classList.add(animationClass);
           } else {
-            entry.target.classList.remove("animate-fade-in-up");
+            entry.target.classList.remove(animationClass);
           }
         });
       },
@@ -45,11 +51,15 @@ export const useScrollAnimation = (options: ScrollAnimationOptions = {}) => {
 
     return () => {
       if (observerRef.current) {
-        // Optional: unobserve elements first for clarity
-        const elements = document.querySelectorAll(".animate-on-scroll");
-        elements.forEach((el) => observerRef.current?.unobserve(el));
-        observerRef.current.disconnect();
+        try {
+          // Optional: unobserve elements first for clarity
+          const elements = document.querySelectorAll(".animate-on-scroll");
+          elements.forEach((el) => observerRef.current?.unobserve(el));
+          observerRef.current.disconnect();
+        } catch (error) {
+          console.warn("Failed to clean up scroll animations:", error);
+        }
       }
     };
-  }, dependencies);
+  }, [threshold, rootMargin, animationClass, ...dependencies]);
 };

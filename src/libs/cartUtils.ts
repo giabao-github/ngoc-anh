@@ -1,6 +1,14 @@
 import { RefObject } from "react";
 
 import { RawCartItem } from "@/app/types";
+import {
+  CIRCLE_SIZE,
+  CLEANUP_DELAY,
+  EASING,
+  FINAL_SIZE,
+  PHASE1_DURATION,
+  PHASE2_DURATION,
+} from "@/constants/cart";
 
 export const getLocalCart = (): RawCartItem[] => {
   if (typeof window === "undefined") {
@@ -13,6 +21,29 @@ export const getLocalCart = (): RawCartItem[] => {
     return [];
   }
 };
+
+const getInitialCloneStyles = (
+  centerX: number,
+  centerY: number,
+  sourceRect: DOMRect,
+) => ({
+  position: "fixed" as const,
+  width: `${sourceRect.width}px`,
+  height: `${sourceRect.height}px`,
+  left: `${centerX - sourceRect.width / 2}px`,
+  top: `${centerY - sourceRect.height / 2}px`,
+  objectFit: "cover" as const,
+  borderRadius: "0%",
+  zIndex: "9999",
+  boxShadow: "0 12px 24px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.15)",
+  border: "0px solid white",
+  backgroundColor: "white",
+  pointerEvents: "none" as const,
+  filter: "brightness(1.05) saturate(1.1)",
+  willChange: "transform, left, top, width, height, opacity",
+  backfaceVisibility: "hidden" as const,
+  opacity: "0",
+});
 
 export const animateAddToCart = (
   imageRef: RefObject<HTMLElement | null>,
@@ -33,14 +64,6 @@ export const animateAddToCart = (
   const sourceRect = imageRef.current.getBoundingClientRect();
   const targetRect = cartIconRef.current.getBoundingClientRect();
 
-  // Constants
-  const CIRCLE_SIZE = 120;
-  const FINAL_SIZE = 40;
-  const PHASE1_DURATION = 400;
-  const PHASE2_DURATION = 600;
-  const CLEANUP_DELAY = 200;
-  const EASING = "cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-
   // Calculate positions
   const startX = isMobile
     ? window.innerWidth * 0.5
@@ -58,24 +81,10 @@ export const animateAddToCart = (
   clone.alt = "Product";
 
   // Batch style assignments for better performance
-  Object.assign(clone.style, {
-    position: "fixed",
-    width: `${sourceRect.width}px`,
-    height: `${sourceRect.height}px`,
-    left: `${centerX - sourceRect.width / 2}px`,
-    top: `${centerY - sourceRect.height / 2}px`,
-    objectFit: "cover",
-    borderRadius: "0%",
-    zIndex: "9999",
-    boxShadow: "0 12px 24px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.15)",
-    border: "0px solid white",
-    backgroundColor: "white",
-    pointerEvents: "none",
-    filter: "brightness(1.05) saturate(1.1)",
-    willChange: "transform, left, top, width, height, opacity",
-    backfaceVisibility: "hidden",
-    opacity: "0",
-  });
+  Object.assign(
+    clone.style,
+    getInitialCloneStyles(centerX, centerY, sourceRect),
+  );
 
   document.body.appendChild(clone);
 
@@ -84,16 +93,10 @@ export const animateAddToCart = (
 
   // Phase 1: Transform to circle
   const animateToCircle = () => {
-    clone.style.transition = [
-      "width",
-      "height",
-      "border-radius",
-      "left",
-      "top",
-      "border",
-      "box-shadow",
-      "opacity",
-    ]
+    const transitionProperties =
+      "width, height, border-radius, left, top, border, box-shadow, opacity";
+    clone.style.transition = transitionProperties
+      .split(", ")
       .map((p) => `${p} ${PHASE1_DURATION}ms ${EASING}`)
       .join(", ");
 
@@ -129,8 +132,14 @@ export const animateAddToCart = (
     const midPointY = Math.min(startPointY, targetY) - arcHeight;
 
     let startTime: number;
+    let animationId: number;
+    let cancelled = false;
 
     const animate = (currentTime: number) => {
+      if (cancelled) {
+        return;
+      }
+
       if (!startTime) {
         startTime = currentTime;
       }
@@ -166,13 +175,22 @@ export const animateAddToCart = (
       });
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        animationId = requestAnimationFrame(animate);
       } else {
         finishAnimation();
       }
     };
 
-    requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate);
+
+    // Return cleanup function
+    return () => {
+      cancelled = true;
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+      clone.remove();
+    };
   };
 
   // Cleanup and cart icon bounce
@@ -189,14 +207,15 @@ export const animateAddToCart = (
 
     // Cart icon bounce
     if (cartIconRef.current) {
+      const cartIcon = cartIconRef.current;
       Object.assign(cartIconRef.current.style, {
         transform: "scale(1.3)",
         transition: "transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
       });
 
       setTimeout(() => {
-        if (cartIconRef.current) {
-          cartIconRef.current.style.transform = "scale(1)";
+        if (cartIcon && cartIcon.isConnected) {
+          cartIcon.style.transform = "scale(1)";
         }
       }, CLEANUP_DELAY);
     }

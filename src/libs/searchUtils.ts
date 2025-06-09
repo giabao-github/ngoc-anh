@@ -72,6 +72,6 @@ export const handleSearch = (query: string, router: AppRouterInstance) => {
     return;
   }
 
-  const encoded = encodeURIComponent(query);
+  const encoded = encodeURIComponent(formattedQuery);
   router.push(`/search?query=${encoded}`);
 };
