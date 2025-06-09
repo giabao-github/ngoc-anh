@@ -54,7 +54,10 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
             alt={product.name}
             width={isMobile ? 48 : 64}
             height={isMobile ? 48 : 64}
-            className="object-cover w-12 h-12 border border-black rounded-lg md:w-16 md:h-16"
+            className="object-cover w-12 h-12 border border-gray-200 rounded-lg md:w-16 md:h-16"
+            style={{
+              backgroundColor: product.background || "transparent",
+            }}
           />
           <div className="flex-1 space-y-1">
             <p className="text-xs font-medium text-gray-800 md:text-sm">
@@ -75,7 +78,9 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
           onClick={() => router.push("/cart")}
           className="w-full px-4 py-5 mt-3 text-white transition bg-green-500 rounded-xl hover:bg-green-600 active:bg-green-400"
         >
-          <span className="text-sm font-semibold">Xem giỏ hàng</span>
+          <span className="text-sm font-semibold tracking-wider">
+            Xem giỏ hàng
+          </span>
         </Button>
       </div>
     );

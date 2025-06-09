@@ -50,7 +50,7 @@ export const animateAddToCart = (
   imageRef: RefObject<HTMLElement | null>,
   cartIconRef: RefObject<HTMLDivElement | null>,
   isMobile: boolean = false,
-) => {
+): (() => void) | void => {
   // Early validation
   if (!cartIconRef.current || !imageRef.current) {
     return;
@@ -89,7 +89,7 @@ export const animateAddToCart = (
 
   document.body.appendChild(clone);
 
-  // Force reflow to ensure styles are applied before animation
+  // Force reflow to ensure initial styles are applied before starting transitions
   clone.offsetHeight;
 
   // Phase 1: Transform to circle
@@ -223,8 +223,16 @@ export const animateAddToCart = (
   };
 
   // Execute animation phases
+  let cleanupFn: (() => void) | undefined;
   requestAnimationFrame(() => {
     animateToCircle();
-    setTimeout(animateToCart, PHASE1_TO_PHASE2_DELAY);
+    setTimeout(() => {
+      cleanupFn = animateToCart();
+    }, PHASE1_TO_PHASE2_DELAY);
   });
+
+  // Return cleanup function to caller
+  return () => {
+    cleanupFn?.();
+  };
 };

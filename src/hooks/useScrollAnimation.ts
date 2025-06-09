@@ -63,6 +63,8 @@ export const useScrollAnimation = (options: ScrollAnimationOptions = {}) => {
   useEffect(() => {
     if (observerRef.current) {
       try {
+        // First unobserve all currently observed elements
+        observerRef.current.disconnect();
         const elements = document.querySelectorAll(".animate-on-scroll");
         elements.forEach((el) => observerRef.current?.observe(el));
       } catch (error) {
