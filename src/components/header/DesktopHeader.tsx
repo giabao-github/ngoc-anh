@@ -12,7 +12,8 @@ import { Input } from "@/components/ui/input";
 
 import { useCart } from "@/hooks/useCart";
 
-import { handleSearch } from "@/lib/utils";
+import { HASH_ROUTES, ROUTES } from "@/constants/routes";
+import { handleNavigation, handleSearch } from "@/lib/utils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -57,9 +58,9 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             quality={100}
             priority
             onClick={() => router.push("/")}
-            className="object-contain w-16 h-16 cursor-pointer select-none 2xl:w-20 2xl:h-20"
+            className="object-contain w-20 h-20 cursor-pointer select-none"
           />
-          <h1 className="hidden text-2xl font-semibold uppercase select-none 2xl:text-3xl text-logo md:block">
+          <h1 className="hidden text-3xl font-semibold uppercase select-none text-logo md:block">
             Thạch Âm
           </h1>
         </div>
@@ -69,12 +70,12 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              collectionRef?.current?.scrollIntoView({ behavior: "smooth" });
-              if (hasSections) {
-                history.pushState(null, "", "#collection");
-              } else {
-                router.push("/#collection");
-              }
+              handleNavigation(
+                HASH_ROUTES.COLLECTION,
+                hasSections,
+                router,
+                collectionRef,
+              );
             }}
             className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
           >
@@ -84,12 +85,12 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              productsRef?.current?.scrollIntoView({ behavior: "smooth" });
-              if (hasSections) {
-                history.pushState(null, "", "#products");
-              } else {
-                router.push("/#products");
-              }
+              handleNavigation(
+                HASH_ROUTES.PRODUCTS,
+                hasSections,
+                router,
+                productsRef,
+              );
             }}
             className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
           >
@@ -99,14 +100,12 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              if (hasSections) {
-                aboutRef?.current?.scrollIntoView({ behavior: "smooth" });
-                history.pushState(null, "", "#about");
-              } else if (hasFooter) {
-                aboutRef?.current?.scrollIntoView({ behavior: "smooth" });
-              } else {
-                router.push("/#about");
-              }
+              handleNavigation(
+                HASH_ROUTES.ABOUT,
+                hasSections,
+                router,
+                aboutRef,
+              );
             }}
             className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
           >

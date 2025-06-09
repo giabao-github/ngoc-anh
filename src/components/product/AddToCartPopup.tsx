@@ -3,11 +3,11 @@ import { FiX } from "react-icons/fi";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+import { Button } from "@/components/ui/button";
+
 import useIsMobile from "@/hooks/useIsMobile";
 
 import { Product } from "@/app/types";
-
-import { Button } from "../ui/button";
 
 interface AddToCartPopupProps {
   show: boolean;

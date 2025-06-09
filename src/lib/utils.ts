@@ -2,6 +2,7 @@ import { RefObject } from "react";
 
 import { type ClassValue, clsx } from "clsx";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
 import { products } from "@/app/storage";
@@ -312,4 +313,23 @@ export const animateAddToCart = (
 
     requestAnimationFrame(animate);
   }, 300);
+};
+
+export const handleNavigation = (
+  hash: string,
+  hasSections: boolean | undefined,
+  router: ReturnType<typeof useRouter>,
+  ref?: RefObject<HTMLDivElement | null>,
+) => {
+  if (hasSections && ref?.current) {
+    const currentHash = window.location.hash;
+    if (currentHash === hash) {
+      ref.current.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+    ref.current.scrollIntoView({ behavior: "smooth" });
+    history.pushState(null, "", hash);
+  } else {
+    router.push(`/${hash}`);
+  }
 };

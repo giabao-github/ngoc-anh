@@ -12,7 +12,8 @@ import { Input } from "@/components/ui/input";
 
 import { useCart } from "@/hooks/useCart";
 
-import { handleSearch } from "@/lib/utils";
+import { HASH_ROUTES, ROUTES } from "@/constants/routes";
+import { handleNavigation, handleSearch } from "@/lib/utils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -67,7 +68,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               onClick={() => router.push("/")}
               className="object-contain w-16 h-16 rounded cursor-pointer select-none"
             />
-            <h1 className="hidden text-logo text-2xl font-semibold uppercase select-none md:block">
+            <h1 className="hidden text-2xl font-semibold uppercase select-none text-logo md:block">
               Thạch Âm
             </h1>
           </div>
@@ -132,20 +133,12 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                if (collectionRef?.current) {
-                  const elementPosition = collectionRef.current.offsetTop;
-                  const offsetPosition = elementPosition - 100;
-
-                  window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth",
-                  });
-                }
-                if (hasSections) {
-                  history.pushState(null, "", "#collection");
-                } else {
-                  router.push("/#collection");
-                }
+                handleNavigation(
+                  HASH_ROUTES.COLLECTION,
+                  hasSections,
+                  router,
+                  collectionRef,
+                );
                 setIsMenuOpen(false);
               }}
               className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors select-none w-fit"
@@ -156,20 +149,12 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                if (productsRef?.current) {
-                  const elementPosition = productsRef.current.offsetTop;
-                  const offsetPosition = elementPosition - 100;
-
-                  window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth",
-                  });
-                }
-                if (hasSections) {
-                  history.pushState(null, "", "#products");
-                } else {
-                  router.push("/#products");
-                }
+                handleNavigation(
+                  HASH_ROUTES.PRODUCTS,
+                  hasSections,
+                  router,
+                  productsRef,
+                );
                 setIsMenuOpen(false);
               }}
               className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors select-none w-fit"
@@ -180,14 +165,12 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                if (hasSections) {
-                  aboutRef?.current?.scrollIntoView({ behavior: "smooth" });
-                  history.pushState(null, "", "#about");
-                } else if (hasFooter) {
-                  aboutRef?.current?.scrollIntoView({ behavior: "smooth" });
-                } else {
-                  router.push("/#about");
-                }
+                handleNavigation(
+                  HASH_ROUTES.ABOUT,
+                  hasSections,
+                  router,
+                  aboutRef,
+                );
                 setIsMenuOpen(false);
               }}
               className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors select-none w-fit"
