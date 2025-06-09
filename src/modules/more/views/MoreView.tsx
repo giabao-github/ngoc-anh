@@ -56,7 +56,7 @@ export const MoreView = () => {
                   THÔNG ĐIỆP
                 </h2>
                 <div className="p-8 border bg-emerald-800/30 backdrop-blur-sm rounded-2xl border-amber-400/20">
-                  <h3 className="mb-4 text-2xl font-bold text-center text-amber-300">
+                  <h3 className="mb-8 text-xl font-bold text-center md:text-2xl 2xl:text-3xl text-amber-300">
                     VĂN HÓA LÀ ĐỂ SỐNG, KHÔNG CHỈ ĐỂ NGẮM
                   </h3>
                   <p className="mb-6 leading-relaxed md:text-lg text-amber-100">

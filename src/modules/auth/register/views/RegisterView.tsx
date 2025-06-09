@@ -13,7 +13,7 @@ import ProviderLogin from "@/components/user/ProviderLogin";
 import SkeletonLoader from "@/components/user/SkeletonLoader";
 import EmailPhoneSwitch from "@/components/user/Switch";
 
-import { testPhone, validateEmail } from "@/lib/utils";
+import { testPhone, validateEmail } from "@/libs/textUtils";
 
 export const RegisterView = () => {
   const router = useRouter();

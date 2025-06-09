@@ -8,7 +8,7 @@ import TaxCodeInput from "@/components/cart/TaxCodeInput";
 import { Input } from "@/components/ui/input";
 import EmailInput from "@/components/user/EmailInput";
 
-import { sanitizeInput, sanitizeInputOnBlur } from "@/lib/utils";
+import { sanitizeInput, sanitizeInputOnBlur } from "@/libs/textUtils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],

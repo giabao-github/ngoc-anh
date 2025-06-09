@@ -12,8 +12,8 @@ import { Input } from "@/components/ui/input";
 
 import { useCart } from "@/hooks/useCart";
 
-import { HASH_ROUTES, ROUTES } from "@/constants/routes";
-import { handleNavigation, handleSearch } from "@/lib/utils";
+import { HASH_ROUTES } from "@/constants/routes";
+import { handleNavigation, handleSearch } from "@/libs/navigationUtils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -136,6 +136,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 handleNavigation(
                   HASH_ROUTES.COLLECTION,
                   hasSections,
+                  undefined,
                   router,
                   collectionRef,
                 );
@@ -152,6 +153,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 handleNavigation(
                   HASH_ROUTES.PRODUCTS,
                   hasSections,
+                  undefined,
                   router,
                   productsRef,
                 );
@@ -168,6 +170,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 handleNavigation(
                   HASH_ROUTES.ABOUT,
                   hasSections,
+                  hasFooter,
                   router,
                   aboutRef,
                 );

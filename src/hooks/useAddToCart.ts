@@ -6,8 +6,8 @@ import { useCart } from "@/hooks/useCart";
 import useIsMobile from "@/hooks/useIsMobile";
 
 import { CartItem, Product } from "@/app/types";
-import { createCartItem, getCartFromStorage } from "@/lib/productUtils";
-import { animateAddToCart } from "@/lib/utils";
+import { animateAddToCart } from "@/libs/cartUtils";
+import { createCartItem, getCartFromStorage } from "@/libs/productUtils";
 
 export const useAddToCart = (
   product: Product | undefined,

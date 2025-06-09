@@ -12,7 +12,7 @@ import FormFields from "@/components/user/FormFields";
 import ProviderLogin from "@/components/user/ProviderLogin";
 import SkeletonLoader from "@/components/user/SkeletonLoader";
 
-import { testPhone, validateEmail } from "@/lib/utils";
+import { testPhone, validateEmail } from "@/libs/textUtils";
 
 export const LoginView = () => {
   const router = useRouter();

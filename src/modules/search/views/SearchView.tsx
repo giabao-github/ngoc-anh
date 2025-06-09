@@ -10,7 +10,7 @@ import Footer from "@/components/sections/Footer";
 
 import { products } from "@/app/storage";
 import { Product } from "@/app/types";
-import { normalizeText } from "@/lib/utils";
+import { normalizeText } from "@/libs/textUtils";
 
 export const SearchView = () => {
   const router = useRouter();

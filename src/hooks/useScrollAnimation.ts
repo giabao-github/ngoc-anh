@@ -1,7 +1,11 @@
 import { useEffect, useRef } from "react";
 
-export const useScrollAnimation = () => {
+export const useScrollAnimation = (dependencies: unknown[] = []) => {
   const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (!window.IntersectionObserver) {
@@ -20,10 +24,14 @@ export const useScrollAnimation = () => {
     );
 
     requestAnimationFrame(() => {
-      const elements = document.querySelectorAll(".animate-on-scroll");
-      elements.forEach((el) => observerRef.current?.observe(el));
+      try {
+        const elements = document.querySelectorAll(".animate-on-scroll");
+        elements.forEach((el) => observerRef.current?.observe(el));
+      } catch (error) {
+        console.warn("Failed to initialize scroll animations:", error);
+      }
     });
 
     return () => observerRef.current?.disconnect();
-  }, []);
+  }, dependencies);
 };

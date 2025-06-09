@@ -9,7 +9,7 @@ import {
   calculateRatingStats,
   createImageData,
   findProductBySlug,
-} from "@/lib/productUtils";
+} from "@/libs/productUtils";
 
 export const useProductPage = (slug: string) => {
   const product: Product | undefined = useMemo(

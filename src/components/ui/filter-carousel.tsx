@@ -15,7 +15,7 @@ import {
 
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 
 interface FilterCarouselProps {
   isLoading?: boolean;
