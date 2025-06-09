@@ -8,7 +8,11 @@ import TaxCodeInput from "@/components/cart/TaxCodeInput";
 import { Input } from "@/components/ui/input";
 import EmailInput from "@/components/user/EmailInput";
 
-import { sanitizeInput, sanitizeInputOnBlur } from "@/lib/utils";
+import {
+  sanitizeInput,
+  sanitizeInputOnBlur,
+  sanitizeInputWithLevel,
+} from "@/libs/textUtils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -89,7 +93,7 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({
         <Input
           type="text"
           placeholder="Tên công ty"
-          value={sanitizeInput(formState.companyName)}
+          value={sanitizeInputWithLevel(formState.companyName, "name")}
           onChange={(e) => handleChange("companyName", e.target.value)}
           onBlur={(e) =>
             handleChange("companyName", sanitizeInputOnBlur(e.target.value))
@@ -113,7 +117,7 @@ const InvoiceForm: React.FC<InvoiceFormProps> = ({
         <Input
           type="text"
           placeholder="Địa chỉ công ty"
-          value={sanitizeInput(formState.address)}
+          value={sanitizeInputWithLevel(formState.address, "moderate")}
           onChange={(e) => handleChange("address", e.target.value)}
           onBlur={(e) =>
             handleChange("address", sanitizeInputOnBlur(e.target.value))

@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -8,26 +8,16 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Header from "@/components/header/Header";
 import Footer from "@/components/sections/Footer";
 
-import { products } from "@/app/storage";
 import { Product } from "@/app/types";
-import { normalizeText } from "@/lib/utils";
+import { searchProducts } from "@/libs/searchUtils";
 
 export const SearchView = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";
   const aboutRef = useRef<HTMLDivElement>(null);
-
-  const normalizedQuery = normalizeText(query);
-  const queryWords = normalizedQuery.split(" ");
-
-  const results = useMemo(() => {
-    return products.filter((product) => {
-      const normalizedName = normalizeText(product.name);
-      const nameWords = normalizedName.split(/\s+/);
-      return queryWords.every((word) => nameWords.includes(word));
-    });
-  }, [query]);
+  const searchResults = searchProducts(query).products;
+  const totalResults = searchResults.length;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -43,15 +33,15 @@ export const SearchView = () => {
             Tìm kiếm
           </h1>
           <p className="my-3 text-sm md:text-base text-primary md:my-4">
-            Có <strong>{results.length} sản phẩm</strong> cho tìm kiếm{" "}
+            Có <strong>{totalResults} sản phẩm</strong> cho tìm kiếm{" "}
             <strong>"{query}"</strong>
           </p>
           <div className="w-16 h-1 mx-auto mt-2 bg-black rounded md:w-20" />
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 gap-2 md:gap-8 md:grid-cols-3 xl:grid-cols-5">
-          {results.map((product: Product) => (
+        <div className="grid grid-cols-2 gap-2 md:gap-8 md:grid-cols-3 2xl:grid-cols-5">
+          {searchResults.map((product: Product) => (
             <div
               key={product.id}
               className="overflow-hidden transition-all duration-200 border shadow-sm bg-neutral-100 border-neutral-200 rounded-xl hover:shadow-md"
@@ -60,7 +50,10 @@ export const SearchView = () => {
                 onClick={() =>
                   router.push(`/products/${product.details[0].slug}`)
                 }
-                className="relative overflow-hidden border-b border-neutral-200 cursor-pointer bg-[#FFF3E5]"
+                className="relative flex items-center justify-center overflow-hidden border-b h-[136px] md:h-[223px] 2xl:h-[245px] cursor-pointer border-neutral-200"
+                style={{
+                  backgroundColor: product.background || "transparent",
+                }}
               >
                 <Image
                   src={product.images[0]}
@@ -68,7 +61,7 @@ export const SearchView = () => {
                   width={2048}
                   height={2048}
                   quality={100}
-                  className="object-contain w-full rounded-t"
+                  className="object-contain w-full h-auto rounded-t"
                 />
               </div>
               <div

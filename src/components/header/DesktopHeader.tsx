@@ -12,7 +12,9 @@ import { Input } from "@/components/ui/input";
 
 import { useCart } from "@/hooks/useCart";
 
-import { handleSearch } from "@/lib/utils";
+import { HASH_ROUTES } from "@/constants/routes";
+import { handleNavigation } from "@/libs/navigationUtils";
+import { handleSearch } from "@/libs/searchUtils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
@@ -59,22 +61,23 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             onClick={() => router.push("/")}
             className="object-contain w-20 h-20 cursor-pointer select-none"
           />
-          <h1 className="hidden text-3xl font-semibold uppercase select-none text-logo md:block">
+          <h1 className="hidden text-2xl font-semibold uppercase select-none 2xl:text-3xl text-logo md:block">
             Thạch Âm
           </h1>
         </div>
 
-        <nav className="items-center hidden tracking-wide md:flex space-x-7">
+        <nav className="items-center hidden tracking-wide md:flex md:space-x-5 xl:space-x-7">
           <Link
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              collectionRef?.current?.scrollIntoView({ behavior: "smooth" });
-              if (hasSections) {
-                history.pushState(null, "", "#collection");
-              } else {
-                router.push("/#collection");
-              }
+              handleNavigation(
+                HASH_ROUTES.COLLECTION,
+                hasSections,
+                undefined,
+                router,
+                collectionRef,
+              );
             }}
             className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
           >
@@ -84,12 +87,13 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              productsRef?.current?.scrollIntoView({ behavior: "smooth" });
-              if (hasSections) {
-                history.pushState(null, "", "#products");
-              } else {
-                router.push("/#products");
-              }
+              handleNavigation(
+                HASH_ROUTES.PRODUCTS,
+                hasSections,
+                undefined,
+                router,
+                productsRef,
+              );
             }}
             className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
           >
@@ -99,14 +103,13 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              if (hasSections) {
-                aboutRef?.current?.scrollIntoView({ behavior: "smooth" });
-                history.pushState(null, "", "#about");
-              } else if (hasFooter) {
-                aboutRef?.current?.scrollIntoView({ behavior: "smooth" });
-              } else {
-                router.push("/#about");
-              }
+              handleNavigation(
+                HASH_ROUTES.ABOUT,
+                hasSections,
+                hasFooter,
+                router,
+                aboutRef,
+              );
             }}
             className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
           >
@@ -131,7 +134,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Tìm kiếm sản phẩm..."
-                className={`header-input w-96 font-medium pl-12 pr-4 py-2 border border-white rounded-full shadow-md shadow-white focus:ring-1 focus:ring-white focus:outline-none transition ${montserrat.className}`}
+                className={`header-input w-80 2xl:w-96 font-medium pl-12 pr-4 py-2 border border-white rounded-full shadow-md shadow-white focus:ring-1 focus:ring-white focus:outline-none transition ${montserrat.className}`}
               />
 
               {query.trim().length > 0 && (
@@ -175,7 +178,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             onClick={() => router.push("/login?method=email")}
             className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70"
           />
-          <div className="relative w-12 h-12 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_20px_rgba(255,255,255,0.8)] hover:shadow-[0_0_20px_rgba(255,255,255,1)]">
+          <div className="relative w-10 h-10 2xl:w-12 2xl:h-12 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_20px_rgba(255,255,255,0.8)] hover:shadow-[0_0_20px_rgba(255,255,255,1)]">
             <Image
               src="/avatar.jpeg"
               alt="Avatar"

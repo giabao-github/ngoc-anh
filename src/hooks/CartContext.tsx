@@ -14,7 +14,7 @@ import { toast } from "sonner";
 
 import { products } from "@/app/storage";
 import { CartItem, Product } from "@/app/types";
-import { getLocalCart } from "@/lib/utils";
+import { getLocalCart } from "@/libs/cartUtils";
 
 interface CartContextType {
   cartItems: CartItem[] | undefined;

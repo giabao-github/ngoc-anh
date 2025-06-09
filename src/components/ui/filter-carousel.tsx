@@ -15,7 +15,7 @@ import {
 
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 
 interface FilterCarouselProps {
   isLoading?: boolean;
@@ -92,13 +92,13 @@ export const FilterCarousel = ({
                   className="relative pl-3 cursor-pointer basis-auto group"
                 >
                   {/* Desktop image */}
-                  <div className="relative hidden border border-secondary md:block overflow-hidden rounded-md w-[372px] h-[266px] xl:w-[558px] xl:h-[400px]">
+                  <div className="relative hidden border border-secondary md:block overflow-hidden rounded-md w-[372px] h-[266px] 2xl:w-[558px] 2xl:h-[400px]">
                     <Image
                       src={item.image}
                       alt={item.label}
                       fill
                       quality={100}
-                      sizes="(min-width: 768px) 1034px"
+                      sizes="(min-width: 768px) 372px"
                       className={cn(
                         "transition-transform duration-300 hover:scale-105 select-none",
                       )}

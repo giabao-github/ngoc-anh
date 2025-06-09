@@ -49,6 +49,9 @@ const ProductImages: React.FC<ProductImagesProps> = ({
                 ? "ring-2 ring-secondary"
                 : "ring-1 ring-neutral-100"
             }`}
+            style={{
+              backgroundColor: product.background || "transparent",
+            }}
           >
             <Image
               width={2048}
@@ -56,7 +59,7 @@ const ProductImages: React.FC<ProductImagesProps> = ({
               src={img}
               quality={100}
               alt={product.name}
-              className="object-cover w-full h-full md:rotate-0 rotate-90"
+              className="object-cover w-full h-full rotate-90 md:rotate-0"
             />
           </button>
         ))}

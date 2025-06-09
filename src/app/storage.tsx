@@ -38,6 +38,7 @@ export const products = [
     id: 1,
     name: "Huy hiệu Thạch Âm - Xanh Rêu",
     images: ["/products/green-badge.png", "/products/green-badge.jpg"],
+    background: "#E9E9E9",
     description: (
       <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
@@ -85,6 +86,7 @@ export const products = [
     id: 2,
     name: "Huy hiệu Thạch Âm - Vàng Nhạt",
     images: ["/products/yellow-badge.jpeg", "/products/yellow-badge.png"],
+    background: "#E6E8E7",
     description: (
       <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
@@ -133,7 +135,7 @@ export const products = [
     id: 3,
     name: "Khăn Bandana Thạch Âm",
     images: ["/products/badana-transparent.png"],
-    background: "#EDEDED",
+    background: "#EEECED",
     description: (
       <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>"Khăn Bandana Thạch Âm: Nét Vàng Cổ Tích Giữa Làn Gió Hiện Đại."</p>
@@ -199,6 +201,7 @@ export const products = [
     id: 4,
     name: "Card Visit Thạch Âm",
     images: ["/products/card.png", "/products/featured-card.png"],
+    background: "#78797A",
     description: (
       <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>Giới Thiệu Bộ Card Visit "Thạch Âm: Dấu Ấn Di Sản Khmer"</p>

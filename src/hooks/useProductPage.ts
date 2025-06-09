@@ -9,7 +9,7 @@ import {
   calculateRatingStats,
   createImageData,
   findProductBySlug,
-} from "@/lib/productUtils";
+} from "@/libs/productUtils";
 
 export const useProductPage = (slug: string) => {
   const product: Product | undefined = useMemo(
@@ -42,16 +42,18 @@ export const useProductPage = (slug: string) => {
     [product?.rating],
   );
   const imageData = useMemo(
-    () => createImageData(images, product?.name || ""),
+    () =>
+      createImageData(
+        images,
+        product?.name || "",
+        product?.background || "transparent",
+      ),
     [images, product?.name],
   );
 
   // Scroll to top when slug changes
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo(0, 0);
   }, [slug]);
 
   // Main add to cart handler

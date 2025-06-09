@@ -48,7 +48,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
       className={`py-16 md:py-32 xl:py-40 px-2 md:px-6 bg-secondary`}
     >
       <div className="max-w-lg mx-auto transition-all md:max-w-7xl duration-400">
-        <h2 className="mb-20 text-2xl font-semibold text-center text-primary md:text-3xl xl:text-4xl md:mb-24">
+        <h2 className="mb-20 text-xl font-semibold text-center text-primary md:text-3xl xl:text-4xl md:mb-24 2xl:mb-32">
           Khám phá cửa hàng trực tuyến THẠCH ÂM
         </h2>
 
@@ -64,16 +64,18 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
             {products.slice(0, itemsToShow).map((product) => (
               <div
                 key={product.id}
-                className="bg-white group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl mx-auto max-w-full md:min-w-[400px] transform transition-transform duration-400"
+                className="bg-white group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl mx-auto max-w-full md:min-w-[300px] 2xl:min-w-[400px] transform transition-transform duration-400"
               >
                 <div
                   onClick={() =>
                     router.push(`/products/${product.details[0].slug}`)
                   }
-                  className="flex items-center justify-center mb-1 overflow-hidden h-36 md:h-72 md:mb-2"
+                  className="flex items-center justify-center h-[138px] mb-1 overflow-hidden md:h-[260px] xl:h-[278px] 2xl:h-72 md:mb-2"
                   style={{
                     backgroundColor:
-                      "background" in product ? product.background : "#FDF8F5",
+                      "background" in product
+                        ? product.background
+                        : "transparent",
                   }}
                 >
                   <Image
@@ -107,7 +109,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                       onClick={() =>
                         router.push(`/products/${product.details[0].slug}`)
                       }
-                      className="mt-2 border border-primary bg-transparent text-primary p-3 md:p-4 rounded-full w-full md:w-[50%] hover:bg-primary active:bg-primary/70 hover:text-white active:text-white/70 hover:border-none active:border-none transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
+                      className="mt-2 border border-primary bg-transparent text-primary p-3 md:p-4 rounded-full w-full md:w-[67%] xl:w-[60%] 2xl:w-[50%] hover:bg-primary active:bg-primary/70 hover:text-white active:text-white/70 hover:border-none active:border-none transition-colors flex items-center justify-center gap-x-2 md:gap-x-3 cursor-pointer select-none"
                     >
                       <FiShoppingCart size={18} />
                       <span className="text-xs font-semibold tracking-wide md:text-sm">

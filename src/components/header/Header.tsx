@@ -7,7 +7,7 @@ import MobileHeader from "@/components/header/MobileHeader";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { handleSearch } from "@/lib/utils";
+import { handleSearch } from "@/libs/searchUtils";
 
 interface HeaderProps {
   hasSections?: boolean;

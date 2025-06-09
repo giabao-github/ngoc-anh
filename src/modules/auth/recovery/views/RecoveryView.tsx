@@ -12,10 +12,9 @@ import FormFields from "@/components/user/FormFields";
 import ProviderLogin from "@/components/user/ProviderLogin";
 import SkeletonLoader from "@/components/user/SkeletonLoader";
 
-import { testPhone, validateEmail } from "@/lib/utils";
+import { testPhone, validateEmail } from "@/libs/textUtils";
 
 export const RecoveryView = () => {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [inputError, setInputError] = useState("");
   const [isTouched, setIsTouched] = useState(false);

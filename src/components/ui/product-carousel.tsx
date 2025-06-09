@@ -14,7 +14,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 
 interface ProductCarouselProps {
   value?: string | null;
@@ -26,6 +26,7 @@ interface ProductCarouselProps {
     value?: string;
     label?: string;
     image: string;
+    background?: string;
   }[];
 }
 
@@ -116,6 +117,9 @@ export const ProductCarousel = ({
                       className={cn(
                         "object-cover transition-transform duration-300 select-none",
                       )}
+                      style={{
+                        backgroundColor: item.background,
+                      }}
                     />
                   </div>
                   {/* Mobile image */}
@@ -133,6 +137,9 @@ export const ProductCarousel = ({
                       className={cn(
                         "object-cover transition-transform duration-300 select-none",
                       )}
+                      style={{
+                        backgroundColor: item.background,
+                      }}
                     />
                   </div>
                 </CarouselItem>

@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
 
 import { Product } from "@/app/types";
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
