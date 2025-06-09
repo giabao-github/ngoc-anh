@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 
-import { handleSearch } from "@/libs/navigationUtils";
+import { handleSearch } from "@/libs/searchUtils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],

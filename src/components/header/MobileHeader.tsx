@@ -13,7 +13,8 @@ import { Input } from "@/components/ui/input";
 import { useCart } from "@/hooks/useCart";
 
 import { HASH_ROUTES } from "@/constants/routes";
-import { handleNavigation, handleSearch } from "@/libs/navigationUtils";
+import { handleNavigation } from "@/libs/navigationUtils";
+import { handleSearch } from "@/libs/searchUtils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],

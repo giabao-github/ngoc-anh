@@ -19,181 +19,192 @@ export const animateAddToCart = (
   cartIconRef: RefObject<HTMLDivElement | null>,
   isMobile: boolean = false,
 ) => {
+  // Early validation
   if (!cartIconRef.current || !imageRef.current) {
     return;
   }
 
-  let actualImageElement: HTMLImageElement | null = null;
-  const imgElement = imageRef.current.querySelector("img");
-  if (imgElement) {
-    actualImageElement = imgElement as HTMLImageElement;
-  }
-
-  if (!actualImageElement) {
+  const imgElement = imageRef.current.querySelector("img") as HTMLImageElement;
+  if (!imgElement) {
     return;
   }
 
+  // Cache DOM measurements
   const sourceRect = imageRef.current.getBoundingClientRect();
   const targetRect = cartIconRef.current.getBoundingClientRect();
 
-  // Calculate the final position for phase 1 (where the circle will be)
+  // Constants
+  const CIRCLE_SIZE = 120;
+  const FINAL_SIZE = 40;
+  const PHASE1_DURATION = 400;
+  const PHASE2_DURATION = 600;
+  const CLEANUP_DELAY = 200;
+  const EASING = "cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+
+  // Calculate positions
   const startX = isMobile
     ? window.innerWidth * 0.5
     : sourceRect.left + sourceRect.width / 2;
   const startY = window.innerHeight * 0.4;
-  const fallbackSize = Math.min(sourceRect.width, sourceRect.height, 200);
 
-  const adjustedSourceRect = {
-    left: startX - fallbackSize / 2,
-    top: startY - fallbackSize / 2,
-    right: startX + fallbackSize / 2,
-    bottom: startY + fallbackSize / 2,
-    width: fallbackSize,
-    height: fallbackSize,
-    x: startX - fallbackSize / 2,
-    y: startY - fallbackSize / 2,
-    toJSON: () => ({}),
-  } as DOMRect;
+  const centerX = startX;
+  const centerY = startY;
+  const targetX = targetRect.left + targetRect.width / 2 - FINAL_SIZE / 2;
+  const targetY = targetRect.top + targetRect.height / 2 - FINAL_SIZE / 2;
 
-  // Calculate circle position for phase 1
-  const circleSize = 120;
-  const centerX = adjustedSourceRect.left + adjustedSourceRect.width / 2;
-  const centerY = adjustedSourceRect.top + adjustedSourceRect.height / 2;
-
+  // Create and configure clone
   const clone = document.createElement("img");
-  clone.src = actualImageElement.src;
+  clone.src = imgElement.src;
   clone.alt = "Product";
-  clone.style.position = "fixed";
-  clone.style.width = `${sourceRect.width}px`;
-  clone.style.height = `${sourceRect.height}px`;
-  clone.style.objectFit = "cover";
-  clone.style.borderRadius = "0%";
-  clone.style.zIndex = "9999";
-  clone.style.boxShadow =
-    "0 12px 24px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.15)";
-  clone.style.border = "0px solid white";
-  clone.style.backgroundColor = "white";
-  clone.style.pointerEvents = "none";
-  clone.style.filter = "brightness(1.05) saturate(1.1)";
-  clone.style.willChange = "transform, left, top, width, height, opacity";
-  clone.style.backfaceVisibility = "hidden";
 
-  // Position the clone at the center of where it will end up in phase 1
-  clone.style.left = `${centerX - sourceRect.width / 2}px`;
-  clone.style.top = `${centerY - sourceRect.height / 2}px`;
-  clone.style.opacity = "0";
+  // Batch style assignments for better performance
+  Object.assign(clone.style, {
+    position: "fixed",
+    width: `${sourceRect.width}px`,
+    height: `${sourceRect.height}px`,
+    left: `${centerX - sourceRect.width / 2}px`,
+    top: `${centerY - sourceRect.height / 2}px`,
+    objectFit: "cover",
+    borderRadius: "0%",
+    zIndex: "9999",
+    boxShadow: "0 12px 24px rgba(0, 0, 0, 0.25), 0 4px 8px rgba(0, 0, 0, 0.15)",
+    border: "0px solid white",
+    backgroundColor: "white",
+    pointerEvents: "none",
+    filter: "brightness(1.05) saturate(1.1)",
+    willChange: "transform, left, top, width, height, opacity",
+    backfaceVisibility: "hidden",
+    opacity: "0",
+  });
 
   document.body.appendChild(clone);
-  clone.getBoundingClientRect();
 
-  // Set up transition for phase 1 (including opacity)
-  clone.style.transition =
-    "width 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94), height 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94), left 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94), top 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+  // Force reflow once
+  clone.offsetHeight;
 
-  setTimeout(() => {
-    // Phase 1: Fade in and transform to circle at the same position
-    clone.style.opacity = "1"; // Fade in
-    clone.style.width = `${circleSize}px`;
-    clone.style.height = `${circleSize}px`;
-    clone.style.borderRadius = "50%";
-    clone.style.left = `${centerX - circleSize / 2}px`;
-    clone.style.top = `${centerY - circleSize / 2}px`;
-    clone.style.border = "3px solid rgba(255, 255, 255, 0.9)";
-    clone.style.boxShadow =
-      "0 16px 32px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
-  }, 10);
+  // Phase 1: Transform to circle
+  const animateToCircle = () => {
+    clone.style.transition = [
+      "width",
+      "height",
+      "border-radius",
+      "left",
+      "top",
+      "border",
+      "box-shadow",
+      "opacity",
+    ]
+      .map((p) => `${p} ${PHASE1_DURATION}ms ${EASING}`)
+      .join(", ");
 
-  const finalSize = 40;
-  const targetX = targetRect.left + targetRect.width / 2 - finalSize / 2;
-  const targetY = targetRect.top + targetRect.height / 2 - finalSize / 2;
+    // Batch phase 1 changes
+    Object.assign(clone.style, {
+      opacity: "1",
+      width: `${CIRCLE_SIZE}px`,
+      height: `${CIRCLE_SIZE}px`,
+      borderRadius: "50%",
+      left: `${centerX - CIRCLE_SIZE / 2}px`,
+      top: `${centerY - CIRCLE_SIZE / 2}px`,
+      border: "3px solid rgba(255, 255, 255, 0.9)",
+      boxShadow:
+        "0 16px 32px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+    });
+  };
 
-  setTimeout(() => {
-    // Phase 2: Animate to cart icon
+  // Phase 2: Animate to cart with optimized calculations
+  const animateToCart = () => {
     clone.style.transition = "";
 
-    let startTime: number | null = null;
-    const duration = 600;
-    const startSize = circleSize;
-    const endSize = finalSize;
-
-    const startPointX = centerX - startSize / 2;
-    const startPointY = centerY - startSize / 2;
-
+    const startPointX = centerX - CIRCLE_SIZE / 2;
+    const startPointY = centerY - CIRCLE_SIZE / 2;
     const horizontalDistance = targetX - startPointX;
     const verticalDistance = targetY - startPointY;
     const totalDistance = Math.sqrt(
-      horizontalDistance * horizontalDistance +
-        verticalDistance * verticalDistance,
+      horizontalDistance ** 2 + verticalDistance ** 2,
     );
 
-    // Optimized curve for natural arc trajectory
+    // Optimized arc calculation
     const arcHeight = Math.min(totalDistance * 0.25, 100);
     const midPointX = startPointX + horizontalDistance * 0.5;
     const midPointY = Math.min(startPointY, targetY) - arcHeight;
+
+    let startTime: number;
 
     const animate = (currentTime: number) => {
       if (!startTime) {
         startTime = currentTime;
       }
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
 
-      // Smooth quadratic bezier curve
+      const progress = Math.min((currentTime - startTime) / PHASE2_DURATION, 1);
       const t = progress;
       const oneMinusT = 1 - t;
 
+      // Quadratic bezier curve calculations
       const xPos =
-        oneMinusT * oneMinusT * startPointX +
+        oneMinusT ** 2 * startPointX +
         2 * oneMinusT * t * midPointX +
-        t * t * targetX;
-
+        t ** 2 * targetX;
       const yPos =
-        oneMinusT * oneMinusT * startPointY +
+        oneMinusT ** 2 * startPointY +
         2 * oneMinusT * t * midPointY +
-        t * t * targetY;
+        t ** 2 * targetY;
 
-      // Gradual size reduction with easing
-      const sizeProgress = 1 - Math.pow(1 - progress, 2);
-      const currentSize = startSize - (startSize - endSize) * sizeProgress;
-
-      // Subtle bounce without rotation
+      // Size and bounce calculations
+      const sizeProgress = 1 - (1 - progress) ** 2;
+      const currentSize =
+        CIRCLE_SIZE - (CIRCLE_SIZE - FINAL_SIZE) * sizeProgress;
       const bounceScale =
         1 + Math.sin(progress * Math.PI) * 0.05 * (1 - progress);
 
-      clone.style.width = `${currentSize}px`;
-      clone.style.height = `${currentSize}px`;
-      clone.style.left = `${xPos}px`;
-      clone.style.top = `${yPos}px`;
-      clone.style.transform = `scale(${bounceScale})`;
+      // Batch style updates
+      Object.assign(clone.style, {
+        width: `${currentSize}px`,
+        height: `${currentSize}px`,
+        left: `${xPos}px`,
+        top: `${yPos}px`,
+        transform: `scale(${bounceScale})`,
+      });
 
       if (progress < 1) {
         requestAnimationFrame(animate);
       } else {
-        clone.style.transform = "scale(0)";
-        clone.style.transition =
-          "transform 200ms cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 200ms ease";
-        clone.style.opacity = "0";
-
-        setTimeout(() => {
-          if (clone.parentNode) {
-            clone.parentNode.removeChild(clone);
-          }
-        }, 200);
-
-        if (cartIconRef.current) {
-          cartIconRef.current.style.transform = "scale(1.3)";
-          cartIconRef.current.style.transition =
-            "transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)";
-
-          setTimeout(() => {
-            if (cartIconRef.current) {
-              cartIconRef.current.style.transform = "scale(1)";
-            }
-          }, 200);
-        }
+        finishAnimation();
       }
     };
 
     requestAnimationFrame(animate);
-  }, 300);
+  };
+
+  // Cleanup and cart icon bounce
+  const finishAnimation = () => {
+    Object.assign(clone.style, {
+      transform: "scale(0)",
+      transition:
+        "transform 200ms cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 200ms ease",
+      opacity: "0",
+    });
+
+    // Cleanup
+    setTimeout(() => clone.remove(), CLEANUP_DELAY);
+
+    // Cart icon bounce
+    if (cartIconRef.current) {
+      Object.assign(cartIconRef.current.style, {
+        transform: "scale(1.3)",
+        transition: "transform 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+      });
+
+      setTimeout(() => {
+        if (cartIconRef.current) {
+          cartIconRef.current.style.transform = "scale(1)";
+        }
+      }, CLEANUP_DELAY);
+    }
+  };
+
+  // Execute animation phases
+  requestAnimationFrame(() => {
+    animateToCircle();
+    setTimeout(animateToCart, 300);
+  });
 };

@@ -70,10 +70,12 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
                   onClick={() =>
                     router.push(`/products/${product.details[0].slug}`)
                   }
-                  className="flex items-center justify-center h-[138px] mb-1 overflow-hidden md:h-72 md:mb-2"
+                  className="flex items-center justify-center mb-1 overflow-hidden max-h-36 md:max-h-72 md:mb-2"
                   style={{
                     backgroundColor:
-                      "background" in product ? product.background : "#FDF8F5",
+                      "background" in product
+                        ? product.background
+                        : "transparent",
                   }}
                 >
                   <Image
