@@ -18,9 +18,9 @@ const montserrat = Montserrat({
 });
 
 interface EmailInputProps {
-  email: string;
+  email: string | undefined;
   setEmail: (value: string) => void;
-  emailError: string;
+  emailError: string | undefined;
   setEmailError: (value: string) => void;
 }
 
@@ -66,7 +66,7 @@ const EmailInput: React.FC<EmailInputProps> = ({
             <Input
               type="text"
               placeholder="Email"
-              value={email}
+              value={email || ""}
               onChange={handleChange}
               className={`text-sm md:text-base bg-neutral-100 border ${
                 emailError ? "border-rose-500" : "border-gray-300"
@@ -77,7 +77,7 @@ const EmailInput: React.FC<EmailInputProps> = ({
           </TooltipTrigger>
           <TooltipContent
             align="start"
-            className="bg-rose-500 text-white text-xs p-2 rounded shadow"
+            className="p-2 text-xs text-white rounded shadow bg-rose-500"
           >
             {emailError}
           </TooltipContent>

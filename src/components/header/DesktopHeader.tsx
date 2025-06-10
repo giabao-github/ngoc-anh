@@ -48,9 +48,9 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
   const { cartCount } = useCart();
 
   return (
-    <header className={`sticky top-0 z-20 bg-primary text-white py-2 px-6`}>
+    <header className="sticky top-0 z-20 px-6 py-2 text-white bg-primary">
       <div className="flex items-center justify-between mx-auto max-w-7xl">
-        <div className={`flex items-center space-x-4`}>
+        <div className="flex items-center space-x-4">
           <Image
             src="/logo.png"
             alt="Logo"

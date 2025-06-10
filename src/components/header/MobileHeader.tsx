@@ -55,72 +55,70 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
   };
 
   return (
-    <div className="fixed top-0 left-0 z-20 w-full">
-      <header className={`bg-primary text-white py-2 px-6`}>
-        <div className="flex items-center justify-between mx-auto max-w-7xl">
-          <div className={`flex items-center space-x-4`}>
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={1024}
-              height={1024}
-              quality={100}
-              priority
-              onClick={() => router.push("/")}
-              className="object-contain w-16 h-16 rounded cursor-pointer select-none"
-            />
-            <h1 className="hidden text-2xl font-semibold uppercase select-none text-logo md:block">
-              Thạch Âm
-            </h1>
-          </div>
-          <div className="flex flex-row items-center gap-x-6">
-            <div ref={cartIconRef} className="relative cursor-pointer group">
-              <FiShoppingCart
-                size={24}
-                title="Đi đến giỏ hàng"
-                aria-label="Giỏ hàng"
-                onClick={() => router.push("/cart")}
-                className="group-hover:text-[#D4AF37] group-active:text-[#D4AF37]/70"
-              />
-              {cartCount > 0 && (
-                <div
-                  className={`absolute bg-white text-orange-500 text-[10px] font-bold ${
-                    cartCount > 99
-                      ? "w-7 h-2/3 -top-2 -right-4"
-                      : "w-5 h-5 -top-[10px] -right-2"
-                  } rounded-full flex items-center justify-center ${
-                    montserrat.className
-                  }`}
-                >
-                  {cartCount > 99 ? "99+" : cartCount}
-                </div>
-              )}
-            </div>
-            <FiUser
-              size={24}
-              title="Tài khoản"
-              aria-label="Tài khoản"
-              onClick={() => router.push("/login?method=email")}
-              className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70"
-            />
-            <div className="relative w-10 h-10 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_16px_rgba(255,255,255,0.8)] active:shadow-[0_0_16px_rgba(255,255,255,1)]">
-              <Image
-                src="/avatar.jpeg"
-                alt="Avatar"
-                fill
-                quality={100}
-                className="object-cover cursor-pointer select-none"
-              />
-            </div>
-            <button
-              className="outline-none cursor-pointer ring-0 focus:ring-0 focus:outline-none"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-            </button>
-          </div>
+    <header className="sticky top-0 left-0 z-20 w-full px-6 py-2 text-white bg-primary">
+      <div className="flex items-center justify-between mx-auto max-w-7xl">
+        <div className={`flex items-center space-x-4`}>
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={1024}
+            height={1024}
+            quality={100}
+            priority
+            onClick={() => router.push("/")}
+            className="object-contain w-16 h-16 rounded cursor-pointer select-none"
+          />
+          <h1 className="hidden text-2xl font-semibold uppercase select-none text-logo md:block">
+            Thạch Âm
+          </h1>
         </div>
-      </header>
+        <div className="flex flex-row items-center gap-x-6">
+          <div ref={cartIconRef} className="relative cursor-pointer group">
+            <FiShoppingCart
+              size={24}
+              title="Đi đến giỏ hàng"
+              aria-label="Giỏ hàng"
+              onClick={() => router.push("/cart")}
+              className="group-hover:text-[#D4AF37] group-active:text-[#D4AF37]/70"
+            />
+            {cartCount > 0 && (
+              <div
+                className={`absolute bg-white text-orange-500 text-[10px] font-bold ${
+                  cartCount > 99
+                    ? "w-7 h-2/3 -top-2 -right-4"
+                    : "w-5 h-5 -top-[10px] -right-2"
+                } rounded-full flex items-center justify-center ${
+                  montserrat.className
+                }`}
+              >
+                {cartCount > 99 ? "99+" : cartCount}
+              </div>
+            )}
+          </div>
+          <FiUser
+            size={24}
+            title="Tài khoản"
+            aria-label="Tài khoản"
+            onClick={() => router.push("/login?method=email")}
+            className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70"
+          />
+          <div className="relative w-10 h-10 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_16px_rgba(255,255,255,0.8)] active:shadow-[0_0_16px_rgba(255,255,255,1)]">
+            <Image
+              src="/avatar.jpeg"
+              alt="Avatar"
+              fill
+              quality={100}
+              className="object-cover cursor-pointer select-none"
+            />
+          </div>
+          <button
+            className="outline-none cursor-pointer ring-0 focus:ring-0 focus:outline-none"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </button>
+        </div>
+      </div>
 
       {/* Animated dropdown menu */}
       <div
@@ -219,7 +217,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
           </nav>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

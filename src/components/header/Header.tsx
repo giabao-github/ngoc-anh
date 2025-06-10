@@ -40,18 +40,16 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <>
       {isMobile ? (
-        <div className="pb-20">
-          <MobileHeader
-            hasSections={hasSections}
-            hasFooter={hasFooter}
-            collectionRef={collectionRef}
-            productsRef={productsRef}
-            aboutRef={aboutRef}
-            cartIconRef={cartIconRef}
-            query={query}
-            setQuery={setQuery}
-          />
-        </div>
+        <MobileHeader
+          hasSections={hasSections}
+          hasFooter={hasFooter}
+          collectionRef={collectionRef}
+          productsRef={productsRef}
+          aboutRef={aboutRef}
+          cartIconRef={cartIconRef}
+          query={query}
+          setQuery={setQuery}
+        />
       ) : (
         <DesktopHeader
           hasSections={hasSections}

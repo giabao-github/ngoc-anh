@@ -18,8 +18,12 @@ const normalizedProducts =
 export const searchProducts = (query: string): SearchResult => {
   const formattedQuery = formatText(query);
 
-  if (typeof formattedQuery !== "string" || formattedQuery.length === 0) {
+  if (typeof formattedQuery !== "string") {
     return { products: [], query: "" };
+  }
+
+  if (formattedQuery.length === 0) {
+    return { products: products, query: "" };
   }
 
   const normalizedQuery = normalizeText(formattedQuery);
@@ -71,7 +75,7 @@ export const searchProducts = (query: string): SearchResult => {
 export const handleSearch = (query: string, router: AppRouterInstance) => {
   const formattedQuery = formatText(query);
 
-  if (typeof formattedQuery !== "string" || formattedQuery.length === 0) {
+  if (typeof formattedQuery !== "string") {
     return;
   }
 

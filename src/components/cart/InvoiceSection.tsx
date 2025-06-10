@@ -3,7 +3,7 @@ import { RefObject } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Montserrat } from "next/font/google";
 
-import InvoiceForm from "@/components/cart/InvoiceForm";
+import { InvoiceForm } from "@/components/cart/InvoiceForm";
 import { Input } from "@/components/ui/input";
 
 const montserrat = Montserrat({

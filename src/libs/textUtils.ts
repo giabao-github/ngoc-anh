@@ -1,4 +1,3 @@
-import { products } from "@/app/storage";
 import {
   DIACRITIC_REGEX,
   SLUG_EDGE_DASHES,
@@ -9,11 +8,44 @@ import {
   WHITESPACE_REGEX,
 } from "@/constants/regrexes";
 
-export const sanitizeInput = (input: string, maxLength = 255): string => {
+export const sanitizeInputName = (input: string, maxLength = 255): string => {
+  // Remove common kaomoji and emoticon patterns (more comprehensive)
+  const kaomojiPatterns = [
+    // Face patterns: (^_^) ಠ_ಠ o()o etc. - expanded character set
+    /[\(\)（）][\^\-_oO•°ಠ><\\\/\|~=]{1,4}[\)\(）（]/g,
+    // Table flip, shrug patterns
+    /[┻┳┃━│┌┐└┘├┤┬┴┼]/g,
+    // Common kaomoji symbols (more selective)
+    /[╯╰╭╮︵︶ツヾシ〜]/g,
+    // Decorative symbols that are typically not content
+    /[♪♫☆★♥♡‼⁉]/g,
+    // Unicode kaomoji characters (covers ᓚᘏᗢ and similar)
+    /[\u1400-\u167F\u2600-\u26FF\u2700-\u27BF\uFE00-\uFE0F]/g,
+    // Repetitive character patterns (likely decorative)
+    /(.)\1{4,}/g,
+    // Specific problematic patterns you mentioned
+    /o\(\)o/g,
+    // Additional face-like patterns with various brackets
+    /[<\[\{][^\w\s]{1,3}[>\]\}]/g,
+  ];
+
+  kaomojiPatterns.forEach((pattern) => {
+    input = input.replace(pattern, "");
+  });
+
   return input
-    .replace(/[^\p{L}\p{N}]/gu, " ")
+    .replace(/[^\p{L}\p{N}\s\-&.']/gu, "")
     .replace(/\s+/g, " ")
-    .trim()
+    .slice(0, maxLength);
+};
+
+export const sanitizeInputAddress = (
+  input: string,
+  maxLength = 255,
+): string => {
+  return input
+    .replace(/[^a-zA-Z0-9\/,()'\-\.#\s]/g, "")
+    .replace(/\s+/g, " ")
     .slice(0, maxLength);
 };
 
@@ -93,7 +125,12 @@ export const sanitizeInputConservative = (
   return input.length > maxLength ? input.slice(0, maxLength) : input;
 };
 
-export type SanitizeLevel = "conservative" | "moderate" | "aggressive" | "name";
+export type SanitizeLevel =
+  | "conservative"
+  | "moderate"
+  | "aggressive"
+  | "name"
+  | "address";
 
 export const sanitizeInputWithLevel = (
   input: string,
@@ -106,8 +143,10 @@ export const sanitizeInputWithLevel = (
     case "aggressive":
       return sanitizeInputAggressive(input, maxLength);
     case "name":
-      return sanitizeInput(input, maxLength);
-    case "moderate":
+      return sanitizeInputName(input, maxLength);
+    case "address":
+      return sanitizeInputAddress(input, maxLength);
+    default:
       // Remove HTML and obvious emojis, keep other Unicode
       return input
         .replace(/<[^>]*>/g, "")

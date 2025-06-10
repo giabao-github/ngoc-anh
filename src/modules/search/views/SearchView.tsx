@@ -32,10 +32,17 @@ export const SearchView = () => {
           <h1 className="text-2xl font-semibold text-gray-900 md:text-3xl">
             Tìm kiếm
           </h1>
-          <p className="my-3 text-sm md:text-base text-primary md:my-4">
-            Có <strong>{totalResults} sản phẩm</strong> cho tìm kiếm{" "}
-            <strong>"{query}"</strong>
-          </p>
+          {query.trim().length > 0 ? (
+            <p className="my-3 text-sm md:text-base text-primary md:my-4">
+              Có <strong>{totalResults} sản phẩm</strong> cho tìm kiếm{" "}
+              <strong>"{query}"</strong>
+            </p>
+          ) : (
+            <p className="my-3 text-sm md:text-base text-primary md:my-4">
+              Vui lòng nhập từ khóa để lọc kết quả chính xác
+            </p>
+          )}
+
           <div className="w-16 h-1 mx-auto mt-2 bg-black rounded md:w-20" />
         </div>
 

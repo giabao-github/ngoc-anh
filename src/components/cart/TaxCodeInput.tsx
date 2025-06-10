@@ -16,9 +16,9 @@ const montserrat = Montserrat({
 });
 
 interface TaxCodeInputProps {
-  taxCode: string;
+  taxCode: string | undefined;
   setTaxCode: (value: string) => void;
-  taxCodeError: string;
+  taxCodeError: string | undefined;
   setTaxCodeError: (value: string) => void;
 }
 
@@ -78,7 +78,7 @@ const TaxCodeInput: React.FC<TaxCodeInputProps> = ({
             <Input
               type="text"
               placeholder="Mã số thuế"
-              value={taxCode}
+              value={taxCode || ""}
               onChange={handleChange}
               className={`text-sm md:text-base uppercase placeholder:normal-case bg-neutral-100 border ${
                 taxCodeError ? "border-rose-500" : "border-gray-300"
