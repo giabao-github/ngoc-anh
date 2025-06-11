@@ -19,7 +19,7 @@ const App = () => {
   const handleScroll = (ref: RefObject<HTMLDivElement | null>) => {
     if (ref.current) {
       const elementPosition = ref.current.offsetTop;
-      const offsetPosition = isMobile ? elementPosition - 100 : elementPosition;
+      const offsetPosition = isMobile ? elementPosition - 80 : elementPosition;
 
       window.scrollTo({
         top: offsetPosition,

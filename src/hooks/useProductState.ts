@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { Product } from "@/app/types";
+import { ToastIds } from "@/constants/toastIds";
 
 export const useProductState = (
   product: Product | undefined,
@@ -57,7 +58,7 @@ export const useProductState = (
     if (isAtMaxQuantity && availableQuantity > 0) {
       const timeoutId = setTimeout(() => {
         toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này", {
-          id: "cart-max-quantity-warning",
+          id: ToastIds.CART_MAX_QTY_WARNING,
         });
       }, 300);
 

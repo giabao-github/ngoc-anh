@@ -1,16 +1,12 @@
 import { FaArrowLeftLong } from "react-icons/fa6";
 
-import { Montserrat } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { Separator } from "@/components/ui/separator";
 
-import { useCart } from "@/hooks/useCart";
+import { montserrat } from "@/config/fonts";
 
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+import { useCart } from "@/hooks/useCart";
 
 const CartSummary = () => {
   const router = useRouter();

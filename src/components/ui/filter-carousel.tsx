@@ -54,13 +54,14 @@ export const FilterCarousel = ({
       <Carousel
         setApi={setApi}
         opts={{
-          align: "center",
+          align: "start",
           dragFree: true,
           loop: true,
+          skipSnaps: false,
         }}
         className="w-full px-10 md:px-12"
       >
-        <CarouselContent className="-ml-3">
+        <CarouselContent className="ml-0">
           {!isLoading &&
             data.map((item, index) => {
               const isActive = index === current - 1;

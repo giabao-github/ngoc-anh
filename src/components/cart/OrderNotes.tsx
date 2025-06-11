@@ -1,11 +1,6 @@
-import { Montserrat } from "next/font/google";
-
 import { Textarea } from "@/components/ui/textarea";
 
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+import { montserrat } from "@/config/fonts";
 
 interface OrderNotesProps {
   notes: string;

@@ -14,6 +14,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
+import { ToastIds } from "@/constants/toastIds";
 import { cn } from "@/libs/utils";
 
 interface ProductCarouselProps {
@@ -60,7 +61,7 @@ export const ProductCarousel = ({
         onSelect(selectedIndex.toString());
       } catch (error) {
         toast.error("Không thể tải hình ảnh sản phẩm", {
-          id: "product-carousel-selection-error",
+          id: ToastIds.PRODUCT_CAROUSEL_SELECTION_ERROR,
         });
         console.warn("Carousel selection error:", error);
       }
@@ -71,7 +72,7 @@ export const ProductCarousel = ({
       onSelectHandler();
     } catch (error) {
       toast.error("Không thể tải hình ảnh sản phẩm", {
-        id: "product-carousel-api-error",
+        id: ToastIds.PRODUCT_CAROUSEL_API_ERROR,
       });
       console.warn("Carousel API error:", error);
     }
@@ -81,7 +82,7 @@ export const ProductCarousel = ({
         api.off("select", onSelectHandler);
       } catch (error) {
         toast.error("Không thể tải hình ảnh sản phẩm", {
-          id: "product-carousel-cleanup-error",
+          id: ToastIds.PRODUCT_CAROUSEL_CLEANUP_ERROR,
         });
         console.warn("Carousel cleanup error:", error);
       }

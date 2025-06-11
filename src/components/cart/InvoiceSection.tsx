@@ -1,17 +1,13 @@
 import { RefObject } from "react";
 
 import { AnimatePresence } from "framer-motion";
-import { Montserrat } from "next/font/google";
 
 import { InvoiceForm } from "@/components/cart/InvoiceForm";
 import { Input } from "@/components/ui/input";
 
-import useIsMobile from "@/hooks/useIsMobile";
+import { montserrat } from "@/config/fonts";
 
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+import useIsMobile from "@/hooks/useIsMobile";
 
 interface InvoiceSectionProps {
   invoiceOpen: boolean;

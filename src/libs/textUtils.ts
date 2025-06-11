@@ -1,6 +1,6 @@
-import { SanitizeLevel } from "@/app/types";
 import {
   DIACRITIC_REGEX,
+  KAOMOJI_PATTERNS,
   SLUG_EDGE_DASHES,
   SLUG_MULTIPLE_DASHES,
   SLUG_SPECIAL_CHARS,
@@ -9,26 +9,11 @@ import {
   WHITESPACE_REGEX,
 } from "@/constants/regexes";
 
+import { SanitizeLevel } from "@/app/types";
+
 export const sanitizeInputName = (input: string, maxLength = 255): string => {
   // Remove common kaomoji and emoticon patterns (more comprehensive)
-  const kaomojiPatterns = [
-    // Face patterns: (^_^) ಠ_ಠ o()o etc. - expanded character set
-    /[\(\)（）][\^\-_oO•°ಠ><\\\/\|~=]{1,4}[\)\(）（]/g,
-    // Table flip, shrug patterns
-    /[┻┳┃━│┌┐└┘├┤┬┴┼]/g,
-    // Common kaomoji symbols (more selective)
-    /[╯╰╭╮︵︶ツヾシ〜]/g,
-    // Decorative symbols that are typically not content
-    /[♪♫☆★♥♡‼⁉]/g,
-    // Unicode kaomoji characters (covers ᓚᘏᗢ and similar)
-    /[\u1400-\u167F\u2600-\u26FF\u2700-\u27BF\uFE00-\uFE0F]/g,
-    // Specific problematic patterns you mentioned
-    /o\(\)o/g,
-    // Additional face-like patterns with various brackets
-    /[<\[\{][^\w\s]{1,3}[>\]\}]/g,
-  ];
-
-  kaomojiPatterns.forEach((pattern) => {
+  KAOMOJI_PATTERNS.forEach((pattern) => {
     input = input.replace(pattern, "");
   });
 
@@ -126,7 +111,7 @@ export const sanitizeInputConservative = (
 
 export const sanitizeInputWithLevel = (
   input: string,
-  level: SanitizeLevel = "moderate",
+  level: SanitizeLevel = "conservative",
   maxLength = 255,
 ): string => {
   switch (level) {

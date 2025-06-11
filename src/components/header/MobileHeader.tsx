@@ -3,23 +3,21 @@ import { BsSearchHeart } from "react-icons/bs";
 import { FiMenu, FiShoppingCart, FiUser, FiX } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
 
-import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 
-import { useCart } from "@/hooks/useCart";
+import { montserrat } from "@/config/fonts";
 
 import { HASH_ROUTES } from "@/constants/routes";
+
+import { useCart } from "@/hooks/useCart";
+
 import { handleNavigation } from "@/libs/navigationUtils";
 import { handleSearch } from "@/libs/searchUtils";
-
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+import { cn } from "@/libs/utils";
 
 interface MobileHeaderProps {
   hasSections?: boolean;
@@ -133,7 +131,12 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         }`}
       >
         <div className="p-6">
-          <nav className="flex flex-col space-y-4">
+          <nav
+            className={cn(
+              "flex font-medium flex-col space-y-6",
+              montserrat.className,
+            )}
+          >
             <Link
               href="#"
               onClick={(e) => {

@@ -1,8 +1,6 @@
 import { z } from "zod";
 
-const hasRedundantSpaces = (value: string) => {
-  return !/\s{2,}/.test(value) && !/^\s+|\s+$/.test(value);
-};
+const hasRedundantSpaces = (value: string) => !/^\s+|\s+$|\s{2,}/.test(value);
 
 export const invoiceFormSchema = z
   .object({

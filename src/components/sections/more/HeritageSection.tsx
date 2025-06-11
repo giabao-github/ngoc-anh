@@ -1,11 +1,8 @@
-import { Montserrat } from "next/font/google";
-
 import { AnimatedSection } from "@/components/sections/more/AnimatedSection";
 
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+import { montserrat } from "@/config/fonts";
+
+import { cn } from "@/libs/utils";
 
 export const HeritageSection = () => (
   <AnimatedSection>
@@ -13,7 +10,10 @@ export const HeritageSection = () => (
       TỪ DI SẢN ĐẾN HIỆN ĐẠI
     </h2>
     <div
-      className={`p-6 md:p-8 border font-medium bg-emerald-800/50 backdrop-blur-sm rounded-2xl border-amber-400/50 ${montserrat.className}`}
+      className={cn(
+        "p-6 md:p-8 border font-medium bg-emerald-800/50 backdrop-blur-sm rounded-2xl border-amber-400/50",
+        montserrat.className,
+      )}
     >
       <p className="mb-6 leading-relaxed md:text-lg text-amber-100">
         Thạch Âm không chỉ nhìn về quá khứ – mà giao tiếp với hiện tại bằng

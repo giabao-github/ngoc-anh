@@ -2,20 +2,15 @@
 
 import { useRef } from "react";
 
-import { Montserrat } from "next/font/google";
-
 import Header from "@/components/header/Header";
 import Footer from "@/components/sections/Footer";
 import { AnimatedSection } from "@/components/sections/more/AnimatedSection";
 import { HeritageSection } from "@/components/sections/more/HeritageSection";
 import { NavigationButtons } from "@/components/sections/more/NavigationButtons";
 
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { montserrat } from "@/config/fonts";
 
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export const MoreView = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -24,13 +19,7 @@ export const MoreView = () => {
   return (
     <>
       <Header hasFooter aboutRef={aboutRef} />
-      <div
-        className="relative min-h-screen overflow-hidden bg-center bg-contain md:bg-cover"
-        style={{
-          backgroundImage: "url('/backgrounds/more-background.jpeg')",
-          backgroundAttachment: "scroll",
-        }}
-      >
+      <div className="relative min-h-screen overflow-hidden bg-[url('/backgrounds/more-background.jpeg')] bg-center bg-contain md:bg-cover bg-scroll">
         <main className="relative z-10 pb-12 md:pt-12 md:pb-20">
           <div className="container max-w-lg px-4 py-16 mx-auto md:max-w-7xl">
             <AnimatedSection>

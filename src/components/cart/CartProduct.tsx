@@ -3,7 +3,6 @@ import { FaTrashCan } from "react-icons/fa6";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { useSwipeable } from "react-swipeable";
 
-import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -11,15 +10,14 @@ import { toast } from "sonner";
 
 import { Input } from "@/components/ui/input";
 
+import { montserrat } from "@/config/fonts";
+
+import { ToastIds } from "@/constants/toastIds";
+
 import { useCart } from "@/hooks/useCart";
 import useIsMobile from "@/hooks/useIsMobile";
 
 import { CartItem, Product } from "@/app/types";
-
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
 
 interface CartProductProps {
   item: CartItem;
@@ -82,7 +80,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
       }
       if (Number(newValue) >= product.quantity) {
         toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này", {
-          id: "cart-max-quantity-warning",
+          id: ToastIds.CART_MAX_QTY_WARNING,
         });
       }
     }

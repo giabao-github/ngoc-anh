@@ -1,17 +1,16 @@
 import { Controller, UseFormReturn } from "react-hook-form";
 import { FaCircleCheck, FaCircleExclamation } from "react-icons/fa6";
 
-import { NextFont } from "next/dist/compiled/@next/font";
-
 import { Input } from "@/components/ui/input";
 
-import { SanitizeLevel } from "@/app/types";
 import {
   formatTaxCode,
   sanitizeInputOnBlur,
   sanitizeInputWithLevel,
 } from "@/libs/textUtils";
 import { cn } from "@/libs/utils";
+
+import { SanitizeLevel } from "@/app/types";
 
 interface InvoiceInputProps {
   name:
@@ -34,7 +33,7 @@ interface InvoiceInputProps {
   sanitizeLevel?: SanitizeLevel | undefined;
   maxLength?: number;
   placeholder: string;
-  font: NextFont;
+  font: { className: string };
   className?: string;
 }
 
@@ -61,23 +60,23 @@ export const InvoiceInput = ({
           <div className="relative">
             <Input
               type="text"
-              max={maxLength}
+              inputMode={name === "taxCode" ? "numeric" : undefined}
+              autoComplete="off"
+              maxLength={maxLength}
               placeholder={placeholder}
               value={field.value}
               onChange={(e) => {
                 if (name === "taxCode") {
                   const taxCode = formatTaxCode(e.target.value);
                   field.onChange(taxCode);
+                } else if (sanitizeLevel) {
+                  const sanitized = sanitizeInputWithLevel(
+                    e.target.value,
+                    sanitizeLevel,
+                  );
+                  field.onChange(sanitized);
                 } else {
-                  if (sanitizeLevel) {
-                    const sanitized = sanitizeInputWithLevel(
-                      e.target.value,
-                      sanitizeLevel,
-                    );
-                    field.onChange(sanitized);
-                  } else {
-                    field.onChange(e.target.value);
-                  }
+                  field.onChange(e.target.value);
                 }
               }}
               onBlur={() => {
@@ -94,7 +93,7 @@ export const InvoiceInput = ({
                     : "border-gray-300",
               )}
             />
-            <div className="absolute -translate-y-1/2 right-3 top-1/2">
+            <div className="absolute -translate-y-1/2 pointer-events-none right-3 top-1/2">
               {isValid && (
                 <FaCircleCheck className="w-4 h-4 text-emerald-500" />
               )}
@@ -104,7 +103,7 @@ export const InvoiceInput = ({
             </div>
           </div>
           {fieldState.error && (
-            <p className="px-1 mt-1 text-xs text-rose-500">
+            <p id={`${name}-error`} className="px-1 mt-1 text-xs text-rose-500">
               {fieldState.error.message}
             </p>
           )}

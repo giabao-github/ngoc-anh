@@ -2,15 +2,20 @@ import { useCallback, useState } from "react";
 
 import { toast } from "sonner";
 
+import { ToastIds } from "@/constants/toastIds";
+
 import { AddressData, District, Province, Ward } from "@/app/types";
 
 const FETCH_TIMEOUT = 10000;
-const cache = new Map<string, any>();
+const CACHE_TTL = 1000 * 60 * 60;
+const cache = new Map<string, { ts: number; data: unknown }>();
 
 const fetchWithTimeout = async (url: string) => {
+  const now = Date.now();
   const cached = cache.get(url);
-  if (cached) {
-    return cached;
+
+  if (cached && now - cached.ts < CACHE_TTL) {
+    return cached.data;
   }
 
   const controller = new AbortController();
@@ -22,7 +27,7 @@ const fetchWithTimeout = async (url: string) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    cache.set(url, data);
+    cache.set(url, { ts: now, data });
     return data;
   } catch (error) {
     if (error instanceof Error) {
@@ -69,7 +74,7 @@ export const useAddressData = () => {
     } catch (error) {
       console.error("Error fetching provinces:", error);
       toast.error("Không thể tải danh sách tỉnh/thành phố", {
-        id: "fetch-provinces-error",
+        id: ToastIds.FETCH_PROVINCES_ERROR,
       });
       setAddressData((prev) => ({
         ...prev,
@@ -101,7 +106,7 @@ export const useAddressData = () => {
     } catch (error) {
       console.error("Error fetching districts:", error);
       toast.error("Không thể tải danh sách quận/huyện", {
-        id: "fetch-districts-error",
+        id: ToastIds.FETCH_DISTRICTS_ERROR,
       });
       setAddressData((prev) => ({
         ...prev,
@@ -132,7 +137,7 @@ export const useAddressData = () => {
     } catch (error) {
       console.error("Error fetching wards:", error);
       toast.error("Không thể tải danh sách phường/xã", {
-        id: "fetch-wards-error",
+        id: ToastIds.FETCH_WARDS_ERROR,
       });
       setAddressData((prev) => ({
         ...prev,

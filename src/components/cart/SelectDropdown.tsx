@@ -2,7 +2,6 @@ import { Controller, UseFormReturn } from "react-hook-form";
 import { FaCircleCheck, FaCircleExclamation } from "react-icons/fa6";
 
 import { ChevronDown } from "lucide-react";
-import { NextFont } from "next/dist/compiled/@next/font";
 
 import { cn } from "@/libs/utils";
 
@@ -29,7 +28,7 @@ interface SelectDropdownProps {
   placeholder: string;
   disabled?: boolean;
   loading?: boolean;
-  font: NextFont;
+  font: { className: string };
 }
 
 export const SelectDropdown = ({
@@ -56,6 +55,8 @@ export const SelectDropdown = ({
           <div className="relative">
             <select
               title={title || placeholder}
+              aria-label={title || placeholder}
+              aria-describedby={fieldState.error ? `${name}-error` : undefined}
               value={field.value}
               onChange={(e) => {
                 field.onChange(e.target.value);
@@ -77,7 +78,7 @@ export const SelectDropdown = ({
                 </option>
               ))}
             </select>
-            <div className="absolute -translate-y-1/2 right-8 top-1/2">
+            <div className="absolute -translate-y-1/2 pointer-events-none right-8 top-1/2">
               {isValid && (
                 <FaCircleCheck className="w-4 h-4 text-emerald-500" />
               )}
@@ -88,7 +89,7 @@ export const SelectDropdown = ({
             <ChevronDown className="absolute w-4 h-4 text-gray-500 -translate-y-1/2 pointer-events-none right-2 top-1/2" />
           </div>
           {fieldState.error && (
-            <p className="px-1 mt-1 text-xs text-rose-500">
+            <p id={`${name}-error`} className="px-1 mt-1 text-xs text-rose-500">
               {fieldState.error.message}
             </p>
           )}

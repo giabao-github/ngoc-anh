@@ -3,26 +3,24 @@ import { FieldErrors, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import { Montserrat } from "next/font/google";
 import { toast } from "sonner";
-import { set } from "zod";
 
 import { InvoiceInput } from "@/components/cart/InvoiceInput";
 import { SelectDropdown } from "@/components/cart/SelectDropdown";
 
+import { montserrat } from "@/config/fonts";
+
+import { ToastIds } from "@/constants/toastIds";
+
 import { useAddressData } from "@/hooks/useAddressData";
+
+import { cn } from "@/libs/utils";
 
 import { invoiceFormSchema } from "@/app/schemas";
 import { InvoiceFormData } from "@/app/types";
-import { cn } from "@/libs/utils";
-
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
 
 interface InvoiceFormProps {
-  contentRef: RefObject<HTMLDivElement | null>;
+  contentRef: RefObject<HTMLFormElement | null>;
   contentHeight: number;
 }
 
@@ -39,7 +37,6 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
   } = useAddressData();
 
   const [formHeight, setFormHeight] = useState(contentHeight * 1.4);
-  let maxLength = 100;
 
   const form = useForm<InvoiceFormData>({
     resolver: zodResolver(invoiceFormSchema),
@@ -137,8 +134,9 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
     }
   }, [watchedValues.district, fetchWards, form, setAddressData]);
 
-  const fullAddress = useMemo(() => {
-    const parts = [];
+  const { fullAddress, previewLimit } = useMemo(() => {
+    let limit = 100;
+    const parts: string[] = [];
     if (watchedValues.streetAddress?.trim()) {
       parts.push(watchedValues.streetAddress.trim());
     }
@@ -148,7 +146,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
       )?.name;
       if (wardName) {
         parts.push(wardName);
-        maxLength += wardName.length + 2;
+        limit += wardName.length + 2;
       }
     }
     if (watchedValues.district) {
@@ -157,7 +155,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
       )?.name;
       if (districtName) {
         parts.push(districtName);
-        maxLength += districtName.length + 2;
+        limit += districtName.length + 2;
       }
     }
     if (watchedValues.province) {
@@ -166,16 +164,16 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
       )?.name;
       if (provinceName) {
         parts.push(provinceName);
-        maxLength += provinceName.length + 2;
+        limit += provinceName.length + 2;
       }
     }
-    return parts.join(", ");
+    return { fullAddress: parts.join(", "), previewLimit: limit };
   }, [watchedValues, addressData]);
 
   const onSubmit = () => {
     toast.success("Đã lưu thông tin", {
       description: "Thông tin hóa đơn của bạn đã được lưu thành công",
-      id: "save-invoice-success",
+      id: ToastIds.SAVE_INVOICE_SUCCESS,
     });
   };
 
@@ -208,7 +206,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
         errorMessages.length > 1
           ? "Vui lòng kiểm tra các trường thông tin"
           : errorMessages[0],
-      id: "invoice-form-error",
+      id: ToastIds.INVOICE_FORM_ERROR,
     });
   };
 
@@ -219,7 +217,11 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
       exit={{ height: 0, opacity: 0 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
     >
-      <div ref={contentRef} className="flex flex-col pb-4 font-medium gap-y-2">
+      <form
+        ref={contentRef}
+        onSubmit={form.handleSubmit(onSubmit, onInvalid)}
+        className="flex flex-col pb-4 font-medium gap-y-2"
+      >
         {/* Company Name */}
         <InvoiceInput
           name="companyName"
@@ -310,8 +312,8 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
                 Địa chỉ đầy đủ:
               </span>
               <span className="text-gray-800">
-                {fullAddress.length > maxLength
-                  ? fullAddress.slice(0, maxLength) + "..."
+                {fullAddress.length > previewLimit
+                  ? fullAddress.slice(0, previewLimit) + "..."
                   : fullAddress || "Vui lòng điền đầy đủ thông tin địa chỉ"}
               </span>
             </div>
@@ -321,13 +323,13 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
         {/* Submit Button */}
         <div className="pt-4">
           <button
-            onClick={form.handleSubmit(onSubmit, onInvalid)}
+            type="submit"
             className="px-6 py-3 font-semibold tracking-wide text-white transition-colors rounded-full cursor-pointer select-none w-fit bg-primary hover:bg-primary/80 active:bg-primary/60"
           >
             Lưu thông tin
           </button>
         </div>
-      </div>
+      </form>
     </motion.div>
   );
 };

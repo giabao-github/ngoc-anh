@@ -3,20 +3,16 @@ import { FaBagShopping } from "react-icons/fa6";
 import { FiMinus, FiPlus, FiShoppingCart } from "react-icons/fi";
 import { LuPackageX } from "react-icons/lu";
 
-import { Montserrat } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 
+import { montserrat } from "@/config/fonts";
+
 import useIsMobile from "@/hooks/useIsMobile";
 
 import { Product } from "@/app/types";
-
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
 
 interface PurchaseSectionProps {
   product: Product;

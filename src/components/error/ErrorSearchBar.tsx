@@ -4,17 +4,13 @@ import { useState } from "react";
 import { BsSearchHeartFill } from "react-icons/bs";
 import { IoCloseCircle } from "react-icons/io5";
 
-import { Montserrat } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 
-import { handleSearch } from "@/libs/searchUtils";
+import { montserrat } from "@/config/fonts";
 
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+import { handleSearch } from "@/libs/searchUtils";
 
 const ErrorSearchBar = () => {
   const [query, setQuery] = useState("");
