@@ -32,7 +32,14 @@ export type RawCartItem = {
 
 export type SyncCartItem = Product & { quantity: number };
 
-export type SanitizeLevel = "conservative" | "aggressive" | "name" | "address";
+export type SanitizeLevel =
+  | "address"
+  | "aggressive"
+  | "conservative"
+  | "default"
+  | "email"
+  | "name"
+  | "taxCode";
 
 export type Province = {
   name: string;
