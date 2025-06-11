@@ -2,15 +2,15 @@ export const DIACRITIC_REGEX = /\p{M}/gu;
 
 export const VIETNAMESE_D_REGEX = /[đĐ]/gu;
 
-export const SLUG_SPECIAL_CHARS = /[^a-zA-Z0-9]+/g;
+export const SLUG_SPECIAL_CHARS = /[^a-zA-Z0-9]+/gu;
 
-export const SLUG_MULTIPLE_DASHES = /-+/g;
+export const SLUG_MULTIPLE_DASHES = /-+/gu;
 
-export const SLUG_EDGE_DASHES = /(?:^-|-$)/g;
+export const SLUG_EDGE_DASHES = /(?:^-|-$)/gu;
 
-export const TEXT_SPECIAL_CHARS = /[^a-zA-Z0-9 ]/g;
+export const TEXT_SPECIAL_CHARS = /[^a-zA-Z0-9 ]/gu;
 
-export const WHITESPACE_REGEX = /\s+/g;
+export const WHITESPACE_REGEX = /\s+/gu;
 
 export const KAOMOJI_PATTERNS: ReadonlyArray<RegExp> = [
   // Face patterns: (^_^) ಠ_ಠ o()o etc. - expanded character set
