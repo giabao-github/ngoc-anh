@@ -11,7 +11,7 @@ import {
 
 import { SanitizeLevel } from "@/app/types";
 
-export const sanitizeInputName = (input: string, maxLength = 255): string => {
+export const sanitizeName = (input: string, maxLength = 255): string => {
   // Remove common kaomoji and emoticon patterns using pre-compiled regex
   input = input.replace(KAOMOJI_REGEX, "");
 
@@ -21,10 +21,31 @@ export const sanitizeInputName = (input: string, maxLength = 255): string => {
     .slice(0, maxLength);
 };
 
-export const sanitizeInputAddress = (
+export const sanitizeEmail = (
   input: string,
-  maxLength = 255,
+  maxLength: number = 255,
 ): string => {
+  return input
+    .replace(/[^a-zA-Z0-9.\-_@+\u00C0-\u00FF]/g, "")
+    .substring(0, maxLength);
+};
+
+export const sanitizeTaxCode = (value: string): string => {
+  // Remove any non-digit characters
+  const digits = value.replace(/\D/g, "");
+
+  // Only format if exactly 13 digits
+  if (digits.length === 13) {
+    return `${digits.slice(0, 10)}-${digits.slice(10)}`;
+  }
+
+  return digits;
+};
+
+export const sanitizeAddress = (input: string, maxLength = 255): string => {
+  // Remove common kaomoji and emoticon patterns using pre-compiled regex
+  input = input.replace(KAOMOJI_REGEX, "");
+
   return input
     .replace(/[^\p{L}\p{N}\/,()'\-\.#\s]/gu, "")
     .replace(/\s+/g, " ")
@@ -118,9 +139,13 @@ export const sanitizeInputWithLevel = (
     case "aggressive":
       return sanitizeInputAggressive(input, maxLength);
     case "name":
-      return sanitizeInputName(input, maxLength);
+      return sanitizeName(input, maxLength);
+    case "email":
+      return sanitizeEmail(input, maxLength);
+    case "taxCode":
+      return sanitizeTaxCode(input);
     case "address":
-      return sanitizeInputAddress(input, maxLength);
+      return sanitizeAddress(input, maxLength);
     default:
       // Remove HTML and obvious emojis, keep other Unicode
       return input
@@ -135,18 +160,6 @@ export const sanitizeInputWithLevel = (
 
 export const sanitizeInputOnBlur = (input: string): string => {
   return input.trim().replace(/\s+/g, " ");
-};
-
-export const formatTaxCode = (value: string): string => {
-  // Remove any non-digit characters
-  const digits = value.replace(/\D/g, "");
-
-  // Only format if exactly 13 digits
-  if (digits.length === 13) {
-    return `${digits.slice(0, 10)}-${digits.slice(10)}`;
-  }
-
-  return digits;
 };
 
 export const normalizeText = (

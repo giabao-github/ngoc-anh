@@ -233,6 +233,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
           <InvoiceInput
             name="email"
             form={form}
+            sanitizeLevel="email"
             placeholder="Email"
             font={montserrat}
             className="flex flex-col w-[61%] md:w-[70%]"
@@ -240,6 +241,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
           <InvoiceInput
             name="taxCode"
             form={form}
+            sanitizeLevel="taxCode"
             placeholder="Mã số thuế"
             font={montserrat}
             className="flex flex-col w-[39%] md:w-[30%]"
@@ -291,6 +293,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
           <InvoiceInput
             name="streetAddress"
             form={form}
+            sanitizeLevel="address"
             placeholder="Số nhà, tên đường (ví dụ: 198 Lê Lợi)"
             font={montserrat}
             className="relative"

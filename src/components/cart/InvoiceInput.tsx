@@ -3,11 +3,7 @@ import { FaCircleCheck, FaCircleExclamation } from "react-icons/fa6";
 
 import { Input } from "@/components/ui/input";
 
-import {
-  formatTaxCode,
-  sanitizeInputOnBlur,
-  sanitizeInputWithLevel,
-} from "@/libs/textUtils";
+import { sanitizeInputOnBlur, sanitizeInputWithLevel } from "@/libs/textUtils";
 import { cn } from "@/libs/utils";
 
 import { SanitizeLevel } from "@/app/types";
@@ -66,10 +62,7 @@ export const InvoiceInput = ({
               placeholder={placeholder}
               value={field.value}
               onChange={(e) => {
-                if (name === "taxCode") {
-                  const taxCode = formatTaxCode(e.target.value);
-                  field.onChange(taxCode);
-                } else if (sanitizeLevel) {
+                if (sanitizeLevel) {
                   const sanitized = sanitizeInputWithLevel(
                     e.target.value,
                     sanitizeLevel,
