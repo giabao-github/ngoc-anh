@@ -22,8 +22,6 @@ const InvoiceSection: React.FC<InvoiceSectionProps> = ({
   contentRef,
   contentHeight,
 }) => {
-  const isMobile = useIsMobile();
-
   return (
     <div className="flex items-center gap-3 mx-2 mt-8 mb-0 md:mb-20">
       <div className="flex flex-col w-full gap-y-4">
@@ -46,11 +44,7 @@ const InvoiceSection: React.FC<InvoiceSectionProps> = ({
           {invoiceOpen && (
             <InvoiceForm
               contentRef={contentRef}
-              // contentHeight={
-              //   isMobile ? contentHeight * 1.5 : contentHeight * 1.3
-              // }
               contentHeight={contentHeight}
-              isMobile={isMobile}
             />
           )}
         </AnimatePresence>

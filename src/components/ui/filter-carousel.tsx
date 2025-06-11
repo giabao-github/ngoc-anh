@@ -34,8 +34,8 @@ export const FilterCarousel = ({
   data,
 }: FilterCarouselProps) => {
   const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  const [showInfoMap, setShowInfoMap] = useState<Record<string, boolean>>({});
+  // const [current, setCurrent] = useState(0);
+  // const [showInfoMap, setShowInfoMap] = useState<Record<string, boolean>>({});
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -43,13 +43,13 @@ export const FilterCarousel = ({
       return;
     }
 
-    const onSelect = () => setCurrent(api.selectedScrollSnap() + 1);
-    onSelect();
-    api.on("select", onSelect);
+    // const handleSnapSelect = () => setCurrent(api.selectedScrollSnap() + 1);
+    // handleSnapSelect();
+    // api.on("select", handleSnapSelect);
 
-    return () => {
-      api.off("select", onSelect);
-    };
+    // return () => {
+    //   api.off("select", handleSnapSelect);
+    // };
   }, [api]);
 
   // Handle automatic show on desktop only (currently unused, keep for future approach)
@@ -91,10 +91,10 @@ export const FilterCarousel = ({
   }) => {
     onSelect(item.value);
     if (isMobile) {
-      setShowInfoMap((prev) => ({
-        ...prev,
-        [item.value]: !prev[item.value],
-      }));
+      // setShowInfoMap((prev) => ({
+      //   ...prev,
+      //   [item.value]: !prev[item.value],
+      // }));
     }
   };
 

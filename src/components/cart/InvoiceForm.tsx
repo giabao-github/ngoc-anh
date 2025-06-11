@@ -22,13 +22,11 @@ import { InvoiceFormData } from "@/app/types";
 interface InvoiceFormProps {
   contentRef: RefObject<HTMLFormElement | null>;
   contentHeight: number;
-  isMobile: boolean;
 }
 
 export const InvoiceForm: React.FC<InvoiceFormProps> = ({
   contentRef,
   contentHeight,
-  isMobile,
 }) => {
   const {
     addressData,
@@ -56,7 +54,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
   });
 
   const watchedValues = form.watch();
-  const { errors, isDirty } = form.formState;
+  const { errors } = form.formState;
 
   const shouldShowPreview =
     watchedValues.streetAddress?.trim() ||

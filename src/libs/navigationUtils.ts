@@ -7,9 +7,15 @@ const scrollToElement = (
   hash: string,
   isMobile: boolean = false,
 ) => {
+  // Bail out during SSR
+  if (typeof window === "undefined") {
+    return;
+  }
+
   if (!ref.current) {
     return;
   }
+
   const isSpecialSection = hash === "#collection" || hash === "#products";
 
   if (isMobile && isSpecialSection) {
@@ -39,7 +45,11 @@ export const handleNavigation = (
   if (hasSections || hasFooter) {
     scrollToElement(ref, hash, isMobile);
 
-    if (hasSections && window.location.hash !== hash) {
+    if (
+      hasSections &&
+      typeof window !== "undefined" &&
+      window.location.hash !== hash
+    ) {
       history.pushState(null, "", hash);
     }
     return;
