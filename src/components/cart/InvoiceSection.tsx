@@ -46,9 +46,11 @@ const InvoiceSection: React.FC<InvoiceSectionProps> = ({
           {invoiceOpen && (
             <InvoiceForm
               contentRef={contentRef}
-              contentHeight={
-                isMobile ? contentHeight * 1.5 : contentHeight * 1.3
-              }
+              // contentHeight={
+              //   isMobile ? contentHeight * 1.5 : contentHeight * 1.3
+              // }
+              contentHeight={contentHeight}
+              isMobile={isMobile}
             />
           )}
         </AnimatePresence>

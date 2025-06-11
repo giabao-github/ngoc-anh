@@ -35,6 +35,7 @@ export const FilterCarousel = ({
 }: FilterCarouselProps) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const [showInfoMap, setShowInfoMap] = useState<Record<string, boolean>>({});
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -42,12 +43,60 @@ export const FilterCarousel = ({
       return;
     }
 
-    setCurrent(api.selectedScrollSnap() + 1);
+    const onSelect = () => setCurrent(api.selectedScrollSnap() + 1);
+    onSelect();
+    api.on("select", onSelect);
 
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
+    return () => {
+      api.off("select", onSelect);
+    };
   }, [api]);
+
+  // Handle automatic show on desktop only (currently unused, keep for future approach)
+  // useEffect(() => {
+  //   if (!isMobile && data.length > 0) {
+  //     const activeItem = data[current - 1];
+  //     if (activeItem) {
+  //       const timeout = setTimeout(() => {
+  //         setShowInfoMap((prev) => ({
+  //           ...prev,
+  //           [activeItem.value]: true,
+  //         }));
+  //       }, 500);
+
+  //       // Hide info for all other items
+  //       setShowInfoMap((prev) => {
+  //         const newMap = { ...prev };
+  //         data.forEach((item) => {
+  //           if (item.value !== activeItem.value) {
+  //             newMap[item.value] = false;
+  //           }
+  //         });
+  //         return newMap;
+  //       });
+
+  //       return () => clearTimeout(timeout);
+  //     }
+  //   } else if (!isMobile) {
+  //     // Hide all info when not mobile
+  //     setShowInfoMap({});
+  //   }
+  // }, [current, isMobile, data]);
+
+  const handleClick = (item: {
+    value: string;
+    label: string;
+    image: string;
+    description: string;
+  }) => {
+    onSelect(item.value);
+    if (isMobile) {
+      setShowInfoMap((prev) => ({
+        ...prev,
+        [item.value]: !prev[item.value],
+      }));
+    }
+  };
 
   return (
     <div className="relative w-full">
@@ -61,35 +110,15 @@ export const FilterCarousel = ({
         }}
         className="w-full px-10 md:px-12"
       >
-        <CarouselContent className="ml-0">
+        <CarouselContent className="-ml-2 md:-ml-3">
           {!isLoading &&
             data.map((item, index) => {
-              const isActive = index === current - 1;
-              const [showInfo, setShowInfo] = useState(false);
-
-              // Handle automatic show on desktop only
-              // useEffect(() => {
-              //   if (!isMobile && isActive) {
-              //     const timeout = setTimeout(() => {
-              //       setShowInfo(true);
-              //     }, 500);
-              //     return () => clearTimeout(timeout);
-              //   } else if (!isMobile) {
-              //     setShowInfo(false);
-              //   }
-              // }, [isActive, isMobile]);
-
-              const handleClick = () => {
-                onSelect(item.value);
-                // if (isMobile) {
-                //   setShowInfo((prev) => !prev);
-                // }
-              };
+              // const showInfo = showInfoMap[item.value] || false;
 
               return (
                 <CarouselItem
                   key={item.value}
-                  onClick={handleClick}
+                  onClick={() => handleClick(item)}
                   className="relative pl-3 cursor-pointer basis-auto group"
                 >
                   {/* Desktop image */}
@@ -99,9 +128,10 @@ export const FilterCarousel = ({
                       alt={item.label}
                       fill
                       quality={100}
-                      sizes="(min-width: 768px) 372px"
+                      priority={index === 0}
+                      sizes="(min-width: 1536px) 558px, (min-width: 768px) 372px"
                       className={cn(
-                        "transition-transform duration-300 hover:scale-105 select-none",
+                        "object-cover transition-transform duration-300 hover:scale-105 select-none",
                       )}
                     />
                   </div>
@@ -112,12 +142,13 @@ export const FilterCarousel = ({
                       alt={item.label}
                       fill
                       quality={100}
+                      priority={index === 0}
                       sizes="(max-width: 767px) 286px"
                       className={cn(
-                        "h-auto transition-transform duration-300 select-none",
+                        "object-cover transition-transform duration-300 select-none",
                       )}
                     />
-                    {/* Info icon (mobile only) */}
+                    {/* Info icon (mobile only, currently unused, keep for future approach) */}
                     {/* {isMobile && (
                       <div className="absolute z-10 bottom-3 right-4">
                         <div className="h-auto p-1 rounded-full shadow-md bg-white/60 active:bg-white/80 backdrop-blur-md">
@@ -140,8 +171,8 @@ export const FilterCarousel = ({
                     )} */}
                   </div>
 
-                  {/* Info popup */}
-                  <div
+                  {/* Info popup (currently unused, keep for future approach) */}
+                  {/* <div
                     className={cn(
                       "absolute right-14 bottom-3 md:right-3 rounded-lg backdrop-blur-md bg-white/80 text-black shadow-lg w-54 md:w-80 transform transition-all duration-300 ease-in-out origin-bottom-right",
                       showInfo
@@ -157,7 +188,7 @@ export const FilterCarousel = ({
                         {item.description}
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                 </CarouselItem>
               );
             })}

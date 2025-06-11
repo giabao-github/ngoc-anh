@@ -22,11 +22,13 @@ import { InvoiceFormData } from "@/app/types";
 interface InvoiceFormProps {
   contentRef: RefObject<HTMLFormElement | null>;
   contentHeight: number;
+  isMobile: boolean;
 }
 
 export const InvoiceForm: React.FC<InvoiceFormProps> = ({
   contentRef,
   contentHeight,
+  isMobile,
 }) => {
   const {
     addressData,
@@ -36,7 +38,8 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
     fetchWards,
   } = useAddressData();
 
-  const [formHeight, setFormHeight] = useState(contentHeight * 1.4);
+  const [formHeight, setFormHeight] = useState(contentHeight);
+  const [firstTouch, setFirstTouch] = useState(false);
 
   const form = useForm<InvoiceFormData>({
     resolver: zodResolver(invoiceFormSchema),
@@ -53,6 +56,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
   });
 
   const watchedValues = form.watch();
+  const { errors, isDirty } = form.formState;
 
   const shouldShowPreview =
     watchedValues.streetAddress?.trim() ||
@@ -62,7 +66,6 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
 
   // Calculate number of error rows and adjust form height
   const errorRows = useMemo(() => {
-    const errors = form.formState.errors;
     let rows = 0;
 
     // Row 1: Company Name
@@ -91,7 +94,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
     }
 
     return rows;
-  }, [form.formState.errors, shouldShowPreview]);
+  }, [errors, shouldShowPreview]);
 
   // Update form height based on error rows
   useEffect(() => {
@@ -106,6 +109,12 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
 
   useEffect(() => {
     if (watchedValues.province) {
+      setFirstTouch(true);
+    }
+  }, [watchedValues.province]);
+
+  useEffect(() => {
+    if (watchedValues.province) {
       fetchDistricts(watchedValues.province);
       form.setValue("district", "");
       form.setValue("ward", "");
@@ -116,9 +125,11 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
         districts: [],
         wards: [],
       }));
-      form.setValue("district", "");
-      form.setValue("ward", "");
-      form.trigger(["province", "district", "ward"]);
+      if (firstTouch) {
+        form.setValue("district", "");
+        form.setValue("ward", "");
+        form.trigger(["province", "district", "ward"]);
+      }
     }
   }, [watchedValues.province, fetchDistricts, form, setAddressData]);
 
@@ -126,11 +137,15 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
     if (watchedValues.district) {
       fetchWards(watchedValues.district);
       form.setValue("ward", "");
-      form.trigger("ward");
+      if (firstTouch) {
+        form.trigger("ward");
+      }
     } else {
       setAddressData((prev) => ({ ...prev, wards: [] }));
       form.setValue("ward", "");
-      form.trigger(["district", "ward"]);
+      if (firstTouch) {
+        form.trigger(["district", "ward"]);
+      }
     }
   }, [watchedValues.district, fetchWards, form, setAddressData]);
 
@@ -178,28 +193,9 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
   };
 
   const onInvalid = (errors: FieldErrors<InvoiceFormData>) => {
-    let errorMessages: string[] = [];
-    if (errors.companyName?.message) {
-      errorMessages.push(errors.companyName.message);
-    }
-    if (errors.email?.message) {
-      errorMessages.push(errors.email.message);
-    }
-    if (errors.taxCode?.message) {
-      errorMessages.push(errors.taxCode.message);
-    }
-    if (errors.province?.message) {
-      errorMessages.push(errors.province.message);
-    }
-    if (errors.district?.message) {
-      errorMessages.push(errors.district.message);
-    }
-    if (errors.ward?.message) {
-      errorMessages.push(errors.ward.message);
-    }
-    if (errors.streetAddress?.message) {
-      errorMessages.push(errors.streetAddress.message);
-    }
+    const errorMessages = Object.values(errors)
+      .map((e) => (e?.message as string) ?? "")
+      .filter(Boolean);
 
     toast.error("Có lỗi trong biểu mẫu", {
       description:
@@ -213,14 +209,16 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
   return (
     <motion.div
       initial={{ height: 0, opacity: 0 }}
-      animate={{ height: contentHeight, opacity: 1 }}
+      animate={{ height: formHeight, opacity: 1 }}
       exit={{ height: 0, opacity: 0 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
+      style={{ minHeight: formHeight }}
     >
       <form
         ref={contentRef}
         onSubmit={form.handleSubmit(onSubmit, onInvalid)}
         className="flex flex-col pb-4 font-medium gap-y-2"
+        style={{ height: "100%" }}
       >
         {/* Company Name */}
         <InvoiceInput

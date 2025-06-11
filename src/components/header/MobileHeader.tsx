@@ -147,6 +147,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                   undefined,
                   router,
                   collectionRef,
+                  true,
                 );
                 setIsMenuOpen(false);
               }}
@@ -164,6 +165,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                   undefined,
                   router,
                   productsRef,
+                  true,
                 );
                 setIsMenuOpen(false);
               }}
@@ -181,6 +183,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                   hasFooter,
                   router,
                   aboutRef,
+                  true,
                 );
                 setIsMenuOpen(false);
               }}

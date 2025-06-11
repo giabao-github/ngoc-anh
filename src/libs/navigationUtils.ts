@@ -2,7 +2,26 @@ import { RefObject } from "react";
 
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-import useIsMobile from "@/hooks/useIsMobile";
+const scrollToElement = (
+  ref: RefObject<HTMLDivElement | null>,
+  hash: string,
+  isMobile: boolean = false,
+) => {
+  if (!ref.current) {
+    return;
+  }
+  const isSpecialSection = hash === "#collection" || hash === "#products";
+
+  if (isMobile && isSpecialSection) {
+    const elementPosition = ref.current.offsetTop;
+    window.scrollTo({
+      top: elementPosition - 80,
+      behavior: "smooth",
+    });
+  } else {
+    ref.current.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 export const handleNavigation = (
   hash: string,
@@ -10,30 +29,21 @@ export const handleNavigation = (
   hasFooter: boolean | undefined,
   router: AppRouterInstance,
   ref?: RefObject<HTMLDivElement | null>,
+  isMobile: boolean = false,
 ) => {
-  if (hasSections && ref?.current) {
-    // Add extra offset for mobile on collection and product sections
-    if (hash === "#collection" || hash === "#products") {
-      const isMobile = window.innerWidth < 768;
-      if (isMobile) {
-        const elementPosition = ref.current.offsetTop;
-        window.scrollTo({
-          top: elementPosition - 80,
-          behavior: "smooth",
-        });
-      } else {
-        ref.current.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      ref.current.scrollIntoView({ behavior: "smooth" });
-    }
+  if (!ref?.current) {
+    router.push(`/${hash}`);
+    return;
+  }
 
-    if (window.location.hash !== hash) {
+  if (hasSections || hasFooter) {
+    scrollToElement(ref, hash, isMobile);
+
+    if (hasSections && window.location.hash !== hash) {
       history.pushState(null, "", hash);
     }
-  } else if (hasFooter && ref?.current) {
-    ref.current.scrollIntoView({ behavior: "smooth" });
-  } else {
-    router.push(`/${hash}`);
+    return;
   }
+
+  router.push(`/${hash}`);
 };
