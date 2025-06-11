@@ -18,7 +18,7 @@ import { handleSearch } from "@/libs/searchUtils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["200", "400", "500", "600", "700", "800"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 interface DesktopHeaderProps {
@@ -59,7 +59,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             quality={100}
             priority
             onClick={() => router.push("/")}
-            className="object-contain w-20 h-20 cursor-pointer select-none"
+            className="object-contain w-16 h-16 cursor-pointer select-none md:w-20 md:h-20"
           />
           <h1 className="hidden text-2xl font-semibold uppercase select-none 2xl:text-3xl text-logo md:block">
             Thạch Âm
@@ -122,7 +122,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 title="Tìm kiếm"
                 type="button"
                 onClick={() => handleSearch(query, router)}
-                className="absolute cursor-pointer inset-y-0 left-4 flex items-center text-white hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition"
+                className="absolute inset-y-0 flex items-center text-gray-300 transition cursor-pointer left-4 hover:text-white active:text-white/80"
               >
                 <BsSearchHeart size={18} />
               </button>
@@ -134,7 +134,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Tìm kiếm sản phẩm..."
-                className={`header-input w-80 2xl:w-96 font-medium pl-12 pr-4 py-2 border border-white rounded-full shadow-md shadow-white focus:ring-1 focus:ring-white focus:outline-none transition ${montserrat.className}`}
+                className={`header-input w-80 2xl:w-96 font-medium pl-12 pr-4 py-2 border border-white rounded-full shadow-md shadow-white focus:ring-1 focus:ring-white focus:outline-none placeholder:text-gray-400 transition ${montserrat.className}`}
               />
 
               {query.trim().length > 0 && (

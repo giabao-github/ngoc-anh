@@ -1,3 +1,4 @@
+import { SanitizeLevel } from "@/app/types";
 import {
   DIACRITIC_REGEX,
   SLUG_EDGE_DASHES,
@@ -6,7 +7,7 @@ import {
   TEXT_SPECIAL_CHARS,
   VIETNAMESE_D_REGEX,
   WHITESPACE_REGEX,
-} from "@/constants/regrexes";
+} from "@/constants/regexes";
 
 export const sanitizeInputName = (input: string, maxLength = 255): string => {
   // Remove common kaomoji and emoticon patterns (more comprehensive)
@@ -21,8 +22,6 @@ export const sanitizeInputName = (input: string, maxLength = 255): string => {
     /[♪♫☆★♥♡‼⁉]/g,
     // Unicode kaomoji characters (covers ᓚᘏᗢ and similar)
     /[\u1400-\u167F\u2600-\u26FF\u2700-\u27BF\uFE00-\uFE0F]/g,
-    // Repetitive character patterns (likely decorative)
-    /(.)\1{4,}/g,
     // Specific problematic patterns you mentioned
     /o\(\)o/g,
     // Additional face-like patterns with various brackets
@@ -44,7 +43,7 @@ export const sanitizeInputAddress = (
   maxLength = 255,
 ): string => {
   return input
-    .replace(/[^a-zA-Z0-9\/,()'\-\.#\s]/g, "")
+    .replace(/[^\p{L}\p{N}\/,()'\-\.#\s]/gu, "")
     .replace(/\s+/g, " ")
     .slice(0, maxLength);
 };
@@ -125,13 +124,6 @@ export const sanitizeInputConservative = (
   return input.length > maxLength ? input.slice(0, maxLength) : input;
 };
 
-export type SanitizeLevel =
-  | "conservative"
-  | "moderate"
-  | "aggressive"
-  | "name"
-  | "address";
-
 export const sanitizeInputWithLevel = (
   input: string,
   level: SanitizeLevel = "moderate",
@@ -160,6 +152,18 @@ export const sanitizeInputWithLevel = (
 
 export const sanitizeInputOnBlur = (input: string): string => {
   return input.trim().replace(/\s+/g, " ");
+};
+
+export const formatTaxCode = (value: string): string => {
+  // Remove any non-digit characters
+  const digits = value.replace(/\D/g, "");
+
+  // Only format if exactly 13 digits
+  if (digits.length === 13) {
+    return `${digits.slice(0, 10)}-${digits.slice(10)}`;
+  }
+
+  return digits;
 };
 
 export const normalizeText = (

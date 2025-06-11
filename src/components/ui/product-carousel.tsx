@@ -59,7 +59,9 @@ export const ProductCarousel = ({
         const selectedIndex = api.selectedScrollSnap();
         onSelect(selectedIndex.toString());
       } catch (error) {
-        toast.error("An error occurred");
+        toast.error("Không thể tải hình ảnh sản phẩm", {
+          id: "product-carousel-selection-error",
+        });
         console.warn("Carousel selection error:", error);
       }
     };
@@ -68,7 +70,9 @@ export const ProductCarousel = ({
       api.on("select", onSelectHandler);
       onSelectHandler();
     } catch (error) {
-      toast.error("An error occurred");
+      toast.error("Không thể tải hình ảnh sản phẩm", {
+        id: "product-carousel-api-error",
+      });
       console.warn("Carousel API error:", error);
     }
 
@@ -76,7 +80,9 @@ export const ProductCarousel = ({
       try {
         api.off("select", onSelectHandler);
       } catch (error) {
-        toast.error("An error occurred");
+        toast.error("Không thể tải hình ảnh sản phẩm", {
+          id: "product-carousel-cleanup-error",
+        });
         console.warn("Carousel cleanup error:", error);
       }
     };

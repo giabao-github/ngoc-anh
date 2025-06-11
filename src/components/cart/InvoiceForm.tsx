@@ -1,26 +1,24 @@
-import { RefObject, useEffect, useMemo } from "react";
-import { useForm } from "react-hook-form";
+import { RefObject, useEffect, useMemo, useState } from "react";
+import { FieldErrors, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { Montserrat } from "next/font/google";
 import { toast } from "sonner";
+import { set } from "zod";
 
-import TaxCodeInput from "@/components/cart/TaxCodeInput";
-import { Input } from "@/components/ui/input";
-import EmailInput from "@/components/user/EmailInput";
+import { InvoiceInput } from "@/components/cart/InvoiceInput";
+import { SelectDropdown } from "@/components/cart/SelectDropdown";
 
 import { useAddressData } from "@/hooks/useAddressData";
 
 import { invoiceFormSchema } from "@/app/schemas";
 import { InvoiceFormData } from "@/app/types";
-import { sanitizeInputOnBlur, sanitizeInputWithLevel } from "@/libs/textUtils";
-
-import { SelectDropdown } from "./SelectDropdown";
+import { cn } from "@/libs/utils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["200", "400", "500", "600", "700", "800"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 interface InvoiceFormProps {
@@ -40,8 +38,12 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
     fetchWards,
   } = useAddressData();
 
+  const [formHeight, setFormHeight] = useState(contentHeight * 1.4);
+  let maxLength = 100;
+
   const form = useForm<InvoiceFormData>({
     resolver: zodResolver(invoiceFormSchema),
+    mode: "onChange",
     defaultValues: {
       companyName: "",
       email: "",
@@ -55,150 +57,204 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
 
   const watchedValues = form.watch();
 
-  // Fetch provinces on mount
-  useEffect(() => {
-    fetchProvinces();
-  }, [fetchProvinces]);
-
-  // Fetch districts when province changes
-  useEffect(() => {
-    if (watchedValues.province) {
-      fetchDistricts(watchedValues.province);
-      // Reset dependent fields
-      form.setValue("district", "");
-      form.setValue("ward", "");
-    } else {
-      // Clear districts and wards when no province is selected
-      setAddressData((prev) => ({ ...prev, districts: [], wards: [] }));
-    }
-  }, [watchedValues.province, fetchDistricts, form, setAddressData]);
-
-  // Fetch wards when district changes
-  useEffect(() => {
-    if (watchedValues.district) {
-      fetchWards(watchedValues.district);
-      // Reset dependent field
-      form.setValue("ward", "");
-    } else {
-      // Clear wards when no district is selected
-      setAddressData((prev) => ({ ...prev, wards: [] }));
-    }
-  }, [watchedValues.district, fetchWards, form, setAddressData]);
-
-  // Memoized full address
-  const fullAddress = useMemo(() => {
-    const parts = [];
-
-    if (watchedValues.streetAddress?.trim()) {
-      parts.push(watchedValues.streetAddress.trim());
-    }
-
-    if (watchedValues.ward) {
-      const wardName = addressData.wards.find(
-        (w) => String(w.code) === watchedValues.ward,
-      )?.name;
-      if (wardName) parts.push(wardName);
-    }
-
-    if (watchedValues.district) {
-      const districtName = addressData.districts.find(
-        (d) => String(d.code) === watchedValues.district,
-      )?.name;
-      if (districtName) parts.push(districtName);
-    }
-
-    if (watchedValues.province) {
-      const provinceName = addressData.provinces.find(
-        (p) => String(p.code) === watchedValues.province,
-      )?.name;
-      if (provinceName) parts.push(provinceName);
-    }
-
-    return parts.join(", ");
-  }, [watchedValues, addressData]);
-
-  const onSubmit = (data: InvoiceFormData) => {
-    if (data.companyName.trim().length === 0) {
-      toast.error("Vui lòng nhập tên công ty", {
-        description: "Tên công ty không được bỏ trống",
-      });
-    } else if (data.companyName.trim().length < 3) {
-      toast.error("Tên công ty quá ngắn", {
-        description: "Tên công ty phải chứa ít nhất 3 ký tự",
-      });
-    } else if (data.email.trim().length === 0) {
-      toast.error("Vui lòng nhập email", {
-        description: "Email không được bỏ trống",
-      });
-    } else if (!data.province) {
-      toast.error("Vui lòng chọn tỉnh/thành phố", {
-        description: "Tỉnh/thành phố không được bỏ trống",
-      });
-    } else if (!data.district) {
-      toast.error("Vui lòng chọn quận/huyện", {
-        description: "Quận/huyện không được bỏ trống",
-      });
-    } else if (!data.ward) {
-      toast.error("Vui lòng chọn phường/xã", {
-        description: "Phường/xã không được bỏ trống",
-      });
-    } else if (data.streetAddress.trim().length === 0) {
-      toast.error("Vui lòng nhập địa chỉ cụ thể", {
-        description: "Số nhà, tên đường không được bỏ trống",
-      });
-    } else {
-      toast.success("Đã lưu thông tin", {
-        description: `Địa chỉ: ${fullAddress}`,
-      });
-    }
-  };
-
-  // Check if we should show the address preview
   const shouldShowPreview =
     watchedValues.streetAddress?.trim() ||
     watchedValues.province ||
     watchedValues.district ||
     watchedValues.ward;
 
+  // Calculate number of error rows and adjust form height
+  const errorRows = useMemo(() => {
+    const errors = form.formState.errors;
+    let rows = 0;
+
+    // Row 1: Company Name
+    if (errors.companyName) {
+      rows++;
+    }
+
+    // Row 2: Email and Tax Code (same row)
+    if (errors.email || errors.taxCode) {
+      rows++;
+    }
+
+    // Row 3: Province, District, Ward (same row)
+    if (errors.province || errors.district || errors.ward) {
+      rows++;
+    }
+
+    // Row 4: Street Address
+    if (errors.streetAddress) {
+      rows++;
+    }
+
+    // Row 5: Address Preview
+    if (shouldShowPreview) {
+      rows++;
+    }
+
+    return rows;
+  }, [form.formState.errors, shouldShowPreview]);
+
+  // Update form height based on error rows
+  useEffect(() => {
+    const newHeight = contentHeight * (1 + errorRows * 0.1);
+    setFormHeight(newHeight);
+  }, [contentHeight, errorRows]);
+
+  useEffect(() => {
+    fetchProvinces();
+    form.setValue("province", "");
+  }, [fetchProvinces]);
+
+  useEffect(() => {
+    if (watchedValues.province) {
+      fetchDistricts(watchedValues.province);
+      form.setValue("district", "");
+      form.setValue("ward", "");
+      form.trigger(["district", "ward"]);
+    } else {
+      setAddressData((prev) => ({
+        ...prev,
+        districts: [],
+        wards: [],
+      }));
+      form.setValue("district", "");
+      form.setValue("ward", "");
+      form.trigger(["province", "district", "ward"]);
+    }
+  }, [watchedValues.province, fetchDistricts, form, setAddressData]);
+
+  useEffect(() => {
+    if (watchedValues.district) {
+      fetchWards(watchedValues.district);
+      form.setValue("ward", "");
+      form.trigger("ward");
+    } else {
+      setAddressData((prev) => ({ ...prev, wards: [] }));
+      form.setValue("ward", "");
+      form.trigger(["district", "ward"]);
+    }
+  }, [watchedValues.district, fetchWards, form, setAddressData]);
+
+  const fullAddress = useMemo(() => {
+    const parts = [];
+    if (watchedValues.streetAddress?.trim()) {
+      parts.push(watchedValues.streetAddress.trim());
+    }
+    if (watchedValues.ward) {
+      const wardName = addressData.wards.find(
+        (w) => String(w.code) === watchedValues.ward,
+      )?.name;
+      if (wardName) {
+        parts.push(wardName);
+        maxLength += wardName.length + 2;
+      }
+    }
+    if (watchedValues.district) {
+      const districtName = addressData.districts.find(
+        (d) => String(d.code) === watchedValues.district,
+      )?.name;
+      if (districtName) {
+        parts.push(districtName);
+        maxLength += districtName.length + 2;
+      }
+    }
+    if (watchedValues.province) {
+      const provinceName = addressData.provinces.find(
+        (p) => String(p.code) === watchedValues.province,
+      )?.name;
+      if (provinceName) {
+        parts.push(provinceName);
+        maxLength += provinceName.length + 2;
+      }
+    }
+    return parts.join(", ");
+  }, [watchedValues, addressData]);
+
+  const onSubmit = () => {
+    toast.success("Đã lưu thông tin", {
+      description: "Thông tin hóa đơn của bạn đã được lưu thành công",
+      id: "save-invoice-success",
+    });
+  };
+
+  const onInvalid = (errors: FieldErrors<InvoiceFormData>) => {
+    let errorMessages: string[] = [];
+    if (errors.companyName?.message) {
+      errorMessages.push(errors.companyName.message);
+    }
+    if (errors.email?.message) {
+      errorMessages.push(errors.email.message);
+    }
+    if (errors.taxCode?.message) {
+      errorMessages.push(errors.taxCode.message);
+    }
+    if (errors.province?.message) {
+      errorMessages.push(errors.province.message);
+    }
+    if (errors.district?.message) {
+      errorMessages.push(errors.district.message);
+    }
+    if (errors.ward?.message) {
+      errorMessages.push(errors.ward.message);
+    }
+    if (errors.streetAddress?.message) {
+      errorMessages.push(errors.streetAddress.message);
+    }
+
+    toast.error("Có lỗi trong biểu mẫu", {
+      description:
+        errorMessages.length > 1
+          ? "Vui lòng kiểm tra các trường thông tin"
+          : errorMessages[0],
+      id: "invoice-form-error",
+    });
+  };
+
   return (
     <motion.div
       initial={{ height: 0, opacity: 0 }}
-      animate={{ height: contentHeight || "auto", opacity: 1 }}
+      animate={{ height: contentHeight, opacity: 1 }}
       exit={{ height: 0, opacity: 0 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-      className="overflow-visible"
+      transition={{ duration: 0.2, ease: "easeInOut" }}
     >
       <div ref={contentRef} className="flex flex-col pb-4 font-medium gap-y-2">
-        <Input
-          type="text"
+        {/* Company Name */}
+        <InvoiceInput
+          name="companyName"
+          form={form}
+          sanitizeLevel="name"
           placeholder="Tên công ty"
-          value={sanitizeInputWithLevel(watchedValues.companyName, "name")}
-          onChange={(e) => form.setValue("companyName", e.target.value)}
-          onBlur={(e) =>
-            form.setValue("companyName", sanitizeInputOnBlur(e.target.value))
-          }
-          className={`w-full text-sm md:text-base bg-neutral-100 border border-gray-300 focus:border-black rounded md:tracking-wide ${montserrat.className}`}
+          font={montserrat}
+          className="relative"
         />
+
+        {/* Email and Tax Code */}
         <div className="flex flex-row gap-x-2">
-          <EmailInput
-            email={watchedValues.email}
-            setEmail={(value) => form.setValue("email", value)}
-            emailError={form.formState.errors.email?.message}
-            setEmailError={() => {}}
+          <InvoiceInput
+            name="email"
+            form={form}
+            placeholder="Email"
+            font={montserrat}
+            className="flex flex-col w-[61%] md:w-[70%]"
           />
-          <TaxCodeInput
-            taxCode={watchedValues.taxCode}
-            setTaxCode={(value) => form.setValue("taxCode", value)}
-            taxCodeError={form.formState.errors.taxCode?.message}
-            setTaxCodeError={() => {}}
+          <InvoiceInput
+            name="taxCode"
+            form={form}
+            placeholder="Mã số thuế"
+            font={montserrat}
+            className="flex flex-col w-[39%] md:w-[30%]"
           />
         </div>
+
         {/* Address Selection */}
         <div className="space-y-2">
           <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
             <SelectDropdown
-              value={watchedValues.province}
-              onChange={(value) => form.setValue("province", value)}
+              name="province"
+              title="Tỉnh/Thành phố"
+              form={form}
               options={addressData.provinces.map((p) => ({
                 code: p.code,
                 name: p.name,
@@ -208,22 +264,24 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
               font={montserrat}
             />
             <SelectDropdown
-              value={watchedValues.district}
-              onChange={(value) => form.setValue("district", value)}
-              options={addressData.districts.map((d) => ({
-                code: d.code,
-                name: d.name,
+              name="district"
+              title="Quận/Huyện"
+              form={form}
+              options={addressData.districts.map((p) => ({
+                code: p.code,
+                name: p.name,
               }))}
               placeholder="Chọn quận/huyện"
               disabled={!watchedValues.province}
               font={montserrat}
             />
             <SelectDropdown
-              value={watchedValues.ward}
-              onChange={(value) => form.setValue("ward", value)}
-              options={addressData.wards.map((w) => ({
-                code: w.code,
-                name: w.name,
+              name="ward"
+              title="Phường/Xã"
+              form={form}
+              options={addressData.wards.map((p) => ({
+                code: p.code,
+                name: p.name,
               }))}
               placeholder="Chọn phường/xã"
               disabled={!watchedValues.district}
@@ -231,39 +289,39 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
             />
           </div>
 
-          <Input
-            type="text"
-            placeholder="Số nhà, tên đường (ví dụ: 198 Cách Mạng Tháng Tám)"
-            value={sanitizeInputWithLevel(
-              watchedValues.streetAddress,
-              "address",
-            )}
-            onChange={(e) => form.setValue("streetAddress", e.target.value)}
-            onBlur={(e) =>
-              form.setValue(
-                "streetAddress",
-                sanitizeInputOnBlur(e.target.value),
-              )
-            }
-            className={`w-full text-sm md:text-base bg-neutral-100 border border-gray-300 focus:border-black rounded md:tracking-wide ${montserrat.className}`}
+          {/* Street Address */}
+          <InvoiceInput
+            name="streetAddress"
+            form={form}
+            placeholder="Số nhà, tên đường (ví dụ: 198 Lê Lợi)"
+            font={montserrat}
+            className="relative"
           />
 
-          {/* Preview of full address */}
+          {/* Address Preview */}
           {shouldShowPreview && (
-            <div className="p-3 text-sm text-gray-700 border border-blue-200 rounded-md bg-blue-50">
-              <span className="font-semibold text-blue-800">
-                Địa chỉ đầy đủ:{" "}
+            <div
+              className={cn(
+                "p-3 space-x-1.5 text-sm text-gray-700 border border-blue-200 rounded-md bg-blue-50",
+                montserrat.className,
+              )}
+            >
+              <span className="font-semibold text-blue-700">
+                Địa chỉ đầy đủ:
               </span>
               <span className="text-gray-800">
-                {fullAddress || "Vui lòng điền đầy đủ thông tin địa chỉ"}
+                {fullAddress.length > maxLength
+                  ? fullAddress.slice(0, maxLength) + "..."
+                  : fullAddress || "Vui lòng điền đầy đủ thông tin địa chỉ"}
               </span>
             </div>
           )}
         </div>
-        {/* Submit button with proper spacing */}
+
+        {/* Submit Button */}
         <div className="pt-4">
           <button
-            onClick={form.handleSubmit(onSubmit)}
+            onClick={form.handleSubmit(onSubmit, onInvalid)}
             className="px-6 py-3 font-semibold tracking-wide text-white transition-colors rounded-full cursor-pointer select-none w-fit bg-primary hover:bg-primary/80 active:bg-primary/60"
           >
             Lưu thông tin

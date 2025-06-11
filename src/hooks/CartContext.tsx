@@ -71,7 +71,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         window.dispatchEvent(new CustomEvent("cartUpdated", { detail: items }));
       } catch (error) {
         console.error("Error updating localStorage:", error);
-        toast.error("Không thể lưu giỏ hàng");
+        toast.error("Không thể lưu giỏ hàng", {
+          id: "save-cart-error",
+        });
       }
     }, 100);
   }, []);
@@ -181,7 +183,9 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         switch (type) {
           case "increment":
             if (newQty + 1 >= maxQty) {
-              toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này");
+              toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này", {
+                id: "cart-max-quantity-warning",
+              });
             }
             newQty = Math.min(item.quantity + 1, maxQty);
             break;
@@ -211,7 +215,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       updateCart(newItems);
 
       toast.success(`Đã xóa ${item.quantity} sản phẩm khỏi giỏ hàng`, {
-        description: item.name,
+        id: "remove-item-success",
       });
     },
     [cartItems, updateCart],
@@ -225,11 +229,13 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       localStorage.removeItem("cart");
       setCartItems([]);
       window.dispatchEvent(new CustomEvent("cartUpdated", { detail: [] }));
-      toast.success(`Đã xóa tất cả ${count} sản phẩm khỏi giỏ hàng`);
+      toast.success(`Đã xóa tất cả ${count} sản phẩm khỏi giỏ hàng`, {
+        id: "clear-cart-success",
+      });
     } catch (error) {
       console.error("Error clearing cart:", error);
       toast.error("Không thể xóa giỏ hàng", {
-        description: "Hãy tải lại trang và thử lại",
+        id: "clear-cart-error",
       });
     }
   }, [cartItems]);

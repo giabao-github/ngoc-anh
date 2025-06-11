@@ -79,15 +79,15 @@ const CartDetails: React.FC<CartDetailsProps> = ({
     return (
       <div className="flex-1 max-w-[920px]">
         <CartDetailsHeader />
-        <div className="my-2 rounded-lg bg-gray-50">
-          <div className="p-3 mx-2 text-sm font-semibold tracking-wide rounded md:text-base md:p-4 md:mt-5 bg-orange-50">
+        <div className="my-2 rounded-lg">
+          <div className="p-3 mx-2 mb-5 text-sm font-semibold tracking-wide rounded md:text-base md:p-4 md:mt-5 md:mb-7 bg-orange-50">
             SẢN PHẨM BÁN LẺ
           </div>
-          <div className="skeleton-desktop">
+          <div className="px-8 skeleton-desktop">
             <CartSkeleton skeletonCount={4} />
           </div>
-          <div className="skeleton-mobile">
-            <CartSkeleton skeletonCount={3} />
+          <div className="px-3 skeleton-mobile">
+            <CartSkeleton skeletonCount={3} isMobile />
           </div>
         </div>
         <Separator
@@ -130,7 +130,7 @@ const CartDetails: React.FC<CartDetailsProps> = ({
         <Separator
           color="#BB9244"
           opacity={30}
-          className="mt-6 mb-8 md:mt-8 md:mb-16"
+          className="mt-6 mb-8 md:mt-8 md:mb-12"
         />
         <OrderNotes notes={notes} setNotes={setNotes} />
         <InvoiceSection

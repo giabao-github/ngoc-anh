@@ -18,7 +18,7 @@ import { handleSearch } from "@/libs/searchUtils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["200", "400", "500", "600", "700", "800"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 interface MobileHeaderProps {
@@ -55,74 +55,80 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
   };
 
   return (
-    <header className="sticky top-0 left-0 z-20 w-full px-6 py-2 text-white bg-primary">
-      <div className="flex items-center justify-between mx-auto max-w-7xl">
-        <div className={`flex items-center space-x-4`}>
-          <Image
-            src="/logo.png"
-            alt="Logo"
-            width={1024}
-            height={1024}
-            quality={100}
-            priority
-            onClick={() => router.push("/")}
-            className="object-contain w-16 h-16 rounded cursor-pointer select-none"
-          />
-          <h1 className="hidden text-2xl font-semibold uppercase select-none text-logo md:block">
-            Thạch Âm
-          </h1>
-        </div>
-        <div className="flex flex-row items-center gap-x-6">
-          <div ref={cartIconRef} className="relative cursor-pointer group">
-            <FiShoppingCart
-              size={24}
-              title="Đi đến giỏ hàng"
-              aria-label="Giỏ hàng"
-              onClick={() => router.push("/cart")}
-              className="group-hover:text-[#D4AF37] group-active:text-[#D4AF37]/70"
-            />
-            {cartCount > 0 && (
-              <div
-                className={`absolute bg-white text-orange-500 text-[10px] font-bold ${
-                  cartCount > 99
-                    ? "w-7 h-2/3 -top-2 -right-4"
-                    : "w-5 h-5 -top-[10px] -right-2"
-                } rounded-full flex items-center justify-center ${
-                  montserrat.className
-                }`}
-              >
-                {cartCount > 99 ? "99+" : cartCount}
-              </div>
-            )}
-          </div>
-          <FiUser
-            size={24}
-            title="Tài khoản"
-            aria-label="Tài khoản"
-            onClick={() => router.push("/login?method=email")}
-            className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70"
-          />
-          <div className="relative w-10 h-10 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_16px_rgba(255,255,255,0.8)] active:shadow-[0_0_16px_rgba(255,255,255,1)]">
+    <div className="pb-20">
+      <header className="fixed top-0 left-0 z-20 w-full text-white bg-primary">
+        {/* App Logo */}
+        <div className="flex items-center justify-between px-6 py-2 mx-auto max-w-7xl">
+          <div className="flex items-center space-x-4">
             <Image
-              src="/avatar.jpeg"
-              alt="Avatar"
-              fill
+              src="/logo.png"
+              alt="Logo"
+              width={1024}
+              height={1024}
               quality={100}
-              className="object-cover cursor-pointer select-none"
+              priority
+              onClick={() => router.push("/")}
+              className="object-contain w-16 h-16 rounded cursor-pointer select-none"
             />
+            <span
+              className="hidden text-2xl font-semibold uppercase select-none text-logo md:block"
+              aria-label="Thạch Âm - Trang chủ"
+              role="text"
+            >
+              Thạch Âm
+            </span>
           </div>
-          <button
-            className="outline-none cursor-pointer ring-0 focus:ring-0 focus:outline-none"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-          </button>
+          <div className="flex flex-row items-center gap-x-6">
+            <div ref={cartIconRef} className="relative cursor-pointer group">
+              <FiShoppingCart
+                size={24}
+                title="Đi đến giỏ hàng"
+                aria-label="Giỏ hàng"
+                onClick={() => router.push("/cart")}
+                className="group-hover:text-[#D4AF37] group-active:text-[#D4AF37]/70"
+              />
+              {cartCount > 0 && (
+                <div
+                  className={`absolute bg-white text-orange-500 text-[10px] font-bold ${
+                    cartCount > 99
+                      ? "w-7 h-2/3 -top-2 -right-4"
+                      : "w-5 h-5 -top-[10px] -right-2"
+                  } rounded-full flex items-center justify-center ${
+                    montserrat.className
+                  }`}
+                >
+                  {cartCount > 99 ? "99+" : cartCount}
+                </div>
+              )}
+            </div>
+            <FiUser
+              size={24}
+              title="Tài khoản"
+              aria-label="Tài khoản"
+              onClick={() => router.push("/login?method=email")}
+              className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70"
+            />
+            <div className="relative w-10 h-10 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_16px_rgba(255,255,255,0.8)] active:shadow-[0_0_16px_rgba(255,255,255,1)]">
+              <Image
+                src="/avatar.jpeg"
+                alt="Avatar"
+                fill
+                quality={100}
+                className="object-cover cursor-pointer select-none"
+              />
+            </div>
+            <button
+              className="outline-none cursor-pointer ring-0 focus:ring-0 focus:outline-none"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            </button>
+          </div>
         </div>
-      </div>
-
+      </header>
       {/* Animated dropdown menu */}
       <div
-        className={`bg-gradient-to-b from-primary to-[#364F6D] rounded-b-2xl text-white overflow-hidden transition-all duration-400 ease-in-out ${
+        className={`fixed w-full top-[79px] z-20 bg-gradient-to-b from-primary via-[#1A4644] to-[#2D5F5A] rounded-b-2xl text-white overflow-hidden transition-all duration-400 ease-in-out ${
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
@@ -188,7 +194,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                   handleSearch(query, router);
                   setIsMenuOpen(false);
                 }}
-                className="absolute cursor-pointer inset-y-0 left-3 flex items-center text-white hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition"
+                className="absolute inset-y-0 flex items-center text-gray-200 transition cursor-pointer left-3 hover:text-white active:text-white/80"
               >
                 <BsSearchHeart size={18} />
               </button>
@@ -200,7 +206,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Tìm kiếm sản phẩm..."
-                className="w-full py-2 pl-10 pr-4 transition border border-white rounded-full shadow-md header-input shadow-white focus:ring-1 focus:ring-white focus:outline-none"
+                className={`w-full py-2 pl-10 pr-4 transition border border-white rounded-full shadow-md header-input shadow-white focus:ring-1 text-sm focus:ring-white focus:outline-none placeholder:text-gray-300 ${montserrat.className}`}
               />
 
               {query.trim().length > 0 && (
@@ -217,7 +223,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
           </nav>
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 

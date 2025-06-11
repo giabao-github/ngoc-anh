@@ -17,9 +17,13 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
     <div className="grid gap-16 mx-auto max-w-7xl md:grid-cols-3 md:gap-32">
       <div className="text-sm md:text-lg">
         <h3 className="mb-4 uppercase">Trụ sở chính</h3>
-        <h1 className="text-lg md:text-2xl mb-4 font-semibold uppercase text-[#D4AF37]">
+        <span
+          className="text-lg md:text-2xl mb-4 font-semibold uppercase text-[#D4AF37] block"
+          aria-label="Công ty TNHH Thạch Âm"
+          role="text"
+        >
           Công ty TNHH Thạch Âm
-        </h1>
+        </span>
         <p>
           Số 333 Đường Hưng Định 24, Khu Phố Hưng Lộc, Phường Hưng Định, Thành
           Phố Thuận An, Tỉnh Bình Dương, Việt Nam.
@@ -27,7 +31,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
         <p>Điện Thoại: (+84) 274 3668899</p>
         <p>Fax: (+84) 274 3724173</p>
         <a
-          href="https://www.google.com/maps/place/Ltd+Minh+Long+1+-+MINH+LONG+I,+Co.+Ltd./@10.9464587,106.7023139,17z/data=!3m1!4b1!4m5!3m4!1s0x3174d7412f3fd84b:0x3820a91ad46687c9!8m2!3d10.9464534!4d106.7045026"
+          href="https://www.google.com/maps/place/HCMC+University+of+Technology+(HUTECH)+%E2%80%93+Sai+Gon+Campus/@10.8015401,106.7143719,21z/data=!4m15!1m8!3m7!1s0x317528a500e8c3d5:0xedfca63e47b5afb8!2zNDc1YSDEkGnhu4duIEJpw6puIFBo4bunLCBQaMaw4budbmcgMjUsIELDrG5oIFRo4bqhbmgsIEjhu5MgQ2jDrSBNaW5oIDcwMDAwLCBWaWV0bmFt!3b1!8m2!3d10.8017151!4d106.7144547!16s%2Fg%2F11lq6yh9h1!3m5!1s0x317528a459cb43ab:0x6c3d29d370b52a7e!8m2!3d10.8016175!4d106.7144559!16s%2Fg%2F124xvbfmg?entry=ttu&g_ep=EgoyMDI1MDYwOC4wIKXMDSoASAFQAw%3D%3D"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-4 w-fit flex items-center flex-row gap-x-1 md:gap-x-2 cursor-pointer font-semibold text-xs md:text-base hover:text-[#D4AF37] active:text-[#D4AF37]/70"

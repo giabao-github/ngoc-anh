@@ -13,7 +13,7 @@ import { cn } from "@/libs/utils";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["200", "400", "500", "600", "700", "800"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 interface ProductInfoProps {
@@ -38,10 +38,12 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
     if (!isFavorite) {
       toast.success("Đã thêm vào danh sách yêu thích", {
         description: "Đã thêm sản phẩm này vào danh sách yêu thích của bạn",
+        id: "add-to-wishlist-success",
       });
     } else {
       toast.success("Đã xóa khỏi danh sách yêu thích", {
         description: "Đã xóa sản phẩm này khỏi danh sách yêu thích của bạn",
+        id: "remove-from-wishlist-success",
       });
     }
   };

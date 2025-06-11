@@ -45,21 +45,21 @@ export const useAddToCart = (
     (quantity: number) => {
       if (!product) {
         toast.error("Không thể thêm sản phẩm vào giỏ hàng", {
-          description: "Sản phẩm này hiện không còn tồn tại hoặc đã bị xóa",
+          id: "product-not-found-error",
         });
         return;
       }
 
       if (availableQuantity === 0) {
-        toast.error("Bạn đã đạt số lượng mua tối đa của sản phẩm này", {
-          description: `Số lượng sản phẩm trong giỏ: ${cartQuantity}`,
+        toast.error("Đã đạt số lượng mua tối đa của sản phẩm này", {
+          id: "max-quantity-error",
         });
         return;
       }
 
       if (quantity > availableQuantity) {
         toast.error("Số lượng bạn chọn vượt quá số lượng có sẵn", {
-          description: `Số lượng có sẵn: ${availableQuantity}`,
+          id: "exceed-stock-error",
         });
         return;
       }
@@ -92,7 +92,9 @@ export const useAddToCart = (
         }, 1000);
       } catch (error) {
         console.error("Error adding to cart:", error);
-        toast.error("Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng");
+        toast.error("Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng", {
+          id: "add-to-cart-error",
+        });
       }
     },
     [

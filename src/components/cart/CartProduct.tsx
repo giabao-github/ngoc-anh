@@ -18,7 +18,7 @@ import { CartItem, Product } from "@/app/types";
 
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["200", "400", "500", "600", "700", "800"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 interface CartProductProps {
@@ -81,7 +81,9 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
         handleQuantityChange("set", product, parsedValue);
       }
       if (Number(newValue) >= product.quantity) {
-        toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này");
+        toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này", {
+          id: "cart-max-quantity-warning",
+        });
       }
     }
   };

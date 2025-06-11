@@ -22,19 +22,17 @@ export const searchProducts = (query: string): SearchResult => {
     return { products: [], query: "" };
   }
 
+  // Case 1: Empty query - show all products
   if (formattedQuery.length === 0) {
     return { products: products, query: "" };
   }
 
   const normalizedQuery = normalizeText(formattedQuery);
 
+  // Split query into words and filter out empty strings
   const queryWords = normalizedQuery
     .split(" ")
     .filter((word) => word.length > 0);
-
-  if (queryWords.length === 0) {
-    return { products: [], query: formattedQuery };
-  }
 
   // Use Map for O(1) lookup instead of array iteration for large datasets
   const productScores = new Map<string, number>();

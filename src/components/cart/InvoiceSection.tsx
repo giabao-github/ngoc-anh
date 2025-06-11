@@ -6,9 +6,11 @@ import { Montserrat } from "next/font/google";
 import { InvoiceForm } from "@/components/cart/InvoiceForm";
 import { Input } from "@/components/ui/input";
 
+import useIsMobile from "@/hooks/useIsMobile";
+
 const montserrat = Montserrat({
   subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["200", "400", "500", "600", "700", "800"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 interface InvoiceSectionProps {
@@ -24,8 +26,10 @@ const InvoiceSection: React.FC<InvoiceSectionProps> = ({
   contentRef,
   contentHeight,
 }) => {
+  const isMobile = useIsMobile();
+
   return (
-    <div className="flex items-center gap-3 mx-2 mt-8 md:mb-16">
+    <div className="flex items-center gap-3 mx-2 mt-8 mb-0 md:mb-20">
       <div className="flex flex-col w-full gap-y-4">
         <div className="flex flex-row items-center gap-2 md:gap-3">
           <Input
@@ -46,7 +50,9 @@ const InvoiceSection: React.FC<InvoiceSectionProps> = ({
           {invoiceOpen && (
             <InvoiceForm
               contentRef={contentRef}
-              contentHeight={contentHeight}
+              contentHeight={
+                isMobile ? contentHeight * 1.5 : contentHeight * 1.3
+              }
             />
           )}
         </AnimatePresence>

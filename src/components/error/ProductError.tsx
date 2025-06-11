@@ -25,9 +25,13 @@ const ProductError = () => {
           onClick={() => router.push("/")}
           className="object-contain w-20 h-20 cursor-pointer select-none"
         />
-        <h1 className="hidden text-2xl font-semibold uppercase select-none text-primary md:text-3xl md:block">
+        <span
+          className="hidden text-2xl font-semibold uppercase select-none text-primary md:text-3xl md:block"
+          aria-label="Thạch Âm - Trang chủ"
+          role="text"
+        >
           Thạch Âm
-        </h1>
+        </span>
       </div>
 
       {/* Illustration */}
