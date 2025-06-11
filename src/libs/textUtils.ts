@@ -1,6 +1,6 @@
 import {
   DIACRITIC_REGEX,
-  KAOMOJI_PATTERNS,
+  KAOMOJI_REGEX,
   SLUG_EDGE_DASHES,
   SLUG_MULTIPLE_DASHES,
   SLUG_SPECIAL_CHARS,
@@ -12,10 +12,8 @@ import {
 import { SanitizeLevel } from "@/app/types";
 
 export const sanitizeInputName = (input: string, maxLength = 255): string => {
-  // Remove common kaomoji and emoticon patterns (more comprehensive)
-  KAOMOJI_PATTERNS.forEach((pattern) => {
-    input = input.replace(pattern, "");
-  });
+  // Remove common kaomoji and emoticon patterns using pre-compiled regex
+  input = input.replace(KAOMOJI_REGEX, "");
 
   return input
     .replace(/[^\p{L}\p{N}\s\-&.']/gu, "")

@@ -28,3 +28,9 @@ export const KAOMOJI_PATTERNS: ReadonlyArray<RegExp> = [
   // Additional face-like patterns with various brackets
   /[<\[\{][^\w\s]{1,3}[>\]\}]/gu,
 ];
+
+// Pre-compiled combined pattern for better performance
+export const KAOMOJI_REGEX = new RegExp(
+  KAOMOJI_PATTERNS.map((re) => re.source).join("|"),
+  "gu",
+);
