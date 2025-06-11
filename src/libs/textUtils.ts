@@ -26,13 +26,14 @@ export const sanitizeEmail = (
   maxLength: number = 255,
 ): string => {
   return input
-    .replace(/[^a-zA-Z0-9.\-_@+\u00C0-\u00FF]/g, "")
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9._@+\-\u00C0-\u00FF]/gu, "")
     .substring(0, maxLength);
 };
 
 export const sanitizeTaxCode = (value: string): string => {
-  // Remove any non-digit characters
-  const digits = value.replace(/\D/g, "");
+  // Remove any non-digit characters and limit to 13 digits
+  const digits = value.replace(/\D/g, "").slice(0, 13);
 
   // Only format if exactly 13 digits
   if (digits.length === 13) {

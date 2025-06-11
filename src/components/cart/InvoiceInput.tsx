@@ -73,8 +73,13 @@ export const InvoiceInput = ({
                 }
               }}
               onBlur={() => {
-                const sanitized = sanitizeInputOnBlur(field.value);
-                field.onChange(sanitized);
+                const trimmed = sanitizeInputOnBlur(field.value);
+                const sanitized = sanitizeLevel
+                  ? sanitizeInputWithLevel(trimmed, sanitizeLevel)
+                  : trimmed;
+                if (sanitized !== field.value) {
+                  field.onChange(sanitized);
+                }
                 field.onBlur();
               }}
               className={cn(

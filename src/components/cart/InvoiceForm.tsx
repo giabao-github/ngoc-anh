@@ -242,6 +242,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
             name="taxCode"
             form={form}
             sanitizeLevel="taxCode"
+            maxLength={14}
             placeholder="Mã số thuế"
             font={montserrat}
             className="flex flex-col w-[39%] md:w-[30%]"
