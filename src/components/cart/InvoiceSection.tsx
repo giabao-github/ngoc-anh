@@ -12,7 +12,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 interface InvoiceSectionProps {
   invoiceOpen: boolean;
   setInvoiceOpen: (value: boolean) => void;
-  contentRef: RefObject<HTMLDivElement | null>;
+  contentRef: RefObject<HTMLFormElement | null>;
   contentHeight: number;
 }
 

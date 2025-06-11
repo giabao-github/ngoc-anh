@@ -38,7 +38,7 @@ const CartDetails: React.FC<CartDetailsProps> = ({
   setNotes,
 }) => {
   const { clearCart, cartItems, totalCount } = useCart();
-  const contentRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLFormElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const isMobile = useIsMobile();
