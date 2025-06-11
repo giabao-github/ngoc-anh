@@ -6,6 +6,7 @@ import { useCart } from "@/hooks/useCart";
 import useIsMobile from "@/hooks/useIsMobile";
 
 import { CartItem, Product } from "@/app/types";
+import { ToastIds } from "@/constants/toastIds";
 import { animateAddToCart } from "@/libs/cartUtils";
 import { createCartItem, getCartFromStorage } from "@/libs/productUtils";
 
@@ -45,21 +46,21 @@ export const useAddToCart = (
     (quantity: number) => {
       if (!product) {
         toast.error("Không thể thêm sản phẩm vào giỏ hàng", {
-          description: "Sản phẩm này hiện không còn tồn tại hoặc đã bị xóa",
+          id: ToastIds.PRODUCT_NOT_FOUND_ERROR,
         });
         return;
       }
 
       if (availableQuantity === 0) {
-        toast.error("Bạn đã đạt số lượng mua tối đa của sản phẩm này", {
-          description: `Số lượng sản phẩm trong giỏ: ${cartQuantity}`,
+        toast.error("Đã đạt số lượng mua tối đa của sản phẩm này", {
+          id: ToastIds.PRODUCT_MAX_QTY_ERROR,
         });
         return;
       }
 
       if (quantity > availableQuantity) {
         toast.error("Số lượng bạn chọn vượt quá số lượng có sẵn", {
-          description: `Số lượng có sẵn: ${availableQuantity}`,
+          id: ToastIds.EXCEED_STOCK_ERROR,
         });
         return;
       }
@@ -92,7 +93,9 @@ export const useAddToCart = (
         }, 1000);
       } catch (error) {
         console.error("Error adding to cart:", error);
-        toast.error("Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng");
+        toast.error("Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng", {
+          id: ToastIds.ADD_TO_CART_ERROR,
+        });
       }
     },
     [

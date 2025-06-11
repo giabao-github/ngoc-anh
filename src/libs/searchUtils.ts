@@ -18,19 +18,17 @@ const normalizedProducts =
 export const searchProducts = (query: string): SearchResult => {
   const formattedQuery = formatText(query);
 
-  if (typeof formattedQuery !== "string" || formattedQuery.length === 0) {
-    return { products: [], query: "" };
+  // Empty query - show all products
+  if (formattedQuery.length === 0) {
+    return { products: products, query: "" };
   }
 
   const normalizedQuery = normalizeText(formattedQuery);
 
+  // Split query into words and filter out empty strings
   const queryWords = normalizedQuery
     .split(" ")
     .filter((word) => word.length > 0);
-
-  if (queryWords.length === 0) {
-    return { products: [], query: formattedQuery };
-  }
 
   // Use Map for O(1) lookup instead of array iteration for large datasets
   const productScores = new Map<string, number>();
@@ -70,10 +68,6 @@ export const searchProducts = (query: string): SearchResult => {
 
 export const handleSearch = (query: string, router: AppRouterInstance) => {
   const formattedQuery = formatText(query);
-
-  if (typeof formattedQuery !== "string" || formattedQuery.length === 0) {
-    return;
-  }
 
   const encoded = encodeURIComponent(formattedQuery);
   router.push(`/search?query=${encoded}`);

@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { IoCloseCircle, IoSearch } from "react-icons/io5";
 
-import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 
-import { handleSearch } from "@/libs/searchUtils";
+import { montserrat } from "@/config/fonts";
 
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["200", "400", "500", "600", "700", "800"],
-});
+import { handleSearch } from "@/libs/searchUtils";
 
 const MESSAGES = {
   emptyCart: "Chưa có sản phẩm trong giỏ hàng...",

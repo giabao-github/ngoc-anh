@@ -3,18 +3,17 @@
 import { useEffect, useState } from "react";
 import { FiHeart } from "react-icons/fi";
 
-import { Montserrat } from "next/font/google";
 import { toast } from "sonner";
 
 import { Separator } from "@/components/ui/separator";
 
-import { Product } from "@/app/types";
+import { montserrat } from "@/config/fonts";
+
+import { ToastIds } from "@/constants/toastIds";
+
 import { cn } from "@/libs/utils";
 
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["200", "400", "500", "600", "700", "800"],
-});
+import { Product } from "@/app/types";
 
 interface ProductInfoProps {
   product: Product;
@@ -38,10 +37,12 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
     if (!isFavorite) {
       toast.success("Đã thêm vào danh sách yêu thích", {
         description: "Đã thêm sản phẩm này vào danh sách yêu thích của bạn",
+        id: ToastIds.ADD_TO_WISHLIST_SUCCESS,
       });
     } else {
       toast.success("Đã xóa khỏi danh sách yêu thích", {
         description: "Đã xóa sản phẩm này khỏi danh sách yêu thích của bạn",
+        id: ToastIds.REMOVE_FROM_WISHLIST_SUCCESS,
       });
     }
   };

@@ -3,23 +3,21 @@ import { BsSearchHeart } from "react-icons/bs";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
 
-import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 
-import { useCart } from "@/hooks/useCart";
+import { montserrat } from "@/config/fonts";
 
 import { HASH_ROUTES } from "@/constants/routes";
+
+import { useCart } from "@/hooks/useCart";
+
 import { handleNavigation } from "@/libs/navigationUtils";
 import { handleSearch } from "@/libs/searchUtils";
-
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["200", "400", "500", "600", "700", "800"],
-});
+import { cn } from "@/libs/utils";
 
 interface DesktopHeaderProps {
   hasSections?: boolean;
@@ -48,9 +46,9 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
   const { cartCount } = useCart();
 
   return (
-    <header className={`sticky top-0 z-20 bg-primary text-white py-2 px-6`}>
-      <div className="flex items-center justify-between mx-auto max-w-7xl">
-        <div className={`flex items-center space-x-4`}>
+    <header className="sticky top-0 z-20 px-6 py-2 text-white bg-primary">
+      <div className="flex items-center justify-between mx-auto max-w-[1400px]">
+        <div className="flex items-center space-x-4">
           <Image
             src="/logo.png"
             alt="Logo"
@@ -59,14 +57,19 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             quality={100}
             priority
             onClick={() => router.push("/")}
-            className="object-contain w-20 h-20 cursor-pointer select-none"
+            className="object-contain w-16 h-16 cursor-pointer select-none md:w-20 md:h-20"
           />
           <h1 className="hidden text-2xl font-semibold uppercase select-none 2xl:text-3xl text-logo md:block">
             Thạch Âm
           </h1>
         </div>
 
-        <nav className="items-center hidden tracking-wide md:flex md:space-x-5 xl:space-x-7">
+        <nav
+          className={cn(
+            "items-center font-medium hidden md:flex md:space-x-5 xl:space-x-7",
+            montserrat.className,
+          )}
+        >
           <Link
             href="#"
             onClick={(e) => {
@@ -122,7 +125,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 title="Tìm kiếm"
                 type="button"
                 onClick={() => handleSearch(query, router)}
-                className="absolute cursor-pointer inset-y-0 left-4 flex items-center text-white hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition"
+                className="absolute inset-y-0 flex items-center text-gray-300 transition cursor-pointer left-4 hover:text-white active:text-white/80"
               >
                 <BsSearchHeart size={18} />
               </button>
@@ -134,7 +137,10 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Tìm kiếm sản phẩm..."
-                className={`header-input w-80 2xl:w-96 font-medium pl-12 pr-4 py-2 border border-white rounded-full shadow-md shadow-white focus:ring-1 focus:ring-white focus:outline-none transition ${montserrat.className}`}
+                className={cn(
+                  "header-input w-80 2xl:w-96 font-medium pl-12 pr-4 py-2 border border-white rounded-full shadow-md shadow-white focus:ring-1 focus:ring-white focus:outline-none placeholder:text-gray-400 transition",
+                  montserrat.className,
+                )}
               />
 
               {query.trim().length > 0 && (

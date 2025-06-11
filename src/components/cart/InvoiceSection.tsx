@@ -1,20 +1,18 @@
 import { RefObject } from "react";
 
 import { AnimatePresence } from "framer-motion";
-import { Montserrat } from "next/font/google";
 
-import InvoiceForm from "@/components/cart/InvoiceForm";
+import { InvoiceForm } from "@/components/cart/InvoiceForm";
 import { Input } from "@/components/ui/input";
 
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["200", "400", "500", "600", "700", "800"],
-});
+import { montserrat } from "@/config/fonts";
+
+import useIsMobile from "@/hooks/useIsMobile";
 
 interface InvoiceSectionProps {
   invoiceOpen: boolean;
   setInvoiceOpen: (value: boolean) => void;
-  contentRef: RefObject<HTMLDivElement | null>;
+  contentRef: RefObject<HTMLFormElement | null>;
   contentHeight: number;
 }
 
@@ -25,7 +23,7 @@ const InvoiceSection: React.FC<InvoiceSectionProps> = ({
   contentHeight,
 }) => {
   return (
-    <div className="flex items-center gap-3 mx-2 mt-8 md:mb-16">
+    <div className="flex items-center gap-3 mx-2 mt-8 mb-0 md:mb-20">
       <div className="flex flex-col w-full gap-y-4">
         <div className="flex flex-row items-center gap-2 md:gap-3">
           <Input

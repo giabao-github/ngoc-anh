@@ -8,6 +8,8 @@ import { AnimatedSection } from "@/components/sections/more/AnimatedSection";
 import { HeritageSection } from "@/components/sections/more/HeritageSection";
 import { NavigationButtons } from "@/components/sections/more/NavigationButtons";
 
+import { montserrat } from "@/config/fonts";
+
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export const MoreView = () => {
@@ -17,9 +19,7 @@ export const MoreView = () => {
   return (
     <>
       <Header hasFooter aboutRef={aboutRef} />
-      <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-primary/95 via-primary/90 to-primary/85">
-        <div className="absolute inset-0 bg-pattern opacity-20"></div>
-
+      <div className="relative min-h-screen overflow-hidden bg-[url('/backgrounds/more-background.jpeg')] bg-center bg-contain md:bg-cover bg-scroll">
         <main className="relative z-10 pb-12 md:pt-12 md:pb-20">
           <div className="container max-w-lg px-4 py-16 mx-auto md:max-w-7xl">
             <AnimatedSection>
@@ -30,7 +30,9 @@ export const MoreView = () => {
 
             <div className="space-y-12 md:space-y-24">
               <AnimatedSection>
-                <div className="p-8 border bg-emerald-800/30 backdrop-blur-sm rounded-2xl border-amber-400/20">
+                <div
+                  className={`p-6 md:p-8 font-medium border bg-emerald-800/50 backdrop-blur-sm rounded-2xl border-amber-400/50 ${montserrat.className}`}
+                >
                   <p className="leading-relaxed md:text-lg text-amber-100">
                     Thạch Âm ra đời từ một chuyến đi đến chùa Phướng – một trong
                     những ngôi chùa Khmer cổ kính tại Trà Vinh. Ở đó, những họa
@@ -55,29 +57,31 @@ export const MoreView = () => {
                 <h2 className="mb-6 text-2xl font-bold text-center md:mb-12 md:text-4xl 2xl:text-5xl text-amber-400">
                   THÔNG ĐIỆP
                 </h2>
-                <div className="p-8 border bg-emerald-800/30 backdrop-blur-sm rounded-2xl border-amber-400/20">
+                <div className="p-6 border md:p-8 bg-emerald-800/50 backdrop-blur-sm rounded-2xl border-amber-400/50">
                   <h3 className="mb-8 text-xl font-bold text-center md:text-2xl 2xl:text-3xl text-amber-300">
                     VĂN HÓA LÀ ĐỂ SỐNG, KHÔNG CHỈ ĐỂ NGẮM
                   </h3>
-                  <p className="mb-6 leading-relaxed md:text-lg text-amber-100">
-                    Thạch Âm không bán sản phẩm – mà bán trải nghiệm sống cùng
-                    văn hóa.
-                  </p>
-                  <p className="mb-4 leading-relaxed md:text-lg text-amber-100">
-                    Chúng tôi mơ về một thế giới nơi giới trẻ:
-                  </p>
-                  <ul className="space-y-3 text-amber-100">
-                    <li className="flex items-start space-x-3">
-                      <div className="w-2 h-2 mt-2 rounded-full bg-amber-400"></div>
-                      <span>Không chỉ biết đến hoa văn Khmer qua ảnh.</span>
-                    </li>
-                    <li className="flex items-start space-x-3">
-                      <div className="w-2 h-2 mt-2 rounded-full bg-amber-400"></div>
-                      <span>
-                        Mà đeo nó, mặc nó, uống nước từ nó, sống cùng nó.
-                      </span>
-                    </li>
-                  </ul>
+                  <div className={`font-medium ${montserrat.className}`}>
+                    <p className="mb-6 leading-relaxed md:text-lg text-amber-100">
+                      Thạch Âm không bán sản phẩm – mà bán trải nghiệm sống cùng
+                      văn hóa.
+                    </p>
+                    <p className="mb-4 leading-relaxed md:text-lg text-amber-100">
+                      Chúng tôi mơ về một thế giới nơi giới trẻ:
+                    </p>
+                    <ul className="space-y-3 text-amber-100">
+                      <li className="flex items-start space-x-3">
+                        <div className="w-2 h-2 mt-2 rounded-full bg-amber-400"></div>
+                        <span>Không chỉ biết đến hoa văn Khmer qua ảnh.</span>
+                      </li>
+                      <li className="flex items-start space-x-3">
+                        <div className="w-2 h-2 mt-2 rounded-full bg-amber-400"></div>
+                        <span>
+                          Mà đeo nó, mặc nó, uống nước từ nó, sống cùng nó.
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </AnimatedSection>
 
@@ -85,7 +89,9 @@ export const MoreView = () => {
                 <h2 className="mb-6 text-2xl font-bold text-center md:mb-12 md:text-4xl 2xl:text-5xl text-amber-400">
                   TẦM NHÌN
                 </h2>
-                <div className="p-8 border bg-emerald-800/30 backdrop-blur-sm rounded-2xl border-amber-400/20">
+                <div
+                  className={`p-6 md:p-8 font-medium border bg-emerald-800/50 backdrop-blur-sm rounded-2xl border-amber-400/50 ${montserrat.className}`}
+                >
                   <p className="mb-6 leading-relaxed md:text-lg text-amber-100">
                     Thạch Âm muốn trở thành:
                   </p>

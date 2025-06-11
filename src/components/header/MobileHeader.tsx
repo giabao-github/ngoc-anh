@@ -3,23 +3,21 @@ import { BsSearchHeart } from "react-icons/bs";
 import { FiMenu, FiShoppingCart, FiUser, FiX } from "react-icons/fi";
 import { IoCloseCircle } from "react-icons/io5";
 
-import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 
-import { useCart } from "@/hooks/useCart";
+import { montserrat } from "@/config/fonts";
 
 import { HASH_ROUTES } from "@/constants/routes";
+
+import { useCart } from "@/hooks/useCart";
+
 import { handleNavigation } from "@/libs/navigationUtils";
 import { handleSearch } from "@/libs/searchUtils";
-
-const montserrat = Montserrat({
-  subsets: ["cyrillic", "latin", "vietnamese"],
-  weight: ["200", "400", "500", "600", "700", "800"],
-});
+import { cn } from "@/libs/utils";
 
 interface MobileHeaderProps {
   hasSections?: boolean;
@@ -55,10 +53,11 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
   };
 
   return (
-    <div className="fixed top-0 left-0 z-20 w-full">
-      <header className={`bg-primary text-white py-2 px-6`}>
-        <div className="flex items-center justify-between mx-auto max-w-7xl">
-          <div className={`flex items-center space-x-4`}>
+    <div className="pb-20">
+      <header className="fixed top-0 left-0 z-20 w-full text-white bg-primary">
+        {/* App Logo */}
+        <div className="flex items-center justify-between px-6 py-2 mx-auto max-w-7xl">
+          <div className="flex items-center space-x-4">
             <Image
               src="/logo.png"
               alt="Logo"
@@ -69,9 +68,13 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               onClick={() => router.push("/")}
               className="object-contain w-16 h-16 rounded cursor-pointer select-none"
             />
-            <h1 className="hidden text-2xl font-semibold uppercase select-none text-logo md:block">
+            <span
+              className="hidden text-2xl font-semibold uppercase select-none text-logo md:block"
+              aria-label="Thạch Âm - Trang chủ"
+              role="text"
+            >
               Thạch Âm
-            </h1>
+            </span>
           </div>
           <div className="flex flex-row items-center gap-x-6">
             <div ref={cartIconRef} className="relative cursor-pointer group">
@@ -121,15 +124,19 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
           </div>
         </div>
       </header>
-
       {/* Animated dropdown menu */}
       <div
-        className={`bg-gradient-to-b from-primary to-[#364F6D] rounded-b-2xl text-white overflow-hidden transition-all duration-400 ease-in-out ${
+        className={`fixed w-full top-[79px] z-20 bg-gradient-to-b from-primary via-[#1A4644] to-[#2D5F5A] rounded-b-2xl text-white overflow-hidden transition-all duration-400 ease-in-out ${
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="p-6">
-          <nav className="flex flex-col space-y-4">
+          <nav
+            className={cn(
+              "flex font-medium flex-col space-y-6",
+              montserrat.className,
+            )}
+          >
             <Link
               href="#"
               onClick={(e) => {
@@ -140,6 +147,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                   undefined,
                   router,
                   collectionRef,
+                  true,
                 );
                 setIsMenuOpen(false);
               }}
@@ -157,6 +165,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                   undefined,
                   router,
                   productsRef,
+                  true,
                 );
                 setIsMenuOpen(false);
               }}
@@ -174,6 +183,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                   hasFooter,
                   router,
                   aboutRef,
+                  true,
                 );
                 setIsMenuOpen(false);
               }}
@@ -190,7 +200,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                   handleSearch(query, router);
                   setIsMenuOpen(false);
                 }}
-                className="absolute cursor-pointer inset-y-0 left-3 flex items-center text-white hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition"
+                className="absolute inset-y-0 flex items-center text-gray-200 transition cursor-pointer left-3 hover:text-white active:text-white/80"
               >
                 <BsSearchHeart size={18} />
               </button>
@@ -202,7 +212,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Tìm kiếm sản phẩm..."
-                className="w-full py-2 pl-10 pr-4 transition border border-white rounded-full shadow-md header-input shadow-white focus:ring-1 focus:ring-white focus:outline-none"
+                className={`w-full py-2 pl-10 pr-4 transition border border-white rounded-full shadow-md header-input shadow-white focus:ring-1 text-sm focus:ring-white focus:outline-none placeholder:text-gray-300 ${montserrat.className}`}
               />
 
               {query.trim().length > 0 && (

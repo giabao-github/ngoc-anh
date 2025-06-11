@@ -19,7 +19,7 @@ export const CartView = () => {
   return (
     <Suspense>
       <Header hasFooter aboutRef={aboutRef} />
-      <div className="mt-4 md:mt-16 max-w-[1400px] mx-auto py-4 px-3 md:p-4 flex flex-col md:flex-row gap-4 md:gap-6">
+      <div className="mt-4 md:mt-16 max-w-[1400px] mx-auto py-4 px-3 md:p-4 flex flex-col md:flex-row gap-20 md:gap-6">
         <CartDetails
           invoiceOpen={invoiceOpen}
           setInvoiceOpen={setInvoiceOpen}

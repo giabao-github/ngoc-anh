@@ -1,11 +1,20 @@
 import { AnimatedSection } from "@/components/sections/more/AnimatedSection";
 
+import { montserrat } from "@/config/fonts";
+
+import { cn } from "@/libs/utils";
+
 export const HeritageSection = () => (
   <AnimatedSection>
     <h2 className="mb-6 text-2xl font-bold text-center md:mb-12 md:text-4xl 2xl:text-5xl text-amber-400">
       TỪ DI SẢN ĐẾN HIỆN ĐẠI
     </h2>
-    <div className="p-8 border bg-emerald-800/30 backdrop-blur-sm rounded-2xl border-amber-400/20">
+    <div
+      className={cn(
+        "p-6 md:p-8 border font-medium bg-emerald-800/50 backdrop-blur-sm rounded-2xl border-amber-400/50",
+        montserrat.className,
+      )}
+    >
       <p className="mb-6 leading-relaxed md:text-lg text-amber-100">
         Thạch Âm không chỉ nhìn về quá khứ – mà giao tiếp với hiện tại bằng
         thiết kế.
@@ -40,7 +49,7 @@ export const HeritageSection = () => (
           </li>
         </ul>
       </div>
-      <div className="p-4 mt-6 border rounded-lg bg-amber-400/10 border-amber-400/30">
+      <div className="p-3 mt-6 -mx-3 border rounded-lg md:p-4 bg-amber-400/10 border-amber-400/30">
         <p className="font-medium text-amber-200">
           Đặc biệt website Thạch Âm như một ngôi đền số – lưu giữ, bán, kể, kết
           nối.
