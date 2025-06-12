@@ -12,13 +12,13 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
   <footer
     ref={aboutRef}
-    className={`bg-primary text-white py-12 md:py-24 px-6`}
+    className="px-2 py-12 tracking-wide text-white md:px-6 bg-primary md:py-24"
   >
-    <div className="grid gap-16 mx-auto max-w-7xl md:grid-cols-3 md:gap-32">
-      <div className="text-sm md:text-lg">
+    <div className="grid gap-16 mx-auto px-6 max-w-[1400px] md:grid-cols-7 md:gap-32 relative">
+      <div className="text-sm md:text-base 2xl:text-lg w-fit md:col-span-3">
         <h3 className="mb-4 uppercase">Trụ sở chính</h3>
         <span
-          className="text-lg md:text-2xl mb-4 font-semibold uppercase text-[#D4AF37] block"
+          className="text-lg md:text-xl 2xl:text-2xl mb-4 font-semibold uppercase text-[#D4AF37] block"
           aria-label="Công ty TNHH Thạch Âm"
           role="text"
         >
@@ -40,65 +40,74 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
           Xem bản đồ
         </a>
       </div>
-      <div>
-        <div className="text-sm md:text-lg">
-          <h3 className="mb-4 uppercase">Kết nối với chúng tôi</h3>
-          <p>
-            Hotline:&nbsp;
-            <Link
-              href={"tel:0378044394"}
-              className="hover:text-[#D4AF37] active:text-[#D4AF37]/70"
-            >
-              (+84) 915 047 339
-            </Link>
-          </p>
-          <p>
-            Email:&nbsp;
-            <Link
-              href={"mailto:thacham@gmail.com"}
-              className="hover:text-[#D4AF37] active:text-[#D4AF37]/70"
-            >
-              thacham@gmail.com
-            </Link>
-          </p>
-          <div className="flex mt-10 space-x-6 md:mt-12">
-            <a
-              href="https://www.facebook.com/minhlongcompany"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaFacebookF className="text-xl md:text-3xl hover:text-[#D4AF37] active:text-[#D4AF37]/70 cursor-pointer" />
-            </a>
-            <a
-              href="https://www.instagram.com/minhlongporcelain"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaInstagram className="text-xl md:text-3xl hover:text-[#D4AF37] active:text-[#D4AF37]/70 cursor-pointer" />
-            </a>
-            <a
-              href="https://www.youtube.com/@MinhLongPorcelain"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaYoutube className="text-xl md:text-3xl hover:text-[#D4AF37] active:text-[#D4AF37]/70 cursor-pointer" />
-            </a>
-          </div>
+      <div className="text-sm w-fit md:text-base 2xl:text-lg md:col-span-2">
+        <h3 className="mb-4 uppercase">Kết nối với chúng tôi</h3>
+        <p>
+          Hotline:&nbsp;
+          <Link
+            href={"tel:0378044394"}
+            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70"
+          >
+            (+84) 915 047 339
+          </Link>
+        </p>
+        <p>
+          Email:&nbsp;
+          <Link
+            href={"mailto:thacham@gmail.com"}
+            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70"
+          >
+            thacham@gmail.com
+          </Link>
+        </p>
+        <div className="flex mt-10 space-x-6 md:mt-12">
+          <a
+            href="https://www.facebook.com/minhlongcompany"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaFacebookF className="text-xl md:text-3xl hover:text-[#D4AF37] active:text-[#D4AF37]/70 cursor-pointer" />
+          </a>
+          <a
+            href="https://www.instagram.com/minhlongporcelain"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaInstagram className="text-xl md:text-3xl hover:text-[#D4AF37] active:text-[#D4AF37]/70 cursor-pointer" />
+          </a>
+          <a
+            href="https://www.youtube.com/@MinhLongPorcelain"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaYoutube className="text-xl md:text-3xl hover:text-[#D4AF37] active:text-[#D4AF37]/70 cursor-pointer" />
+          </a>
         </div>
       </div>
-      <div>
+      <div className="w-fit md:absolute md:right-0 md:col-span-1">
         <div className="hidden md:block">
-          <div className="relative w-48 h-16">
+          <div className="relative w-auto h-14 2xl:h-16">
             <Image
               src={
                 "https://file.hstatic.net/200000532849/file/logothongbao_d4f8886efdb04dd3984bff803b418aa5.png"
               }
               alt="Verified"
               fill
-              sizes="(max-width: 768px) 120px, 180px"
+              sizes="(max-width: 768px) 128px, 192px"
               className="object-contain"
             />
           </div>
+        </div>
+        <div className="justify-start hidden mx-4 mt-16 text-center md:flex">
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="cursor-pointer select-none bg-transparent text-[#D4AF37] border border-[#D4AF37] px-6 py-3 rounded-full hover:bg-[#D4AF37] hover:text-white active:bg-[#D4AF37]/70 active:text-white/70 transition-colors flex items-center"
+          >
+            <span className="text-sm font-semibold tracking-wide 2xl:text-base">
+              Quay về đầu trang
+            </span>
+          </button>
         </div>
         <div className="flex flex-row md:hidden gap-x-8">
           <div className="relative w-32 h-12">
@@ -108,7 +117,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
               }
               alt="Verified"
               fill
-              sizes="(max-width: 768px) 120px, 180px"
+              sizes="(max-width: 768px) 128px, 192px"
               className="object-contain"
             />
           </div>
@@ -117,17 +126,6 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
             className="cursor-pointer select-none bg-transparent text-[#D4AF37] border border-[#D4AF37] px-4 py-2 rounded-full hover:bg-[#D4AF37] hover:text-white active:bg-[#D4AF37]/70 active:text-white/70 transition-colors flex items-center"
           >
             <span className="text-xs font-semibold tracking-wide">
-              Quay về đầu trang
-            </span>
-          </button>
-        </div>
-        <div className="justify-start hidden mx-4 mt-16 text-center md:flex">
-          <button
-            type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="cursor-pointer select-none bg-transparent text-[#D4AF37] border border-[#D4AF37] px-6 py-3 rounded-full hover:bg-[#D4AF37] hover:text-white active:bg-[#D4AF37]/70 active:text-white/70 transition-colors flex items-center"
-          >
-            <span className="font-semibold tracking-wide">
               Quay về đầu trang
             </span>
           </button>

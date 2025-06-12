@@ -9,7 +9,7 @@ import PurchaseSection from "@/components/product/PurchaseSection";
 import RatingSection from "@/components/product/RatingSection";
 import Footer from "@/components/sections/Footer";
 
-interface ProductPageLayoutProps {
+interface ProductViewLayoutProps {
   product: any;
   slug: string;
   images: string[];
@@ -48,7 +48,7 @@ interface ProductPageLayoutProps {
   handleCloseNotification: () => void;
 }
 
-const ProductPageLayout: React.FC<ProductPageLayoutProps> = ({
+export const ProductViewLayout: React.FC<ProductViewLayoutProps> = ({
   product,
   slug,
   images,
@@ -130,5 +130,3 @@ const ProductPageLayout: React.FC<ProductPageLayoutProps> = ({
     </>
   );
 };
-
-export default ProductPageLayout;

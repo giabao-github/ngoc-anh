@@ -2,13 +2,15 @@ import { RefObject, useCallback, useMemo } from "react";
 
 import { toast } from "sonner";
 
+import { ToastIds } from "@/constants/toastIds";
+
 import { useCart } from "@/hooks/useCart";
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { CartItem, Product } from "@/app/types";
-import { ToastIds } from "@/constants/toastIds";
 import { animateAddToCart } from "@/libs/cartUtils";
 import { createCartItem, getCartFromStorage } from "@/libs/productUtils";
+
+import { CartItem, Product } from "@/app/types";
 
 export const useAddToCart = (
   product: Product | undefined,

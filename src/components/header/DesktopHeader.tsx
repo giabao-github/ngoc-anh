@@ -66,8 +66,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
 
         <nav
           className={cn(
-            "items-center font-medium hidden md:flex md:space-x-5 xl:space-x-7",
-            montserrat.className,
+            "items-center font-semibold hidden tracking-wider md:flex md:space-x-5 xl:space-x-7",
           )}
         >
           <Link
@@ -82,7 +81,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 collectionRef,
               );
             }}
-            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
+            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg 2xl:text-xl w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
           >
             Bộ sưu tập
           </Link>
@@ -98,7 +97,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 productsRef,
               );
             }}
-            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
+            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg 2xl:text-xl w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
           >
             Cửa hàng
           </Link>
@@ -114,7 +113,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 aboutRef,
               );
             }}
-            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
+            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg 2xl:text-xl w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
           >
             Về chúng tôi
           </Link>
@@ -189,6 +188,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
               src="/avatar.jpeg"
               alt="Avatar"
               fill
+              sizes="(max-width: 1280px) 40px, 48px"
               quality={100}
               className="object-cover cursor-pointer select-none"
             />

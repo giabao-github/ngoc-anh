@@ -8,8 +8,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Header from "@/components/header/Header";
 import Footer from "@/components/sections/Footer";
 
-import { Product } from "@/app/types";
 import { searchProducts } from "@/libs/searchUtils";
+
+import { Product } from "@/app/types";
 
 export const SearchView = () => {
   const router = useRouter();

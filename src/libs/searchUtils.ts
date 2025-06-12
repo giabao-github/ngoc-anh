@@ -1,8 +1,9 @@
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
+import { formatText, normalizeText } from "@/libs/textUtils";
+
 import { products } from "@/app/storage";
 import { Product } from "@/app/types";
-import { formatText, normalizeText } from "@/libs/textUtils";
 
 export interface SearchResult {
   products: Product[];

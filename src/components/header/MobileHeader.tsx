@@ -111,6 +111,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 src="/avatar.jpeg"
                 alt="Avatar"
                 fill
+                sizes="(max-width: 768px) 40px, 40px"
                 quality={100}
                 className="object-cover cursor-pointer select-none"
               />
@@ -133,8 +134,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         <div className="p-6">
           <nav
             className={cn(
-              "flex font-medium flex-col space-y-6",
-              montserrat.className,
+              "flex font-semibold tracking-wider flex-col text-lg space-y-6",
             )}
           >
             <Link
