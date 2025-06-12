@@ -1,109 +1,102 @@
-# Ngọc Ánh - Minh Long Porcelain E-commerce
+# Thạch Âm - Premium Porcelain E-commerce
 
-A modern, full-featured e-commerce web application for Minh Long porcelain products, built with Next.js, React, and Tailwind CSS. The platform enables users to browse curated collections, view detailed product information, manage a shopping cart, register/login, and recover passwords. The UI is responsive, elegant, and optimized for both desktop and mobile devices.
-
----
+A modern, full-featured e-commerce web application for premium porcelain products, built with Next.js, React, and Tailwind CSS. The platform offers an elegant shopping experience with curated collections, detailed product information, and seamless user interactions.
 
 ## Features
 
-- **Product Catalog**: Browse a curated selection of Minh Long porcelain products with high-quality images, prices, and detailed descriptions.
-- **Collections**: Explore themed product collections with a visually engaging carousel interface.
-- **Advanced Search**: Quickly find products using a robust, integrated search bar with real-time filtering.
-- **Shopping Cart**: Add products to your cart, view details, adjust quantities, and proceed to checkout with a seamless experience.
-- **Authentication**: Register and log in using email or phone number. Password recovery is supported for both methods.
-- **Responsive Design**: Fully responsive layout for a seamless experience on all devices, including mobile and desktop.
-- **Modern UI/UX**: Built with Tailwind CSS, Radix UI, and custom React components for a clean, elegant, and accessible interface.
-- **Animations**: Smooth transitions and interactive elements powered by Framer Motion.
-- **Extensible Architecture**: Modular components, hooks, and utilities for easy customization and scalability.
-
----
+- **Product Catalog**: Browse premium porcelain products with high-quality images and detailed descriptions
+- **Collections**: Explore themed product collections with an engaging carousel interface
+- **Advanced Search**: Find products quickly with real-time filtering
+- **Shopping Cart**: Manage cart items and checkout seamlessly
+- **Authentication**: Secure login/register with email or phone, including password recovery
+- **Responsive Design**: Optimized for all devices
+- **Modern UI/UX**: Built with Tailwind CSS and Radix UI
+- **Animations**: Smooth transitions with Framer Motion and GSAP
 
 ## Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (App Router, TypeScript)
-- **Frontend**: [React 19](https://react.dev/)
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) with plugins (`@tailwindcss/line-clamp`, `tailwindcss-animate`)
-- **UI Components**: [Radix UI](https://www.radix-ui.com/), [Lucide React](https://lucide.dev/), [React Icons](https://react-icons.github.io/react-icons/)
-- **Carousel**: [Embla Carousel](https://www.embla-carousel.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Utilities**: `clsx`, `class-variance-authority`, `tailwind-merge`, `next-themes`, and more
-
----
+- **Framework**: Next.js 15.3.1 (App Router, TypeScript)
+- **Frontend**: React 19.0.0
+- **Styling**: Tailwind CSS 4 with plugins (line-clamp, animate, autofill)
+- **UI Components**:
+  - Radix UI (Label, Scroll Area, Select, Separator, Switch, Tooltip)
+  - Headless UI
+  - Lucide React
+  - React Icons
+- **Carousel**: Embla Carousel
+- **Animations**: Framer Motion, GSAP
+- **Form Handling**: React Hook Form with Zod validation
+- **Utilities**:
+  - clsx
+  - class-variance-authority
+  - tailwind-merge
+  - next-themes
+  - sonner (toasts)
 
 ## Project Structure
 
 ```
-ngoc-anh/
+thach-am/
 ├── src/
-│   └── app/
-│       ├── components/      # Reusable UI and page components (cart, product, header, footer, etc.)
-│       ├── ui/              # UI primitives (buttons, inputs, carousels, tooltips, etc.)
-│       ├── hooks/           # Custom React hooks (cart context, mobile detection, etc.)
-│       ├── lib/             # Utility functions and helpers
-│       ├── cart/            # Cart page and logic
-│       ├── search/          # Search page and logic
-│       ├── login/           # Login page and logic
-│       ├── register/        # Registration page and logic
-│       ├── password-recovery/ # Password recovery page and logic
-│       ├── products/        # Product detail pages (dynamic routing)
-│       ├── storage.tsx      # Product and collection data (customizable)
-│       ├── page.tsx         # Main landing page
-│       ├── layout.tsx       # App layout and global wrappers
-│       └── globals.css      # Global styles
-├── public/                  # Static assets (images, favicon, etc.)
-├── package.json             # Project metadata and dependencies
-├── tailwind.config.js       # Tailwind CSS configuration
-├── next.config.ts           # Next.js configuration (image domains, etc.)
-├── tsconfig.json            # TypeScript configuration
-└── ...
+│   ├── app/                 # App router pages and layouts
+│   │   ├── (auth)/         # Authentication routes
+│   │   ├── cart/           # Cart functionality
+│   │   ├── more/           # Additional pages
+│   │   ├── products/       # Product pages
+│   │   ├── search/         # Search functionality
+│   │   ├── components.json # UI components config
+│   │   ├── globals.css     # Global styles
+│   │   ├── layout.tsx      # Root layout
+│   │   ├── page.tsx        # Home page
+│   │   ├── schemas.ts      # Zod validation schemas
+│   │   ├── storage.tsx     # Product data
+│   │   └── types.ts        # TypeScript types
+│   ├── components/         # Shared components
+│   ├── config/            # App configuration
+│   ├── constants/         # App constants
+│   ├── hooks/            # Custom React hooks
+│   ├── libs/             # Utility libraries
+│   └── modules/          # Feature modules
+├── public/               # Static assets
+├── .vscode/             # VS Code settings
+├── package.json         # Dependencies
+├── tailwind.config.js   # Tailwind config
+├── next.config.ts       # Next.js config
+└── tsconfig.json        # TypeScript config
 ```
-
----
 
 ## Getting Started
 
 1. **Install dependencies:**
+
    ```bash
    yarn install
    # or
    npm install
    ```
+
 2. **Run the development server:**
+
    ```bash
    yarn dev
    # or
    npm run dev
    ```
+
 3. **Open the app:**
    - Development: [http://localhost:3000](http://localhost:3000)
-   - Production: [https://ngoc-anh.vercel.app](https://ngoc-anh.vercel.app)
+   - Production: [https://thacham.vercel.app](https://thacham.vercel.app)
 
----
+## Development Guidelines
 
-## Customization & Extensibility
-
-- **Product & Collection Data:**
-  - Update or extend product and collection data in `src/app/storage.tsx`.
-- **UI & Theme:**
-  - Adjust styles via Tailwind CSS and `tailwind.config.js`.
-  - Customize or extend UI primitives in `src/app/ui/` and components in `src/app/components/`.
-- **Add Features:**
-  - Add new pages or features by creating new folders/files in `src/app/` following the Next.js App Router conventions.
-- **Image Domains:**
-  - To allow images from new domains, update the `images.remotePatterns` array in `next.config.ts`.
-
----
-
-## Contribution Guidelines
-
-1. Fork the repository and create a new branch for your feature or fix.
-2. Follow the existing code style and structure.
-3. Add clear, descriptive commit messages.
-4. Test your changes locally before submitting a pull request.
-5. Open a pull request with a detailed description of your changes.
-
----
+1. Create feature branches from `main`
+2. Follow TypeScript and React best practices
+3. Write clear commit messages
+4. Test changes locally
+5. Submit PRs with detailed descriptions
+6. Use Prettier for code formatting
+7. Follow the established project structure
 
 ## License
 
-This project is for demonstration and educational purposes. Minh Long branding and product data are used for illustrative purposes only.
+This project is proprietary and confidential. Unauthorized copying, distribution, or use is strictly prohibited.
