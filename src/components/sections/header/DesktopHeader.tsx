@@ -44,6 +44,8 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
 }) => {
   const router = useRouter();
   const { cartCount } = useCart();
+  const navLinkClass =
+    "hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg 2xl:text-xl w-fit outline-none ring-0 focus:ring-0 focus:outline-none";
 
   return (
     <header className="sticky top-0 z-20 px-6 py-2 text-white bg-primary">
@@ -81,7 +83,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 collectionRef,
               );
             }}
-            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg 2xl:text-xl w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
+            className={navLinkClass}
           >
             Bộ sưu tập
           </Link>
@@ -97,7 +99,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 productsRef,
               );
             }}
-            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg 2xl:text-xl w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
+            className={navLinkClass}
           >
             Cửa hàng
           </Link>
@@ -113,7 +115,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 aboutRef,
               );
             }}
-            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg 2xl:text-xl w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
+            className={navLinkClass}
           >
             Về chúng tôi
           </Link>

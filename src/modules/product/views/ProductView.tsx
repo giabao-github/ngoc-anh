@@ -12,6 +12,10 @@ export const ProductView = () => {
   const params = useParams();
   const slug = params.slug as string;
 
+  if (!slug) {
+    return <ProductError />;
+  }
+
   const productViewData = useProductView(slug);
 
   if (!productViewData.product) {

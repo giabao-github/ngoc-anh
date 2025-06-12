@@ -2,11 +2,11 @@
 
 import { RefObject, useEffect, useRef } from "react";
 
-import Header from "@/components/header/Header";
 import Collection from "@/components/sections/Collection";
-import Footer from "@/components/sections/Footer";
 import Hero from "@/components/sections/Hero";
 import Products from "@/components/sections/Products";
+import Footer from "@/components/sections/footer/Footer";
+import Header from "@/components/sections/header/Header";
 
 import useIsMobile from "@/hooks/useIsMobile";
 

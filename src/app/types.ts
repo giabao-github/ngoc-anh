@@ -3,14 +3,17 @@ import { z } from "zod";
 import { invoiceFormSchema } from "@/app/schemas";
 import { products } from "@/app/storage";
 
+// Product types
 export type Product = (typeof products)[number];
 
 export type ImageData = {
-  value: string;
-  label: string | undefined;
+  value?: string | undefined;
+  label?: string | undefined;
   image: string;
+  background?: string | undefined;
 };
 
+// Cart types
 export type CartItem = {
   id: number;
   name: string;
@@ -32,6 +35,7 @@ export type RawCartItem = {
 
 export type SyncCartItem = Product & { quantity: number };
 
+// Input handling types
 export type SanitizeLevel =
   | "address"
   | "aggressive"
@@ -41,6 +45,7 @@ export type SanitizeLevel =
   | "name"
   | "taxCode";
 
+// Location types
 export type Province = {
   name: string;
   code: string;

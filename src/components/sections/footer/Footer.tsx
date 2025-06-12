@@ -3,7 +3,8 @@ import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa6";
 import { HiOutlineMapPin } from "react-icons/hi2";
 
 import Image from "next/image";
-import Link from "next/link";
+
+import BackToTopButton from "./BackToTopButton";
 
 interface FooterProps {
   aboutRef?: RefObject<HTMLDivElement | null>;
@@ -44,21 +45,21 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
         <h3 className="mb-4 uppercase">Kết nối với chúng tôi</h3>
         <p>
           Hotline:&nbsp;
-          <Link
+          <a
             href={"tel:0378044394"}
             className="hover:text-[#D4AF37] active:text-[#D4AF37]/70"
           >
             (+84) 915 047 339
-          </Link>
+          </a>
         </p>
         <p>
           Email:&nbsp;
-          <Link
+          <a
             href={"mailto:thacham@gmail.com"}
             className="hover:text-[#D4AF37] active:text-[#D4AF37]/70"
           >
             thacham@gmail.com
-          </Link>
+          </a>
         </p>
         <div className="flex mt-10 space-x-6 md:mt-12">
           <a
@@ -99,15 +100,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
           </div>
         </div>
         <div className="justify-start hidden mx-4 mt-16 text-center md:flex">
-          <button
-            type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="cursor-pointer select-none bg-transparent text-[#D4AF37] border border-[#D4AF37] px-6 py-3 rounded-full hover:bg-[#D4AF37] hover:text-white active:bg-[#D4AF37]/70 active:text-white/70 transition-colors flex items-center"
-          >
-            <span className="text-sm font-semibold tracking-wide 2xl:text-base">
-              Quay về đầu trang
-            </span>
-          </button>
+          <BackToTopButton variant="desktop" />
         </div>
         <div className="flex flex-row md:hidden gap-x-8">
           <div className="relative w-32 h-12">
@@ -121,14 +114,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
               className="object-contain"
             />
           </div>
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="cursor-pointer select-none bg-transparent text-[#D4AF37] border border-[#D4AF37] px-4 py-2 rounded-full hover:bg-[#D4AF37] hover:text-white active:bg-[#D4AF37]/70 active:text-white/70 transition-colors flex items-center"
-          >
-            <span className="text-xs font-semibold tracking-wide">
-              Quay về đầu trang
-            </span>
-          </button>
+          <BackToTopButton variant="mobile" />
         </div>
       </div>
     </div>

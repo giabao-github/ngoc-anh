@@ -1,19 +1,22 @@
 import React, { RefObject } from "react";
 
-import Header from "@/components/header/Header";
+import ProductError from "@/components/error/ProductError";
 import AddToCartPopup from "@/components/product/AddToCartPopup";
 import ProductDetails from "@/components/product/ProductDetails";
 import ProductImages from "@/components/product/ProductImages";
 import ProductInfo from "@/components/product/ProductInfo";
 import PurchaseSection from "@/components/product/PurchaseSection";
 import RatingSection from "@/components/product/RatingSection";
-import Footer from "@/components/sections/Footer";
+import Footer from "@/components/sections/footer/Footer";
+import Header from "@/components/sections/header/Header";
+
+import { ImageData, Product } from "@/app/types";
 
 interface ProductViewLayoutProps {
-  product: any;
+  product: Product | undefined;
   slug: string;
   images: string[];
-  imageData: any[];
+  imageData: ImageData[];
   ratingStats: { totalReviews: number; averageRating: number };
 
   // Refs
@@ -73,6 +76,10 @@ export const ProductViewLayout: React.FC<ProductViewLayoutProps> = ({
   notificationFlag,
   handleCloseNotification,
 }) => {
+  if (!product) {
+    return <ProductError />;
+  }
+
   return (
     <>
       <title>{product.name}</title>
