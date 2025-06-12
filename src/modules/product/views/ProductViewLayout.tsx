@@ -1,5 +1,7 @@
 import React, { RefObject } from "react";
 
+import Head from "next/head";
+
 import ProductError from "@/components/error/ProductError";
 import AddToCartPopup from "@/components/product/AddToCartPopup";
 import ProductDetails from "@/components/product/ProductDetails";
@@ -82,7 +84,10 @@ export const ProductViewLayout: React.FC<ProductViewLayoutProps> = ({
 
   return (
     <>
-      <title>{product.name}</title>
+      <Head>
+        <title>{product.name}</title>
+      </Head>
+
       <Header hasFooter aboutRef={aboutRef} cartIconRef={cartIconRef} />
 
       <div className="px-4 py-8 mx-auto max-w-7xl">

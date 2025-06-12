@@ -29,8 +29,8 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
           Số 333 Đường Hưng Định 24, Khu Phố Hưng Lộc, Phường Hưng Định, Thành
           Phố Thuận An, Tỉnh Bình Dương, Việt Nam.
         </p>
-        <p>Điện Thoại: (+84) 274 3668899</p>
-        <p>Fax: (+84) 274 3724173</p>
+        <p>Điện Thoại: (+84) 915 047 339</p>
+        <p>Fax: (+84) 915 047 339</p>
         <a
           href="https://www.google.com/maps/place/HCMC+University+of+Technology+(HUTECH)+%E2%80%93+Sai+Gon+Campus/@10.8015401,106.7143719,21z/data=!4m15!1m8!3m7!1s0x317528a500e8c3d5:0xedfca63e47b5afb8!2zNDc1YSDEkGnhu4duIEJpw6puIFBo4bunLCBQaMaw4budbmcgMjUsIELDrG5oIFRo4bqhbmgsIEjhu5MgQ2jDrSBNaW5oIDcwMDAwLCBWaWV0bmFt!3b1!8m2!3d10.8017151!4d106.7144547!16s%2Fg%2F11lq6yh9h1!3m5!1s0x317528a459cb43ab:0x6c3d29d370b52a7e!8m2!3d10.8016175!4d106.7144559!16s%2Fg%2F124xvbfmg?entry=ttu&g_ep=EgoyMDI1MDYwOC4wIKXMDSoASAFQAw%3D%3D"
           target="_blank"
@@ -46,7 +46,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
         <p>
           Hotline:&nbsp;
           <a
-            href={"tel:0378044394"}
+            href={"tel:0915047339"}
             className="hover:text-[#D4AF37] active:text-[#D4AF37]/70"
           >
             (+84) 915 047 339
@@ -92,7 +92,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
               src={
                 "https://file.hstatic.net/200000532849/file/logothongbao_d4f8886efdb04dd3984bff803b418aa5.png"
               }
-              alt="Verified"
+              alt="Logo chứng nhận đã đăng ký Bộ Công Thương"
               fill
               sizes="(max-width: 768px) 128px, 192px"
               className="object-contain"

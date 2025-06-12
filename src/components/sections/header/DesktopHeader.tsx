@@ -66,11 +66,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           </h1>
         </div>
 
-        <nav
-          className={cn(
-            "items-center font-semibold hidden tracking-wider md:flex md:space-x-5 xl:space-x-7",
-          )}
-        >
+        <nav className="items-center hidden font-semibold tracking-wider md:flex md:space-x-5 xl:space-x-7">
           <Link
             href="#"
             onClick={(e) => {

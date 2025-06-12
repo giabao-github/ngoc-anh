@@ -61,8 +61,8 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
             <Image
               src="/logo.png"
               alt="Logo"
-              width={1024}
-              height={1024}
+              width={64}
+              height={64}
               quality={100}
               priority
               onClick={() => router.push("/")}
@@ -111,7 +111,6 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 src="/avatar.jpeg"
                 alt="Avatar"
                 fill
-                sizes="(max-width: 768px) 40px, 40px"
                 quality={100}
                 className="object-cover cursor-pointer select-none"
               />
@@ -132,11 +131,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         }`}
       >
         <div className="p-6">
-          <nav
-            className={cn(
-              "flex font-semibold tracking-wider flex-col text-lg space-y-6",
-            )}
-          >
+          <nav className="flex flex-col space-y-6 text-lg font-semibold tracking-wider">
             <Link
               href="#"
               onClick={(e) => {

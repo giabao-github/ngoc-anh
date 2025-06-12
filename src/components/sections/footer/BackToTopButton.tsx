@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import { cn } from "@/libs/utils";
 
 interface BackToTopButtonProps {
@@ -5,24 +7,24 @@ interface BackToTopButtonProps {
   className?: string;
 }
 
+const variants = {
+  desktop: {
+    button: "px-6 py-3",
+    text: "text-sm font-semibold tracking-wide 2xl:text-base",
+  },
+  mobile: {
+    button: "px-4 py-2",
+    text: "text-xs font-semibold tracking-wide",
+  },
+};
+
 const BackToTopButton: React.FC<BackToTopButtonProps> = ({
   variant,
   className,
 }) => {
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const variants = {
-    desktop: {
-      button: "px-6 py-3",
-      text: "text-sm font-semibold tracking-wide 2xl:text-base",
-    },
-    mobile: {
-      button: "px-4 py-2",
-      text: "text-xs font-semibold tracking-wide",
-    },
-  };
+  }, []);
 
   return (
     <button
