@@ -5,8 +5,8 @@ import { Suspense, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import Header from "@/components/header/Header";
-import Footer from "@/components/sections/Footer";
+import Footer from "@/components/sections/footer/Footer";
+import Header from "@/components/sections/header/Header";
 import Disclaimer from "@/components/user/Disclaimer";
 import FormFields from "@/components/user/FormFields";
 import ProviderLogin from "@/components/user/ProviderLogin";

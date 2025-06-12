@@ -15,27 +15,23 @@ import {
 } from "@/components/ui/carousel";
 
 import { ToastIds } from "@/constants/toastIds";
+
 import { cn } from "@/libs/utils";
 
+import { ImageData } from "@/app/types";
+
 interface ProductCarouselProps {
-  value?: string | null;
   isLoading?: boolean;
   currentIndex?: number;
   imageRef?: RefObject<HTMLImageElement | null>;
   onSelect: (value: string | null) => void;
-  data: {
-    value?: string;
-    label?: string;
-    image: string;
-    background?: string;
-  }[];
+  data: ImageData[];
 }
 
 const DESKTOP_IMAGE_WIDTH = 608;
 const MOBILE_IMAGE_WIDTH = "90vw";
 
 export const ProductCarousel = ({
-  value,
   isLoading,
   onSelect,
   data,

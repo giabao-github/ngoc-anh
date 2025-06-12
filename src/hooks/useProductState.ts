@@ -2,8 +2,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { toast } from "sonner";
 
-import { Product } from "@/app/types";
 import { ToastIds } from "@/constants/toastIds";
+
+import { Product } from "@/app/types";
 
 export const useProductState = (
   product: Product | undefined,

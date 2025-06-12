@@ -22,7 +22,7 @@ const Collection: React.FC<CollectionProps> = ({ collectionRef }) => (
     style={{ backgroundImage: "url('/backgrounds/collection-background.jpg')" }}
   >
     <div className="max-w-lg mx-auto md:max-w-7xl">
-      <h2 className="mb-12 text-xl font-semibold text-center text-white md:text-3xl 2xl:text-4xl md:mb-24 2xl:mb-32">
+      <h2 className="mb-12 text-xl font-semibold tracking-wide text-center text-white md:text-3xl 2xl:text-4xl md:mb-24 2xl:mb-32">
         Sản phẩm nổi bật
       </h2>
     </div>

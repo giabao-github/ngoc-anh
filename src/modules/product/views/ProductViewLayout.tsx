@@ -1,19 +1,24 @@
 import React, { RefObject } from "react";
 
-import Header from "@/components/header/Header";
+import Head from "next/head";
+
+import ProductError from "@/components/error/ProductError";
 import AddToCartPopup from "@/components/product/AddToCartPopup";
 import ProductDetails from "@/components/product/ProductDetails";
 import ProductImages from "@/components/product/ProductImages";
 import ProductInfo from "@/components/product/ProductInfo";
 import PurchaseSection from "@/components/product/PurchaseSection";
 import RatingSection from "@/components/product/RatingSection";
-import Footer from "@/components/sections/Footer";
+import Footer from "@/components/sections/footer/Footer";
+import Header from "@/components/sections/header/Header";
 
-interface ProductPageLayoutProps {
-  product: any;
+import { ImageData, Product } from "@/app/types";
+
+interface ProductViewLayoutProps {
+  product: Product | undefined;
   slug: string;
   images: string[];
-  imageData: any[];
+  imageData: ImageData[];
   ratingStats: { totalReviews: number; averageRating: number };
 
   // Refs
@@ -48,7 +53,7 @@ interface ProductPageLayoutProps {
   handleCloseNotification: () => void;
 }
 
-const ProductPageLayout: React.FC<ProductPageLayoutProps> = ({
+export const ProductViewLayout: React.FC<ProductViewLayoutProps> = ({
   product,
   slug,
   images,
@@ -73,9 +78,16 @@ const ProductPageLayout: React.FC<ProductPageLayoutProps> = ({
   notificationFlag,
   handleCloseNotification,
 }) => {
+  if (!product) {
+    return <ProductError />;
+  }
+
   return (
     <>
-      <title>{product.name}</title>
+      <Head>
+        <title>{product.name}</title>
+      </Head>
+
       <Header hasFooter aboutRef={aboutRef} cartIconRef={cartIconRef} />
 
       <div className="px-4 py-8 mx-auto max-w-7xl">
@@ -130,5 +142,3 @@ const ProductPageLayout: React.FC<ProductPageLayoutProps> = ({
     </>
   );
 };
-
-export default ProductPageLayout;

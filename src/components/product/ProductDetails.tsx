@@ -10,7 +10,7 @@ interface ProductDetailsProps {
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   return (
-    <TabGroup className="mx-2 md:mx-0">
+    <TabGroup className="mx-2 md:mx-0 md:pb-20">
       <TabList className="flex border-b border-secondary/40 gap-x-10">
         {["CHI TIẾT SẢN PHẨM", "HƯỚNG DẪN SỬ DỤNG"].map((tab) => (
           <Tab

@@ -1,6 +1,5 @@
 import { RefObject } from "react";
 
-import { RawCartItem } from "@/app/types";
 import {
   CIRCLE_SIZE,
   CLEANUP_DELAY,
@@ -10,6 +9,8 @@ import {
   PHASE1_TO_PHASE2_DELAY,
   PHASE2_DURATION,
 } from "@/constants/cart";
+
+import { RawCartItem } from "@/app/types";
 
 export const getLocalCart = (): RawCartItem[] => {
   if (typeof window === "undefined") {

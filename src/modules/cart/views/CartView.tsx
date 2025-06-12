@@ -4,8 +4,8 @@ import { Suspense, useEffect, useRef, useState } from "react";
 
 import CartDetails from "@/components/cart/CartDetails";
 import CartSummary from "@/components/cart/CartSummary";
-import Header from "@/components/header/Header";
-import Footer from "@/components/sections/Footer";
+import Footer from "@/components/sections/footer/Footer";
+import Header from "@/components/sections/header/Header";
 
 export const CartView = () => {
   const aboutRef = useRef(null);

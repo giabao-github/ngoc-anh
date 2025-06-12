@@ -4,14 +4,15 @@ import { useAddToCart } from "@/hooks/useAddToCart";
 import { useNotification } from "@/hooks/useNotification";
 import { useProductState } from "@/hooks/useProductState";
 
-import { Product } from "@/app/types";
 import {
   calculateRatingStats,
   createImageData,
   findProductBySlug,
 } from "@/libs/productUtils";
 
-export const useProductPage = (slug: string) => {
+import { ImageData, Product } from "@/app/types";
+
+export const useProductView = (slug: string) => {
   const product: Product | undefined = useMemo(
     () => findProductBySlug(slug),
     [slug],
@@ -41,7 +42,7 @@ export const useProductPage = (slug: string) => {
     () => calculateRatingStats(product?.rating),
     [product?.rating],
   );
-  const imageData = useMemo(
+  const imageData: ImageData[] = useMemo(
     () =>
       createImageData(
         images,

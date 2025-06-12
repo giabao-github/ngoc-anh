@@ -44,6 +44,8 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
 }) => {
   const router = useRouter();
   const { cartCount } = useCart();
+  const navLinkClass =
+    "hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg 2xl:text-xl w-fit outline-none ring-0 focus:ring-0 focus:outline-none";
 
   return (
     <header className="sticky top-0 z-20 px-6 py-2 text-white bg-primary">
@@ -64,12 +66,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           </h1>
         </div>
 
-        <nav
-          className={cn(
-            "items-center font-medium hidden md:flex md:space-x-5 xl:space-x-7",
-            montserrat.className,
-          )}
-        >
+        <nav className="items-center hidden font-semibold tracking-wider md:flex md:space-x-5 xl:space-x-7">
           <Link
             href="#"
             onClick={(e) => {
@@ -82,7 +79,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 collectionRef,
               );
             }}
-            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
+            className={navLinkClass}
           >
             Bộ sưu tập
           </Link>
@@ -98,7 +95,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 productsRef,
               );
             }}
-            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
+            className={navLinkClass}
           >
             Cửa hàng
           </Link>
@@ -114,7 +111,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 aboutRef,
               );
             }}
-            className="hover:text-[#D4AF37] active:text-[#D4AF37]/70 transition-colors text-lg w-fit outline-none ring-0 focus:ring-0 focus:outline-none"
+            className={navLinkClass}
           >
             Về chúng tôi
           </Link>
@@ -189,6 +186,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
               src="/avatar.jpeg"
               alt="Avatar"
               fill
+              sizes="(max-width: 1280px) 40px, 48px"
               quality={100}
               className="object-cover cursor-pointer select-none"
             />

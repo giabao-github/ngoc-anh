@@ -12,10 +12,12 @@ import {
 
 import { toast } from "sonner";
 
+import { ToastIds } from "@/constants/toastIds";
+
+import { getLocalCart } from "@/libs/cartUtils";
+
 import { products } from "@/app/storage";
 import { CartItem, Product } from "@/app/types";
-import { ToastIds } from "@/constants/toastIds";
-import { getLocalCart } from "@/libs/cartUtils";
 
 interface CartContextType {
   cartItems: CartItem[] | undefined;

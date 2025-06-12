@@ -2,8 +2,8 @@ import { RefObject, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import DesktopHeader from "@/components/header/DesktopHeader";
-import MobileHeader from "@/components/header/MobileHeader";
+import DesktopHeader from "@/components/sections/header/DesktopHeader";
+import MobileHeader from "@/components/sections/header/MobileHeader";
 
 import useIsMobile from "@/hooks/useIsMobile";
 

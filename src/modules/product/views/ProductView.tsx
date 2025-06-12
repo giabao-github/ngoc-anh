@@ -4,19 +4,23 @@ import { useParams } from "next/navigation";
 
 import ProductError from "@/components/error/ProductError";
 
-import { useProductPage } from "@/hooks/useProductPage";
+import { useProductView } from "@/hooks/useProductView";
 
-import ProductPageLayout from "@/modules/product/views/ProductPageLayout";
+import { ProductViewLayout } from "@/modules/product/views/ProductViewLayout";
 
 export const ProductView = () => {
   const params = useParams();
   const slug = params.slug as string;
 
-  const productPageData = useProductPage(slug);
-
-  if (!productPageData.product) {
+  if (!slug) {
     return <ProductError />;
   }
 
-  return <ProductPageLayout {...productPageData} slug={slug} />;
+  const productViewData = useProductView(slug);
+
+  if (!productViewData.product) {
+    return <ProductError />;
+  }
+
+  return <ProductViewLayout {...productViewData} slug={slug} />;
 };

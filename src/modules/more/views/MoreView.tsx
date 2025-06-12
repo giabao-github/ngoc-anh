@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 
-import Header from "@/components/header/Header";
-import Footer from "@/components/sections/Footer";
+import Footer from "@/components/sections/footer/Footer";
+import Header from "@/components/sections/header/Header";
 import { AnimatedSection } from "@/components/sections/more/AnimatedSection";
 import { HeritageSection } from "@/components/sections/more/HeritageSection";
 import { NavigationButtons } from "@/components/sections/more/NavigationButtons";

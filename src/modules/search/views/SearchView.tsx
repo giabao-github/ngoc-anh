@@ -5,11 +5,12 @@ import { Suspense, useEffect, useRef } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import Header from "@/components/header/Header";
-import Footer from "@/components/sections/Footer";
+import Footer from "@/components/sections/footer/Footer";
+import Header from "@/components/sections/header/Header";
+
+import { searchProducts } from "@/libs/searchUtils";
 
 import { Product } from "@/app/types";
-import { searchProducts } from "@/libs/searchUtils";
 
 export const SearchView = () => {
   const router = useRouter();

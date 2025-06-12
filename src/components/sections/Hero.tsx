@@ -15,7 +15,7 @@ const Hero = () => {
     >
       <div className="max-w-[1400px] mx-auto grid py-16 md:py-24 2xl:py-32 md:grid-cols-2 gap-8 px-6 md:px-12 2xl:px-0">
         <div className="flex flex-col justify-center md:gap-y-12">
-          <h2 className="mb-6 text-4xl font-semibold tracking-wide uppercase md:text-5xl 2xl:text-6xl text-secondary">
+          <h2 className="mb-6 text-4xl font-semibold uppercase md:text-5xl 2xl:text-6xl text-secondary">
             ÂM VANG DI SẢN KHMER
           </h2>
           <p className="mb-8 text-lg tracking-wide md:text-xl">
