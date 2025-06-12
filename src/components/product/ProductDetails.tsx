@@ -1,6 +1,10 @@
+import { useEffect, useMemo } from "react";
+
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 import { montserrat } from "@/config/fonts";
+
+import useIsMobile from "@/hooks/useIsMobile";
 
 import { Product } from "@/app/types";
 
@@ -9,10 +13,31 @@ interface ProductDetailsProps {
 }
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
+  const isMobile = useIsMobile();
+
+  const tabs = useMemo(() => {
+    const initialTabs: string[] = [];
+
+    if ("description" in product) {
+      const tabName = isMobile ? "CHI TIẾT" : "CHI TIẾT SẢN PHẨM";
+      initialTabs.push(tabName);
+    }
+    if ("instruction" in product) {
+      const tabName = isMobile ? "HƯỚNG DẪN" : "HƯỚNG DẪN SỬ DỤNG";
+      initialTabs.push(tabName);
+    }
+    if ("note" in product) {
+      const tabName = isMobile ? "LƯU Ý" : "LƯU Ý QUAN TRỌNG";
+      initialTabs.push(tabName);
+    }
+
+    return initialTabs;
+  }, [product, isMobile]);
+
   return (
     <TabGroup className="mx-2 md:mx-0 md:pb-20">
       <TabList className="flex border-b border-secondary/40 gap-x-10">
-        {["CHI TIẾT SẢN PHẨM", "HƯỚNG DẪN SỬ DỤNG"].map((tab) => (
+        {tabs.map((tab) => (
           <Tab
             key={tab}
             className={({ selected }) =>
@@ -30,7 +55,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
 
       <TabPanels className={`pt-6 ${montserrat.className}`}>
         {/* Tab 1 - Product Details */}
-        <TabPanel className="space-y-4">{product.description || ""}</TabPanel>
+        {"description" in product && (
+          <TabPanel className="space-y-4">{product.description}</TabPanel>
+        )}
 
         {/* Tab 2 - Usage Instructions */}
         <TabPanel className="space-y-4">
@@ -42,6 +69,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
             </ul>
           )}
         </TabPanel>
+
+        {/* Tab 3 - Important Notes */}
+        {"note" in product && (
+          <TabPanel className="space-y-4">{product.note}</TabPanel>
+        )}
       </TabPanels>
     </TabGroup>
   );

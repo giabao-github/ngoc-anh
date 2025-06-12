@@ -30,7 +30,6 @@ interface SelectDropdownProps {
   loading?: boolean;
   font: { className: string };
 }
-
 export const SelectDropdown = ({
   name,
   title,
@@ -45,7 +44,6 @@ export const SelectDropdown = ({
   const isDirty = formState.dirtyFields[name];
   const hasError = formState.errors[name];
   const isValid = isDirty && !hasError;
-
   return (
     <Controller
       name={name}

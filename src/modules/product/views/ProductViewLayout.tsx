@@ -84,9 +84,7 @@ export const ProductViewLayout: React.FC<ProductViewLayoutProps> = ({
 
   return (
     <>
-      <Head>
-        <title>{product.name}</title>
-      </Head>
+      <title>{product.name}</title>
 
       <Header hasFooter aboutRef={aboutRef} cartIconRef={cartIconRef} />
 

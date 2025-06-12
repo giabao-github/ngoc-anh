@@ -24,7 +24,7 @@ const Hero = () => {
           </p>
           <button
             onClick={() => router.push("/more")}
-            className="bg-transparent text-secondary font-semibold text-base border border-secondary px-6 py-3.5 md:px-8 md:py-4 rounded-full w-fit hover:bg-secondary hover:text-primary active:bg-secondary/80 active:text-primary/80 cursor-pointer transition-colors select-none flex items-center flex-row gap-x-3"
+            className="bg-transparent text-secondary font-semibold text-base border border-secondary px-6 py-3.5 md:px-8 md:py-4 rounded-full w-fit hover:bg-secondary hover:text-black active:bg-secondary/80 active:text-black cursor-pointer transition-colors select-none flex items-center flex-row gap-x-3"
           >
             <span className="text-sm tracking-wide md:text-base">
               Tìm hiểu thêm

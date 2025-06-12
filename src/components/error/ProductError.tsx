@@ -1,16 +1,21 @@
-import { FaArrowLeft } from "react-icons/fa6";
+import { FaArrowRightLong } from "react-icons/fa6";
 
+import { LucideHome } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import ErrorSearchBar from "@/components/error/ErrorSearchBar";
+import SearchBar from "@/components/SearchBar";
+
+import { montserrat } from "@/config/fonts";
+
+import { cn } from "@/libs/utils";
 
 const ProductError = () => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 space-y-6 bg-rose-50 text-rose-500">
+    <div className="flex flex-col items-center justify-center min-h-screen px-6 gap-y-8">
       <title>Không tìm thấy sản phẩm</title>
       {/* App Logo */}
 
@@ -26,7 +31,7 @@ const ProductError = () => {
           className="object-contain w-20 h-20 cursor-pointer select-none"
         />
         <span
-          className="hidden text-2xl font-semibold uppercase select-none text-primary md:text-3xl md:block"
+          className="block text-2xl font-semibold uppercase select-none text-primary md:text-3xl"
           aria-label="Thạch Âm - Trang chủ"
           role="text"
         >
@@ -44,35 +49,50 @@ const ProductError = () => {
       />
 
       {/* Heading */}
-      <h1 className="mt-8 text-3xl font-bold text-center md:text-4xl">
+      <h1
+        className={cn(
+          "mt-8 text-2xl md:text-3xl font-bold text-center xl:text-4xl",
+          montserrat.className,
+        )}
+      >
         Sản phẩm không tồn tại
       </h1>
 
       {/* Description */}
-      <p className="max-w-md tracking-wide text-center text-rose-500">
+      <p className={cn("max-w-lg text-center", montserrat.className)}>
         Chúng tôi không thể tìm thấy sản phẩm bạn đang tìm kiếm. Có thể đường
         dẫn không đúng hoặc sản phẩm đã bị gỡ.
       </p>
 
       {/* Action buttons */}
-      <div className="flex flex-col gap-3 mt-4 sm:flex-row">
+      <div className="flex flex-col gap-6 my-4 md:flex-row">
         <Link
           href="/"
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 text-white transition rounded-full shadow-md select-none bg-rose-600 hover:bg-rose-500/75 active:bg-rose-400"
+          className="inline-flex items-center justify-center gap-3 px-6 py-4 font-semibold text-white transition duration-200 rounded-full shadow-md select-none bg-primary active:bg-primary/80 group"
         >
-          <FaArrowLeft /> Quay về trang chủ
+          <LucideHome
+            size={18}
+            strokeWidth={2}
+            className="group-hover:scale-[1.2] group-active:scale-[1.2]"
+          />
+          <span>Quay về trang chủ</span>
         </Link>
 
         <Link
           href="/#products"
-          className="inline-flex items-center justify-center px-6 py-3 transition bg-white border rounded-full shadow-md select-none text-rose-600 border-rose-600 hover:bg-rose-200/70 active:bg-rose-100"
+          className="inline-flex items-center justify-center gap-3 px-6 py-4 font-semibold transition bg-white border rounded-full shadow-md select-none text-primary border-primary active:bg-gray-200 group"
         >
-          Xem sản phẩm khác
+          <span>Xem sản phẩm khác</span>
+          <FaArrowRightLong
+            size={18}
+            strokeWidth={2}
+            className="group-hover:transform group-hover:translate-x-1 group-active:transform group-active:translate-x-1"
+          />
         </Link>
       </div>
 
       {/* Search bar */}
-      <ErrorSearchBar />
+      <SearchBar />
     </div>
   );
 };

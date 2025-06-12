@@ -103,7 +103,7 @@ export const FilterCarousel = ({
       <Carousel
         setApi={setApi}
         opts={{
-          align: "start",
+          align: "center",
           dragFree: true,
           loop: true,
           skipSnaps: false,

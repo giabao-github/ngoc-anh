@@ -39,7 +39,7 @@
     "tailwind-merge": "^3.3.0",
     "tailwindcss-animate": "^1.0.7",
     "tailwindcss-autofill": "^1.0.2",
-    "zod": "^3.25.57"
+    "zod": "^3.25.62"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
