@@ -54,9 +54,10 @@ const ProductImages: React.FC<ProductImagesProps> = ({
             }}
           >
             <Image
+              src={img}
               width={112}
               height={112}
-              src={img}
+              sizes="(min-width: 768px) 112px, 64px"
               quality={100}
               alt={product.name}
               className="object-cover w-full h-full rotate-90 md:rotate-0"
