@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
@@ -12,26 +12,55 @@ interface ProductDetailsProps {
   product: Product;
 }
 
+interface TabConfig {
+  key: string;
+  label: string;
+  content: React.ReactNode;
+}
+
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   const isMobile = useIsMobile();
 
   const tabs = useMemo(() => {
-    const initialTabs: string[] = [];
+    const tabConfigs: TabConfig[] = [];
 
     if ("description" in product) {
-      const tabName = isMobile ? "CHI TIẾT" : "CHI TIẾT SẢN PHẨM";
-      initialTabs.push(tabName);
-    }
-    if ("instruction" in product) {
-      const tabName = isMobile ? "HƯỚNG DẪN" : "HƯỚNG DẪN SỬ DỤNG";
-      initialTabs.push(tabName);
-    }
-    if ("note" in product) {
-      const tabName = isMobile ? "LƯU Ý" : "LƯU Ý QUAN TRỌNG";
-      initialTabs.push(tabName);
+      tabConfigs.push({
+        key: "description",
+        label: isMobile ? "CHI TIẾT" : "CHI TIẾT SẢN PHẨM",
+        content: product.description,
+      });
     }
 
-    return initialTabs;
+    if ("instruction" in product) {
+      tabConfigs.push({
+        key: "instruction",
+        label: isMobile ? "HƯỚNG DẪN" : "HƯỚNG DẪN SỬ DỤNG",
+        content: product.instruction,
+      });
+    } else {
+      tabConfigs.push({
+        key: "instruction",
+        label: isMobile ? "HƯỚNG DẪN" : "HƯỚNG DẪN SỬ DỤNG",
+        content: (
+          <ul className="space-y-1 text-sm text-gray-700 list-disc list-inside">
+            <li>Vệ sinh bằng khăn mềm, tránh va đập mạnh.</li>
+            <li>Không dùng hóa chất tẩy rửa mạnh.</li>
+            <li>Bảo quản nơi khô ráo, tránh ánh nắng trực tiếp.</li>
+          </ul>
+        ),
+      });
+    }
+
+    if ("note" in product) {
+      tabConfigs.push({
+        key: "note",
+        label: isMobile ? "LƯU Ý" : "LƯU Ý QUAN TRỌNG",
+        content: product.note,
+      });
+    }
+
+    return tabConfigs;
   }, [product, isMobile]);
 
   return (
@@ -39,7 +68,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
       <TabList className="flex border-b border-secondary/40 gap-x-10">
         {tabs.map((tab) => (
           <Tab
-            key={tab}
+            key={tab.key}
             className={({ selected }) =>
               `py-3 text-sm md:text-lg font-semibold uppercase tracking-wide cursor-pointer border-b -mb-px transition outline-none ring-0 focus:ring-0 focus:outline-none ${
                 selected
@@ -48,32 +77,17 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
               }`
             }
           >
-            {tab}
+            {tab.label}
           </Tab>
         ))}
       </TabList>
 
       <TabPanels className={`pt-6 ${montserrat.className}`}>
-        {/* Tab 1 - Product Details */}
-        {"description" in product && (
-          <TabPanel className="space-y-4">{product.description}</TabPanel>
-        )}
-
-        {/* Tab 2 - Usage Instructions */}
-        <TabPanel className="space-y-4">
-          {product.instruction || (
-            <ul className="space-y-1 text-sm text-gray-700 list-disc list-inside">
-              <li>Vệ sinh bằng khăn mềm, tránh va đập mạnh.</li>
-              <li>Không dùng hóa chất tẩy rửa mạnh.</li>
-              <li>Bảo quản nơi khô ráo, tránh ánh nắng trực tiếp.</li>
-            </ul>
-          )}
-        </TabPanel>
-
-        {/* Tab 3 - Important Notes */}
-        {"note" in product && (
-          <TabPanel className="space-y-4">{product.note}</TabPanel>
-        )}
+        {tabs.map((tab) => (
+          <TabPanel key={tab.key} className="space-y-4">
+            {tab.content}
+          </TabPanel>
+        ))}
       </TabPanels>
     </TabGroup>
   );

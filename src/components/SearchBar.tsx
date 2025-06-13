@@ -14,20 +14,21 @@ const SearchBar = () => {
   const router = useRouter();
   const [query, setQuery] = useState("");
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleSearch(query, router);
-    }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleSearch(query, router);
   };
 
   return (
-    <div className={cn("relative w-full max-w-md", montserrat.className)}>
+    <form
+      role="search"
+      onSubmit={handleSubmit}
+      className={cn("relative w-full max-w-md", montserrat.className)}
+    >
       {/* Search icon */}
       <button
         title="Tìm kiếm"
-        type="button"
-        onClick={() => handleSearch(query, router)}
+        type="submit"
         className="absolute inset-y-0 flex items-center transition cursor-pointer left-3 text-neutral-400 hover:text-black"
       >
         <IoSearch size={24} />
@@ -35,10 +36,9 @@ const SearchBar = () => {
 
       {/* Input */}
       <Input
-        type="text"
+        type="search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleKeyDown}
         placeholder="Tìm kiếm sản phẩm..."
         aria-label="Tìm kiếm sản phẩm"
         aria-describedby="search-help"
@@ -55,7 +55,7 @@ const SearchBar = () => {
           <IoCloseCircle size={18} />
         </button>
       )}
-    </div>
+    </form>
   );
 };
 

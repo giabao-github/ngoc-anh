@@ -54,8 +54,8 @@ const ProductImages: React.FC<ProductImagesProps> = ({
             }}
           >
             <Image
-              width={2048}
-              height={2048}
+              width={112}
+              height={112}
               src={img}
               quality={100}
               alt={product.name}

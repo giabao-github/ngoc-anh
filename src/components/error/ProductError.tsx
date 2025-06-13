@@ -18,13 +18,12 @@ const ProductError = () => {
     <div className="flex flex-col items-center justify-center min-h-screen px-6 gap-y-8">
       <title>Không tìm thấy sản phẩm</title>
       {/* App Logo */}
-
       <div className="absolute flex items-center space-x-4 transition top-6 left-6">
         <Image
           src="/dark-logo.png"
           alt="Logo"
-          width={1024}
-          height={1024}
+          width={80}
+          height={80}
           quality={100}
           priority
           onClick={() => router.push("/")}

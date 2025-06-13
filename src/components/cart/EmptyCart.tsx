@@ -1,16 +1,9 @@
-import { useState } from "react";
-import { IoCloseCircle, IoSearch } from "react-icons/io5";
-
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import { Input } from "@/components/ui/input";
+import SearchBar from "@/components/SearchBar";
 
 import { montserrat } from "@/config/fonts";
-
-import { handleSearch } from "@/libs/searchUtils";
-
-import SearchBar from "../SearchBar";
 
 const MESSAGES = {
   emptyCart: "Chưa có sản phẩm trong giỏ hàng...",
@@ -20,14 +13,6 @@ const MESSAGES = {
 
 const EmptyCart = () => {
   const router = useRouter();
-  const [query, setQuery] = useState("");
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleSearch(query, router);
-    }
-  };
 
   return (
     <div
@@ -36,8 +21,8 @@ const EmptyCart = () => {
       <Image
         src="/illustrations/empty-cart.jpeg"
         alt="Empty Cart"
-        width={2160}
-        height={2160}
+        width={256}
+        height={256}
         quality={100}
         className="w-64 h-64 mb-4 rounded-full"
       />

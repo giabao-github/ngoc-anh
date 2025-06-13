@@ -17,7 +17,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 
 import { cn } from "@/libs/utils";
 
-interface FilterCarouselProps {
+interface CollectionCarouselProps {
   isLoading?: boolean;
   onSelect: (value: string | null) => void;
   data: {
@@ -28,11 +28,11 @@ interface FilterCarouselProps {
   }[];
 }
 
-export const FilterCarousel = ({
+export const CollectionCarousel = ({
   isLoading,
   onSelect,
   data,
-}: FilterCarouselProps) => {
+}: CollectionCarouselProps) => {
   const [api, setApi] = useState<CarouselApi>();
   // const [current, setCurrent] = useState(0);
   // const [showInfoMap, setShowInfoMap] = useState<Record<string, boolean>>({});
@@ -103,10 +103,9 @@ export const FilterCarousel = ({
       <Carousel
         setApi={setApi}
         opts={{
-          align: "center",
+          align: "start",
           dragFree: true,
           loop: true,
-          skipSnaps: false,
         }}
         className="w-full px-10 md:px-12"
       >
@@ -119,7 +118,7 @@ export const FilterCarousel = ({
                 <CarouselItem
                   key={item.value}
                   onClick={() => handleClick(item)}
-                  className="relative pl-3 cursor-pointer basis-auto group"
+                  className="relative pl-3 mx-auto cursor-pointer basis-auto group"
                 >
                   {/* Desktop image */}
                   <div className="relative hidden border border-secondary md:block overflow-hidden rounded-md w-[372px] h-[266px] 2xl:w-[558px] 2xl:h-[400px]">
@@ -130,9 +129,7 @@ export const FilterCarousel = ({
                       quality={100}
                       priority={index === 0}
                       sizes="(min-width: 1536px) 558px, (min-width: 768px) 372px"
-                      className={cn(
-                        "object-cover transition-transform duration-300 hover:scale-105 select-none",
-                      )}
+                      className="object-cover transition-transform duration-300 select-none hover:scale-105"
                     />
                   </div>
                   <div className="md:hidden relative overflow-hidden rounded-md w-[286px] h-[206px] border border-secondary">
@@ -144,9 +141,7 @@ export const FilterCarousel = ({
                       quality={100}
                       priority={index === 0}
                       sizes="(max-width: 767px) 286px"
-                      className={cn(
-                        "object-cover transition-transform duration-300 select-none",
-                      )}
+                      className="object-cover transition-transform duration-300 select-none"
                     />
                     {/* Info icon (mobile only, currently unused, keep for future approach) */}
                     {/* {isMobile && (

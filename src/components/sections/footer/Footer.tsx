@@ -18,21 +18,21 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
     <div className="grid gap-16 mx-auto px-6 max-w-[1400px] md:grid-cols-7 md:gap-32 relative">
       <div className="text-sm md:text-base 2xl:text-lg w-fit md:col-span-3">
         <h3 className="mb-4 uppercase">Trụ sở chính</h3>
-        <span
+        <div
           className="text-lg md:text-xl 2xl:text-2xl mb-4 font-semibold uppercase text-[#D4AF37] block"
           aria-label="Công ty TNHH Thạch Âm"
           role="text"
         >
           Công ty TNHH Thạch Âm
-        </span>
-        <span className="space-y-1">
+        </div>
+        <div className="space-y-1">
           <p>
             Số 475A Đường Điện Biên Phủ, Phường 25, Quận Bình Thạnh, Thành Phố
             Hồ Chí Minh, Việt Nam.
           </p>
           <p>Điện Thoại: (+84) 915 047 339</p>
           <p>Fax: (+84) 915 047 339</p>
-        </span>
+        </div>
         <a
           href="https://www.google.com/maps/place/HCMC+University+of+Technology+(HUTECH)+%E2%80%93+Sai+Gon+Campus/@10.8015401,106.7143719,21z/data=!4m15!1m8!3m7!1s0x317528a500e8c3d5:0xedfca63e47b5afb8!2zNDc1YSDEkGnhu4duIEJpw6puIFBo4bunLCBQaMaw4budbmcgMjUsIELDrG5oIFRo4bqhbmgsIEjhu5MgQ2jDrSBNaW5oIDcwMDAwLCBWaWV0bmFt!3b1!8m2!3d10.8017151!4d106.7144547!16s%2Fg%2F11lq6yh9h1!3m5!1s0x317528a459cb43ab:0x6c3d29d370b52a7e!8m2!3d10.8016175!4d106.7144559!16s%2Fg%2F124xvbfmg?entry=ttu&g_ep=EgoyMDI1MDYwOC4wIKXMDSoASAFQAw%3D%3D"
           target="_blank"
@@ -45,7 +45,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
       </div>
       <div className="text-sm w-fit md:text-base 2xl:text-lg md:col-span-2">
         <h3 className="mb-4 uppercase">Kết nối với chúng tôi</h3>
-        <span className="space-y-1">
+        <div className="space-y-1">
           <p>
             Hotline:&nbsp;
             <a
@@ -64,7 +64,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
               thacham@gmail.com
             </a>
           </p>
-        </span>
+        </div>
         <div className="flex mt-10 space-x-6 md:mt-12">
           <a
             href="https://www.facebook.com/minhlongcompany"
