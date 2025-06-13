@@ -18,10 +18,11 @@ import { ToastIds } from "@/constants/toastIds";
 
 import { cn } from "@/libs/utils";
 
-import { ImageData } from "@/app/types";
+import { ImageData, Product } from "@/app/types";
 
 interface ProductCarouselProps {
   isLoading?: boolean;
+  product: Product;
   currentIndex?: number;
   imageRef?: RefObject<HTMLImageElement | null>;
   onSelect: (value: string | null) => void;
@@ -33,10 +34,11 @@ const MOBILE_IMAGE_WIDTH = "90vw";
 
 export const ProductCarousel = ({
   isLoading,
-  onSelect,
+  product,
   data,
   currentIndex,
   imageRef,
+  onSelect,
 }: ProductCarouselProps) => {
   const [api, setApi] = useState<CarouselApi>();
 
@@ -118,7 +120,8 @@ export const ProductCarousel = ({
                       quality={100}
                       sizes={`(min-width: 768px) ${DESKTOP_IMAGE_WIDTH}px`}
                       className={cn(
-                        "object-cover transition-transform duration-300 select-none",
+                        "transition-transform duration-300 select-none",
+                        product.zoom ? "object-cover" : "object-contain",
                       )}
                       style={{
                         backgroundColor: item.background,
@@ -138,7 +141,7 @@ export const ProductCarousel = ({
                       quality={100}
                       sizes={`(max-width: 767px) ${MOBILE_IMAGE_WIDTH}`}
                       className={cn(
-                        "object-cover transition-transform duration-300 select-none",
+                        "object-contain transition-transform duration-300 select-none",
                       )}
                       style={{
                         backgroundColor: item.background,
