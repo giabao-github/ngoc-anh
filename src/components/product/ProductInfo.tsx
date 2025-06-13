@@ -83,7 +83,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       </div>
 
       <p className="text-2xl font-bold text-orange-500 md:text-4xl">
-        {product.details[0]?.price?.toLocaleString("en-US") ?? "Giá liên hệ"}₫
+        {product.details[0]?.price?.toLocaleString("vi-VN") ?? "Giá liên hệ"}₫
       </p>
 
       <Separator color="#BB9244" opacity={40} />

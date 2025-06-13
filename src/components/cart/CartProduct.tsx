@@ -108,8 +108,8 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
           <Image
             src={item.image}
             alt={item.name}
-            width={1024}
-            height={1024}
+            width={96}
+            height={96}
             quality={100}
             priority
             onClick={() => router.push(`/products/${item.slug}`)}

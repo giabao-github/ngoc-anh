@@ -4,9 +4,9 @@ import { RefObject, useEffect, useRef } from "react";
 
 import Collection from "@/components/sections/Collection";
 import Hero from "@/components/sections/Hero";
-import Products from "@/components/sections/Products";
 import Footer from "@/components/sections/footer/Footer";
 import Header from "@/components/sections/header/Header";
+import Products from "@/components/sections/products/Products";
 
 import useIsMobile from "@/hooks/useIsMobile";
 

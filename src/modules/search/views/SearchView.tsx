@@ -66,8 +66,8 @@ export const SearchView = () => {
                 <Image
                   src={product.images[0]}
                   alt={product.name}
-                  width={2048}
-                  height={2048}
+                  width={245}
+                  height={245}
                   quality={100}
                   className="object-contain w-full h-auto rounded-t"
                 />

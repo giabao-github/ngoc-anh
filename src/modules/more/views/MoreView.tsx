@@ -19,7 +19,7 @@ export const MoreView = () => {
   return (
     <>
       <Header hasFooter aboutRef={aboutRef} />
-      <div className="relative min-h-screen overflow-hidden bg-[url('/backgrounds/more-background.jpeg')] bg-center bg-contain md:bg-cover bg-scroll">
+      <div className="relative w-full min-h-screen bg-[url('/backgrounds/more-background.jpeg')] bg-top bg-repeat-y bg-[length:100vw_auto]">
         <main className="relative z-10 pb-12 md:pt-12 md:pb-20">
           <div className="container max-w-lg px-4 py-16 mx-auto md:max-w-7xl">
             <AnimatedSection>
