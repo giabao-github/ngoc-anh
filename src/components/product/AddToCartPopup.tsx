@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
+import { cn } from "@/libs/utils";
+
 import { Product } from "@/app/types";
 
 interface AddToCartPopupProps {
@@ -54,7 +56,10 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
             alt={product.name}
             width={isMobile ? 48 : 64}
             height={isMobile ? 48 : 64}
-            className="object-cover w-12 h-12 border border-gray-200 rounded-lg md:w-16 md:h-16"
+            className={cn(
+              "w-12 h-12 border border-gray-300 rounded-lg md:w-16 md:h-16",
+              product.zoom ? "object-cover" : "object-contain",
+            )}
             style={{
               backgroundColor: product.background || "transparent",
             }}

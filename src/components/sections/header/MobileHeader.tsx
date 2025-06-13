@@ -17,7 +17,6 @@ import { useCart } from "@/hooks/useCart";
 
 import { handleNavigation } from "@/libs/navigationUtils";
 import { handleSearch } from "@/libs/searchUtils";
-import { cn } from "@/libs/utils";
 
 interface MobileHeaderProps {
   hasSections?: boolean;
@@ -53,20 +52,29 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
   };
 
   return (
-    <div className="pb-20">
-      <header className="fixed top-0 left-0 z-20 w-full text-white bg-primary">
+    <>
+      <header className="sticky top-0 left-0 z-20 w-full text-white bg-primary">
         {/* App Logo */}
         <div className="flex items-center justify-between px-6 py-2 mx-auto max-w-7xl">
           <div className="flex items-center space-x-4">
             <Image
               src="/logo.png"
-              alt="Logo"
+              alt="Thạch Âm Logo"
               width={64}
               height={64}
               quality={100}
               priority
               onClick={() => router.push("/")}
               className="object-contain w-16 h-16 rounded cursor-pointer select-none"
+              role="button"
+              aria-label="Navigate to home page"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  router.push("/");
+                }
+              }}
             />
             <span
               className="hidden text-2xl font-semibold uppercase select-none text-logo md:block"
@@ -224,7 +232,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
           </nav>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

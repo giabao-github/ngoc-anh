@@ -17,6 +17,8 @@ import { ToastIds } from "@/constants/toastIds";
 import { useCart } from "@/hooks/useCart";
 import useIsMobile from "@/hooks/useIsMobile";
 
+import { cn } from "@/libs/utils";
+
 import { CartItem, Product } from "@/app/types";
 
 interface CartProductProps {
@@ -107,16 +109,28 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
           {/* Image */}
           <Image
             src={item.image}
-            alt={item.name}
+            alt={`${item.name} product image`}
             width={96}
             height={96}
             quality={100}
-            priority
+            loading="lazy"
             onClick={() => router.push(`/products/${item.slug}`)}
-            className="object-cover w-24 h-24 border rounded-md cursor-pointer shrink-0 border-neutral-200"
+            className={cn(
+              "w-24 h-24 border border-gray-300 rounded-md cursor-pointer shrink-0",
+              product.zoom ? "object-cover" : "object-contain",
+            )}
             style={{
               backgroundColor:
                 "background" in product ? product.background : "transparent",
+            }}
+            role="button"
+            aria-label={`View details for ${item.name}`}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                router.push(`/products/${item.slug}`);
+              }
             }}
           />
 
@@ -159,8 +173,10 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                       ? "cursor-pointer hover:bg-gray-200 active:bg-gray-200/80"
                       : "cursor-default text-gray-400"
                   }`}
+                  aria-label="Decrease quantity"
+                  disabled={item.quantity <= 1}
                 >
-                  <FiMinus size={isMobile ? 12 : 16} />
+                  <FiMinus size={isMobile ? 12 : 16} aria-hidden="true" />
                 </button>
                 <Input
                   type="text"
@@ -174,6 +190,10 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                   className={`w-[34px] h-8 md:w-12 md:h-10 p-0 text-center font-medium rounded-none border-none shadow-[2px_0_4px_-1px_rgba(0,0,0,0.1),-2px_0_4px_-1px_rgba(0,0,0,0.1)] ${
                     isMobile ? "text-xs" : "text-sm"
                   } ${montserrat.className}`}
+                  aria-label="Product quantity"
+                  aria-valuemin={1}
+                  aria-valuemax={product.quantity}
+                  aria-valuenow={parseInt(inputValue)}
                 />
                 <button
                   onClick={() =>

@@ -181,14 +181,14 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             onClick={() => router.push("/login?method=email")}
             className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70"
           />
-          <div className="relative w-10 h-10 2xl:w-12 2xl:h-12 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_20px_rgba(255,255,255,0.8)] hover:shadow-[0_0_20px_rgba(255,255,255,1)]">
+          <div className="relative flex items-center justify-center w-10 bg-white h-10 2xl:w-12 2xl:h-12 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_20px_rgba(255,255,255,0.8)] hover:shadow-[0_0_20px_rgba(255,255,255,1)]">
             <Image
               src="/avatar.jpeg"
               alt="Avatar"
-              fill
-              sizes="(max-width: 1280px) 40px, 48px"
+              width={24}
+              height={24}
               quality={100}
-              className="object-cover cursor-pointer select-none"
+              className="object-contain w-8 h-8 cursor-pointer select-none 2xl:w-10 2xl:h-10"
             />
           </div>
         </nav>

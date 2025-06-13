@@ -13,7 +13,7 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
   <footer
     ref={aboutRef}
-    className="px-2 py-12 tracking-wide text-white md:px-6 bg-primary md:py-24"
+    className="px-2 py-12 tracking-wide text-white md:px-6 bg-primary md:py-16"
   >
     <div className="grid gap-16 mx-auto px-6 max-w-[1400px] md:grid-cols-7 md:gap-32 relative">
       <div className="text-sm md:text-base 2xl:text-lg w-fit md:col-span-3">
@@ -121,6 +121,9 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
           <BackToTopButton variant="mobile" />
         </div>
       </div>
+    </div>
+    <div className="mt-16 text-base font-medium tracking-wide text-center text-white md:text-lg">
+      &copy; {new Date().getFullYear()} Thạch Âm. All rights reserved.
     </div>
   </footer>
 );
