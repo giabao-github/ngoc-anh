@@ -5,6 +5,8 @@ import Image from "next/image";
 import { ProductCarousel } from "@/components/ui/product-carousel";
 import { Separator } from "@/components/ui/separator";
 
+import { cn } from "@/libs/utils";
+
 import { ImageData, Product } from "@/app/types";
 
 interface ProductImagesProps {
@@ -29,11 +31,12 @@ const ProductImages: React.FC<ProductImagesProps> = ({
       <div className="flex items-center justify-center">
         <div
           ref={imageRef}
-          className="relative overflow-hidden rounded-lg aspect-square"
+          className="relative overflow-hidden rounded-lg ring ring-gray-300 aspect-square"
         >
           <ProductCarousel
-            onSelect={(value) => setCurrentIndex(Number(value))}
+            product={product}
             data={data}
+            onSelect={(value) => setCurrentIndex(Number(value))}
             currentIndex={currentIndex}
           />
         </div>
@@ -42,13 +45,15 @@ const ProductImages: React.FC<ProductImagesProps> = ({
       <div className="flex justify-center gap-4 mx-auto">
         {images.map((img, index) => (
           <button
+            type="button"
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`aspect-square w-16 md:w-28 cursor-pointer rounded-lg overflow-hidden ${
+            className={cn(
+              "aspect-square w-16 md:w-28 cursor-pointer rounded-lg overflow-hidden",
               currentIndex === index
                 ? "ring-2 ring-secondary"
-                : "ring-1 ring-neutral-100"
-            }`}
+                : "ring-1 ring-neutral-100",
+            )}
             style={{
               backgroundColor: product.background || "transparent",
             }}
@@ -60,7 +65,10 @@ const ProductImages: React.FC<ProductImagesProps> = ({
               sizes="(min-width: 768px) 112px, 64px"
               quality={100}
               alt={product.name}
-              className="object-cover w-full h-full rotate-90 md:rotate-0"
+              className={cn(
+                "w-full h-full",
+                product.zoom ? "object-cover" : "object-contain",
+              )}
             />
           </button>
         ))}

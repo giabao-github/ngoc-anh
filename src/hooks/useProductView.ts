@@ -58,8 +58,8 @@ export const useProductView = (slug: string) => {
   }, [slug]);
 
   // Main add to cart handler
-  const handleAddToCart = () => {
-    addToCartHook.addToCart(productState.quantity);
+  const handleAddToCart = (skipAnimation: boolean = false) => {
+    addToCartHook.addToCart(productState.quantity, skipAnimation);
   };
 
   return {

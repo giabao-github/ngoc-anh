@@ -45,7 +45,7 @@ export const useAddToCart = (
   );
 
   const addToCart = useCallback(
-    (quantity: number) => {
+    (quantity: number, skipAnimation: boolean = false) => {
       if (!product) {
         toast.error("Không thể thêm sản phẩm vào giỏ hàng", {
           id: ToastIds.PRODUCT_NOT_FOUND_ERROR,
@@ -67,32 +67,47 @@ export const useAddToCart = (
         return;
       }
 
+      const existingCart = getCartFromStorage();
+      const existingIndex = existingCart.findIndex(
+        (item: CartItem) =>
+          item.id === product.id && item.name === product.name,
+      );
+      const itemToAdd = createCartItem(product, quantity);
+
+      const updateLocalCart = () => {
+        if (existingIndex !== -1) {
+          existingCart[existingIndex].quantity = Math.min(
+            existingCart[existingIndex].quantity + quantity,
+            product.quantity,
+          );
+        } else {
+          existingCart.push(itemToAdd);
+        }
+        localStorage.setItem("cart", JSON.stringify(existingCart));
+        updateCartCount();
+      };
+
       try {
-        const existingCart = getCartFromStorage();
-        const existingIndex = existingCart.findIndex(
-          (item: CartItem) =>
-            item.id === product.id && item.name === product.name,
-        );
-        const itemToAdd = createCartItem(product, quantity);
-
         // Animate and show notification
-        animateAddToCart(imageRef, cartIconRef, isMobile);
-        showNotificationWithTimeout(existingIndex !== -1 ? "update" : "add");
+        if (!skipAnimation) {
+          const cancelAnimation = animateAddToCart(
+            imageRef,
+            cartIconRef,
+            isMobile,
+          );
+          showNotificationWithTimeout(existingIndex !== -1 ? "update" : "add");
 
-        // Update cart after animation delay
-        setTimeout(() => {
-          if (existingIndex !== -1) {
-            existingCart[existingIndex].quantity = Math.min(
-              existingCart[existingIndex].quantity + quantity,
-              product.quantity,
-            );
-          } else {
-            existingCart.push(itemToAdd);
-          }
-
-          localStorage.setItem("cart", JSON.stringify(existingCart));
-          updateCartCount();
-        }, 1000);
+          // Update cart after animation delay and cleanup animation
+          setTimeout(() => {
+            updateLocalCart();
+            if (typeof cancelAnimation === "function") {
+              cancelAnimation();
+            }
+          }, 1000);
+        } else {
+          showNotificationWithTimeout(existingIndex !== -1 ? "update" : "add");
+          updateLocalCart();
+        }
       } catch (error) {
         console.error("Error adding to cart:", error);
         toast.error("Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng", {

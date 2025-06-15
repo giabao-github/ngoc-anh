@@ -37,12 +37,10 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
     if (!isFavorite) {
       toast.success("Đã thêm vào danh sách yêu thích", {
         description: "Đã thêm sản phẩm này vào danh sách yêu thích của bạn",
-        id: ToastIds.ADD_TO_WISHLIST_SUCCESS,
       });
     } else {
       toast.success("Đã xóa khỏi danh sách yêu thích", {
         description: "Đã xóa sản phẩm này khỏi danh sách yêu thích của bạn",
-        id: ToastIds.REMOVE_FROM_WISHLIST_SUCCESS,
       });
     }
   };

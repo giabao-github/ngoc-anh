@@ -12,6 +12,8 @@ import { montserrat } from "@/config/fonts";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
+import { cn } from "@/libs/utils";
+
 import { Product } from "@/app/types";
 
 interface PurchaseSectionProps {
@@ -202,6 +204,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
         <div className="flex items-center gap-x-6">
           <div className="flex items-center border border-gray-300 rounded-lg">
             <button
+              type="button"
               onClick={() => canDecrement && handleQuantityChange("decrement")}
               disabled={!canDecrement}
               className={`w-10 h-10 flex items-center justify-center rounded-tl-lg rounded-bl-lg shadow-[2px_0_4px_-1px_rgba(0,0,0,0.1)] transition ${
@@ -230,6 +233,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
               }`}
             />
             <button
+              type="button"
               onClick={() => canIncrement && handleQuantityChange("increment")}
               disabled={!canIncrement}
               className={`w-10 h-10 flex items-center justify-center rounded-tr-lg rounded-br-lg shadow-[-2px_0_4px_-1px_rgba(0,0,0,0.1)] transition ${
@@ -258,6 +262,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
       <div className="flex flex-row gap-2 mt-6 mb-8 md:mt-12">
         {isOutOfStock ? (
           <button
+            type="button"
             disabled
             className="flex items-center justify-center w-full p-3 mt-2 text-gray-400 transition-colors bg-gray-200 border border-gray-300 rounded-full cursor-default select-none md:p-4 gap-x-2 md:gap-x-4"
           >
@@ -269,20 +274,25 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
         ) : (
           <>
             <button
+              type="button"
               onClick={handleAntiSpamAddToCart}
               disabled={isAddingToCart}
-              className={`mt-2 border border-primary p-3 md:p-4 bg-white rounded-full w-full md:w-[40%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none ${
+              className={cn(
+                "mt-2 border border-primary p-3 md:p-4 bg-white rounded-full w-full md:w-[40%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none",
                 isAddingToCart
                   ? "bg-gray-200 text-gray-400 cursor-default border border-gray-300"
-                  : "text-primary hover:bg-primary hover:text-white active:bg-primary/80 active:text-white/80 cursor-pointer hover:border-none active:border-none"
-              }`}
+                  : "text-primary hover:bg-primary hover:text-white active:bg-primary/80 active:text-white/80 cursor-pointer hover:border-none active:border-none",
+              )}
             >
               <FiShoppingCart size={isMobile ? 18 : 24} />
               <span className="text-sm font-semibold md:text-base md:tracking-wide">
                 {isAddingToCart ? "Đang thêm..." : "Thêm vào giỏ hàng"}
               </span>
             </button>
-            <button className="mt-2 border border-primary p-3 md:p-4 rounded-full w-full md:w-[60%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-white text-primary hover:bg-primary hover:text-white active:bg-primary/80 active:text-white/80 cursor-pointer hover:border-none active:border-none">
+            <button
+              type="button"
+              className="mt-2 border border-primary p-3 md:p-4 rounded-full w-full md:w-[60%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-white text-primary hover:bg-primary hover:text-white active:bg-primary/80 active:text-white/80 cursor-pointer hover:border-none active:border-none"
+            >
               <FaBagShopping size={isMobile ? 18 : 24} />
               <span className="text-sm font-semibold md:text-base md:tracking-wide">
                 Mua ngay
