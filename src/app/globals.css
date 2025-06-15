@@ -171,6 +171,19 @@ input::-webkit-credentials-auto-fill-button {
   background-size: 60px 60px;
 }
 
+@keyframes progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.animate-progress {
+  animation: progress 3s linear forwards;
+}
+
 @media (max-width: 767px) {
   .skeleton-desktop {
     display: none;

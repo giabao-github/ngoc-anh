@@ -29,91 +29,72 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
   cartQuantity,
   onClose,
 }) => {
+  {
+    /* Important notes (please read carefully and give a hotfix before committing): 
+    This add to cart pop-up has several problems that may critically affect UX:
+    - The progress bar does not reset its remaining time immediately when clicking to add to cart button multiple times, it waits for the current progress bar completes to start the new progress bar, causing a quite long delay.
+    - Since the above delay, when clicking to add multiple items or a same item multiple times in short time (before a pop-up disappears), pop-up disappear before a progress bar completes, leading to user confusion and weird behavior.
+    - When a pop-up is opened, clicking X icon cannot close it, but reset the progress bar remaining time (which is the expected outcome of the stated issues, currently no idea where this weird behavior is coming from). In brief, the close button is currently useless. The pop-up only auto closes after time out. The same issue appears on "Tiếp tục mua" and "Xem giỏ hàng" buttons, which cannot serve their accurate purpose but leading to the stated weird behavior.
+    - Currently, there is no solution to fix those issues. The reviewer should propose a fix of all of stated ones, or create a simple version of it: remove complicated logic, only keep the UI and basic implementation.
+    - All of the above is not all the issues happening, they are just identified issues.  
+  */
+  }
   const router = useRouter();
   const isMobile = useIsMobile();
   const [isVisible, setIsVisible] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
-  const [progress, setProgress] = useState(100);
+  const [animationKey, setAnimationKey] = useState(0);
+  const hideTimeoutRef = useRef<number | null>(null);
 
-  // Use refs to store timer IDs for cleanup
-  const autoCloseTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Cleanup function to clear all timers
+  // Cleanup function for timers
   const cleanupTimers = useCallback(() => {
-    if (autoCloseTimerRef.current) {
-      clearTimeout(autoCloseTimerRef.current);
-      autoCloseTimerRef.current = null;
-    }
-    if (progressIntervalRef.current) {
-      clearInterval(progressIntervalRef.current);
-      progressIntervalRef.current = null;
-    }
     if (hideTimeoutRef.current) {
       clearTimeout(hideTimeoutRef.current);
       hideTimeoutRef.current = null;
     }
   }, []);
 
-  // Handle popup close with animation
+  // Handle popup closure
   const handleClose = useCallback(() => {
     cleanupTimers();
     setIsVisible(false);
-    hideTimeoutRef.current = setTimeout(() => {
-      setShouldRender(false);
-      onClose();
-    }, 300); // Match animation duration
+    hideTimeoutRef.current = Number(
+      setTimeout(() => {
+        setShouldRender(false);
+        onClose();
+      }, 300), // Matches closing animation duration
+    );
   }, [cleanupTimers, onClose]);
 
+  // Sync popup visibility and animation with show prop
   useEffect(() => {
     if (show) {
-      // Always cleanup existing timers first
       cleanupTimers();
-
-      // Reset and show popup
       setShouldRender(true);
       setIsVisible(true);
-      setProgress(100); // Reset progress bar to 100%
-
-      // Set up the 3-second auto-close timer
-      autoCloseTimerRef.current = setTimeout(() => {
-        handleClose();
-      }, 3000);
-
-      // Smoothly decrease progress bar over 3 seconds (60fps = ~16.67ms intervals)
-      const progressStep = 100 / (3000 / 16.67); // Progress decrease per frame
-      progressIntervalRef.current = setInterval(() => {
-        setProgress((prev) => {
-          const newProgress = prev - progressStep;
-          return newProgress <= 0 ? 0 : newProgress;
-        });
-      }, 16.67); // ~60fps for smooth animation
+      setAnimationKey((prev) => prev + 1); // Increment key to restart animation
     } else if (isVisible) {
       handleClose();
     }
-
-    // Cleanup on unmount or when show changes
     return cleanupTimers;
   }, [show, cleanupTimers, handleClose, isVisible]);
 
-  // Manual close handler
   const handleManualClose = useCallback(() => {
     handleClose();
   }, [handleClose]);
 
-  // View cart handler
   const handleViewCart = useCallback(() => {
     cleanupTimers();
     setIsVisible(false);
-    hideTimeoutRef.current = setTimeout(() => {
-      setShouldRender(false);
-      onClose();
-      router.push("/cart");
-    }, 300);
+    hideTimeoutRef.current = Number(
+      setTimeout(() => {
+        setShouldRender(false);
+        onClose();
+        router.push("/cart");
+      }, 300),
+    );
   }, [cleanupTimers, onClose, router]);
 
-  // Backdrop click handler (mobile only)
   const handleBackdropClick = useCallback(() => {
     if (isMobile) {
       handleManualClose();
@@ -245,8 +226,16 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
         </div>
         <div className="h-1 bg-gray-100">
           <div
-            className="h-full transition-all duration-75 ease-out bg-gradient-to-r from-green-400 to-green-600"
-            style={{ width: `${progress}%` }}
+            key={animationKey} // Key changes to restart animation
+            className={cn(
+              "h-full bg-gradient-to-r from-green-400 to-green-600",
+              isVisible && "animate-progress",
+            )}
+            onAnimationEnd={() => {
+              if (isVisible) {
+                handleClose();
+              }
+            }}
           />
         </div>
       </div>

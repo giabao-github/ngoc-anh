@@ -69,6 +69,6 @@ export const getDiscountPrice = (product: Product): string => {
     return price.toLocaleString("vi-VN") + "₫";
   }
 
-  const discountPrice = (price * (100 - discountAmount)) / 100;
+  const discountPrice = Math.round((price * (100 - discountAmount)) / 100);
   return discountPrice.toLocaleString("vi-VN") + "₫";
 };

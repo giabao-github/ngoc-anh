@@ -1,12 +1,11 @@
 "use client";
 
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject, useLayoutEffect, useRef } from "react";
 
 import Collection from "@/components/sections/Collection";
 import Hero from "@/components/sections/Hero";
 import Footer from "@/components/sections/footer/Footer";
 import Header from "@/components/sections/header/Header";
-import Products from "@/components/sections/products/Products";
 import UpdatedProducts from "@/components/sections/products/UpdatedProducts";
 
 import useIsMobile from "@/hooks/useIsMobile";
@@ -29,25 +28,21 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const { hash } = window.location;
 
-    // Add a small delay to ensure components are mounted
-    const timeoutId = setTimeout(() => {
-      if (hash === "#collection") {
-        if (collectionRef.current) {
-          handleScroll(collectionRef);
-        }
-      } else if (hash === "#products") {
-        if (productsRef.current) {
-          handleScroll(productsRef);
-        }
+    // Use requestAnimationFrame to ensure DOM is ready
+    const frameId = requestAnimationFrame(() => {
+      if (hash === "#collection" && collectionRef.current) {
+        handleScroll(collectionRef);
+      } else if (hash === "#products" && productsRef.current) {
+        handleScroll(productsRef);
       } else if (hash === "#about" && aboutRef.current) {
         aboutRef.current.scrollIntoView({ behavior: "smooth" });
       }
-    }, 10);
+    });
 
-    return () => clearTimeout(timeoutId);
+    return () => cancelAnimationFrame(frameId);
   }, [isMobile]);
 
   return (

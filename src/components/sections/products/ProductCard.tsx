@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import ProductError from "@/components/error/ProductError";
 import GridProductCard from "@/components/sections/products/GridProductCard";
@@ -16,6 +17,15 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
+  const slug = product.details[0]?.slug;
+
+  if (!slug) {
+    toast.error("Không thể tải dữ liệu sản phẩm", {
+      description: "Vui lòng tải lại trang và thử lại",
+    });
+    return;
+  }
+
   const {
     product: productData,
     cartQuantity,
@@ -26,7 +36,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
     quantity,
     ratingStats,
     showNotification,
-  } = useProductView(product.details[0].slug);
+  } = useProductView(slug);
 
   if (!productData) {
     return <ProductError />;

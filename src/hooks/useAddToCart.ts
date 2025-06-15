@@ -67,46 +67,46 @@ export const useAddToCart = (
         return;
       }
 
-      try {
-        const existingCart = getCartFromStorage();
-        const existingIndex = existingCart.findIndex(
-          (item: CartItem) =>
-            item.id === product.id && item.name === product.name,
-        );
-        const itemToAdd = createCartItem(product, quantity);
+      const existingCart = getCartFromStorage();
+      const existingIndex = existingCart.findIndex(
+        (item: CartItem) =>
+          item.id === product.id && item.name === product.name,
+      );
+      const itemToAdd = createCartItem(product, quantity);
 
+      const updateLocalCart = () => {
+        if (existingIndex !== -1) {
+          existingCart[existingIndex].quantity = Math.min(
+            existingCart[existingIndex].quantity + quantity,
+            product.quantity,
+          );
+        } else {
+          existingCart.push(itemToAdd);
+        }
+        localStorage.setItem("cart", JSON.stringify(existingCart));
+        updateCartCount();
+      };
+
+      try {
         // Animate and show notification
         if (!skipAnimation) {
-          animateAddToCart(imageRef, cartIconRef, isMobile);
-        }
-        showNotificationWithTimeout(existingIndex !== -1 ? "update" : "add");
+          const cancelAnimation = animateAddToCart(
+            imageRef,
+            cartIconRef,
+            isMobile,
+          );
+          showNotificationWithTimeout(existingIndex !== -1 ? "update" : "add");
 
-        if (!skipAnimation) {
-          // Update cart after animation delay
+          // Update cart after animation delay and cleanup animation
           setTimeout(() => {
-            if (existingIndex !== -1) {
-              existingCart[existingIndex].quantity = Math.min(
-                existingCart[existingIndex].quantity + quantity,
-                product.quantity,
-              );
-            } else {
-              existingCart.push(itemToAdd);
+            updateLocalCart();
+            if (typeof cancelAnimation === "function") {
+              cancelAnimation();
             }
-            localStorage.setItem("cart", JSON.stringify(existingCart));
-            updateCartCount();
           }, 1000);
         } else {
-          if (existingIndex !== -1) {
-            existingCart[existingIndex].quantity = Math.min(
-              existingCart[existingIndex].quantity + quantity,
-              product.quantity,
-            );
-          } else {
-            existingCart.push(itemToAdd);
-          }
-
-          localStorage.setItem("cart", JSON.stringify(existingCart));
-          updateCartCount();
+          showNotificationWithTimeout(existingIndex !== -1 ? "update" : "add");
+          updateLocalCart();
         }
       } catch (error) {
         console.error("Error adding to cart:", error);

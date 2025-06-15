@@ -80,7 +80,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
     if (product.details.length) {
       router.push(`/products/${product.details[0].slug}`);
     }
-  }, [product.details[0].slug, product.details.length]);
+  }, [product, router]);
 
   return (
     <>

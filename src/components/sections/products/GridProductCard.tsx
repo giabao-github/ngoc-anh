@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { MdOutlineDiscount } from "react-icons/md";
 
 import {
@@ -14,7 +14,6 @@ import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.
 import Image from "next/image";
 import { toast } from "sonner";
 
-import ProductError from "@/components/error/ProductError";
 import AddToCartPopup from "@/components/product/AddToCartPopup";
 
 import { getDiscountPrice } from "@/libs/productUtils";
@@ -92,7 +91,7 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
     if (product.details.length) {
       router.push(`/products/${product.details[0].slug}`);
     }
-  }, [product.details[0].slug, product.details.length]);
+  }, [product, router]);
 
   return (
     <>

@@ -65,7 +65,8 @@ const ProductsPanel: React.FC<ProductsPanelProps> = ({
       <div className="flex items-center gap-4">
         <div className="relative">
           <select
-            title="Sort selection"
+            title="Sắp xếp sản phẩm"
+            aria-label="Sắp xếp sản phẩm"
             value={sortBy}
             onChange={handleSortChange}
             className="px-3 py-1.5 md:px-4 md:py-2 pr-8 md:pr-10 text-xs md:text-sm bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-1 focus:ring-neutral-300 focus:border-transparent"

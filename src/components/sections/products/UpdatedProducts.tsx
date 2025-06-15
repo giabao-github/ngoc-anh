@@ -1,6 +1,7 @@
 import React, {
   RefObject,
   useCallback,
+  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -81,7 +82,7 @@ const UpdatedProducts: React.FC<ProductsProps> = ({ productsRef }) => {
   }, [selectedCategory, sortBy]);
 
   // Handle viewport width changes
-  useLayoutEffect(() => {
+  useEffect(() => {
     const handleResize = () => setViewportWidth(window.innerWidth);
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -149,7 +150,14 @@ const UpdatedProducts: React.FC<ProductsProps> = ({ productsRef }) => {
   );
 
   const showMore = useCallback(() => {
+    const currentScroll = window.scrollY;
     setVisibleRows((prev) => prev + ROWS_PER_CLICK);
+    requestAnimationFrame(() => {
+      window.scrollTo({
+        top: currentScroll,
+        behavior: "auto",
+      });
+    });
   }, []);
 
   const collapse = useCallback(() => {
@@ -208,7 +216,7 @@ const UpdatedProducts: React.FC<ProductsProps> = ({ productsRef }) => {
             >
               {visibleProducts.map((product) => (
                 <ProductCard
-                  key={`${product.id}-${selectedCategory}-${sortBy}`}
+                  key={product.id}
                   product={product}
                   viewMode={viewMode}
                 />
