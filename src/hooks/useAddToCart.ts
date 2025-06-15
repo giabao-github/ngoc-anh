@@ -45,7 +45,7 @@ export const useAddToCart = (
   );
 
   const addToCart = useCallback(
-    (quantity: number) => {
+    (quantity: number, skipAnimation: boolean = false) => {
       if (!product) {
         toast.error("Không thể thêm sản phẩm vào giỏ hàng", {
           id: ToastIds.PRODUCT_NOT_FOUND_ERROR,
@@ -76,11 +76,26 @@ export const useAddToCart = (
         const itemToAdd = createCartItem(product, quantity);
 
         // Animate and show notification
-        animateAddToCart(imageRef, cartIconRef, isMobile);
+        if (!skipAnimation) {
+          animateAddToCart(imageRef, cartIconRef, isMobile);
+        }
         showNotificationWithTimeout(existingIndex !== -1 ? "update" : "add");
 
-        // Update cart after animation delay
-        setTimeout(() => {
+        if (!skipAnimation) {
+          // Update cart after animation delay
+          setTimeout(() => {
+            if (existingIndex !== -1) {
+              existingCart[existingIndex].quantity = Math.min(
+                existingCart[existingIndex].quantity + quantity,
+                product.quantity,
+              );
+            } else {
+              existingCart.push(itemToAdd);
+            }
+            localStorage.setItem("cart", JSON.stringify(existingCart));
+            updateCartCount();
+          }, 1000);
+        } else {
           if (existingIndex !== -1) {
             existingCart[existingIndex].quantity = Math.min(
               existingCart[existingIndex].quantity + quantity,
@@ -92,7 +107,7 @@ export const useAddToCart = (
 
           localStorage.setItem("cart", JSON.stringify(existingCart));
           updateCartCount();
-        }, 1000);
+        }
       } catch (error) {
         console.error("Error adding to cart:", error);
         toast.error("Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng", {

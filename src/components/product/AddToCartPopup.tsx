@@ -1,4 +1,5 @@
-import { FiX } from "react-icons/fi";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { FiCheck, FiShoppingCart, FiX } from "react-icons/fi";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -19,6 +20,7 @@ interface AddToCartPopupProps {
   cartQuantity: number;
   onClose: () => void;
 }
+
 const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
   show,
   flag,
@@ -29,69 +31,227 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
 }) => {
   const router = useRouter();
   const isMobile = useIsMobile();
+  const [isVisible, setIsVisible] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
+  const [progress, setProgress] = useState(100);
 
-  if (show) {
-    return (
-      <div className="fixed cursor-pointer top-28 right-4 bg-white shadow-2xl rounded-xl p-3 md:p-4 w-[292px] md:w-[342px] z-50 border border-gray-200">
-        <div className="flex items-start justify-between mb-3">
-          <h4 className="text-xs font-semibold text-green-600 md:text-sm">
-            {flag === "add"
-              ? "Đã thêm sản phẩm vào giỏ hàng!"
-              : "Đã cập nhật số lượng sản phẩm trong giỏ hàng!"}
-          </h4>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onClose();
-            }}
-            className="cursor-pointer"
-          >
-            <FiX className="w-5 h-5 text-gray-300 hover:text-gray-700" />
-          </button>
-        </div>
+  // Use refs to store timer IDs for cleanup
+  const autoCloseTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-        <div className="flex items-center space-x-4">
-          <Image
-            src={product.images[0]}
-            alt={product.name}
-            width={isMobile ? 48 : 64}
-            height={isMobile ? 48 : 64}
-            className={cn(
-              "w-12 h-12 border border-gray-300 rounded-lg md:w-16 md:h-16",
-              product.zoom ? "object-cover" : "object-contain",
-            )}
-            style={{
-              backgroundColor: product.background || "transparent",
-            }}
-          />
-          <div className="flex-1 space-y-1">
-            <p className="text-xs font-medium text-gray-800 md:text-sm">
-              {product.name}
-            </p>
-            <p className="text-xs text-gray-600 md:text-sm">
-              {`Số lượng: ${quantity} (tổng cộng: ${cartQuantity})`}
-            </p>
-            <p className="mt-1 text-xs font-semibold text-gray-900 md:text-sm">
-              {new Intl.NumberFormat("vi-VN", {
-                style: "currency",
-                currency: "VND",
-              }).format(product.details[0].price * quantity)}
-            </p>
-          </div>
-        </div>
-        <Button
-          onClick={() => router.push("/cart")}
-          className="w-full px-4 py-5 mt-3 text-white transition bg-green-500 rounded-xl hover:bg-green-600 active:bg-green-400"
-        >
-          <span className="text-sm font-semibold tracking-wider">
-            Xem giỏ hàng
-          </span>
-        </Button>
-      </div>
-    );
+  // Cleanup function to clear all timers
+  const cleanupTimers = useCallback(() => {
+    if (autoCloseTimerRef.current) {
+      clearTimeout(autoCloseTimerRef.current);
+      autoCloseTimerRef.current = null;
+    }
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+      progressIntervalRef.current = null;
+    }
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+  }, []);
+
+  // Handle popup close with animation
+  const handleClose = useCallback(() => {
+    cleanupTimers();
+    setIsVisible(false);
+    hideTimeoutRef.current = setTimeout(() => {
+      setShouldRender(false);
+      onClose();
+    }, 300); // Match animation duration
+  }, [cleanupTimers, onClose]);
+
+  useEffect(() => {
+    if (show) {
+      // Always cleanup existing timers first
+      cleanupTimers();
+
+      // Reset and show popup
+      setShouldRender(true);
+      setIsVisible(true);
+      setProgress(100); // Reset progress bar to 100%
+
+      // Set up the 3-second auto-close timer
+      autoCloseTimerRef.current = setTimeout(() => {
+        handleClose();
+      }, 3000);
+
+      // Smoothly decrease progress bar over 3 seconds (60fps = ~16.67ms intervals)
+      const progressStep = 100 / (3000 / 16.67); // Progress decrease per frame
+      progressIntervalRef.current = setInterval(() => {
+        setProgress((prev) => {
+          const newProgress = prev - progressStep;
+          return newProgress <= 0 ? 0 : newProgress;
+        });
+      }, 16.67); // ~60fps for smooth animation
+    } else if (isVisible) {
+      handleClose();
+    }
+
+    // Cleanup on unmount or when show changes
+    return cleanupTimers;
+  }, [show, cleanupTimers, handleClose, isVisible]);
+
+  // Manual close handler
+  const handleManualClose = useCallback(() => {
+    handleClose();
+  }, [handleClose]);
+
+  // View cart handler
+  const handleViewCart = useCallback(() => {
+    cleanupTimers();
+    setIsVisible(false);
+    hideTimeoutRef.current = setTimeout(() => {
+      setShouldRender(false);
+      onClose();
+      router.push("/cart");
+    }, 300);
+  }, [cleanupTimers, onClose, router]);
+
+  // Backdrop click handler (mobile only)
+  const handleBackdropClick = useCallback(() => {
+    if (isMobile) {
+      handleManualClose();
+    }
+  }, [isMobile, handleManualClose]);
+
+  if (!shouldRender) {
+    return null;
   }
 
-  return null;
+  return (
+    <>
+      {isMobile && (
+        <div
+          className={cn(
+            "fixed inset-0 bg-black/20 z-40 transition-opacity duration-300",
+            isVisible ? "opacity-100" : "opacity-0",
+          )}
+          onClick={handleBackdropClick}
+        />
+      )}
+      <div
+        className={cn(
+          "fixed z-50 transition-all duration-300 ease-out",
+          isMobile
+            ? cn(
+                "left-4 right-4 bottom-4 transform",
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-full opacity-0",
+              )
+            : cn(
+                "top-20 right-4 w-80 transform",
+                isVisible
+                  ? "translate-x-0 opacity-100 scale-100"
+                  : "translate-x-full opacity-0 scale-95",
+              ),
+          "bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden",
+        )}
+      >
+        <div className="p-4">
+          <div className="flex items-start justify-between mb-4">
+            <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-center w-6 h-6 bg-green-100 rounded-full">
+                <FiCheck className="w-4 h-4 text-green-600" />
+              </div>
+              <h4 className="text-sm font-semibold text-gray-900">
+                {flag === "add"
+                  ? "Đã thêm vào giỏ hàng"
+                  : "Đã cập nhật giỏ hàng"}
+              </h4>
+            </div>
+            <button
+              onClick={handleManualClose}
+              className="p-1 transition-colors rounded-full hover:bg-gray-100 active:bg-gray-200"
+              aria-label="Đóng"
+            >
+              <FiX className="w-4 h-4 text-gray-400" />
+            </button>
+          </div>
+          <div className="flex items-start mb-4 space-x-3">
+            <div className="relative flex-shrink-0">
+              <Image
+                src={product.images[0]}
+                alt={product.name}
+                width={64}
+                height={64}
+                className={cn(
+                  "w-16 h-16 border border-gray-200 rounded-xl",
+                  (product.zoom ?? false)
+                    ? "object-cover"
+                    : "object-contain p-1",
+                )}
+                style={{
+                  backgroundColor: product.background || "transparent",
+                }}
+              />
+              <div className="absolute flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 rounded-full -top-2 -right-2">
+                {quantity}
+              </div>
+            </div>
+            <div className="flex-1 min-w-0">
+              <h5 className="mb-1 text-sm font-medium text-gray-900 line-clamp-2">
+                {product.name}
+              </h5>
+              <div className="space-y-1">
+                <p className="text-xs text-gray-500">
+                  Số lượng:{" "}
+                  <span className="font-medium text-gray-700">{quantity}</span>
+                </p>
+                <p className="text-xs text-gray-500">
+                  Tổng trong giỏ:{" "}
+                  <span className="font-medium text-gray-700">
+                    {cartQuantity}
+                  </span>
+                </p>
+                <p className="text-sm font-semibold text-gray-900">
+                  {new Intl.NumberFormat("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                  }).format(product.details[0].price * quantity)}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className={cn("flex gap-3", isMobile ? "flex-col" : "flex-row")}>
+            <Button
+              variant="outline"
+              onClick={handleManualClose}
+              className={cn(
+                "transition-all duration-200 border-gray-200 hover:border-gray-300",
+                isMobile ? "flex-1" : "flex-1",
+              )}
+            >
+              <span className="text-sm">Tiếp tục mua</span>
+            </Button>
+            <Button
+              onClick={handleViewCart}
+              className={cn(
+                "bg-green-500 hover:bg-green-600 text-white transition-all duration-200",
+                "shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]",
+                isMobile ? "flex-1" : "flex-1",
+              )}
+            >
+              <FiShoppingCart className="w-4 h-4 mr-2" />
+              <span className="text-sm font-medium">Xem giỏ hàng</span>
+            </Button>
+          </div>
+        </div>
+        <div className="h-1 bg-gray-100">
+          <div
+            className="h-full transition-all duration-75 ease-out bg-gradient-to-r from-green-400 to-green-600"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default AddToCartPopup;

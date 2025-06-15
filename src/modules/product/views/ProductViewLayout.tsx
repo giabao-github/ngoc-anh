@@ -1,7 +1,5 @@
 import React, { RefObject } from "react";
 
-import Head from "next/head";
-
 import ProductError from "@/components/error/ProductError";
 import AddToCartPopup from "@/components/product/AddToCartPopup";
 import ProductDetails from "@/components/product/ProductDetails";

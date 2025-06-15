@@ -93,13 +93,13 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
             ref={gridRef}
             className="grid justify-center grid-cols-2 gap-2 transition-opacity md:grid-cols-3 md:gap-4 2xl:gap-8 duration-400"
           >
-            {visibleProducts.map((product) => (
+            {/* {visibleProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
                 onNavigate={handleNavigate}
               />
-            ))}
+            ))} */}
           </div>
         </div>
 

@@ -34,9 +34,9 @@ const ProductImages: React.FC<ProductImagesProps> = ({
           className="relative overflow-hidden rounded-lg ring ring-gray-300 aspect-square"
         >
           <ProductCarousel
-            onSelect={(value) => setCurrentIndex(Number(value))}
-            data={data}
             product={product}
+            data={data}
+            onSelect={(value) => setCurrentIndex(Number(value))}
             currentIndex={currentIndex}
           />
         </div>
@@ -45,6 +45,7 @@ const ProductImages: React.FC<ProductImagesProps> = ({
       <div className="flex justify-center gap-4 mx-auto">
         {images.map((img, index) => (
           <button
+            type="button"
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={cn(

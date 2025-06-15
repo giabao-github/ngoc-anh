@@ -57,3 +57,18 @@ export const createImageData = (
     image: image,
     background: background,
   }));
+
+export const getDiscountPrice = (product: Product): string => {
+  const { price } = product.details[0];
+  const discountAmount =
+    "discount" in product.details[0].badge
+      ? product.details[0].badge.discount
+      : 0;
+
+  if (discountAmount === 0) {
+    return price.toLocaleString("vi-VN") + "₫";
+  }
+
+  const discountPrice = (price * (100 - discountAmount)) / 100;
+  return discountPrice.toLocaleString("vi-VN") + "₫";
+};

@@ -72,17 +72,25 @@ export const products = [
     brand: "Thạch Âm",
     material: "Kim loại mạ bóng, in hình phủ nhựa bóng/mờ",
     pin: "Ghim kim cài lưng (an toàn, dễ sử dụng)",
-    type: "Huy hiệu truyền thống",
+    category: "Huy hiệu",
     details: [
       {
         color: "Nền xanh rêu",
-        slug: "huy-hieu-truyen-thong-xanh-reu",
-        price: 20000,
+        slug: "huy-hieu-thach-am-xanh-reu",
+        price: 25000,
+        badge: {
+          isNew: true,
+          discount: 20,
+        },
       },
       {
         color: "Nền vàng nhạt",
-        slug: "huy-hieu-truyen-thong-vang-nhat",
-        price: 20000,
+        slug: "huy-hieu-thach-am-vang-nhat",
+        price: 25000,
+        badge: {
+          isNew: true,
+          discount: 20,
+        },
       },
     ],
     size: "10 cm",
@@ -122,17 +130,25 @@ export const products = [
     brand: "Thạch Âm",
     material: "Kim loại mạ bóng, in hình phủ nhựa bóng/mờ",
     pin: "Ghim kim cài lưng (an toàn, dễ sử dụng)",
-    type: "Huy hiệu truyền thống",
+    category: "Huy hiệu",
     details: [
       {
         color: "Nền vàng",
-        slug: "huy-hieu-truyen-thong-vang-nhat",
-        price: 20000,
+        slug: "huy-hieu-thach-am-vang-nhat",
+        price: 25000,
+        badge: {
+          isNew: true,
+          discount: 20,
+        },
       },
       {
         color: "Nền xanh rêu",
-        slug: "huy-hieu-truyen-thong-xanh-reu",
-        price: 20000,
+        slug: "huy-hieu-thach-am-xanh-reu",
+        price: 25000,
+        badge: {
+          isNew: true,
+          discount: 20,
+        },
       },
     ],
     size: "10 cm",
@@ -194,12 +210,16 @@ export const products = [
     code: "A001_694535520",
     brand: "Thạch Âm",
     material: "Lụa cao cấp",
-    type: "Khăn Bandana",
+    category: "Khăn",
     details: [
       {
         color: "Xanh rêu đậm",
         slug: "khan-bandana-thach-am",
-        price: 250000,
+        price: 300000,
+        badge: {
+          isNew: true,
+          discount: 15,
+        },
       },
     ],
     size: "70 cm × 70 cm",
@@ -280,12 +300,16 @@ export const products = [
     code: "A001_01134034503",
     brand: "Thạch Âm",
     material: "Giấy mỹ thuật cao cấp",
-    type: "Card Visit",
+    category: "Card",
     details: [
       {
         color: "Xanh rêu đậm & vàng đồng",
         slug: "card-visit-thach-am",
         price: 0,
+        badge: {
+          isNew: true,
+          isReward: true,
+        },
       },
     ],
     size: "90 mm × 54 mm",
@@ -390,12 +414,17 @@ export const products = [
     code: "A001_01134034745",
     brand: "Thạch Âm",
     material: "Giấy cao cấp",
-    type: "Quạt giấy cầm tay",
+    category: "Quạt",
     details: [
       {
         color: "Xanh rêu đậm & vàng đồng",
         slug: "quat-giay-thach-am",
-        price: 120000,
+        price: 150000,
+        badge: {
+          isNew: true,
+          discount: 20,
+          isBestseller: true,
+        },
       },
     ],
     size: "30 cm × 50 cm",

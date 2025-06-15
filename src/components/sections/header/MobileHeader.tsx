@@ -67,7 +67,6 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               onClick={() => router.push("/")}
               className="object-contain w-16 h-16 rounded cursor-pointer select-none"
               role="button"
-              aria-label="Navigate to home page"
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
@@ -114,16 +113,18 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               onClick={() => router.push("/login?method=email")}
               className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70"
             />
-            <div className="relative w-10 h-10 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_16px_rgba(255,255,255,0.8)] active:shadow-[0_0_16px_rgba(255,255,255,1)]">
+            <div className="relative flex items-center justify-center w-10 bg-white h-10 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_20px_rgba(255,255,255,0.8)] hover:shadow-[0_0_20px_rgba(255,255,255,1)]">
               <Image
                 src="/avatar.jpeg"
                 alt="Avatar"
-                fill
+                width={24}
+                height={24}
                 quality={100}
-                className="object-cover cursor-pointer select-none"
+                className="object-contain w-8 h-8 cursor-pointer select-none"
               />
             </div>
             <button
+              type="button"
               className="outline-none cursor-pointer ring-0 focus:ring-0 focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >

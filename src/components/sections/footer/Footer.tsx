@@ -6,6 +6,8 @@ import Image from "next/image";
 
 import BackToTopButton from "./BackToTopButton";
 
+const currentYear = new Date().getFullYear();
+
 interface FooterProps {
   aboutRef?: RefObject<HTMLDivElement | null>;
 }
@@ -123,7 +125,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
       </div>
     </div>
     <div className="mt-16 text-base font-medium tracking-wide text-center text-white md:text-lg">
-      &copy; {new Date().getFullYear()} Thạch Âm. All rights reserved.
+      &copy; {currentYear} Thạch Âm. All rights reserved.
     </div>
   </footer>
 );

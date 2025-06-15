@@ -163,6 +163,9 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
             <div className="flex flex-wrap items-center justify-between gap-1 md:gap-4 sm:flex-nowrap">
               <div className="flex items-center border border-gray-300 rounded-lg">
                 <button
+                  type="button"
+                  aria-label="Decrease quantity"
+                  disabled={item.quantity <= 1}
                   onClick={() =>
                     item.quantity > 1 &&
                     product &&
@@ -173,8 +176,6 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                       ? "cursor-pointer hover:bg-gray-200 active:bg-gray-200/80"
                       : "cursor-default text-gray-400"
                   }`}
-                  aria-label="Decrease quantity"
-                  disabled={item.quantity <= 1}
                 >
                   <FiMinus size={isMobile ? 12 : 16} aria-hidden="true" />
                 </button>
@@ -193,9 +194,13 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                   aria-label="Product quantity"
                   aria-valuemin={1}
                   aria-valuemax={product.quantity}
-                  aria-valuenow={parseInt(inputValue)}
+                  aria-valuenow={
+                    isNaN(Number(inputValue)) ? undefined : Number(inputValue)
+                  }
                 />
                 <button
+                  type="button"
+                  aria-label="Increase quantity"
                   onClick={() =>
                     product &&
                     item.quantity < product.quantity &&

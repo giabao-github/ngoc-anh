@@ -142,6 +142,9 @@ input::-webkit-credentials-auto-fill-button {
   body {
     @apply bg-background text-foreground;
   }
+  button {
+    @apply cursor-pointer;
+  }
 }
 
 @keyframes fade-in-up {
