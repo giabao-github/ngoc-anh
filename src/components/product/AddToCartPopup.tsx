@@ -21,7 +21,17 @@ interface AddToCartPopupProps {
   onClose: () => void;
   progress: number;
 }
-
+const styles = `
+@keyframes progress {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+`;
+if (typeof document !== "undefined") {
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = styles;
+  document.head.appendChild(styleSheet);
+}
 const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
   show,
   flag,
@@ -33,152 +43,131 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
 }) => {
   const router = useRouter();
   const isMobile = useIsMobile();
-
   const handleManualClose = useCallback(() => {
     onClose();
   }, [onClose]);
-
   const handleViewCart = useCallback(() => {
     onClose();
     router.push("/cart");
   }, [onClose, router]);
-
-  const handleBackdropClick = useCallback(() => {
-    if (isMobile) {
-      handleManualClose();
-    }
-  }, [isMobile, handleManualClose]);
-
+  const handleBackdropClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (e.target === e.currentTarget) {
+        handleManualClose();
+      }
+    },
+    [handleManualClose],
+  );
   if (!show) {
     return null;
   }
-
   return (
-    <>
-      {isMobile && (
-        <div
-          className="fixed inset-0 z-40 transition-opacity duration-300"
-          onClick={handleBackdropClick}
-        />
+    <div
+      className={cn(
+        "fixed z-50 transition-all duration-300 ease-out",
+        isMobile
+          ? cn(
+              "left-4 right-4 bottom-4 transform",
+              show ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
+            )
+          : cn(
+              "top-20 right-4 w-80 transform",
+              show
+                ? "translate-x-0 opacity-100 scale-100"
+                : "translate-x-full opacity-0 scale-95",
+            ),
+        "bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden",
       )}
-      <div
-        className={cn(
-          "fixed z-50 transition-all duration-300 ease-out",
-          isMobile
-            ? cn(
-                "left-4 right-4 bottom-4 transform",
-                show
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-full opacity-0",
-              )
-            : cn(
-                "top-20 right-4 w-80 transform",
-                show
-                  ? "translate-x-0 opacity-100 scale-100"
-                  : "translate-x-full opacity-0 scale-95",
-              ),
-          "bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden",
-        )}
-      >
-        <div className="p-4">
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center justify-center w-6 h-6 bg-green-100 rounded-full">
-                <FiCheck className="w-4 h-4 text-green-600" />
-              </div>
-              <h4 className="text-sm font-semibold text-gray-900">
-                {flag === "add"
-                  ? "Đã thêm vào giỏ hàng"
-                  : "Đã cập nhật giỏ hàng"}
-              </h4>
+    >
+      <div className="p-4">
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center justify-center w-6 h-6 bg-green-100 rounded-full">
+              <FiCheck className="w-4 h-4 text-green-600" />
             </div>
-            <button
-              type="button"
-              onClick={handleManualClose}
-              className="p-1 transition-colors rounded-full hover:bg-gray-100 active:bg-gray-200"
-              aria-label="Đóng"
-            >
-              <FiX className="w-4 h-4 text-gray-400" />
-            </button>
+            <h4 className="text-sm font-semibold text-gray-900">
+              {flag === "add" ? "Đã thêm vào giỏ hàng" : "Đã cập nhật giỏ hàng"}
+            </h4>
           </div>
-          <div className="flex items-start mb-4 space-x-3">
-            <div className="relative flex-shrink-0">
-              <Image
-                src={product.images[0]}
-                alt={product.name}
-                width={64}
-                height={64}
-                className={cn(
-                  "w-16 h-16 border border-gray-200 rounded-xl",
-                  (product.zoom ?? false)
-                    ? "object-cover"
-                    : "object-contain p-1",
-                )}
-                style={{
-                  backgroundColor: product.background || "transparent",
-                }}
-              />
-              <div className="absolute flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 rounded-full -top-2 -right-2">
-                {quantity}
-              </div>
-            </div>
-            <div className="flex-1 min-w-0">
-              <h5 className="mb-1 text-sm font-medium text-gray-900 line-clamp-2">
-                {product.name}
-              </h5>
-              <div className="space-y-1">
-                <p className="text-xs text-gray-500">
-                  Số lượng:{" "}
-                  <span className="font-medium text-gray-700">{quantity}</span>
-                </p>
-                <p className="text-xs text-gray-500">
-                  Tổng trong giỏ:{" "}
-                  <span className="font-medium text-gray-700">
-                    {cartQuantity}
-                  </span>
-                </p>
-                <p className="text-sm font-semibold text-gray-900">
-                  {new Intl.NumberFormat("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  }).format(product.details[0].price * quantity)}
-                </p>
-              </div>
+          <button
+            type="button"
+            onClick={handleManualClose}
+            className="p-1 transition-colors rounded-full hover:bg-gray-100 active:bg-gray-200"
+            aria-label="Đóng"
+          >
+            <FiX className="w-4 h-4 text-gray-400" />
+          </button>
+        </div>
+        <div className="flex items-start mb-4 space-x-3">
+          <div className="relative flex-shrink-0">
+            <Image
+              src={product.images[0]}
+              alt={product.name}
+              width={64}
+              height={64}
+              className={cn(
+                "w-16 h-16 border border-gray-200 rounded-xl",
+                (product.zoom ?? false) ? "object-cover" : "object-contain p-1",
+              )}
+              style={{
+                backgroundColor: product.background || "transparent",
+              }}
+            />
+            <div className="absolute flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 rounded-full -top-2 -right-2">
+              {quantity}
             </div>
           </div>
-          <div className={cn("flex gap-3", isMobile ? "flex-col" : "flex-row")}>
-            <Button
-              variant="outline"
-              onClick={handleManualClose}
-              className={cn(
-                "transition-all duration-200 border-gray-200 hover:border-gray-300",
-                isMobile ? "flex-1" : "flex-1",
-              )}
-            >
-              <span className="text-sm">Tiếp tục mua</span>
-            </Button>
-            <Button
-              onClick={handleViewCart}
-              className={cn(
-                "bg-green-500 hover:bg-green-600 text-white transition-all duration-200",
-                "shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]",
-                isMobile ? "flex-1" : "flex-1",
-              )}
-            >
-              <FiShoppingCart className="w-4 h-4 mr-2" />
-              <span className="text-sm font-medium">Xem giỏ hàng</span>
-            </Button>
+          <div className="flex-1 min-w-0">
+            <h5 className="mb-1 text-sm font-medium text-gray-900 line-clamp-2">
+              {product.name}
+            </h5>
+            <div className="space-y-1">
+              <p className="text-xs text-gray-500">
+                Số lượng:{" "}
+                <span className="font-medium text-gray-700">{quantity}</span>
+              </p>
+              <p className="text-xs text-gray-500">
+                Tổng trong giỏ:{" "}
+                <span className="font-medium text-gray-700">
+                  {cartQuantity}
+                </span>
+              </p>
+              <p className="text-sm font-semibold text-gray-900">
+                {new Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(product.details[0].price * quantity)}
+              </p>
+            </div>
           </div>
         </div>
-        <div className="h-1 bg-gray-100">
-          <div
-            className="h-full transition-all duration-75 ease-linear bg-gradient-to-r from-green-400 to-green-600"
-            style={{ width: `${progress}%` }}
-          />
+        <div className="flex flex-row gap-3">
+          <Button
+            variant="outline"
+            onClick={handleManualClose}
+            className="flex-1 transition-all duration-200 border-gray-200 hover:border-gray-300"
+          >
+            <span className="text-sm">Tiếp tục mua</span>
+          </Button>
+          <Button
+            onClick={handleViewCart}
+            className={cn(
+              "flex-1 bg-green-500 hover:bg-green-600 text-white transition-all duration-200",
+              "shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]",
+            )}
+          >
+            <FiShoppingCart className="w-4 h-4 mr-2" />
+            <span className="text-sm font-medium">Xem giỏ hàng</span>
+          </Button>
         </div>
       </div>
-    </>
+      <div className="h-1 bg-gray-100">
+        <div
+          className="h-full transition-all duration-75 ease-linear bg-gradient-to-r from-green-400 to-green-600"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+    </div>
   );
 };
-
 export default AddToCartPopup;
