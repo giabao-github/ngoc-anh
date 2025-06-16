@@ -186,9 +186,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         switch (type) {
           case "increment":
             if (newQty + 1 >= maxQty) {
-              toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này", {
-                id: ToastIds.CART_MAX_QTY_WARNING,
-              });
+              toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này");
             }
             newQty = Math.min(item.quantity + 1, maxQty);
             break;

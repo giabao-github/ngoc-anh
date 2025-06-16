@@ -142,6 +142,9 @@ input::-webkit-credentials-auto-fill-button {
   body {
     @apply bg-background text-foreground;
   }
+  button {
+    @apply cursor-pointer;
+  }
 }
 
 @keyframes fade-in-up {
@@ -166,6 +169,19 @@ input::-webkit-credentials-auto-fill-button {
     transparent 0
   );
   background-size: 60px 60px;
+}
+
+@keyframes progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.animate-progress {
+  animation: progress 3s linear forwards;
 }
 
 @media (max-width: 767px) {
