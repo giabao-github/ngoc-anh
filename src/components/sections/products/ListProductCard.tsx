@@ -36,6 +36,7 @@ interface ListProductCardProps {
   showNotification: boolean;
   notificationFlag: string;
   handleCloseNotification: () => void;
+  progress: number;
 }
 
 const ListProductCard: React.FC<ListProductCardProps> = ({
@@ -51,6 +52,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
   router,
   isFavorite,
   onToggleFavorite,
+  progress,
 }) => {
   const favoriteKey = `favorite-${product.id}`;
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -82,6 +84,14 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
     }
   }, [product, router]);
 
+  const onAddToCart = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      handleAddToCart();
+    },
+    [handleAddToCart],
+  );
+
   return (
     <>
       <AddToCartPopup
@@ -91,6 +101,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
         quantity={quantity}
         cartQuantity={cartQuantity}
         onClose={handleCloseNotification}
+        progress={progress}
       />
       <div className="overflow-hidden transition-all duration-300 bg-white border border-gray-100 shadow-sm rounded-xl hover:shadow-lg group">
         <div className="flex flex-row">
@@ -222,12 +233,17 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
                   </button>
                   <button
                     type="button"
-                    onClick={handleAddToCart}
-                    disabled={isOutOfStock}
-                    className="flex items-center justify-center w-full p-2 transition-colors bg-transparent border rounded-full cursor-pointer select-none border-primary text-primary md:p-3 hover:bg-primary active:bg-primary/70 hover:text-white active:text-white/70 hover:border-primary active:border-primary/70 gap-x-3 disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-default"
+                    onClick={onAddToCart}
+                    className={cn(
+                      "flex items-center justify-center w-full p-2 transition-colors bg-transparent border rounded-full cursor-pointer select-none border-primary text-primary md:p-3 gap-x-3",
+                      !isOutOfStock &&
+                        "hover:bg-primary active:bg-primary/70 hover:text-white active:text-white/70 hover:border-primary active:border-primary/70",
+                      isOutOfStock &&
+                        "bg-gray-200 text-gray-400 border-gray-300 cursor-default",
+                    )}
                     aria-label="Thêm vào giỏ hàng"
                   >
-                    <ShoppingCart className={cn("w-4 h-4")} />
+                    <ShoppingCart className="w-4 h-4" />
                     <span className="text-sm font-semibold tracking-wide">
                       Thêm vào giỏ
                     </span>

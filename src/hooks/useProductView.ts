@@ -87,5 +87,6 @@ export const useProductView = (slug: string) => {
     showNotification: notification.showNotification,
     notificationFlag: notification.notificationFlag,
     handleCloseNotification: notification.hideNotification,
+    progress: notification.progress,
   };
 };

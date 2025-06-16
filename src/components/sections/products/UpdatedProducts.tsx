@@ -69,7 +69,7 @@ const UpdatedProducts: React.FC<ProductsProps> = ({ productsRef }) => {
       requestAnimationFrame(() => {
         const newHeight = wrapper.scrollHeight;
         const heightDiff = newHeight - originalHeight;
-        const scrollDiff = heightDiff > 0 ? heightDiff : 0;
+        const scrollDiff = heightDiff;
 
         window.scrollTo({
           top: scrollPositionRef.current + scrollDiff,
@@ -140,7 +140,7 @@ const UpdatedProducts: React.FC<ProductsProps> = ({ productsRef }) => {
     return {
       itemsToShow: items,
       isAllVisible: items >= filteredAndSortedProducts.length,
-      showControls: filteredAndSortedProducts.length > ROWS_PER_CLICK * columns,
+      showControls: filteredAndSortedProducts.length > items,
     };
   }, [visibleRows, filteredAndSortedProducts.length, getColumnsPerRow]);
 

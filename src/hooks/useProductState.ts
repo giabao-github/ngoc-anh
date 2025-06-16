@@ -58,9 +58,7 @@ export const useProductState = (
   useEffect(() => {
     if (isAtMaxQuantity && availableQuantity > 0) {
       const timeoutId = setTimeout(() => {
-        toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này", {
-          id: ToastIds.CART_MAX_QTY_WARNING,
-        });
+        toast.warning("Đã đạt số lượng mua tối đa cho sản phẩm này");
       }, 300);
 
       return () => clearTimeout(timeoutId);

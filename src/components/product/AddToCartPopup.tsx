@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback } from "react";
 import { FiCheck, FiShoppingCart, FiX } from "react-icons/fi";
 
 import Image from "next/image";
@@ -19,6 +19,7 @@ interface AddToCartPopupProps {
   quantity: number;
   cartQuantity: number;
   onClose: () => void;
+  progress: number;
 }
 
 const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
@@ -28,72 +29,19 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
   quantity,
   cartQuantity,
   onClose,
+  progress,
 }) => {
-  {
-    /* Important notes (please read carefully and give a hotfix before committing): 
-    This add to cart pop-up has several problems that may critically affect UX:
-    - The progress bar does not reset its remaining time immediately when clicking to add to cart button multiple times, it waits for the current progress bar completes to start the new progress bar, causing a quite long delay.
-    - Since the above delay, when clicking to add multiple items or a same item multiple times in short time (before a pop-up disappears), pop-up disappear before a progress bar completes, leading to user confusion and weird behavior.
-    - When a pop-up is opened, clicking X icon cannot close it, but reset the progress bar remaining time (which is the expected outcome of the stated issues, currently no idea where this weird behavior is coming from). In brief, the close button is currently useless. The pop-up only auto closes after time out. The same issue appears on "Tiếp tục mua" and "Xem giỏ hàng" buttons, which cannot serve their accurate purpose but leading to the stated weird behavior.
-    - Currently, there is no solution to fix those issues. The reviewer should propose a fix of all of stated ones, or create a simple version of it: remove complicated logic, only keep the UI and basic implementation.
-    - All of the above is not all the issues happening, they are just identified issues.  
-  */
-  }
   const router = useRouter();
   const isMobile = useIsMobile();
-  const [isVisible, setIsVisible] = useState(false);
-  const [shouldRender, setShouldRender] = useState(false);
-  const [animationKey, setAnimationKey] = useState(0);
-  const hideTimeoutRef = useRef<number | null>(null);
-
-  // Cleanup function for timers
-  const cleanupTimers = useCallback(() => {
-    if (hideTimeoutRef.current) {
-      clearTimeout(hideTimeoutRef.current);
-      hideTimeoutRef.current = null;
-    }
-  }, []);
-
-  // Handle popup closure
-  const handleClose = useCallback(() => {
-    cleanupTimers();
-    setIsVisible(false);
-    hideTimeoutRef.current = Number(
-      setTimeout(() => {
-        setShouldRender(false);
-        onClose();
-      }, 300), // Matches closing animation duration
-    );
-  }, [cleanupTimers, onClose]);
-
-  // Sync popup visibility and animation with show prop
-  useEffect(() => {
-    if (show) {
-      cleanupTimers();
-      setShouldRender(true);
-      setIsVisible(true);
-      setAnimationKey((prev) => prev + 1); // Increment key to restart animation
-    } else if (isVisible) {
-      handleClose();
-    }
-    return cleanupTimers;
-  }, [show, cleanupTimers, handleClose, isVisible]);
 
   const handleManualClose = useCallback(() => {
-    handleClose();
-  }, [handleClose]);
+    onClose();
+  }, [onClose]);
 
   const handleViewCart = useCallback(() => {
-    cleanupTimers();
-    setIsVisible(false);
-    hideTimeoutRef.current = Number(
-      setTimeout(() => {
-        setShouldRender(false);
-        onClose();
-        router.push("/cart");
-      }, 300),
-    );
-  }, [cleanupTimers, onClose, router]);
+    onClose();
+    router.push("/cart");
+  }, [onClose, router]);
 
   const handleBackdropClick = useCallback(() => {
     if (isMobile) {
@@ -101,7 +49,7 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
     }
   }, [isMobile, handleManualClose]);
 
-  if (!shouldRender) {
+  if (!show) {
     return null;
   }
 
@@ -109,10 +57,7 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
     <>
       {isMobile && (
         <div
-          className={cn(
-            "fixed inset-0 bg-black/20 z-40 transition-opacity duration-300",
-            isVisible ? "opacity-100" : "opacity-0",
-          )}
+          className="fixed inset-0 z-40 transition-opacity duration-300"
           onClick={handleBackdropClick}
         />
       )}
@@ -122,13 +67,13 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
           isMobile
             ? cn(
                 "left-4 right-4 bottom-4 transform",
-                isVisible
+                show
                   ? "translate-y-0 opacity-100"
                   : "translate-y-full opacity-0",
               )
             : cn(
                 "top-20 right-4 w-80 transform",
-                isVisible
+                show
                   ? "translate-x-0 opacity-100 scale-100"
                   : "translate-x-full opacity-0 scale-95",
               ),
@@ -148,6 +93,7 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
               </h4>
             </div>
             <button
+              type="button"
               onClick={handleManualClose}
               className="p-1 transition-colors rounded-full hover:bg-gray-100 active:bg-gray-200"
               aria-label="Đóng"
@@ -226,16 +172,8 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
         </div>
         <div className="h-1 bg-gray-100">
           <div
-            key={animationKey} // Key changes to restart animation
-            className={cn(
-              "h-full bg-gradient-to-r from-green-400 to-green-600",
-              isVisible && "animate-progress",
-            )}
-            onAnimationEnd={() => {
-              if (isVisible) {
-                handleClose();
-              }
-            }}
+            className="h-full transition-all duration-75 ease-linear bg-gradient-to-r from-green-400 to-green-600"
+            style={{ width: `${progress}%` }}
           />
         </div>
       </div>

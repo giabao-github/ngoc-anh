@@ -36,6 +36,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
     quantity,
     ratingStats,
     showNotification,
+    progress,
   } = useProductView(slug);
 
   if (!productData) {
@@ -43,7 +44,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
   }
 
   const router = useRouter();
-  const [showQuickView, setShowQuickView] = useState(false);
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
 
   useEffect(() => {
@@ -82,6 +82,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
           quantity={quantity}
           ratingStats={ratingStats}
           showNotification={showNotification}
+          progress={progress}
         />
       </>
     );
@@ -93,8 +94,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
         router={router}
         isFavorite={favorites.has(product.id)}
         onToggleFavorite={toggleFavorite}
-        showQuickView={showQuickView}
-        setShowQuickView={setShowQuickView}
         cartQuantity={cartQuantity}
         handleAddToCart={() => handleAddToCart(true)}
         handleCloseNotification={handleCloseNotification}
@@ -104,6 +103,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
         quantity={quantity}
         ratingStats={ratingStats}
         showNotification={showNotification}
+        progress={progress}
       />
     </>
   );

@@ -49,6 +49,7 @@ interface ProductViewLayoutProps {
   showNotification: boolean;
   notificationFlag: string;
   handleCloseNotification: () => void;
+  progress: number;
 }
 
 export const ProductViewLayout: React.FC<ProductViewLayoutProps> = ({
@@ -75,6 +76,7 @@ export const ProductViewLayout: React.FC<ProductViewLayoutProps> = ({
   showNotification,
   notificationFlag,
   handleCloseNotification,
+  progress,
 }) => {
   if (!product) {
     return <ProductError />;
@@ -94,6 +96,7 @@ export const ProductViewLayout: React.FC<ProductViewLayoutProps> = ({
           quantity={quantity}
           cartQuantity={cartQuantity}
           onClose={handleCloseNotification}
+          progress={progress}
         />
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-12 md:mt-12">

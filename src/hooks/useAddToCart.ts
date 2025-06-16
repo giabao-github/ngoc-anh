@@ -1,4 +1,5 @@
 import { RefObject, useCallback, useMemo } from "react";
+import React from "react";
 
 import { toast } from "sonner";
 
@@ -47,23 +48,17 @@ export const useAddToCart = (
   const addToCart = useCallback(
     (quantity: number, skipAnimation: boolean = false) => {
       if (!product) {
-        toast.error("Không thể thêm sản phẩm vào giỏ hàng", {
-          id: ToastIds.PRODUCT_NOT_FOUND_ERROR,
-        });
+        toast.error("Không thể thêm sản phẩm vào giỏ hàng");
         return;
       }
 
       if (availableQuantity === 0) {
-        toast.error("Đã đạt số lượng mua tối đa của sản phẩm này", {
-          id: ToastIds.PRODUCT_MAX_QTY_ERROR,
-        });
+        toast.warning("Đã đạt số lượng mua tối đa của sản phẩm này");
         return;
       }
 
       if (quantity > availableQuantity) {
-        toast.error("Số lượng bạn chọn vượt quá số lượng có sẵn", {
-          id: ToastIds.EXCEED_STOCK_ERROR,
-        });
+        toast.warning("Số lượng bạn chọn vượt quá số lượng có sẵn");
         return;
       }
 
@@ -73,6 +68,7 @@ export const useAddToCart = (
           item.id === product.id && item.name === product.name,
       );
       const itemToAdd = createCartItem(product, quantity);
+      const flag = existingIndex !== -1 ? "update" : "add";
 
       const updateLocalCart = () => {
         if (existingIndex !== -1) {
@@ -90,22 +86,60 @@ export const useAddToCart = (
       try {
         // Animate and show notification
         if (!skipAnimation) {
-          const cancelAnimation = animateAddToCart(
+          const startAnimation = animateAddToCart(
             imageRef,
             cartIconRef,
             isMobile,
           );
-          showNotificationWithTimeout(existingIndex !== -1 ? "update" : "add");
+          showNotificationWithTimeout(flag);
 
           // Update cart after animation delay and cleanup animation
           setTimeout(() => {
             updateLocalCart();
-            if (typeof cancelAnimation === "function") {
-              cancelAnimation();
+            if (typeof startAnimation === "function") {
+              startAnimation();
             }
           }, 1000);
+        } else if (isMobile) {
+          const message =
+            flag === "add" ? "Đã thêm vào giỏ hàng" : "Đã cập nhật giỏ hàng";
+
+          const updatedCartQuantity =
+            existingIndex !== -1
+              ? existingCart[existingIndex].quantity + quantity
+              : quantity;
+
+          const price = (itemToAdd.price * quantity).toLocaleString("vi-VN");
+          const totalPrice = (
+            itemToAdd.price * updatedCartQuantity
+          ).toLocaleString("vi-VN");
+
+          toast.success(message, {
+            description: React.createElement(
+              "div",
+              { className: "flex flex-col gap-0.5" },
+              [
+                React.createElement(
+                  "span",
+                  { className: "font-medium", key: "name" },
+                  itemToAdd.name,
+                ),
+                React.createElement(
+                  "span",
+                  { key: "quantity" },
+                  `Số lượng: ${quantity} (tổng trong giỏ: ${updatedCartQuantity})`,
+                ),
+                React.createElement(
+                  "span",
+                  { key: "price" },
+                  `Giá: ${price}đ (tổng cộng: ${totalPrice}đ)`,
+                ),
+              ],
+            ),
+          });
+          updateLocalCart();
         } else {
-          showNotificationWithTimeout(existingIndex !== -1 ? "update" : "add");
+          showNotificationWithTimeout(flag);
           updateLocalCart();
         }
       } catch (error) {
