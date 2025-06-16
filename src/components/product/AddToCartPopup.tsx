@@ -21,17 +21,7 @@ interface AddToCartPopupProps {
   onClose: () => void;
   progress: number;
 }
-const styles = `
-@keyframes progress {
-  from { width: 100%; }
-  to { width: 0%; }
-}
-`;
-if (typeof document !== "undefined") {
-  const styleSheet = document.createElement("style");
-  styleSheet.textContent = styles;
-  document.head.appendChild(styleSheet);
-}
+
 const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
   show,
   flag,
@@ -43,24 +33,20 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
 }) => {
   const router = useRouter();
   const isMobile = useIsMobile();
+
   const handleManualClose = useCallback(() => {
     onClose();
   }, [onClose]);
+
   const handleViewCart = useCallback(() => {
     onClose();
     router.push("/cart");
   }, [onClose, router]);
-  const handleBackdropClick = useCallback(
-    (e: React.MouseEvent) => {
-      if (e.target === e.currentTarget) {
-        handleManualClose();
-      }
-    },
-    [handleManualClose],
-  );
+
   if (!show) {
     return null;
   }
+
   return (
     <div
       className={cn(
@@ -164,7 +150,7 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
       <div className="h-1 bg-gray-100">
         <div
           className="h-full transition-all duration-75 ease-linear bg-gradient-to-r from-green-400 to-green-600"
-          style={{ width: `${progress}%` }}
+          style={{ width: `${Math.max(0, Math.min(progress, 100))}%` }}
         />
       </div>
     </div>
