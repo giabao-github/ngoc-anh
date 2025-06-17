@@ -127,7 +127,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
           {/* Image */}
           <Image
             src={item.image}
-            alt={`${item.name} product image`}
+            alt={`${item.name} image`}
             width={96}
             height={96}
             quality={100}
@@ -135,11 +135,10 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
             onClick={() => router.push(`/products/${item.slug}`)}
             className={cn(
               "w-24 h-24 border border-gray-300 rounded-md cursor-pointer shrink-0",
-              product.zoom ? "object-cover" : "object-contain",
+              (product.zoom?.length ?? 0) ? "object-cover" : "object-contain",
             )}
             style={{
-              backgroundColor:
-                "background" in product ? product.background : "transparent",
+              backgroundImage: product.background || "",
             }}
             role="button"
             aria-label={`View details for ${item.name}`}

@@ -3,45 +3,46 @@ import React from "react";
 export const collections = [
   {
     id: 1,
+    name: "Card Visit Thạch Âm (hộp)",
+    description: "",
+    image: "/products/card-1-transparent.png",
+  },
+  {
+    id: 2,
     name: "Card Visit Thạch Âm (card)",
     description: "",
     image: "/products/featured-card-transparent.png",
   },
   {
-    id: 2,
+    id: 3,
     name: "Huy Hiệu Thạch Âm (vàng)",
     description: "",
     image: "/products/yellow-badge-transparent.png",
   },
   {
-    id: 3,
+    id: 4,
     name: "Huy Hiệu Thạch Âm (xanh rêu)",
     description: "",
     image: "/products/green-badge-transparent.png",
   },
   {
-    id: 4,
+    id: 5,
     name: "Khăn Bandana Thạch Âm",
     description: "",
-    image: "/products/badana-transparent.png",
+    image: "/products/bandana-transparent.png",
   },
-  {
-    id: 5,
-    name: "Card Visit Thạch Âm (hộp)",
-    description: "",
-    image: "/products/card-transparent.png",
-  },
+
   {
     id: 6,
     name: "Quạt Giấy Thạch Âm - Khmer Wind",
     description: "",
-    image: "/products/hand-fan-transparent.png",
+    image: "/products/hand-fan-1-transparent.png",
   },
   {
     id: 7,
     name: "Quạt Giấy Thạch Âm - Naga Wind",
     description: "",
-    image: "/products/hand-fan-2.jpg",
+    image: "/products/hand-fan-2-transparent.png",
   },
 ];
 
@@ -50,8 +51,8 @@ export const products = [
     id: 1,
     name: "Huy Hiệu Thạch Âm - Xanh Rêu",
     images: ["/products/green-badge.png", "/products/green-badge.jpg"],
-    background: "#E9E9E9",
-    zoom: true,
+    background: "linear-gradient(to right, #e5e5e5, #e9e9e9, #eee)",
+    zoom: [],
     description: (
       <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
@@ -107,8 +108,8 @@ export const products = [
     id: 2,
     name: "Huy Hiệu Thạch Âm - Vàng Nhạt",
     images: ["/products/yellow-badge.jpeg", "/products/yellow-badge.png"],
-    background: "#E6E8E0",
-    zoom: true,
+    background: "linear-gradient(to right, #e3e3e5, #e7e7e7, #eaeaea)",
+    zoom: [],
     description: (
       <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>
@@ -164,9 +165,9 @@ export const products = [
   {
     id: 3,
     name: "Khăn Bandana Thạch Âm",
-    images: ["/products/badana-transparent.png"],
-    background: "#EEECED",
-    zoom: true,
+    images: ["/products/bandana.png"],
+    background: "linear-gradient(to right, #ebebeb, #eee, #ebebeb)",
+    zoom: [],
     description: (
       <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>"Khăn Bandana Thạch Âm: Nét Vàng Cổ Tích Giữa Làn Gió Hiện Đại."</p>
@@ -236,11 +237,13 @@ export const products = [
     id: 4,
     name: "Card Visit Thạch Âm",
     images: [
-      "/products/card-transparent.png",
-      "/products/featured-card-transparent.png",
+      "/products/card-1.png",
+      "/products/featured-card.png",
+      "/products/card-2.png",
+      "/products/card-3.png",
     ],
     background: "#797979",
-    zoom: true,
+    zoom: [2, 3],
     description: (
       <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>Giới Thiệu Bộ Card Visit "Thạch Âm: Dấu Ấn Di Sản Khmer"</p>
@@ -325,9 +328,9 @@ export const products = [
   {
     id: 5,
     name: "Quạt Tay Thạch Âm - Khmer Wind",
-    images: ["/products/hand-fan.jpeg"],
+    images: ["/products/hand-fan-1.jpeg"],
     background: "#FCFCFC",
-    zoom: false,
+    zoom: [],
     description: (
       <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>Quạt Tay Thạch Âm - Nét Đẹp Huyền Bí Từ Họa Tiết Khmer</p>
@@ -461,7 +464,7 @@ export const products = [
     name: "Quạt Tay Thạch Âm - Naga Wind",
     images: ["/products/hand-fan-2.jpg"],
     background: "#FCFCFC",
-    zoom: false,
+    zoom: [],
     description: (
       <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
         <p>Quạt Tay Thạch Âm - Nét Đẹp Huyền Bí Từ Họa Tiết Khmer</p>

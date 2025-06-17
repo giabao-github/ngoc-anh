@@ -52,6 +52,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
   const isMobile = useIsMobile();
   const [inputValue, setInputValue] = useState(quantity.toString());
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const variantLabel = product.details[0].pattern ? "Họa tiết" : "Màu sắc";
 
   // Handle add to cart with cool down
   const handleAntiSpamAddToCart = useCallback(() => {
@@ -149,7 +150,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
   return (
     <>
       {/* Color card */}
-      {product.details[0].color && (
+      {product.details[0].color && variantLabel !== "Màu sắc" && (
         <div className="mb-6 space-y-2">
           <p className="font-semibold">Màu sắc</p>
           <div
@@ -162,9 +163,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
 
       {/* Variant selector */}
       <div className="space-y-2">
-        <p className="font-semibold">
-          {product.details[0].pattern ? "Họa tiết" : "Màu sắc"}
-        </p>
+        <p className="font-semibold">{variantLabel}</p>
         <div className="flex gap-4">
           {product.details.map((detail) => (
             <button

@@ -16,6 +16,8 @@ import {
 
 import { ToastIds } from "@/constants/toastIds";
 
+import { cn } from "@/libs/utils";
+
 import { ImageData, Product } from "@/app/types";
 
 import { Skeleton } from "./skeleton";
@@ -26,7 +28,7 @@ interface ProductCarouselProps {
   imageRef?: RefObject<HTMLImageElement | null>;
   onSelect: (value: string | null) => void;
   data: ImageData[];
-  productName: string;
+  product: Product;
 }
 
 const DESKTOP_IMAGE_WIDTH = 608;
@@ -38,7 +40,7 @@ export const ProductCarousel = ({
   currentIndex,
   imageRef,
   onSelect,
-  productName,
+  product,
 }: ProductCarouselProps) => {
   const [api, setApi] = useState<CarouselApi>();
 
@@ -101,21 +103,20 @@ export const ProductCarousel = ({
                 }}
               >
                 <Image
-                  src={item.image}
-                  alt=""
-                  fill
-                  quality={10}
-                  className="absolute inset-0 object-cover select-none"
-                  aria-hidden="true"
-                />
-                <Image
                   ref={index === currentIndex ? imageRef : null}
                   src={item.image}
-                  alt={`${productName} - ${item.label || `Hình ảnh ${index + 1}`}`}
+                  alt={`${product.name} - ${item.label || `Hình ảnh ${index + 1}`}`}
                   fill
                   quality={100}
-                  sizes={`(min-width: 768px) ${DESKTOP_IMAGE_WIDTH}px`}
-                  className="object-contain transition-transform duration-300 select-none"
+                  className={cn(
+                    "w-full h-full transition-transform duration-300 select-none",
+                    (product.zoom?.length ?? 0)
+                      ? "object-cover"
+                      : "object-contain",
+                  )}
+                  style={{
+                    backgroundImage: product.background || "",
+                  }}
                 />
               </div>
               {/* Mobile image */}
@@ -126,21 +127,20 @@ export const ProductCarousel = ({
                 }}
               >
                 <Image
-                  src={item.image}
-                  alt=""
-                  fill
-                  quality={10}
-                  className="absolute inset-0 object-cover select-none"
-                  aria-hidden="true"
-                />
-                <Image
                   ref={index === currentIndex ? imageRef : null}
                   src={item.image}
-                  alt={`${productName} - ${item.label || `Hình ảnh ${index + 1}`}`}
+                  alt={`${product.name} - ${item.label || `Hình ảnh ${index + 1}`}`}
                   fill
                   quality={100}
-                  sizes={`(max-width: 767px) ${MOBILE_IMAGE_WIDTH}`}
-                  className="object-contain transition-transform duration-300 select-none"
+                  className={cn(
+                    "w-full h-full transition-transform duration-300 select-none",
+                    (product.zoom?.length ?? 0)
+                      ? "object-cover"
+                      : "object-contain",
+                  )}
+                  style={{
+                    backgroundImage: product.background || "",
+                  }}
                 />
               </div>
             </CarouselItem>

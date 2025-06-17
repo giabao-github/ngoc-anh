@@ -61,7 +61,7 @@ export const SearchView = () => {
                 }
                 className="relative flex items-center justify-center overflow-hidden border-b h-[136px] md:h-[223px] 2xl:h-[245px] cursor-pointer border-neutral-200"
                 style={{
-                  backgroundColor: product.background || "transparent",
+                  backgroundImage: product.background || "",
                 }}
               >
                 <Image

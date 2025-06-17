@@ -37,7 +37,7 @@ const ProductImages: React.FC<ProductImagesProps> = ({
             data={data}
             onSelect={(value) => setCurrentIndex(Number(value))}
             currentIndex={currentIndex}
-            productName={product.name}
+            product={product}
           />
         </div>
       </div>
@@ -48,29 +48,24 @@ const ProductImages: React.FC<ProductImagesProps> = ({
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={cn(
-              "aspect-square relative w-16 md:w-28 cursor-pointer rounded-lg overflow-hidden group",
+              "aspect-square relative w-16 md:w-28 cursor-pointer rounded-lg overflow-hidden",
               currentIndex === index
                 ? "ring-2 ring-secondary"
-                : "ring-1 ring-neutral-100",
+                : "ring-1 ring-neutral-100 hover:ring-neutral-300",
             )}
           >
             <Image
               src={img}
               alt={product.name}
               fill
-              placeholder="blur"
-              blurDataURL={img}
-              className="absolute inset-0 object-cover select-none"
-              aria-hidden="true"
-            />
-            <Image
-              src={img}
-              width={112}
-              height={112}
-              sizes="(min-width: 768px) 112px, 64px"
               quality={100}
-              alt={product.name}
-              className="relative object-contain w-full h-full"
+              className={cn(
+                "w-full h-full",
+                (product.zoom?.length ?? 0) ? "object-cover" : "object-contain",
+              )}
+              style={{
+                backgroundImage: product.background || "",
+              }}
             />
           </button>
         ))}

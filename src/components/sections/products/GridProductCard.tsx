@@ -155,7 +155,7 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
       <article className="flex flex-col h-full overflow-hidden transition-all duration-300 transform bg-white border border-gray-100 shadow-sm rounded-xl hover:shadow-xl group hover:border-blue-200 hover:-translate-y-1">
         <div
           className="relative flex-shrink-0 overflow-hidden cursor-pointer h-36 md:h-72"
-          style={{ backgroundColor: product.background }}
+          style={{ backgroundImage: product.background }}
           onClick={handleImageInteraction}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -166,7 +166,7 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className={cn(
-              "object-contain transition-all duration-500 group-hover:scale-105",
+              "object-cover transition-all duration-500 group-hover:scale-105",
               imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-110",
             )}
             onLoad={() => setImageLoaded(true)}

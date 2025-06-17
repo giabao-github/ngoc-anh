@@ -102,12 +102,13 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
               alt={product.name}
               width={64}
               height={64}
+              quality={100}
               className={cn(
                 "w-16 h-16 border border-gray-200 rounded-xl",
-                (product.zoom ?? false) ? "object-cover" : "object-contain p-1",
+                (product.zoom?.length ?? 0) ? "object-cover" : "object-contain",
               )}
               style={{
-                backgroundColor: product.background || "transparent",
+                backgroundImage: product.background || "",
               }}
             />
             <div className="absolute flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 rounded-full -top-2 -right-2">

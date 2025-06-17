@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 import { invoiceFormSchema } from "@/app/schemas";
-import { products } from "@/app/storage";
 
 // Product types
 export type Product = {
@@ -9,7 +8,7 @@ export type Product = {
   name: string;
   images: string[];
   background?: string;
-  zoom?: boolean;
+  zoom?: number[];
   description?: React.ReactNode;
   code: string;
   brand: string;

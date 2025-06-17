@@ -127,11 +127,11 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
         onClose={handleCloseNotification}
         progress={progress}
       />
-      <div className="overflow-hidden transition-all duration-300 bg-white border border-gray-100 shadow-sm rounded-xl hover:shadow-lg group">
-        <div className="flex flex-row">
+      <div className="h-48 overflow-hidden transition-all duration-300 bg-white border border-gray-100 shadow-sm rounded-xl hover:shadow-lg group">
+        <div className="flex flex-row h-full">
           <div
-            className="relative w-64 h-auto overflow-hidden cursor-pointer"
-            style={{ backgroundColor: product.background }}
+            className="relative w-64 h-full overflow-hidden cursor-pointer"
+            style={{ backgroundImage: product.background }}
           >
             <Image
               src={product.images[0]}
@@ -139,7 +139,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className={cn(
-                "object-contain transition-all duration-500 group-hover:scale-105",
+                "object-cover transition-all duration-500 group-hover:scale-105",
                 imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-110",
               )}
               onLoad={() => setImageLoaded(true)}
