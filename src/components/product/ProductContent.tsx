@@ -1,16 +1,14 @@
-import { useMemo } from "react";
-
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 import { montserrat } from "@/config/fonts";
 
 import useIsMobile from "@/hooks/useIsMobile";
-import { useProductContent } from "@/hooks/useProductContent";
 
-import { Product } from "@/types/product";
+import { ProductContent as ProductContentType } from "@/types/product";
 
-interface ProductDetailsProps {
-  product: Product;
+interface ProductContentProps {
+  content: ProductContentType;
+  isLoading: boolean;
 }
 
 interface TabConfig {
@@ -19,39 +17,48 @@ interface TabConfig {
   content: React.ReactNode;
 }
 
-const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
+export default function ProductContent({
+  content,
+  isLoading,
+}: ProductContentProps) {
   const isMobile = useIsMobile();
-  const content = useProductContent(product);
 
-  const tabs = useMemo(() => {
-    const tabConfigs: TabConfig[] = [];
+  const tabs = [
+    {
+      key: "description",
+      label: isMobile ? "CHI TIẾT" : "CHI TIẾT SẢN PHẨM",
+      content: content.description,
+    },
+    {
+      key: "instruction",
+      label: isMobile ? "HƯỚNG DẪN" : "HƯỚNG DẪN SỬ DỤNG",
+      content: content.instruction,
+    },
+    {
+      key: "note",
+      label: isMobile ? "LƯU Ý" : "LƯU Ý QUAN TRỌNG",
+      content: content.note,
+    },
+  ].filter((tab) => tab.content);
 
-    if (content.description) {
-      tabConfigs.push({
-        key: "description",
-        label: isMobile ? "CHI TIẾT" : "CHI TIẾT SẢN PHẨM",
-        content: content.description,
-      });
-    }
+  if (isLoading) {
+    return (
+      <div className="mx-2 md:mx-0 md:pb-20">
+        <div className="space-y-4 animate-pulse">
+          <div className="w-1/3 h-8 bg-gray-200" />
+          <div className="space-y-2">
+            <div className="w-full h-4 bg-gray-200" />
+            <div className="w-5/6 h-4 bg-gray-200" />
+            <div className="w-4/6 h-4 bg-gray-200" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-    if (content.instruction) {
-      tabConfigs.push({
-        key: "instruction",
-        label: isMobile ? "HƯỚNG DẪN" : "HƯỚNG DẪN SỬ DỤNG",
-        content: content.instruction,
-      });
-    }
-
-    if (content.note) {
-      tabConfigs.push({
-        key: "note",
-        label: isMobile ? "LƯU Ý" : "LƯU Ý QUAN TRỌNG",
-        content: content.note,
-      });
-    }
-
-    return tabConfigs;
-  }, [content, isMobile]);
+  if (tabs.length === 0) {
+    return null;
+  }
 
   return (
     <TabGroup className="mx-2 md:mx-0 md:pb-20">
@@ -81,5 +88,4 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
       </TabPanels>
     </TabGroup>
   );
-};
-export default ProductDetails;
+}

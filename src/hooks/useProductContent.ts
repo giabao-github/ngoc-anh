@@ -5,29 +5,27 @@ import { Product, ProductContent } from "@/types/product";
 
 export const useProductContent = (product: Product): ProductContent => {
   return useMemo(() => {
-    const content: ProductContent = {};
+    const result: ProductContent = {};
+    const keyMap: Record<
+      keyof Pick<Product, "descriptionKey" | "instructionKey" | "noteKey">,
+      keyof ProductContent
+    > = {
+      descriptionKey: "description",
+      instructionKey: "instruction",
+      noteKey: "note",
+    };
 
-    if (product.descriptionKey) {
-      const productContent = getProductContent(product.descriptionKey);
-      if (productContent.description) {
-        content.description = productContent.description;
+    (Object.keys(keyMap) as Array<keyof typeof keyMap>).forEach((k) => {
+      const slug = product[k];
+      if (!slug) {
+        return;
       }
-    }
-
-    if (product.instructionKey) {
-      const productContent = getProductContent(product.instructionKey);
-      if (productContent.instruction) {
-        content.instruction = productContent.instruction;
+      const c = getProductContent(slug);
+      const field = keyMap[k];
+      if (c[field]) {
+        result[field] = c[field];
       }
-    }
-
-    if (product.noteKey) {
-      const productContent = getProductContent(product.noteKey);
-      if (productContent.note) {
-        content.note = productContent.note;
-      }
-    }
-
-    return content;
+    });
+    return result;
   }, [product.descriptionKey, product.instructionKey, product.noteKey]);
 };

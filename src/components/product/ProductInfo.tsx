@@ -105,5 +105,4 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
     </>
   );
 };
-
 export default ProductInfo;

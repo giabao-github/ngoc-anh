@@ -362,5 +362,5 @@ export const productContentMap: Record<string, ProductContent> = {
 };
 
 export const getProductContent = (slug: string): ProductContent => {
-  return productContentMap[slug] || {};
+  return productContentMap[slug] ?? Object.freeze({});
 };
