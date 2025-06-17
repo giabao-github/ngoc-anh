@@ -11,7 +11,7 @@ import Header from "@/components/sections/header/Header";
 import { formatPrice } from "@/libs/productUtils";
 import { searchProducts } from "@/libs/searchUtils";
 
-import { Product } from "@/app/types";
+import { Product } from "@/types/invoice";
 
 export const SearchView = () => {
   const router = useRouter();
@@ -61,7 +61,7 @@ export const SearchView = () => {
                 }
                 className="relative flex items-center justify-center overflow-hidden border-b h-[136px] md:h-[223px] 2xl:h-[245px] cursor-pointer border-neutral-200"
                 style={{
-                  backgroundImage: product.background || "",
+                  background: product.background || "",
                 }}
               >
                 <Image

@@ -16,7 +16,7 @@ import { calculateRatingStats } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
 import { products } from "@/app/storage";
-import { Product } from "@/app/types";
+import { Product } from "@/types/invoice";
 
 const ROWS_PER_CLICK = 2;
 const PRODUCTS_PER_ROW = { mobile: 1, tablet: 2, desktop: 3, xl: 4 };

@@ -10,7 +10,7 @@ import RatingSection from "@/components/product/RatingSection";
 import Footer from "@/components/sections/footer/Footer";
 import Header from "@/components/sections/header/Header";
 
-import { ImageData, Product } from "@/app/types";
+import { ImageData, Product } from "@/types/invoice";
 
 interface ProductViewLayoutProps {
   product: Product | undefined;

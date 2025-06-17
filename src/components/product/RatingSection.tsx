@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import RatingBar from "@/components/product/RatingBar";
 import RatingInput from "@/components/product/RatingInput";
 
-import { Product } from "@/app/types";
+import { Product } from "@/types/invoice";
 
 interface RatingSectionProps {
   product: Product;

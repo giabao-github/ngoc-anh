@@ -4,7 +4,7 @@ import { toast } from "sonner";
 
 import { ToastIds } from "@/constants/toastIds";
 
-import { Product } from "@/app/types";
+import { Product } from "@/types/invoice";
 
 export const useProductState = (
   product: Product | undefined,

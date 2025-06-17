@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 
 import { cn } from "@/libs/utils";
 
-import { ImageData, Product } from "@/app/types";
+import { ImageData, Product } from "@/types/invoice";
 
 interface ProductImagesProps {
   product: Product;
@@ -64,7 +64,7 @@ const ProductImages: React.FC<ProductImagesProps> = ({
                 (product.zoom?.length ?? 0) ? "object-cover" : "object-contain",
               )}
               style={{
-                backgroundImage: product.background || "",
+                background: product.background || "",
               }}
             />
           </button>

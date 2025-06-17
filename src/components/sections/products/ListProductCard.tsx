@@ -6,15 +6,14 @@ import Image from "next/image";
 import { toast } from "sonner";
 
 import AddToCartPopup from "@/components/product/AddToCartPopup";
+import ProductCard from "@/components/sections/products/ProductCard";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
 import { formatPrice, getOriginalPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
-import { Product } from "@/app/types";
-
-import ProductCard from "./ProductCard";
+import { Product } from "@/types/invoice";
 
 interface ListProductCardProps {
   // Product
@@ -131,7 +130,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
         <div className="flex flex-row h-full">
           <div
             className="relative w-64 h-full overflow-hidden cursor-pointer"
-            style={{ backgroundImage: product.background }}
+            style={{ background: product.background }}
           >
             <Image
               src={product.images[0]}

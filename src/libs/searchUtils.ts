@@ -3,7 +3,7 @@ import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.
 import { formatText, normalizeText } from "@/libs/textUtils";
 
 import { products } from "@/app/storage";
-import { Product } from "@/app/types";
+import { Product } from "@/types/invoice";
 
 export interface SearchResult {
   products: Product[];

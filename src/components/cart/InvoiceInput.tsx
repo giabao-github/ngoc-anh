@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { sanitizeInputOnBlur, sanitizeInputWithLevel } from "@/libs/textUtils";
 import { cn } from "@/libs/utils";
 
-import { SanitizeLevel } from "@/app/types";
+import { SanitizeLevel } from "@/types/invoice";
 
 interface InvoiceInputProps {
   name:

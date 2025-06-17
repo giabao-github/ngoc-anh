@@ -10,7 +10,7 @@ import {
   findProductBySlug,
 } from "@/libs/productUtils";
 
-import { ImageData, Product } from "@/app/types";
+import { ImageData, Product } from "@/types/invoice";
 
 export const useProductView = (slug: string) => {
   const product: Product | undefined = useMemo(

@@ -12,7 +12,7 @@ import { montserrat } from "@/config/fonts";
 import { formatPrice, getOriginalPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
-import { Product } from "@/app/types";
+import { Product } from "@/types/invoice";
 
 interface ProductInfoProps {
   product: Product;

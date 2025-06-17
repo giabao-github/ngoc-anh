@@ -9,7 +9,7 @@ import ListProductCard from "@/components/sections/products/ListProductCard";
 
 import { useProductView } from "@/hooks/useProductView";
 
-import { Product } from "@/app/types";
+import { Product } from "@/types/invoice";
 
 interface ProductCardProps {
   product: Product;

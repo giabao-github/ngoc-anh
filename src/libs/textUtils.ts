@@ -9,7 +9,7 @@ import {
   WHITESPACE_REGEX,
 } from "@/constants/regexes";
 
-import { SanitizeLevel } from "@/app/types";
+import { SanitizeLevel } from "@/types/invoice";
 
 export const sanitizeName = (input: string, maxLength = 255): string => {
   // Remove common kaomoji and emoticon patterns using pre-compiled regex

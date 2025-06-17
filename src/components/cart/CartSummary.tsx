@@ -15,11 +15,7 @@ const CartSummary = () => {
   const router = useRouter();
   const { totalPrice } = useCart();
 
-  // Memoize formatted price
-  const formattedTotalPrice = useMemo(
-    () => formatPrice(totalPrice || 0),
-    [totalPrice],
-  );
+  const formattedTotalPrice = formatPrice(totalPrice || 0);
 
   return (
     <div className="w-full lg:w-1/3 md:mt-8">

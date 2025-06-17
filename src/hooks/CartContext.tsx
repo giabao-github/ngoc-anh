@@ -17,7 +17,8 @@ import { ToastIds } from "@/constants/toastIds";
 import { getLocalCart } from "@/libs/cartUtils";
 
 import { products } from "@/app/storage";
-import { CartItem, Product } from "@/app/types";
+import { CartItem } from "@/types/cart";
+import { Product } from "@/types/invoice";
 
 interface CartContextType {
   cartItems: CartItem[] | undefined;

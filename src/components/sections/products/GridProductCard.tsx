@@ -23,7 +23,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { formatPrice, getOriginalPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
-import { Product } from "@/app/types";
+import { Product } from "@/types/invoice";
 
 interface GridProductCardProps {
   // Product
@@ -155,7 +155,7 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
       <article className="flex flex-col h-full overflow-hidden transition-all duration-300 transform bg-white border border-gray-100 shadow-sm rounded-xl hover:shadow-xl group hover:border-blue-200 hover:-translate-y-1">
         <div
           className="relative flex-shrink-0 overflow-hidden cursor-pointer h-36 md:h-72"
-          style={{ backgroundImage: product.background }}
+          style={{ background: product.background }}
           onClick={handleImageInteraction}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}

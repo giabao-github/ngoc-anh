@@ -14,7 +14,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 
 import { cn } from "@/libs/utils";
 
-import { Product, ProductDetail } from "@/app/types";
+import { Product, ProductDetail } from "@/types/invoice";
 
 interface PurchaseSectionProps {
   product: Product;

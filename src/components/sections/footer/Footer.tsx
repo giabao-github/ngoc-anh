@@ -4,7 +4,7 @@ import { HiOutlineMapPin } from "react-icons/hi2";
 
 import Image from "next/image";
 
-import BackToTopButton from "./BackToTopButton";
+import BackToTopButton from "@/components/sections/footer/BackToTopButton";
 
 const currentYear = new Date().getFullYear();
 

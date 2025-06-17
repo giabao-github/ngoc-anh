@@ -13,14 +13,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { ToastIds } from "@/constants/toastIds";
 
 import { cn } from "@/libs/utils";
 
-import { ImageData, Product } from "@/app/types";
-
-import { Skeleton } from "./skeleton";
+import { ImageData, Product } from "@/types/product";
 
 interface ProductCarouselProps {
   isLoading?: boolean;
@@ -71,7 +70,7 @@ export const ProductCarousel = ({
     onSelectHandler();
 
     return () => {
-      api && api.off("select", onSelectHandler);
+      api?.off("select", onSelectHandler);
     };
   }, [api, onSelect]);
 
@@ -115,7 +114,7 @@ export const ProductCarousel = ({
                       : "object-contain",
                   )}
                   style={{
-                    backgroundImage: product.background || "",
+                    background: product.background || "",
                   }}
                 />
               </div>
@@ -139,7 +138,7 @@ export const ProductCarousel = ({
                       : "object-contain",
                   )}
                   style={{
-                    backgroundImage: product.background || "",
+                    background: product.background || "",
                   }}
                 />
               </div>

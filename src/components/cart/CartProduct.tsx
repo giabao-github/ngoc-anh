@@ -18,7 +18,8 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { formatPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
-import { CartItem, Product } from "@/app/types";
+import { CartItem } from "@/types/cart";
+import { Product } from "@/types/invoice";
 
 interface CartProductProps {
   item: CartItem;
@@ -138,7 +139,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
               (product.zoom?.length ?? 0) ? "object-cover" : "object-contain",
             )}
             style={{
-              backgroundImage: product.background || "",
+              background: product.background || "",
             }}
             role="button"
             aria-label={`View details for ${item.name}`}

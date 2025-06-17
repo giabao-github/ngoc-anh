@@ -11,7 +11,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { formatPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
-import { Product } from "@/app/types";
+import { Product } from "@/types/invoice";
 
 interface AddToCartPopupProps {
   show: boolean;
@@ -108,7 +108,7 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
                 (product.zoom?.length ?? 0) ? "object-cover" : "object-contain",
               )}
               style={{
-                backgroundImage: product.background || "",
+                background: product.background || "",
               }}
             />
             <div className="absolute flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 rounded-full -top-2 -right-2">

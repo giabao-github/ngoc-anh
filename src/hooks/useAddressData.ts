@@ -4,7 +4,7 @@ import { toast } from "sonner";
 
 import { ToastIds } from "@/constants/toastIds";
 
-import { AddressData, District, Province, Ward } from "@/app/types";
+import { AddressData, District, Province, Ward } from "@/types/invoice";
 
 const FETCH_TIMEOUT = 10000;
 const CACHE_TTL = 1000 * 60 * 60;

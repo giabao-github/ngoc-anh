@@ -1,5 +1,6 @@
 import { products } from "@/app/storage";
-import { CartItem, Product } from "@/app/types";
+import { CartItem } from "@/types/cart";
+import { Product } from "@/types/invoice";
 
 export const findProductBySlug = (slug: string) =>
   products.find((item) => item.details[0].slug === slug);
