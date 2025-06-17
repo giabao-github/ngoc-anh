@@ -5,8 +5,9 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { montserrat } from "@/config/fonts";
 
 import useIsMobile from "@/hooks/useIsMobile";
+import { useProductContent } from "@/hooks/useProductContent";
 
-import { Product } from "@/app/types";
+import { Product } from "@/types/product";
 
 interface ProductDetailsProps {
   product: Product;
@@ -20,48 +21,37 @@ interface TabConfig {
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   const isMobile = useIsMobile();
+  const content = useProductContent(product);
 
   const tabs = useMemo(() => {
     const tabConfigs: TabConfig[] = [];
 
-    if ("description" in product) {
+    if (content.description) {
       tabConfigs.push({
         key: "description",
         label: isMobile ? "CHI TIẾT" : "CHI TIẾT SẢN PHẨM",
-        content: product.description,
+        content: content.description,
       });
     }
 
-    if ("instruction" in product) {
+    if (content.instruction) {
       tabConfigs.push({
         key: "instruction",
         label: isMobile ? "HƯỚNG DẪN" : "HƯỚNG DẪN SỬ DỤNG",
-        content: product.instruction,
-      });
-    } else {
-      tabConfigs.push({
-        key: "instruction",
-        label: isMobile ? "HƯỚNG DẪN" : "HƯỚNG DẪN SỬ DỤNG",
-        content: (
-          <ul className="space-y-1 text-sm text-gray-700 list-disc list-inside">
-            <li>Vệ sinh bằng khăn mềm, tránh va đập mạnh.</li>
-            <li>Không dùng hóa chất tẩy rửa mạnh.</li>
-            <li>Bảo quản nơi khô ráo, tránh ánh nắng trực tiếp.</li>
-          </ul>
-        ),
+        content: content.instruction,
       });
     }
 
-    if ("note" in product) {
+    if (content.note) {
       tabConfigs.push({
         key: "note",
         label: isMobile ? "LƯU Ý" : "LƯU Ý QUAN TRỌNG",
-        content: product.note,
+        content: content.note,
       });
     }
 
     return tabConfigs;
-  }, [product, isMobile]);
+  }, [content, isMobile]);
 
   return (
     <TabGroup className="mx-2 md:mx-0 md:pb-20">
@@ -92,5 +82,4 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     </TabGroup>
   );
 };
-
 export default ProductDetails;

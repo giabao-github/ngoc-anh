@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
 import { useRouter } from "next/navigation";
@@ -8,9 +9,13 @@ import { montserrat } from "@/config/fonts";
 
 import { useCart } from "@/hooks/useCart";
 
+import { formatPrice } from "@/libs/productUtils";
+
 const CartSummary = () => {
   const router = useRouter();
   const { totalPrice } = useCart();
+
+  const formattedTotalPrice = formatPrice(totalPrice || 0);
 
   return (
     <div className="w-full lg:w-1/3 md:mt-8">
@@ -21,7 +26,7 @@ const CartSummary = () => {
             Tạm tính
           </span>
           <span className="text-sm font-semibold tracking-wider text-gray-500 md:text-base">
-            {totalPrice?.toLocaleString() || 0}₫
+            {formattedTotalPrice}
           </span>
         </div>
         <Separator color="#BB9244" opacity={40} />
@@ -30,7 +35,7 @@ const CartSummary = () => {
         >
           <span className="text-base tracking-wide md:text-lg">TỔNG CỘNG</span>
           <span className="text-base tracking-wider md:text-lg">
-            {totalPrice?.toLocaleString() || 0}₫
+            {formattedTotalPrice}
           </span>
         </div>
 

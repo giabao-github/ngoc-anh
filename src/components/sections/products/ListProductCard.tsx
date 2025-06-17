@@ -1,18 +1,19 @@
 import { useCallback, useMemo, useState } from "react";
-import { MdOutlineDiscount } from "react-icons/md";
 
-import { Eye, Heart, ShoppingCart, Star, Zap } from "lucide-react";
+import { Eye, Heart, ShoppingCart, Star } from "lucide-react";
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import AddToCartPopup from "@/components/product/AddToCartPopup";
+import ProductCard from "@/components/sections/products/ProductCard";
 
-import { calculateRatingStats, getDiscountPrice } from "@/libs/productUtils";
+import useIsMobile from "@/hooks/useIsMobile";
+
+import { formatPrice, getOriginalPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
-import { Product } from "@/app/types";
+import { Product } from "@/types/invoice";
 
 interface ListProductCardProps {
   // Product
@@ -22,7 +23,10 @@ interface ListProductCardProps {
   // State
   quantity: number;
   isFavorite: boolean;
-  ratingStats: { totalReviews: number; averageRating: number };
+  ratingStats: {
+    totalReviews: number;
+    displayRating: string;
+  };
 
   // Cart state
   cartQuantity: number;
@@ -54,8 +58,23 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
   onToggleFavorite,
   progress,
 }) => {
+  const isMobile = useIsMobile();
   const favoriteKey = `favorite-${product.id}`;
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [showQuickView, setShowQuickView] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  // Memoize formatted prices
+  const formattedPrice = useMemo(
+    () => formatPrice(product.details[0].price),
+    [product.details[0].price],
+  );
+  const formattedOriginalPrice = useMemo(() => {
+    if ("discount" in product.details[0].badge) {
+      return getOriginalPrice(product);
+    }
+    return null;
+  }, [product]);
 
   const handleFavoriteToggle = useCallback(
     (e: React.MouseEvent) => {
@@ -92,6 +111,10 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
     [handleAddToCart],
   );
 
+  if (isMobile) {
+    return <ProductCard product={product} viewMode="grid" />;
+  }
+
   return (
     <>
       <AddToCartPopup
@@ -103,11 +126,11 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
         onClose={handleCloseNotification}
         progress={progress}
       />
-      <div className="overflow-hidden transition-all duration-300 bg-white border border-gray-100 shadow-sm rounded-xl hover:shadow-lg group">
-        <div className="flex flex-row">
+      <div className="h-48 overflow-hidden transition-all duration-300 bg-white border border-gray-100 shadow-sm rounded-xl hover:shadow-lg group">
+        <div className="flex flex-row h-full">
           <div
-            className="relative w-64 h-auto overflow-hidden cursor-pointer"
-            style={{ backgroundColor: product.background }}
+            className="relative w-64 h-full overflow-hidden cursor-pointer"
+            style={{ background: product.background }}
           >
             <Image
               src={product.images[0]}
@@ -115,7 +138,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className={cn(
-                "object-contain transition-all duration-500 group-hover:scale-105",
+                "object-cover transition-all duration-500 group-hover:scale-105",
                 imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-110",
               )}
               onLoad={() => setImageLoaded(true)}
@@ -172,15 +195,21 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
                   <span className="mr-2 text-sm font-medium text-blue-600 truncate">
                     {product.category}
                   </span>
-                  <div className="flex items-center flex-shrink-0 gap-1">
-                    <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                    <span className="text-sm font-medium">
-                      {ratingStats.averageRating}
-                    </span>
+                  {ratingStats.totalReviews > 0 ? (
+                    <div className="flex items-center flex-shrink-0 gap-1">
+                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                      <span className="text-sm font-medium">
+                        {ratingStats.displayRating}
+                      </span>
+                      <span className="inline text-sm text-gray-500">
+                        ({ratingStats.totalReviews} đánh giá)
+                      </span>
+                    </div>
+                  ) : (
                     <span className="inline text-sm text-gray-500">
-                      ({ratingStats.totalReviews} đánh giá)
+                      Chưa có đánh giá
                     </span>
-                  </div>
+                  )}
                 </div>
 
                 <h3
@@ -208,11 +237,11 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
               <div className="flex items-center justify-between">
                 <div className="flex flex-row items-center gap-2">
                   <div className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">
-                    {getDiscountPrice(product)}
+                    {formattedPrice}
                   </div>
-                  {"discount" in product.details[0].badge && (
-                    <div className="text-sm text-gray-400 line-through ">
-                      {product.details[0].price.toLocaleString("vi-VN")}đ
+                  {formattedOriginalPrice && (
+                    <div className="text-sm text-gray-400 line-through">
+                      {formattedOriginalPrice}
                     </div>
                   )}
                 </div>

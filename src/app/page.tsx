@@ -6,7 +6,7 @@ import Collection from "@/components/sections/Collection";
 import Hero from "@/components/sections/Hero";
 import Footer from "@/components/sections/footer/Footer";
 import Header from "@/components/sections/header/Header";
-import UpdatedProducts from "@/components/sections/products/UpdatedProducts";
+import Products from "@/components/sections/products/Products";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
@@ -56,7 +56,7 @@ const App = () => {
       />
       <Hero />
       <Collection collectionRef={collectionRef} />
-      <UpdatedProducts productsRef={productsRef} />
+      <Products productsRef={productsRef} />
       <Footer aboutRef={aboutRef} />
     </div>
   );

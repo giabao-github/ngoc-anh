@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { FaTrashCan } from "react-icons/fa6";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { useSwipeable } from "react-swipeable";
@@ -12,14 +12,14 @@ import { Input } from "@/components/ui/input";
 
 import { montserrat } from "@/config/fonts";
 
-import { ToastIds } from "@/constants/toastIds";
-
 import { useCart } from "@/hooks/useCart";
 import useIsMobile from "@/hooks/useIsMobile";
 
+import { formatPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
-import { CartItem, Product } from "@/app/types";
+import { CartItem } from "@/types/cart";
+import { Product } from "@/types/invoice";
 
 interface CartProductProps {
   item: CartItem;
@@ -33,6 +33,12 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
   const isMobile = useIsMobile();
   const [inputValue, setInputValue] = useState(item.quantity.toString());
   const { handleRemove, handleQuantityChange } = useCart();
+
+  // Memoize formatted price
+  const formattedTotalPrice = useMemo(
+    () => formatPrice(item.price * item.quantity),
+    [item.price, item.quantity],
+  );
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => setShowDelete(true),
@@ -93,6 +99,21 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
     }
   };
 
+  const getProductDetails = () => {
+    const details = [];
+    // If pattern exists, only show pattern
+    if (product.details[0].pattern) {
+      details.push(product.details[0].pattern);
+    } else if (product.details[0].color) {
+      // Only show color if no pattern exists
+      details.push(product.details[0].color);
+    }
+    if (product.size) {
+      details.push(product.size);
+    }
+    return details.join(" / ");
+  };
+
   return (
     <div {...swipeHandlers} className="relative overflow-hidden">
       <div {...swipeHandlers} className="relative overflow-hidden min-h-24">
@@ -107,7 +128,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
           {/* Image */}
           <Image
             src={item.image}
-            alt={`${item.name} product image`}
+            alt={`${item.name} image`}
             width={96}
             height={96}
             quality={100}
@@ -115,11 +136,10 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
             onClick={() => router.push(`/products/${item.slug}`)}
             className={cn(
               "w-24 h-24 border border-gray-300 rounded-md cursor-pointer shrink-0",
-              product.zoom ? "object-cover" : "object-contain",
+              (product.zoom?.length ?? 0) ? "object-cover" : "object-contain",
             )}
             style={{
-              backgroundColor:
-                "background" in product ? product.background : "transparent",
+              background: product.background || "",
             }}
             role="button"
             aria-label={`View details for ${item.name}`}
@@ -151,9 +171,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                 </Link>
               </h3>
               <p className="text-sm text-gray-500 md:text-base">
-                {product.details[0].color.length > 0 &&
-                  `${product.details[0].color} / `}
-                {product.size || "Không xác định"}
+                {getProductDetails() || "Không xác định"}
               </p>
             </div>
 
@@ -216,7 +234,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
               <div
                 className={`w-[134px] md:w-36 text-right text-sm tracking-wide font-semibold text-orange-500 ${montserrat.className}`}
               >
-                {(item.price * item.quantity).toLocaleString()}₫
+                {formattedTotalPrice}
               </div>
             </div>
           </div>

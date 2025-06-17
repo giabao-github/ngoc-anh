@@ -14,7 +14,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 
 import { cn } from "@/libs/utils";
 
-import { Product } from "@/app/types";
+import { Product, ProductDetail } from "@/types/invoice";
 
 interface PurchaseSectionProps {
   product: Product;
@@ -52,6 +52,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
   const isMobile = useIsMobile();
   const [inputValue, setInputValue] = useState(quantity.toString());
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const variantLabel = product.details[0].pattern ? "Họa tiết" : "Màu sắc";
 
   // Handle add to cart with cool down
   const handleAntiSpamAddToCart = useCallback(() => {
@@ -130,52 +131,47 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
     }
   }, [inputValue, handleQuantityChange]);
 
-  const getSelectorValue = useCallback((selector: { color: string }) => {
-    return selector.color;
-  }, []);
+  const getSelectorValue = (detail: ProductDetail) => {
+    return detail.pattern || detail.color;
+  };
 
   const handleVariantChange = useCallback(
-    (variant: string, variantSlug: string) => {
-      setActiveSelector(variant);
-      const newUrl = `/products/${variantSlug}`;
-      if (slug !== variantSlug && window.location.pathname !== newUrl) {
-        router.replace(newUrl);
+    (variantSlug: string) => {
+      // Update URL first for immediate feedback
+      if (slug !== variantSlug) {
+        router.replace(`/products/${variantSlug}`, { scroll: false });
       }
+      // Then update the active selector
+      setActiveSelector(variantSlug);
     },
     [slug, router, setActiveSelector],
   );
 
   return (
     <>
-      {/* Color selection (legacy) */}
-      {/* {product.details[0].color && product.details[0].color.length > 0 && (
-        <div className="space-y-2">
+      {/* Color card */}
+      {product.details[0].color && variantLabel !== "Màu sắc" && (
+        <div className="mb-6 space-y-2">
           <p className="font-semibold">Màu sắc</p>
-          <div className="flex gap-4">
-            {product.details.map((detail) => (
-              <button
-                key={detail.color}
-                className={`w-fit px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:border-secondary hover:bg-secondary hover:text-white transition-colors border-secondary bg-secondary text-white ${montserrat.className}`}
-              >
-                {detail.color}
-              </button>
-            ))}
+          <div
+            className={`w-fit px-4 py-2 rounded-lg select-none border text-sm transition-colors border-primary bg-secondary text-primary ${montserrat.className}`}
+          >
+            {product.details[0].color}
           </div>
         </div>
-      )} */}
+      )}
 
       {/* Variant selector */}
       <div className="space-y-2">
-        <p className="font-semibold">{"Màu sắc"}</p>
+        <p className="font-semibold">{variantLabel}</p>
         <div className="flex gap-4">
           {product.details.map((detail) => (
             <button
-              key={getSelectorValue(detail)}
-              onClick={() =>
-                handleVariantChange(getSelectorValue(detail), detail.slug)
-              }
+              type="button"
+              key={detail.slug}
+              onClick={() => handleVariantChange(detail.slug)}
               className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:bg-secondary hover:text-primary transition-colors ${
-                activeSelector === getSelectorValue(detail)
+                activeSelector === detail.slug
                   ? "border-primary bg-secondary text-primary hover:border-primary"
                   : "border-gray-300"
               } ${montserrat.className}`}

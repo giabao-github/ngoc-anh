@@ -6,20 +6,20 @@ import { useRouter } from "next/navigation";
 import RatingBar from "@/components/product/RatingBar";
 import RatingInput from "@/components/product/RatingInput";
 
-import { Product } from "@/app/types";
+import { Product } from "@/types/invoice";
 
 interface RatingSectionProps {
   product: Product;
-  averageRating: number;
   totalReviews: number;
+  displayRating: string;
 }
 
 const LOGIN_URL = "/login?method=email";
 
 const RatingSection: React.FC<RatingSectionProps> = ({
   product,
-  averageRating,
   totalReviews,
+  displayRating,
 }) => {
   const router = useRouter();
   return (
@@ -35,11 +35,13 @@ const RatingSection: React.FC<RatingSectionProps> = ({
               <div className="flex items-center gap-3">
                 <FaStar className="text-[#F3C63F] h-6 w-6 md:w-10 md:h-10" />
                 <span className="text-xl font-bold md:text-3xl">
-                  {averageRating}
+                  {displayRating}
                 </span>
               </div>
-              <p className="text-sm text-left text-gray-700 md:text-right">
-                {totalReviews} đánh giá
+              <p className="text-sm text-left text-gray-700 md:text-right whitespace-nowrap">
+                {totalReviews === 0
+                  ? "Chưa có đánh giá"
+                  : `${totalReviews} đánh giá`}
               </p>
             </div>
 

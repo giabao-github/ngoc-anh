@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { FiCheck, FiShoppingCart, FiX } from "react-icons/fi";
 
 import Image from "next/image";
@@ -8,9 +8,10 @@ import { Button } from "@/components/ui/button";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
+import { formatPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
-import { Product } from "@/app/types";
+import { Product } from "@/types/invoice";
 
 interface AddToCartPopupProps {
   show: boolean;
@@ -34,6 +35,16 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
   const router = useRouter();
   const isMobile = useIsMobile();
 
+  // Memoize formatted prices
+  const price = useMemo(
+    () => formatPrice(product.details[0].price * quantity),
+    [product.details[0].price, quantity],
+  );
+  const totalPrice = useMemo(
+    () => formatPrice(product.details[0].price * cartQuantity),
+    [product.details[0].price, cartQuantity],
+  );
+
   const handleManualClose = useCallback(() => {
     onClose();
   }, [onClose]);
@@ -53,7 +64,7 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
         "fixed z-50 transition-all duration-300 ease-out",
         isMobile
           ? cn(
-              "left-4 right-4 bottom-4 transform",
+              "left-4 right-4 bottom-0 transform",
               show ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
             )
           : cn(
@@ -91,12 +102,13 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
               alt={product.name}
               width={64}
               height={64}
+              quality={100}
               className={cn(
                 "w-16 h-16 border border-gray-200 rounded-xl",
-                (product.zoom ?? false) ? "object-cover" : "object-contain p-1",
+                (product.zoom?.length ?? 0) ? "object-cover" : "object-contain",
               )}
               style={{
-                backgroundColor: product.background || "transparent",
+                background: product.background || "",
               }}
             />
             <div className="absolute flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 rounded-full -top-2 -right-2">
@@ -108,21 +120,20 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
               {product.name}
             </h5>
             <div className="space-y-1">
-              <p className="text-xs text-gray-500">
-                Số lượng:{" "}
-                <span className="font-medium text-gray-700">{quantity}</span>
-              </p>
-              <p className="text-xs text-gray-500">
-                Tổng trong giỏ:{" "}
-                <span className="font-medium text-gray-700">
-                  {cartQuantity}
-                </span>
-              </p>
+              {isMobile ? (
+                <p className="text-xs text-gray-500">
+                  {`Số lượng: ${quantity} (tổng trong giỏ: ${cartQuantity})`}
+                </p>
+              ) : (
+                <>
+                  <p className="text-xs text-gray-700">Số lượng: {quantity}</p>
+                  <p className="text-xs text-gray-700">
+                    Tổng trong giỏ: {cartQuantity}
+                  </p>
+                </>
+              )}
               <p className="text-sm font-semibold text-gray-900">
-                {new Intl.NumberFormat("vi-VN", {
-                  style: "currency",
-                  currency: "VND",
-                }).format(product.details[0].price * quantity)}
+                {`${price} (${totalPrice})`}
               </p>
             </div>
           </div>
@@ -142,7 +153,7 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
               "shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]",
             )}
           >
-            <FiShoppingCart className="w-4 h-4 mr-2" />
+            <FiShoppingCart className="w-4 h-4" />
             <span className="text-sm font-medium">Xem giỏ hàng</span>
           </Button>
         </div>

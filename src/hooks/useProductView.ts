@@ -10,17 +10,19 @@ import {
   findProductBySlug,
 } from "@/libs/productUtils";
 
-import { ImageData, Product } from "@/app/types";
+import { ImageData, Product } from "@/types/invoice";
 
 export const useProductView = (slug: string) => {
   const product: Product | undefined = useMemo(
     () => findProductBySlug(slug),
     [slug],
   );
+
   // Refs
   const aboutRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLDivElement | null>(null);
   const cartIconRef = useRef<HTMLDivElement | null>(null);
+
   // Custom hooks
   const notification = useNotification();
   const addToCartHook = useAddToCart(
@@ -32,7 +34,9 @@ export const useProductView = (slug: string) => {
   const productState = useProductState(
     product,
     addToCartHook.availableQuantity,
+    slug,
   );
+
   // Memoized values
   const images = useMemo(() => product?.images ?? [], [product?.images]);
   const ratingStats = useMemo(
@@ -46,16 +50,19 @@ export const useProductView = (slug: string) => {
         product?.name || "",
         product?.background || "transparent",
       ),
-    [images, product?.name],
+    [images, product?.name, product?.background],
   );
+
   // Scroll to top when slug changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
+
   // Main add to cart handler
   const handleAddToCart = (skipAnimation: boolean = false) => {
     addToCartHook.addToCart(productState.quantity, skipAnimation);
   };
+
   return {
     // Product data
     product,

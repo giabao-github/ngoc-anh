@@ -10,7 +10,7 @@ import {
   PHASE2_DURATION,
 } from "@/constants/cart";
 
-import { RawCartItem } from "@/app/types";
+import { RawCartItem } from "@/types/cart";
 
 export const getLocalCart = (): RawCartItem[] => {
   if (typeof window === "undefined") {

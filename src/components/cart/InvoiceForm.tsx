@@ -17,7 +17,7 @@ import { useAddressData } from "@/hooks/useAddressData";
 import { cn } from "@/libs/utils";
 
 import { invoiceFormSchema } from "@/app/schemas";
-import { InvoiceFormData } from "@/app/types";
+import { InvoiceFormData } from "@/types/invoice";
 
 interface InvoiceFormProps {
   contentRef: RefObject<HTMLFormElement | null>;

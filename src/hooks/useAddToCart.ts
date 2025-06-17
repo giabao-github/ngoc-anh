@@ -11,11 +11,12 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { animateAddToCart } from "@/libs/cartUtils";
 import { createCartItem, getCartFromStorage } from "@/libs/productUtils";
 
-import { CartItem, Product } from "@/app/types";
+import { CartItem } from "@/types/cart";
+import { Product } from "@/types/invoice";
 
 export const useAddToCart = (
   product: Product | undefined,
-  imageRef: RefObject<HTMLDivElement | null>,
+  imageRef: RefObject<HTMLElement | null>,
   cartIconRef: RefObject<HTMLDivElement | null>,
   showNotificationWithTimeout: (flag: string) => void,
 ) => {
@@ -100,44 +101,6 @@ export const useAddToCart = (
               startAnimation();
             }
           }, 1000);
-        } else if (isMobile) {
-          const message =
-            flag === "add" ? "Đã thêm vào giỏ hàng" : "Đã cập nhật giỏ hàng";
-
-          const updatedCartQuantity =
-            existingIndex !== -1
-              ? existingCart[existingIndex].quantity + quantity
-              : quantity;
-
-          const price = (itemToAdd.price * quantity).toLocaleString("vi-VN");
-          const totalPrice = (
-            itemToAdd.price * updatedCartQuantity
-          ).toLocaleString("vi-VN");
-
-          toast.success(message, {
-            description: React.createElement(
-              "div",
-              { className: "flex flex-col gap-0.5" },
-              [
-                React.createElement(
-                  "span",
-                  { className: "font-medium", key: "name" },
-                  itemToAdd.name,
-                ),
-                React.createElement(
-                  "span",
-                  { key: "quantity" },
-                  `Số lượng: ${quantity} (tổng trong giỏ: ${updatedCartQuantity})`,
-                ),
-                React.createElement(
-                  "span",
-                  { key: "price" },
-                  `Giá: ${price}đ (tổng cộng: ${totalPrice}đ)`,
-                ),
-              ],
-            ),
-          });
-          updateLocalCart();
         } else {
           showNotificationWithTimeout(flag);
           updateLocalCart();

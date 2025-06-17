@@ -4,7 +4,7 @@ import CartProduct from "@/components/cart/CartProduct";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 import { products } from "@/app/storage";
-import { CartItem } from "@/app/types";
+import { CartItem } from "@/types/cart";
 
 interface ProductListProps {
   cartItems: CartItem[];
