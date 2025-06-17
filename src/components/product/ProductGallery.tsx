@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Image from "next/image";
 
@@ -7,7 +7,17 @@ interface ProductGalleryProps {
 }
 
 export default function ProductGallery({ images }: ProductGalleryProps) {
-  const [selectedImage, setSelectedImage] = useState(images[0]);
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(
+    images[0],
+  );
+
+  useEffect(() => {
+    setSelectedImage(images[0]);
+  }, [images]);
+
+  if (!images || images.length === 0) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col-reverse">
@@ -15,6 +25,7 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
         <div className="grid grid-cols-4 gap-6">
           {images.map((image) => (
             <button
+              type="button"
               key={image}
               onClick={() => setSelectedImage(image)}
               className={`relative flex aspect-square cursor-pointer items-center justify-center rounded-md bg-white ${
@@ -25,8 +36,9 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
             >
               <Image
                 src={image}
-                alt="Product image"
+                alt={`Thumbnail of product – ${image.split("/").pop()}`}
                 fill
+                sizes="96px"
                 className="object-cover object-center rounded-md"
               />
             </button>
@@ -37,9 +49,10 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
       <div className="w-full aspect-square">
         <div className="relative overflow-hidden bg-gray-100 rounded-lg aspect-square">
           <Image
-            src={selectedImage}
-            alt="Selected product image"
+            src={selectedImage!}
+            alt="Enlarged product image"
             fill
+            sizes="(max-width:768px) 100vw, 512px"
             className="object-cover object-center"
             priority
           />

@@ -23,7 +23,7 @@ export default function ProductContent({
 }: ProductContentProps) {
   const isMobile = useIsMobile();
 
-  const tabs = [
+  const tabs: TabConfig[] = [
     {
       key: "description",
       label: isMobile ? "CHI TIẾT" : "CHI TIẾT SẢN PHẨM",
@@ -39,11 +39,11 @@ export default function ProductContent({
       label: isMobile ? "LƯU Ý" : "LƯU Ý QUAN TRỌNG",
       content: content.note,
     },
-  ].filter((tab) => tab.content);
+  ].filter((tab) => tab.content !== null && tab.content !== undefined);
 
   if (isLoading) {
     return (
-      <div className="mx-2 md:mx-0 md:pb-20">
+      <div className="mx-2 md:mx-0 md:pb-20" aria-busy="true" role="status">
         <div className="space-y-4 animate-pulse">
           <div className="w-1/3 h-8 bg-gray-200" />
           <div className="space-y-2">
