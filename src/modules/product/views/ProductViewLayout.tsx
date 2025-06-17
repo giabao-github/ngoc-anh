@@ -10,8 +10,6 @@ import RatingSection from "@/components/product/RatingSection";
 import Footer from "@/components/sections/footer/Footer";
 import Header from "@/components/sections/header/Header";
 
-import { useNotification } from "@/hooks/useNotification";
-
 import { ImageData, Product } from "@/app/types";
 
 interface ProductViewLayoutProps {

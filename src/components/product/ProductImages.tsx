@@ -37,6 +37,7 @@ const ProductImages: React.FC<ProductImagesProps> = ({
             data={data}
             onSelect={(value) => setCurrentIndex(Number(value))}
             currentIndex={currentIndex}
+            productName={product.name}
           />
         </div>
       </div>
@@ -55,9 +56,10 @@ const ProductImages: React.FC<ProductImagesProps> = ({
           >
             <Image
               src={img}
-              alt=""
+              alt={product.name}
               fill
-              quality={10}
+              placeholder="blur"
+              blurDataURL={img}
               className="absolute inset-0 object-cover select-none"
               aria-hidden="true"
             />

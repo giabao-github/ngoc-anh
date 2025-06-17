@@ -4,7 +4,38 @@ import { invoiceFormSchema } from "@/app/schemas";
 import { products } from "@/app/storage";
 
 // Product types
-export type Product = (typeof products)[number];
+export type Product = {
+  id: number;
+  name: string;
+  images: string[];
+  background?: string;
+  zoom?: boolean;
+  description?: React.ReactNode;
+  code: string;
+  brand: string;
+  material: string;
+  pin?: string;
+  category: string;
+  details: ProductDetail[];
+  size?: string;
+  quantity: number;
+  rating: number[];
+  instruction?: React.ReactNode;
+  note?: React.ReactNode;
+};
+
+export type ProductDetail = {
+  color: string;
+  slug: string;
+  price: number;
+  pattern?: string;
+  badge: {
+    isNew?: boolean;
+    discount?: number;
+    isReward?: boolean;
+    isBestseller?: boolean;
+  };
+};
 
 export type ImageData = {
   value?: string | undefined;
@@ -19,6 +50,7 @@ export type CartItem = {
   name: string;
   background?: string;
   color?: string;
+  pattern?: string;
   size?: string;
   volume?: string;
   slug: string;

@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Footer from "@/components/sections/footer/Footer";
 import Header from "@/components/sections/header/Header";
 
+import { formatPrice } from "@/libs/productUtils";
 import { searchProducts } from "@/libs/searchUtils";
 
 import { Product } from "@/app/types";
@@ -88,7 +89,7 @@ export const SearchView = () => {
                   {product.name}
                 </h2>
                 <p className="mt-2 font-semibold text-orange-500 md:text-xl">
-                  {product.details[0].price.toLocaleString()}₫
+                  {formatPrice(product.details[0].price)}
                 </p>
               </div>
             </div>

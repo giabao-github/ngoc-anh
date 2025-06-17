@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { FiCheck, FiShoppingCart, FiX } from "react-icons/fi";
 
 import Image from "next/image";
@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
+import { formatPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
 import { Product } from "@/app/types";
@@ -34,6 +35,16 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
   const router = useRouter();
   const isMobile = useIsMobile();
 
+  // Memoize formatted prices
+  const price = useMemo(
+    () => formatPrice(product.details[0].price * quantity),
+    [product.details[0].price, quantity],
+  );
+  const totalPrice = useMemo(
+    () => formatPrice(product.details[0].price * cartQuantity),
+    [product.details[0].price, cartQuantity],
+  );
+
   const handleManualClose = useCallback(() => {
     onClose();
   }, [onClose]);
@@ -46,11 +57,6 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
   if (!show) {
     return null;
   }
-
-  const price: string =
-    (product.details[0].price * quantity).toLocaleString("vi-VN") + "₫";
-  const totalPrice: string =
-    (product.details[0].price * cartQuantity).toLocaleString("vi-VN") + "₫";
 
   return (
     <div

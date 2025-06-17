@@ -4,7 +4,13 @@ import { CartItem, Product } from "@/app/types";
 export const findProductBySlug = (slug: string) =>
   products.find((item) => item.details[0].slug === slug);
 
-export const calculateRatingStats = (rating?: number[]) => {
+export const calculateRatingStats = (
+  rating?: number[],
+): {
+  totalReviews: number;
+  averageRating: number;
+  displayRating: string;
+} => {
   if (!rating?.length) {
     return { totalReviews: 0, averageRating: 0, displayRating: "0.0" };
   }
@@ -39,7 +45,8 @@ export const createCartItem = (
   name: product.name,
   image: product.images[0],
   background: "background" in product ? product.background : undefined,
-  color: "color" in product.details ? product.details[0].color : undefined,
+  color: product.details[0].color,
+  pattern: product.details[0].pattern,
   size: product.size,
   slug: product.details[0].slug,
   price: product.details[0].price,
@@ -61,15 +68,16 @@ export const createImageData = (
 export const getOriginalPrice = (product: Product): string => {
   const { price } = product.details[0];
 
-  const discountAmount =
-    "discount" in product.details[0].badge
-      ? product.details[0].badge.discount
-      : 0;
+  const discountAmount = product.details[0].badge?.discount ?? 0;
 
   if (discountAmount === 0) {
-    return price.toLocaleString("vi-VN") + "₫";
+    return formatPrice(price);
   }
 
   const originalPrice = Math.round((price * 100) / (100 - discountAmount));
-  return originalPrice.toLocaleString("vi-VN") + "₫";
+  return formatPrice(originalPrice);
+};
+
+export const formatPrice = (value: number): string => {
+  return value.toLocaleString("vi-VN") + "₫";
 };

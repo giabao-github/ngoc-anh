@@ -26,6 +26,7 @@ interface ProductCarouselProps {
   imageRef?: RefObject<HTMLImageElement | null>;
   onSelect: (value: string | null) => void;
   data: ImageData[];
+  productName: string;
 }
 
 const DESKTOP_IMAGE_WIDTH = 608;
@@ -37,6 +38,7 @@ export const ProductCarousel = ({
   currentIndex,
   imageRef,
   onSelect,
+  productName,
 }: ProductCarouselProps) => {
   const [api, setApi] = useState<CarouselApi>();
 
@@ -67,7 +69,7 @@ export const ProductCarousel = ({
     onSelectHandler();
 
     return () => {
-      api.off("select", onSelectHandler);
+      api && api.off("select", onSelectHandler);
     };
   }, [api, onSelect]);
 
@@ -109,7 +111,7 @@ export const ProductCarousel = ({
                 <Image
                   ref={index === currentIndex ? imageRef : null}
                   src={item.image}
-                  alt={item.label ?? ""}
+                  alt={`${productName} - ${item.label || `Hình ảnh ${index + 1}`}`}
                   fill
                   quality={100}
                   sizes={`(min-width: 768px) ${DESKTOP_IMAGE_WIDTH}px`}
@@ -134,7 +136,7 @@ export const ProductCarousel = ({
                 <Image
                   ref={index === currentIndex ? imageRef : null}
                   src={item.image}
-                  alt={item.label ?? ""}
+                  alt={`${productName} - ${item.label || `Hình ảnh ${index + 1}`}`}
                   fill
                   quality={100}
                   sizes={`(max-width: 767px) ${MOBILE_IMAGE_WIDTH}`}

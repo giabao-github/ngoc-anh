@@ -9,8 +9,9 @@ import { Product } from "@/app/types";
 export const useProductState = (
   product: Product | undefined,
   availableQuantity: number,
+  initialSlug?: string,
 ) => {
-  const [activeSelector, setActiveSelector] = useState("");
+  const [activeSelector, setActiveSelector] = useState(initialSlug || "");
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -47,15 +48,13 @@ export const useProductState = (
   // Initialize state when product changes
   useEffect(() => {
     if (product) {
-      const selector =
-        "pattern" in product.details[0]
-          ? product.details[0].pattern
-          : product.details[0].color;
-      setActiveSelector(selector);
+      if (!activeSelector) {
+        setActiveSelector(product.details[0].slug);
+      }
       setQuantity(1);
       setCurrentImageIndex(0);
     }
-  }, [product]);
+  }, [product, activeSelector]);
 
   // Quantity warning effect
   useEffect(() => {

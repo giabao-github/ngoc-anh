@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { MdOutlineDiscount } from "react-icons/md";
 
 import {
@@ -20,7 +20,7 @@ import AddToCartPopup from "@/components/product/AddToCartPopup";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { getOriginalPrice } from "@/libs/productUtils";
+import { formatPrice, getOriginalPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
 import { Product } from "@/app/types";
@@ -70,6 +70,18 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
   const [imageLoaded, setImageLoaded] = useState(false);
   const [showQuickView, setShowQuickView] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
+
+  // Memoize formatted prices
+  const formattedPrice = useMemo(
+    () => formatPrice(product.details[0].price),
+    [product.details[0].price],
+  );
+  const formattedOriginalPrice = useMemo(() => {
+    if ("discount" in product.details[0].badge) {
+      return getOriginalPrice(product);
+    }
+    return null;
+  }, [product]);
 
   const handleImageInteraction = useCallback(() => {
     if (isMobile) {
@@ -265,18 +277,24 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
             <span className="mr-2 text-[10px] font-medium text-blue-600 truncate md:text-sm">
               {product.category}
             </span>
-            <div className="flex items-center flex-shrink-0 gap-1">
-              <Star className="w-2.5 h-2.5 text-yellow-400 md:w-4 md:h-4 fill-yellow-400" />
-              <span className="text-[10px] font-medium md:text-sm">
-                {ratingStats.displayRating}
+            {ratingStats.totalReviews > 0 ? (
+              <div className="flex items-center flex-shrink-0 gap-1">
+                <Star className="w-2.5 h-2.5 text-yellow-400 md:w-4 md:h-4 fill-yellow-400" />
+                <span className="text-[10px] font-medium md:text-sm">
+                  {ratingStats.displayRating}
+                </span>
+                <span className="hidden text-sm text-gray-500 md:inline">
+                  ({ratingStats.totalReviews} đánh giá)
+                </span>
+                <span className="inline text-[10px] text-gray-500 md:hidden">
+                  ({ratingStats.totalReviews})
+                </span>
+              </div>
+            ) : (
+              <span className="inline text-[10px] md:text-sm text-gray-500">
+                Chưa có đánh giá
               </span>
-              <span className="hidden text-sm text-gray-500 md:inline">
-                ({ratingStats.totalReviews} đánh giá)
-              </span>
-              <span className="inline text-[10px] text-gray-500 md:hidden">
-                ({ratingStats.totalReviews})
-              </span>
-            </div>
+            )}
           </div>
           <div className="flex-shrink-0 mb-2 md:mb-3">
             <h3
@@ -291,11 +309,11 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
           <div className="flex items-center justify-between flex-shrink-0 mb-1 md:mb-4">
             <div className="flex flex-col gap-0.5 md:flex-row md:items-center md:gap-2">
               <div className="text-base font-bold text-transparent md:text-xl bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">
-                {product.details[0].price.toLocaleString("vi-VN")}₫
+                {formattedPrice}
               </div>
-              {"discount" in product.details[0].badge && (
+              {formattedOriginalPrice && (
                 <div className="text-xs text-gray-400 line-through md:text-sm">
-                  {getOriginalPrice(product)}
+                  {formattedOriginalPrice}
                 </div>
               )}
             </div>

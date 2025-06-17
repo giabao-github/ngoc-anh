@@ -34,6 +34,7 @@ export const useProductView = (slug: string) => {
   const productState = useProductState(
     product,
     addToCartHook.availableQuantity,
+    slug,
   );
 
   // Memoized values
@@ -49,7 +50,7 @@ export const useProductView = (slug: string) => {
         product?.name || "",
         product?.background || "transparent",
       ),
-    [images, product?.name],
+    [images, product?.name, product?.background],
   );
 
   // Scroll to top when slug changes

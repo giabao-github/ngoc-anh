@@ -31,7 +31,7 @@ const Hero = () => {
         <div className="relative h-[300px] md:h-[500px]">
           <Image
             src="/illustrations/dragon.png"
-            alt="Dragon"
+            alt="Illustration of Khmer dragon"
             fill
             className="object-contain rounded-lg select-none"
             sizes="(max-width: 768px) 100vw, 50vw"

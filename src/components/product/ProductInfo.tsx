@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FiHeart } from "react-icons/fi";
 
 import { toast } from "sonner";
@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator";
 
 import { montserrat } from "@/config/fonts";
 
-import { getOriginalPrice } from "@/libs/productUtils";
+import { formatPrice, getOriginalPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
 import { Product } from "@/app/types";
@@ -21,6 +21,16 @@ interface ProductInfoProps {
 const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
   const favoriteKey = `favorite-${product.id}`;
   const [isFavorite, setIsFavorite] = useState(false);
+
+  // Memoize formatted prices
+  const formattedPrice = useMemo(
+    () => formatPrice(product.details[0].price),
+    [product.details[0].price],
+  );
+  const formattedOriginalPrice = useMemo(
+    () => getOriginalPrice(product),
+    [product],
+  );
 
   useEffect(() => {
     const storedValue = localStorage.getItem(favoriteKey);
@@ -82,11 +92,13 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
 
       <div className="flex flex-row items-center gap-x-3 md:gap-x-5">
         <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 md:text-4xl">
-          {product.details[0].price.toLocaleString("vi-VN")}₫
+          {formattedPrice}
         </p>
-        <p className="text-gray-400 line-through md:text-xl">
-          {getOriginalPrice(product)}
-        </p>
+        {formattedOriginalPrice !== formattedPrice && (
+          <p className="text-gray-400 line-through md:text-xl">
+            {formattedOriginalPrice}
+          </p>
+        )}
       </div>
 
       <Separator color="#BB9244" opacity={40} />

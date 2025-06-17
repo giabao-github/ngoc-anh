@@ -38,8 +38,10 @@ const RatingSection: React.FC<RatingSectionProps> = ({
                   {displayRating}
                 </span>
               </div>
-              <p className="text-sm text-left text-gray-700 md:text-right">
-                {totalReviews} đánh giá
+              <p className="text-sm text-left text-gray-700 md:text-right whitespace-nowrap">
+                {totalReviews === 0
+                  ? "Chưa có đánh giá"
+                  : `${totalReviews} đánh giá`}
               </p>
             </div>
 

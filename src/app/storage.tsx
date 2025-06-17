@@ -33,9 +33,15 @@ export const collections = [
   },
   {
     id: 6,
-    name: "Quạt Giấy Thạch Âm",
+    name: "Quạt Giấy Thạch Âm - Khmer Wind",
     description: "",
     image: "/products/hand-fan-transparent.png",
+  },
+  {
+    id: 7,
+    name: "Quạt Giấy Thạch Âm - Naga Wind",
+    description: "",
+    image: "/products/hand-fan-2.jpg",
   },
 ];
 
@@ -553,7 +559,7 @@ export const products = [
         </p>
       </div>
     ),
-    code: "A001_01134034745",
+    code: "A001_01134034766",
     brand: "Thạch Âm",
     material: "Giấy cao cấp",
     category: "Quạt",
@@ -583,6 +589,6 @@ export const products = [
     ],
     size: "30 cm × 50 cm",
     quantity: 3400,
-    rating: [11, 19, 27, 83, 2360],
+    rating: [11, 19, 27, 83, 2383],
   },
 ];

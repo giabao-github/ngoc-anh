@@ -38,18 +38,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         label: isMobile ? "HƯỚNG DẪN" : "HƯỚNG DẪN SỬ DỤNG",
         content: product.instruction,
       });
-    } else {
-      tabConfigs.push({
-        key: "instruction",
-        label: isMobile ? "HƯỚNG DẪN" : "HƯỚNG DẪN SỬ DỤNG",
-        content: (
-          <ul className="space-y-1 text-sm text-gray-700 list-disc list-inside">
-            <li>Vệ sinh bằng khăn mềm, tránh va đập mạnh.</li>
-            <li>Không dùng hóa chất tẩy rửa mạnh.</li>
-            <li>Bảo quản nơi khô ráo, tránh ánh nắng trực tiếp.</li>
-          </ul>
-        ),
-      });
     }
 
     if ("note" in product) {
