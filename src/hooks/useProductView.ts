@@ -17,10 +17,12 @@ export const useProductView = (slug: string) => {
     () => findProductBySlug(slug),
     [slug],
   );
+
   // Refs
   const aboutRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLDivElement | null>(null);
   const cartIconRef = useRef<HTMLDivElement | null>(null);
+
   // Custom hooks
   const notification = useNotification();
   const addToCartHook = useAddToCart(
@@ -33,6 +35,7 @@ export const useProductView = (slug: string) => {
     product,
     addToCartHook.availableQuantity,
   );
+
   // Memoized values
   const images = useMemo(() => product?.images ?? [], [product?.images]);
   const ratingStats = useMemo(
@@ -48,14 +51,17 @@ export const useProductView = (slug: string) => {
       ),
     [images, product?.name],
   );
+
   // Scroll to top when slug changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
+
   // Main add to cart handler
   const handleAddToCart = (skipAnimation: boolean = false) => {
     addToCartHook.addToCart(productState.quantity, skipAnimation);
   };
+
   return {
     // Product data
     product,

@@ -8,15 +8,18 @@ import { useCallback, useEffect, useRef, useState } from "react";
 */
 }
 
+const POPUP_DURATION = 3000;
+const UPDATE_INTERVAL = 32;
+
 export const useNotification = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationFlag, setNotificationFlag] = useState("");
   const [progress, setProgress] = useState(100);
+
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const startTimeRef = useRef<number>(0);
-  const POPUP_DURATION = 3000;
-  const UPDATE_INTERVAL = 16;
+
   const clearTimers = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -27,16 +30,16 @@ export const useNotification = () => {
       intervalRef.current = null;
     }
   }, []);
+
   const hideNotification = useCallback(() => {
     setShowNotification(false);
     setProgress(100);
     clearTimers();
   }, [clearTimers]);
+
   const showNotificationWithTimeout = useCallback(
     (flag: string) => {
-      // Clear any existing timers
       clearTimers();
-      // Reset and show notification
       setNotificationFlag(flag);
       setShowNotification(true);
       setProgress(100);
@@ -58,10 +61,11 @@ export const useNotification = () => {
     },
     [clearTimers, hideNotification],
   );
-  // Cleanup on unmount
+
   useEffect(() => {
     return clearTimers;
   }, [clearTimers]);
+
   return {
     showNotification,
     notificationFlag,

@@ -68,29 +68,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
 
   if (viewMode === "list") {
     return (
-      <>
-        <ListProductCard
-          product={product}
-          router={router}
-          isFavorite={favorites.has(product.id)}
-          onToggleFavorite={toggleFavorite}
-          cartQuantity={cartQuantity}
-          handleAddToCart={() => handleAddToCart(true)}
-          handleCloseNotification={handleCloseNotification}
-          isOutOfStock={isOutOfStock}
-          notificationFlag={notificationFlag}
-          quantity={quantity}
-          ratingStats={ratingStats}
-          showNotification={showNotification}
-          progress={progress}
-        />
-      </>
-    );
-  }
-
-  return (
-    <>
-      <GridProductCard
+      <ListProductCard
+        product={product}
         router={router}
         isFavorite={favorites.has(product.id)}
         onToggleFavorite={toggleFavorite}
@@ -98,14 +77,31 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
         handleAddToCart={() => handleAddToCart(true)}
         handleCloseNotification={handleCloseNotification}
         isOutOfStock={isOutOfStock}
-        product={product}
         notificationFlag={notificationFlag}
         quantity={quantity}
         ratingStats={ratingStats}
         showNotification={showNotification}
         progress={progress}
       />
-    </>
+    );
+  }
+
+  return (
+    <GridProductCard
+      router={router}
+      isFavorite={favorites.has(product.id)}
+      onToggleFavorite={toggleFavorite}
+      cartQuantity={cartQuantity}
+      handleAddToCart={() => handleAddToCart(true)}
+      handleCloseNotification={handleCloseNotification}
+      isOutOfStock={isOutOfStock}
+      product={product}
+      notificationFlag={notificationFlag}
+      quantity={quantity}
+      ratingStats={ratingStats}
+      showNotification={showNotification}
+      progress={progress}
+    />
   );
 };
 

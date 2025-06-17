@@ -130,9 +130,12 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
     }
   }, [inputValue, handleQuantityChange]);
 
-  const getSelectorValue = useCallback((selector: { color: string }) => {
-    return selector.color;
-  }, []);
+  const getSelectorValue = useCallback(
+    (selector: { color: string; pattern?: string }) => {
+      return selector.pattern || selector.color;
+    },
+    [],
+  );
 
   const handleVariantChange = useCallback(
     (variant: string, variantSlug: string) => {
@@ -163,13 +166,27 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
           </div>
         </div>
       )} */}
+      {/* Color card */}
+      {"pattern" in product.details[0] && "color" in product.details[0] && (
+        <div className="mb-6 space-y-2">
+          <p className="font-semibold">Màu sắc</p>
+          <div
+            className={`w-fit px-4 py-2 rounded-lg select-none border text-sm transition-colors border-primary bg-secondary text-primary ${montserrat.className}`}
+          >
+            {product.details[0].color}
+          </div>
+        </div>
+      )}
 
       {/* Variant selector */}
       <div className="space-y-2">
-        <p className="font-semibold">{"Màu sắc"}</p>
+        <p className="font-semibold">
+          {"pattern" in product.details[0] ? "Họa tiết" : "Màu sắc"}
+        </p>
         <div className="flex gap-4">
           {product.details.map((detail) => (
             <button
+              type="button"
               key={getSelectorValue(detail)}
               onClick={() =>
                 handleVariantChange(getSelectorValue(detail), detail.slug)

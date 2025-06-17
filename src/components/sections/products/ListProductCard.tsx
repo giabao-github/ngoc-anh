@@ -1,18 +1,20 @@
-import { useCallback, useMemo, useState } from "react";
-import { MdOutlineDiscount } from "react-icons/md";
+import { useCallback, useState } from "react";
 
-import { Eye, Heart, ShoppingCart, Star, Zap } from "lucide-react";
+import { Eye, Heart, ShoppingCart, Star } from "lucide-react";
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import AddToCartPopup from "@/components/product/AddToCartPopup";
 
-import { calculateRatingStats, getDiscountPrice } from "@/libs/productUtils";
+import useIsMobile from "@/hooks/useIsMobile";
+
+import { getOriginalPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
 import { Product } from "@/app/types";
+
+import ProductCard from "./ProductCard";
 
 interface ListProductCardProps {
   // Product
@@ -22,7 +24,11 @@ interface ListProductCardProps {
   // State
   quantity: number;
   isFavorite: boolean;
-  ratingStats: { totalReviews: number; averageRating: number };
+  ratingStats: {
+    totalReviews: number;
+    averageRating: number;
+    displayRating: string;
+  };
 
   // Cart state
   cartQuantity: number;
@@ -54,6 +60,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
   onToggleFavorite,
   progress,
 }) => {
+  const isMobile = useIsMobile();
   const favoriteKey = `favorite-${product.id}`;
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -91,6 +98,10 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
     },
     [handleAddToCart],
   );
+
+  if (isMobile) {
+    return <ProductCard product={product} viewMode="grid" />;
+  }
 
   return (
     <>
@@ -175,7 +186,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
                   <div className="flex items-center flex-shrink-0 gap-1">
                     <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                     <span className="text-sm font-medium">
-                      {ratingStats.averageRating}
+                      {ratingStats.displayRating}
                     </span>
                     <span className="inline text-sm text-gray-500">
                       ({ratingStats.totalReviews} đánh giá)
@@ -208,11 +219,11 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
               <div className="flex items-center justify-between">
                 <div className="flex flex-row items-center gap-2">
                   <div className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">
-                    {getDiscountPrice(product)}
+                    {product.details[0].price.toLocaleString("vi-VN")}₫
                   </div>
                   {"discount" in product.details[0].badge && (
                     <div className="text-sm text-gray-400 line-through ">
-                      {product.details[0].price.toLocaleString("vi-VN")}đ
+                      {getOriginalPrice(product)}
                     </div>
                   )}
                 </div>

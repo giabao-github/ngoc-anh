@@ -9,8 +9,7 @@ import { Separator } from "@/components/ui/separator";
 
 import { montserrat } from "@/config/fonts";
 
-import { ToastIds } from "@/constants/toastIds";
-
+import { getOriginalPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
 import { Product } from "@/app/types";
@@ -52,6 +51,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
           {product.name}
         </h1>
         <button
+          type="button"
           title={`${isFavorite ? "Remove from Favorite" : "Add to Favorite"}`}
           onClick={handleFavoriteToggle}
           className={`group p-0 md:p-3 rounded-lg cursor-pointer outline-none ring-0 focus:ring-0 focus:outline-none md:hover:bg-red-50 ${
@@ -80,9 +80,14 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
         )}
       </div>
 
-      <p className="text-2xl font-bold text-orange-500 md:text-4xl">
-        {product.details[0]?.price?.toLocaleString("vi-VN") ?? "Giá liên hệ"}₫
-      </p>
+      <div className="flex flex-row items-center gap-x-3 md:gap-x-5">
+        <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 md:text-4xl">
+          {product.details[0].price.toLocaleString("vi-VN")}₫
+        </p>
+        <p className="text-gray-400 line-through md:text-xl">
+          {getOriginalPrice(product)}
+        </p>
+      </div>
 
       <Separator color="#BB9244" opacity={40} />
     </>

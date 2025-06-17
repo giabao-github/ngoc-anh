@@ -147,6 +147,7 @@ input::-webkit-credentials-auto-fill-button {
   }
 }
 
+/* Animations */
 @keyframes fade-in-up {
   from {
     opacity: 0;
@@ -162,15 +163,6 @@ input::-webkit-credentials-auto-fill-button {
   animation: fade-in-up 1s ease-out forwards;
 }
 
-.bg-pattern {
-  background-image: radial-gradient(
-    circle at 1px 1px,
-    #fbd885 1px,
-    transparent 0
-  );
-  background-size: 60px 60px;
-}
-
 @keyframes progress {
   from {
     width: 100%;
@@ -184,6 +176,7 @@ input::-webkit-credentials-auto-fill-button {
   animation: progress 3s linear forwards;
 }
 
+/* Media queries */
 @media (max-width: 767px) {
   .skeleton-desktop {
     display: none;

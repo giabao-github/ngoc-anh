@@ -34,14 +34,12 @@ const ProductImages: React.FC<ProductImagesProps> = ({
           className="relative overflow-hidden rounded-lg ring ring-gray-300 aspect-square"
         >
           <ProductCarousel
-            product={product}
             data={data}
             onSelect={(value) => setCurrentIndex(Number(value))}
             currentIndex={currentIndex}
           />
         </div>
       </div>
-
       <div className="flex justify-center gap-4 mx-auto">
         {images.map((img, index) => (
           <button
@@ -49,15 +47,20 @@ const ProductImages: React.FC<ProductImagesProps> = ({
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={cn(
-              "aspect-square w-16 md:w-28 cursor-pointer rounded-lg overflow-hidden",
+              "aspect-square relative w-16 md:w-28 cursor-pointer rounded-lg overflow-hidden group",
               currentIndex === index
                 ? "ring-2 ring-secondary"
                 : "ring-1 ring-neutral-100",
             )}
-            style={{
-              backgroundColor: product.background || "transparent",
-            }}
           >
+            <Image
+              src={img}
+              alt=""
+              fill
+              quality={10}
+              className="absolute inset-0 object-cover select-none"
+              aria-hidden="true"
+            />
             <Image
               src={img}
               width={112}
@@ -65,17 +68,13 @@ const ProductImages: React.FC<ProductImagesProps> = ({
               sizes="(min-width: 768px) 112px, 64px"
               quality={100}
               alt={product.name}
-              className={cn(
-                "w-full h-full",
-                product.zoom ? "object-cover" : "object-contain",
-              )}
+              className="relative object-contain w-full h-full"
             />
           </button>
         ))}
       </div>
-
       <div className="mt-8 md:mt-16 md:-mx-8">
-        <Separator color="#BB9244" opacity={100} />
+        <Separator color="#BB9244" opacity={40} />
       </div>
     </div>
   );

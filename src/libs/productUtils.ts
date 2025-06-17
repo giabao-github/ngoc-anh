@@ -6,7 +6,7 @@ export const findProductBySlug = (slug: string) =>
 
 export const calculateRatingStats = (rating?: number[]) => {
   if (!rating?.length) {
-    return { totalReviews: 0, averageRating: 0 };
+    return { totalReviews: 0, averageRating: 0, displayRating: "0.0" };
   }
 
   const totalReviews = rating.reduce((sum, count) => sum + count, 0);
@@ -14,10 +14,10 @@ export const calculateRatingStats = (rating?: number[]) => {
     (sum, count, index) => sum + count * (index + 1),
     0,
   );
-  const averageRating =
-    totalReviews > 0 ? parseFloat((weightedSum / totalReviews).toFixed(1)) : 0;
+  const averageRating = totalReviews > 0 ? weightedSum / totalReviews : 0;
+  const displayRating = averageRating.toFixed(1);
 
-  return { totalReviews, averageRating };
+  return { totalReviews, averageRating, displayRating };
 };
 
 export const getCartFromStorage = (): CartItem[] => {
@@ -58,8 +58,9 @@ export const createImageData = (
     background: background,
   }));
 
-export const getDiscountPrice = (product: Product): string => {
+export const getOriginalPrice = (product: Product): string => {
   const { price } = product.details[0];
+
   const discountAmount =
     "discount" in product.details[0].badge
       ? product.details[0].badge.discount
@@ -69,6 +70,6 @@ export const getDiscountPrice = (product: Product): string => {
     return price.toLocaleString("vi-VN") + "₫";
   }
 
-  const discountPrice = Math.round((price * (100 - discountAmount)) / 100);
-  return discountPrice.toLocaleString("vi-VN") + "₫";
+  const originalPrice = Math.round((price * 100) / (100 - discountAmount));
+  return originalPrice.toLocaleString("vi-VN") + "₫";
 };

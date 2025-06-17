@@ -10,6 +10,8 @@ import RatingSection from "@/components/product/RatingSection";
 import Footer from "@/components/sections/footer/Footer";
 import Header from "@/components/sections/header/Header";
 
+import { useNotification } from "@/hooks/useNotification";
+
 import { ImageData, Product } from "@/app/types";
 
 interface ProductViewLayoutProps {
@@ -17,7 +19,7 @@ interface ProductViewLayoutProps {
   slug: string;
   images: string[];
   imageData: ImageData[];
-  ratingStats: { totalReviews: number; averageRating: number };
+  ratingStats: { totalReviews: number; displayRating: string };
 
   // Refs
   aboutRef: RefObject<HTMLDivElement | null>;
@@ -131,7 +133,7 @@ export const ProductViewLayout: React.FC<ProductViewLayoutProps> = ({
 
           <RatingSection
             product={product}
-            averageRating={ratingStats.averageRating}
+            displayRating={ratingStats.displayRating}
             totalReviews={ratingStats.totalReviews}
           />
         </div>

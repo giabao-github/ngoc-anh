@@ -47,13 +47,18 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
     return null;
   }
 
+  const price: string =
+    (product.details[0].price * quantity).toLocaleString("vi-VN") + "₫";
+  const totalPrice: string =
+    (product.details[0].price * cartQuantity).toLocaleString("vi-VN") + "₫";
+
   return (
     <div
       className={cn(
         "fixed z-50 transition-all duration-300 ease-out",
         isMobile
           ? cn(
-              "left-4 right-4 bottom-4 transform",
+              "left-4 right-4 bottom-0 transform",
               show ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
             )
           : cn(
@@ -108,21 +113,20 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
               {product.name}
             </h5>
             <div className="space-y-1">
-              <p className="text-xs text-gray-500">
-                Số lượng:{" "}
-                <span className="font-medium text-gray-700">{quantity}</span>
-              </p>
-              <p className="text-xs text-gray-500">
-                Tổng trong giỏ:{" "}
-                <span className="font-medium text-gray-700">
-                  {cartQuantity}
-                </span>
-              </p>
+              {isMobile ? (
+                <p className="text-xs text-gray-500">
+                  {`Số lượng: ${quantity} (tổng trong giỏ: ${cartQuantity})`}
+                </p>
+              ) : (
+                <>
+                  <p className="text-xs text-gray-700">Số lượng: {quantity}</p>
+                  <p className="text-xs text-gray-700">
+                    Tổng trong giỏ: {cartQuantity}
+                  </p>
+                </>
+              )}
               <p className="text-sm font-semibold text-gray-900">
-                {new Intl.NumberFormat("vi-VN", {
-                  style: "currency",
-                  currency: "VND",
-                }).format(product.details[0].price * quantity)}
+                {`${price} (${totalPrice})`}
               </p>
             </div>
           </div>
@@ -142,7 +146,7 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
               "shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]",
             )}
           >
-            <FiShoppingCart className="w-4 h-4 mr-2" />
+            <FiShoppingCart className="w-4 h-4" />
             <span className="text-sm font-medium">Xem giỏ hàng</span>
           </Button>
         </div>
