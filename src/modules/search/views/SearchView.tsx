@@ -109,9 +109,17 @@ export const SearchView = () => {
 
     switch (sortBy) {
       case "price-low":
-        return toSort.sort((a, b) => a.details[0].price - b.details[0].price);
+        return toSort.sort(
+          (a, b) =>
+            (a.details[0]?.price ?? Number.POSITIVE_INFINITY) -
+            (b.details[0]?.price ?? Number.POSITIVE_INFINITY),
+        );
       case "price-high":
-        return toSort.sort((a, b) => b.details[0].price - a.details[0].price);
+        return toSort.sort(
+          (a, b) =>
+            (b.details[0]?.price ?? Number.NEGATIVE_INFINITY) -
+            (a.details[0]?.price ?? Number.NEGATIVE_INFINITY),
+        );
       case "rating":
         return toSort.sort(
           (a, b) =>
