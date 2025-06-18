@@ -153,9 +153,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
       {product.details[0].color && variantLabel !== "Màu sắc" && (
         <div className="mb-6 space-y-2">
           <p className="font-semibold">Màu sắc</p>
-          <div
-            className={`w-fit px-4 py-2 rounded-lg select-none border text-sm transition-colors border-primary bg-secondary text-primary ${montserrat.className}`}
-          >
+          <div className="px-4 py-2 text-sm font-medium rounded-lg border transition-colors select-none w-fit border-primary bg-secondary text-primary">
             {product.details[0].color}
           </div>
         </div>
@@ -170,11 +168,12 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
               type="button"
               key={detail.slug}
               onClick={() => handleVariantChange(detail.slug)}
-              className={`px-4 py-2 rounded-lg cursor-pointer select-none border text-sm hover:bg-secondary hover:text-primary transition-colors ${
+              className={cn(
+                "px-4 py-2 rounded-lg cursor-pointer select-none border text-sm font-medium hover:bg-secondary hover:text-primary transition-colors",
                 activeSelector === detail.slug
                   ? "border-primary bg-secondary text-primary hover:border-primary"
-                  : "border-gray-300"
-              } ${montserrat.className}`}
+                  : "border-gray-300",
+              )}
             >
               {getSelectorValue(detail)}
             </button>
@@ -185,9 +184,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
       {/* Size card */}
       <div className="mb-6 space-y-2">
         <p className="font-semibold">Kích thước</p>
-        <div
-          className={`w-fit px-4 py-2 rounded-lg select-none border text-sm transition-colors border-primary bg-secondary text-primary ${montserrat.className}`}
-        >
+        <div className="px-4 py-2 text-sm font-medium rounded-lg border transition-colors select-none w-fit border-primary bg-secondary text-primary">
           {product.size || "Không xác định"}
         </div>
       </div>
@@ -197,8 +194,8 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
       {/* Quantity selection */}
       <div className="space-y-2">
         <p className="font-semibold">Số lượng</p>
-        <div className="flex items-center gap-x-6">
-          <div className="flex items-center border border-gray-300 rounded-lg">
+        <div className="flex gap-x-6 items-center">
+          <div className="flex items-center rounded-lg border border-gray-300">
             <button
               type="button"
               onClick={() => canDecrement && handleQuantityChange("decrement")}
@@ -241,9 +238,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
               <FiPlus />
             </button>
           </div>
-          <div
-            className={`text-sm text-gray-600 tracking-wide ${montserrat.className}`}
-          >
+          <div className="text-sm text-gray-600">
             <p>{`${product.quantity} sản phẩm còn lại`}</p>
             {cartQuantity > 0 && (
               <p className="text-xs text-gray-500">
@@ -260,10 +255,10 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
           <button
             type="button"
             disabled
-            className="flex items-center justify-center w-full p-3 mt-2 text-gray-400 transition-colors bg-gray-200 border border-gray-300 rounded-full cursor-default select-none md:p-4 gap-x-2 md:gap-x-4"
+            className="flex gap-x-2 justify-center items-center p-3 mt-2 w-full text-gray-400 bg-gray-200 rounded-full border border-gray-300 transition-colors cursor-default select-none md:p-4 md:gap-x-4"
           >
             <LuPackageX size={isMobile ? 18 : 24} />
-            <span className="text-sm font-semibold md:text-base md:tracking-wide">
+            <span className="text-sm font-bold md:text-base md:tracking-wide">
               Số lượng sản phẩm trong giỏ đạt giới hạn
             </span>
           </button>
@@ -274,23 +269,27 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
               onClick={handleAntiSpamAddToCart}
               disabled={isAddingToCart}
               className={cn(
-                "mt-2 border border-primary p-3 md:p-4 bg-white rounded-full w-full md:w-[40%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none",
+                "mt-2 border border-primary p-3 md:p-4 bg-white rounded-full w-full md:w-[45%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none",
                 isAddingToCart
                   ? "bg-gray-200 text-gray-400 cursor-default border border-gray-300"
                   : "text-primary hover:bg-primary hover:text-white active:bg-primary/80 active:text-white/80 cursor-pointer hover:border-none active:border-none",
               )}
             >
               <FiShoppingCart size={isMobile ? 18 : 24} />
-              <span className="text-sm font-semibold md:text-base md:tracking-wide">
-                {isAddingToCart ? "Đang thêm..." : "Thêm vào giỏ hàng"}
+              <span className="text-sm font-bold md:text-base md:tracking-wide">
+                {isAddingToCart
+                  ? "Đang thêm..."
+                  : isMobile
+                    ? "Thêm vào giỏ"
+                    : "Thêm vào giỏ hàng"}
               </span>
             </button>
             <button
               type="button"
-              className="mt-2 border border-primary p-3 md:p-4 rounded-full w-full md:w-[60%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-white text-primary hover:bg-primary hover:text-white active:bg-primary/80 active:text-white/80 cursor-pointer hover:border-none active:border-none"
+              className="mt-2 border border-primary p-3 md:p-4 rounded-full w-full md:w-[55%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-white text-primary hover:bg-primary hover:text-white active:bg-primary/80 active:text-white/80 cursor-pointer hover:border-none active:border-none"
             >
               <FaBagShopping size={isMobile ? 18 : 24} />
-              <span className="text-sm font-semibold md:text-base md:tracking-wide">
+              <span className="text-sm font-bold md:text-base md:tracking-wide">
                 Mua ngay
               </span>
             </button>

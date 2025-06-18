@@ -12,6 +12,8 @@ import ControlButtons from "@/components/sections/products/ControlButtons";
 import ProductCard from "@/components/sections/products/ProductCard";
 import ProductsPanel from "@/components/sections/products/ProductsPanel";
 
+import { arsenal } from "@/config/fonts";
+
 import { calculateRatingStats } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
@@ -194,13 +196,18 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
     >
       <div className="mx-auto max-w-7xl 2xl:max-w-[1400px]">
         <div className="mb-12 text-center md:mb-16">
-          <h2 className="mb-4 space-y-2 text-xl font-bold text-gray-900 md:text-2xl xl:text-3xl 2xl:text-4xl">
+          <h2
+            className={cn(
+              "mb-4 space-y-2 text-xl font-bold text-gray-900 md:text-2xl xl:text-3xl 2xl:text-4xl",
+              arsenal.className,
+            )}
+          >
             <div>Khám phá cửa hàng trực tuyến</div>
             <div className="block text-transparent bg-clip-text bg-gradient-to-r to-green-600 from-primary">
               THẠCH ÂM
             </div>
           </h2>
-          <p className="mx-auto max-w-2xl text-sm text-gray-800 md:text-lg">
+          <p className="mx-auto max-w-2xl text-sm font-medium text-gray-800 md:text-lg">
             Những sản phẩm chất lượng cao được tuyển chọn kỹ lưỡng dành riêng
             cho bạn
           </p>

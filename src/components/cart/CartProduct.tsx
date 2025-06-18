@@ -115,8 +115,8 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
   };
 
   return (
-    <div {...swipeHandlers} className="relative overflow-hidden">
-      <div {...swipeHandlers} className="relative overflow-hidden min-h-24">
+    <div {...swipeHandlers} className="overflow-hidden relative">
+      <div {...swipeHandlers} className="overflow-hidden relative min-h-24">
         {/* Slide-able content */}
         <div
           className={`
@@ -153,9 +153,9 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
           />
 
           {/* Right content */}
-          <div className="flex flex-col flex-1 w-full gap-2 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col flex-1 gap-2 w-full md:flex-row md:items-center md:justify-between">
             {/* Name */}
-            <div className="flex flex-col w-full overflow-hidden gap-y-1">
+            <div className="flex overflow-hidden flex-col gap-y-1 w-full">
               <h3
                 title={item.name}
                 className="text-base md:text-lg font-bold line-clamp-2 max-h-[56px]"
@@ -176,8 +176,8 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
             </div>
 
             {/* Quantity & Price */}
-            <div className="flex flex-wrap items-center justify-between gap-1 md:gap-4 sm:flex-nowrap">
-              <div className="flex items-center border border-gray-300 rounded-lg">
+            <div className="flex flex-wrap gap-1 justify-between items-center md:gap-4 sm:flex-nowrap">
+              <div className="flex items-center rounded-lg border border-gray-300">
                 <button
                   type="button"
                   aria-label="Decrease quantity"
@@ -232,7 +232,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                 </button>
               </div>
               <div
-                className={`w-[134px] md:w-36 text-right text-sm tracking-wide font-semibold text-orange-500 ${montserrat.className}`}
+                className={`w-[134px] md:w-36 text-right text-sm md:text-base tracking-wide font-bold text-orange-500 ${montserrat.className}`}
               >
                 {formattedTotalPrice}
               </div>
@@ -243,7 +243,7 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
           <button
             title="Xóa khỏi giỏ hàng"
             onClick={() => handleRemove(item)}
-            className="absolute top-0 right-0 hidden cursor-pointer text-neutral-400 hover:text-rose-500 active:text-rose-400/70 sm:block"
+            className="hidden absolute top-0 right-0 cursor-pointer text-neutral-400 hover:text-rose-500 active:text-rose-400/70 sm:block"
           >
             <FaTrashCan size={18} />
           </button>

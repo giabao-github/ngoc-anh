@@ -10,11 +10,11 @@ interface BackToTopButtonProps {
 const variants = {
   desktop: {
     button: "px-6 py-3",
-    text: "text-sm font-semibold tracking-wide 2xl:text-base",
+    text: "text-sm font-bold tracking-wide 2xl:text-base",
   },
   mobile: {
     button: "px-4 py-2",
-    text: "text-xs font-semibold tracking-wide",
+    text: "text-xs font-bold tracking-wide",
   },
 };
 

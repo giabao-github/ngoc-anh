@@ -32,13 +32,13 @@ const RatingSection: React.FC<RatingSectionProps> = ({
           <div className="flex flex-col space-y-6 md:flex-row md:items-center md:justify-start md:space-y-0 md:space-x-10">
             {/* Left: overall rating */}
             <div className="space-y-3">
-              <div className="flex items-center gap-3">
+              <div className="flex gap-3 items-center">
                 <FaStar className="text-[#F3C63F] h-6 w-6 md:w-10 md:h-10" />
                 <span className="text-xl font-bold md:text-3xl">
                   {displayRating}
                 </span>
               </div>
-              <p className="text-sm text-left text-gray-700 md:text-right whitespace-nowrap">
+              <p className="text-sm text-left text-gray-700 whitespace-nowrap md:text-right">
                 {totalReviews === 0
                   ? "Chưa có đánh giá"
                   : `${totalReviews} đánh giá`}
@@ -46,7 +46,7 @@ const RatingSection: React.FC<RatingSectionProps> = ({
             </div>
 
             {/* Right: ratings breakdown */}
-            <div className="w-2/3 space-y-1 md:space-y-2 md:w-full">
+            <div className="space-y-1 w-2/3 md:space-y-2 md:w-full">
               {[5, 4, 3, 2, 1].map((star) => {
                 const index = star - 1;
                 const count =
@@ -57,7 +57,7 @@ const RatingSection: React.FC<RatingSectionProps> = ({
                     : 0;
 
                 return (
-                  <div key={star} className="flex items-center gap-3 md:gap-4">
+                  <div key={star} className="flex gap-3 items-center md:gap-4">
                     {/* Stars */}
                     <div className="flex gap-0.5">
                       {Array.from({ length: 5 }).map((_, i) => (
@@ -101,9 +101,9 @@ const RatingSection: React.FC<RatingSectionProps> = ({
           </p>
           <button
             onClick={() => router.push(LOGIN_URL)}
-            className="flex items-center justify-center px-6 py-3 mt-2 transition-colors bg-transparent border rounded-full cursor-pointer select-none hover:border-primary active:border-primary/70 border-primary text-primary w-fit hover:bg-primary hover:text-white active:bg-primary/70 active:text-white/70 gap-x-2 md:gap-x-4"
+            className="flex gap-x-2 justify-center items-center px-6 py-3 mt-2 bg-transparent rounded-full border transition-colors cursor-pointer select-none hover:border-primary active:border-primary/70 border-primary text-primary w-fit hover:bg-primary hover:text-white active:bg-primary/70 active:text-white/70 md:gap-x-4"
           >
-            <span className="text-xs font-semibold tracking-wide md:text-sm">
+            <span className="text-xs font-bold tracking-wide md:text-sm">
               Viết đánh giá
             </span>
           </button>

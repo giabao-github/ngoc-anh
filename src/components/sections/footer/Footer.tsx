@@ -19,7 +19,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
   >
     <div className="grid gap-16 mx-auto px-6 max-w-[1400px] md:grid-cols-7 md:gap-32 relative">
       <div className="text-sm md:text-base 2xl:text-lg w-fit md:col-span-3">
-        <h3 className="mb-4 uppercase">Trụ sở chính</h3>
+        <h3 className="mb-4 font-medium uppercase">Trụ sở chính</h3>
         <div
           className="text-lg md:text-xl 2xl:text-2xl mb-4 font-semibold uppercase text-[#D4AF37] block"
           aria-label="Công ty TNHH Thạch Âm"
@@ -46,7 +46,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
         </a>
       </div>
       <div className="text-sm w-fit md:text-base 2xl:text-lg md:col-span-2">
-        <h3 className="mb-4 uppercase">Kết nối với chúng tôi</h3>
+        <h3 className="mb-4 font-medium uppercase">Kết nối với chúng tôi</h3>
         <div className="space-y-1">
           <p>
             Hotline:&nbsp;
@@ -105,10 +105,10 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
             />
           </div>
         </div>
-        <div className="justify-start hidden mx-4 mt-16 text-center md:flex">
+        <div className="hidden justify-start mx-4 mt-16 text-center md:flex">
           <BackToTopButton variant="desktop" />
         </div>
-        <div className="flex flex-row md:hidden gap-x-8">
+        <div className="flex flex-row gap-x-8 md:hidden">
           <div className="relative w-32 h-12">
             <Image
               src={
@@ -124,7 +124,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
         </div>
       </div>
     </div>
-    <div className="mt-16 text-base font-medium tracking-wide text-center text-white md:text-lg">
+    <div className="mt-16 text-base font-semibold tracking-wide text-center text-white md:text-lg">
       &copy; {currentYear} Thạch Âm. All rights reserved.
     </div>
   </footer>

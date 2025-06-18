@@ -7,6 +7,8 @@ import ProductError from "@/components/error/ProductError";
 import GridProductCard from "@/components/sections/products/GridProductCard";
 import ListProductCard from "@/components/sections/products/ListProductCard";
 
+import { montserrat, quicksand } from "@/config/fonts";
+
 import { useProductView } from "@/hooks/useProductView";
 
 import { Product } from "@/types/invoice";
@@ -68,8 +70,29 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
 
   if (viewMode === "list") {
     return (
-      <ListProductCard
-        product={product}
+      <div className={quicksand.className}>
+        <ListProductCard
+          product={product}
+          router={router}
+          isFavorite={favorites.has(product.id)}
+          onToggleFavorite={toggleFavorite}
+          cartQuantity={cartQuantity}
+          handleAddToCart={() => handleAddToCart(true)}
+          handleCloseNotification={handleCloseNotification}
+          isOutOfStock={isOutOfStock}
+          notificationFlag={notificationFlag}
+          quantity={quantity}
+          ratingStats={ratingStats}
+          showNotification={showNotification}
+          progress={progress}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className={quicksand.className}>
+      <GridProductCard
         router={router}
         isFavorite={favorites.has(product.id)}
         onToggleFavorite={toggleFavorite}
@@ -77,31 +100,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
         handleAddToCart={() => handleAddToCart(true)}
         handleCloseNotification={handleCloseNotification}
         isOutOfStock={isOutOfStock}
+        product={product}
         notificationFlag={notificationFlag}
         quantity={quantity}
         ratingStats={ratingStats}
         showNotification={showNotification}
         progress={progress}
       />
-    );
-  }
-
-  return (
-    <GridProductCard
-      router={router}
-      isFavorite={favorites.has(product.id)}
-      onToggleFavorite={toggleFavorite}
-      cartQuantity={cartQuantity}
-      handleAddToCart={() => handleAddToCart(true)}
-      handleCloseNotification={handleCloseNotification}
-      isOutOfStock={isOutOfStock}
-      product={product}
-      notificationFlag={notificationFlag}
-      quantity={quantity}
-      ratingStats={ratingStats}
-      showNotification={showNotification}
-      progress={progress}
-    />
+    </div>
   );
 };
 

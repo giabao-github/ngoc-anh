@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import SearchBar from "@/components/SearchBar";
 
-import { montserrat } from "@/config/fonts";
+import { arsenal } from "@/config/fonts";
 
 import { cn } from "@/libs/utils";
 
@@ -15,10 +15,15 @@ const ProductError = () => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 gap-y-8">
+    <div className="flex flex-col gap-y-8 justify-center items-center px-6 min-h-screen">
       <title>Không tìm thấy sản phẩm</title>
       {/* App Logo */}
-      <div className="absolute flex items-center space-x-4 transition top-6 left-6">
+      <div
+        className={cn(
+          "absolute flex items-center space-x-4 transition top-6 left-6",
+          arsenal.className,
+        )}
+      >
         <Image
           src="/dark-logo.png"
           alt="Logo"
@@ -48,17 +53,12 @@ const ProductError = () => {
       />
 
       {/* Heading */}
-      <h1
-        className={cn(
-          "mt-8 text-2xl md:text-3xl font-bold text-center xl:text-4xl",
-          montserrat.className,
-        )}
-      >
+      <h1 className="mt-8 text-2xl font-bold text-center md:text-3xl xl:text-4xl">
         Sản phẩm không tồn tại
       </h1>
 
       {/* Description */}
-      <p className={cn("max-w-lg text-center", montserrat.className)}>
+      <p className="max-w-lg text-center">
         Chúng tôi không thể tìm thấy sản phẩm bạn đang tìm kiếm. Có thể đường
         dẫn không đúng hoặc sản phẩm đã bị gỡ.
       </p>
@@ -67,7 +67,7 @@ const ProductError = () => {
       <div className="flex flex-col gap-6 my-4 md:flex-row">
         <Link
           href="/"
-          className="inline-flex items-center justify-center gap-3 px-6 py-4 font-semibold text-white transition duration-200 rounded-full shadow-md select-none bg-primary active:bg-primary/80 group"
+          className="inline-flex gap-3 justify-center items-center px-6 py-4 font-bold text-white rounded-full shadow-md transition duration-200 select-none bg-primary active:bg-primary/80 group"
         >
           <LucideHome
             size={18}
@@ -79,7 +79,7 @@ const ProductError = () => {
 
         <Link
           href="/#products"
-          className="inline-flex items-center justify-center gap-3 px-6 py-4 font-semibold transition bg-white border rounded-full shadow-md select-none text-primary border-primary active:bg-gray-200 group"
+          className="inline-flex gap-3 justify-center items-center px-6 py-4 font-bold bg-white rounded-full border shadow-md transition select-none text-primary border-primary active:bg-gray-200 group"
         >
           <span>Xem sản phẩm khác</span>
           <FaArrowRightLong
