@@ -128,11 +128,13 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
             (a.details[0]?.price ?? Number.NEGATIVE_INFINITY),
         );
       case "rating":
-        return [...filtered].sort(
-          (a, b) =>
-            calculateRatingStats(b.rating).averageRating -
-            calculateRatingStats(a.rating).averageRating,
-        );
+        return [...filtered]
+          .map((p) => ({
+            product: p,
+            avg: calculateRatingStats(p.rating).averageRating,
+          }))
+          .sort((a, b) => b.avg - a.avg)
+          .map(({ product }) => product);
       case "newest":
         return [...filtered].sort((a, b) => b.id - a.id);
       default:
@@ -175,10 +177,14 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   }, [productsRef]);
 
   const categories = useMemo(() => {
-    const uniqueCategories = new Set(
-      products.map((p) => p.category.toLowerCase()),
-    );
-    return ["all", ...Array.from(uniqueCategories)];
+    const unique = new Map<string, string>();
+    products.forEach((p) => {
+      const key = p.category.toLowerCase();
+      if (!unique.has(key)) {
+        unique.set(key, p.category);
+      }
+    });
+    return ["all", ...unique.values()];
   }, []);
 
   return (
