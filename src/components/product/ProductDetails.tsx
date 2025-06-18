@@ -1,87 +1,9 @@
-// import { useMemo } from "react";
-// import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-// import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-// import useIsMobile from "@/hooks/useIsMobile";
-// import { useProductContent } from "@/hooks/useProductContent";
-// import { Product } from "@/types/product";
-// interface ProductDetailsProps {
-//   product: Product;
-// }
-// interface TabConfig {
-//   key: string;
-//   label: string;
-//   content: React.ReactNode;
-// }
-// const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
-//   const isMobile = useIsMobile();
-//   const content = useProductContent(product);
-//   const tabs = useMemo(() => {
-//     const tabConfigs: TabConfig[] = [];
-//     if (content.description) {
-//       tabConfigs.push({
-//         key: "description",
-//         label: isMobile ? "CHI TIẾT" : "CHI TIẾT SẢN PHẨM",
-//         content: content.description,
-//       });
-//     }
-//     if (content.instruction) {
-//       tabConfigs.push({
-//         key: "instruction",
-//         label: isMobile ? "HƯỚNG DẪN" : "HƯỚNG DẪN SỬ DỤNG",
-//         content: content.instruction,
-//       });
-//     }
-//     if (content.note) {
-//       tabConfigs.push({
-//         key: "note",
-//         label: isMobile ? "LƯU Ý" : "LƯU Ý QUAN TRỌNG",
-//         content: content.note,
-//       });
-//     }
-//     return tabConfigs;
-//   }, [content, isMobile]);
-//   return (
-//     <TabGroup className="mx-2 md:mx-0 md:pb-20">
-//       <ScrollArea className="w-full">
-//         <TabList className="flex gap-x-10 pb-0 border-b border-secondary/40">
-//           {tabs.map((tab) => (
-//             <Tab
-//               key={tab.key}
-//               className={({ selected }) =>
-//                 `py-3 text-sm md:text-lg font-bold uppercase cursor-pointer border-b -mb-px transition outline-none ring-0 focus:ring-0 focus:outline-none whitespace-nowrap flex-shrink-0 ${
-//                   selected
-//                     ? "border-secondary text-black"
-//                     : "border-transparent text-gray-400 hover:border-secondary hover:text-black"
-//                 }`
-//               }
-//             >
-//               {tab.label}
-//             </Tab>
-//           ))}
-//         </TabList>
-//         <ScrollBar orientation="horizontal" />
-//       </ScrollArea>
-//       <TabPanels className="pt-6">
-//         {tabs.map((tab) => (
-//           <TabPanel key={tab.key} className="space-y-4 font-medium">
-//             {tab.content}
-//           </TabPanel>
-//         ))}
-//       </TabPanels>
-//     </TabGroup>
-//   );
-// };
-// export default ProductDetails;
-import { useEffect, useMemo, useRef } from "react";
-
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-
 import useIsMobile from "@/hooks/useIsMobile";
 import { useProductContent } from "@/hooks/useProductContent";
-
 import { Product } from "@/types/product";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+import { useMemo, useRef } from "react";
 
 interface ProductDetailsProps {
   product: Product;
