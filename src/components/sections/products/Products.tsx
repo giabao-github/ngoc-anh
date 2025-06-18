@@ -16,7 +16,6 @@ import { calculateRatingStats } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
 import { products } from "@/app/storage";
-import { Product } from "@/types/invoice";
 
 const ROWS_PER_CLICK = 2;
 const PRODUCTS_PER_ROW = { mobile: 1, tablet: 2, desktop: 3, xl: 4 };
@@ -183,11 +182,11 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
         <div className="mb-12 text-center md:mb-16">
           <h2 className="mb-4 space-y-2 text-xl font-bold text-gray-900 md:text-2xl xl:text-3xl 2xl:text-4xl">
             <div>Khám phá cửa hàng trực tuyến</div>
-            <div className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-600">
+            <div className="block text-transparent bg-clip-text bg-gradient-to-r to-green-600 from-primary">
               THẠCH ÂM
             </div>
           </h2>
-          <p className="max-w-2xl mx-auto text-sm text-gray-800 md:text-lg">
+          <p className="mx-auto max-w-2xl text-sm text-gray-800 md:text-lg">
             Những sản phẩm chất lượng cao được tuyển chọn kỹ lưỡng dành riêng
             cho bạn
           </p>

@@ -152,9 +152,9 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
         onClose={handleCloseNotification}
         progress={progress}
       />
-      <article className="flex flex-col h-full overflow-hidden transition-all duration-300 transform bg-white border border-gray-100 shadow-sm rounded-xl hover:shadow-xl group hover:border-blue-200 hover:-translate-y-1">
+      <article className="flex overflow-hidden flex-col h-full bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300 transform hover:shadow-xl group hover:border-blue-200 hover:-translate-y-1">
         <div
-          className="relative flex-shrink-0 overflow-hidden cursor-pointer h-36 md:h-72"
+          className="overflow-hidden relative flex-shrink-0 h-36 cursor-pointer md:h-72"
           style={{ background: product.background }}
           onClick={handleImageInteraction}
           onMouseEnter={handleMouseEnter}
@@ -173,7 +173,7 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
             priority
           />
           {!imageLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-200 animate-pulse">
+            <div className="flex absolute inset-0 justify-center items-center bg-gray-200 animate-pulse">
               <div className="w-8 h-8 bg-gray-300 rounded-full md:w-16 md:h-16"></div>
             </div>
           )}
@@ -225,7 +225,7 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
                 e.stopPropagation();
                 router.push(`/products/${product.details[0].slug}`);
               }}
-              className="p-2 transition-all duration-200 rounded-full shadow-lg md:p-3 bg-white/80 backdrop-blur-sm hover:bg-white hover:scale-110"
+              className="p-2 rounded-full shadow-lg backdrop-blur-sm transition-all duration-200 md:p-3 bg-white/80 hover:bg-white hover:scale-110"
               aria-label="Xem sản phẩm"
             >
               <Eye className="w-4 h-4 text-gray-700 md:w-5 md:h-5" />
@@ -237,11 +237,11 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
                 e.stopPropagation();
                 handleFavoriteToggle(e);
               }}
-              className="p-2 transition-all duration-200 rounded-full shadow-lg md:p-3 bg-white/80 backdrop-blur-sm hover:bg-white hover:scale-110"
+              className="p-2 rounded-full shadow-lg backdrop-blur-sm transition-all duration-200 md:p-3 bg-white/80 hover:bg-white hover:scale-110"
               aria-label="Thêm vào danh sách yêu thích"
             >
               <Heart
-                className={`w-4 h-4 md:w-5 md:h-5 ${isFavorite ? "fill-red-500 text-red-500" : "text-gray-700"}`}
+                className={`w-4 h-4 md:w-5 md:h-5 ${isFavorite ? "text-red-500 fill-red-500" : "text-gray-700"}`}
               />
             </button>
             <button
@@ -268,7 +268,7 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
             aria-label="Thêm vào danh sách yêu thích"
           >
             <Heart
-              className={`w-3 h-3 md:w-4 md:h-4 ${isFavorite ? "fill-red-500 text-red-500" : "text-gray-400"}`}
+              className={`w-3 h-3 md:w-4 md:h-4 ${isFavorite ? "text-red-500 fill-red-500" : "text-gray-400"}`}
             />
           </button>
         </div>
@@ -278,7 +278,7 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
               {product.category}
             </span>
             {ratingStats.totalReviews > 0 ? (
-              <div className="flex items-center flex-shrink-0 gap-1">
+              <div className="flex flex-shrink-0 gap-1 items-center">
                 <Star className="w-2.5 h-2.5 text-yellow-400 md:w-4 md:h-4 fill-yellow-400" />
                 <span className="text-[10px] font-medium md:text-sm">
                   {ratingStats.displayRating}
@@ -306,9 +306,9 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
             </h3>
           </div>
           <div className="flex-grow"></div>
-          <div className="flex items-center justify-between flex-shrink-0 mb-1 md:mb-4">
+          <div className="flex flex-shrink-0 justify-between items-center mb-1 md:mb-4">
             <div className="flex flex-col gap-0.5 md:flex-row md:items-center md:gap-2">
-              <div className="text-base font-bold text-transparent md:text-xl bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">
+              <div className="text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 md:text-xl">
                 {formattedPrice}
               </div>
               {formattedOriginalPrice && (
@@ -327,7 +327,7 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
                     : "text-red-600",
               )}
             >
-              <div className="absolute bottom-0 right-0 inline">
+              <div className="inline absolute right-0 bottom-0">
                 {isOutOfStock
                   ? "Không thể mua thêm"
                   : product.quantity > 0
@@ -336,13 +336,13 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
               </div>
             </div>
           </div>
-          <div className="items-center justify-between flex-shrink-0 hidden mt-2 text-xs text-gray-500 md:flex md:mt-4">
-            <div className="flex items-center gap-1">
+          <div className="hidden flex-shrink-0 justify-between items-center mt-2 text-xs text-gray-500 md:flex md:mt-4">
+            <div className="flex gap-1 items-center">
               <Truck className="w-3 h-3" />
               <span className="hidden md:inline">Miễn phí vận chuyển</span>
               <span className="md:hidden">Free ship</span>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex gap-1 items-center">
               <Shield className="w-3 h-3" />
               <span className="hidden md:inline">Bảo hành 1 năm</span>
               <span className="md:hidden">1 năm BH</span>

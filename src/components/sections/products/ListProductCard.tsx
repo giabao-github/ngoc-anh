@@ -126,10 +126,10 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
         onClose={handleCloseNotification}
         progress={progress}
       />
-      <div className="h-48 overflow-hidden transition-all duration-300 bg-white border border-gray-100 shadow-sm rounded-xl hover:shadow-lg group">
+      <div className="overflow-hidden h-48 bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-lg group">
         <div className="flex flex-row h-full">
           <div
-            className="relative w-64 h-full overflow-hidden cursor-pointer"
+            className="overflow-hidden relative w-64 h-full cursor-pointer"
             style={{ background: product.background }}
           >
             <Image
@@ -146,7 +146,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
             />
 
             {!imageLoaded && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-200 animate-pulse">
+              <div className="flex absolute inset-0 justify-center items-center bg-gray-200 animate-pulse">
                 <div className="w-8 h-8 bg-gray-300 rounded-full sm:w-12 sm:h-12 md:w-16 md:h-16"></div>
               </div>
             )}
@@ -154,22 +154,22 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
             <div className="absolute top-3 left-3 max-w-[calc(100%-6rem)]">
               <div className="flex flex-wrap gap-2">
                 {"discount" in product.details[0].badge && (
-                  <span className="px-3 py-1 text-xs font-medium text-white rounded-full shadow-sm bg-gradient-to-r from-red-500 to-red-600">
+                  <span className="px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-red-500 to-red-600 rounded-full shadow-sm">
                     <span>-{product.details[0].badge.discount}%</span>
                   </span>
                 )}
                 {"isReward" in product.details[0].badge && (
-                  <span className="px-3 py-1 text-xs font-medium text-white rounded-full shadow-sm bg-gradient-to-r from-pink-600 to-pink-700">
+                  <span className="px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-pink-600 to-pink-700 rounded-full shadow-sm">
                     <span>Hàng tặng</span>
                   </span>
                 )}
                 {"isBestseller" in product.details[0].badge && (
-                  <span className="px-3 py-1 text-xs font-medium text-white rounded-full shadow-sm bg-gradient-to-r from-orange-500 to-orange-600">
+                  <span className="px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full shadow-sm">
                     <span>Bán chạy</span>
                   </span>
                 )}
                 {product.details[0].badge.isNew && (
-                  <span className="px-3 py-1 text-xs font-medium text-white rounded-full shadow-sm bg-gradient-to-r from-green-500 to-green-600">
+                  <span className="px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-green-500 to-green-600 rounded-full shadow-sm">
                     <span>Mới</span>
                   </span>
                 )}
@@ -179,11 +179,11 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
             <button
               type="button"
               onClick={handleFavoriteToggle}
-              className="absolute p-2 transition-all duration-200 rounded-full shadow-md top-3 right-3 bg-white/80 backdrop-blur-sm hover:bg-white"
+              className="absolute top-3 right-3 p-2 rounded-full shadow-md backdrop-blur-sm transition-all duration-200 bg-white/80 hover:bg-white"
               aria-label="Thêm vào danh sách yêu thích"
             >
               <Heart
-                className={`w-4 h-4 ${isFavorite ? "fill-red-500 text-red-500" : "text-gray-400"}`}
+                className={`w-4 h-4 ${isFavorite ? "text-red-500 fill-red-500" : "text-gray-400"}`}
               />
             </button>
           </div>
@@ -191,12 +191,12 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
           <div className="flex-1 p-5">
             <div className="flex flex-col h-full">
               <div className="flex-1">
-                <div className="flex items-start justify-between md:mb-2">
+                <div className="flex justify-between items-start md:mb-2">
                   <span className="mr-2 text-sm font-medium text-blue-600 truncate">
                     {product.category}
                   </span>
                   {ratingStats.totalReviews > 0 ? (
-                    <div className="flex items-center flex-shrink-0 gap-1">
+                    <div className="flex flex-shrink-0 gap-1 items-center">
                       <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                       <span className="text-sm font-medium">
                         {ratingStats.displayRating}
@@ -213,7 +213,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
                 </div>
 
                 <h3
-                  className="mb-3 text-lg font-semibold leading-tight text-transparent transition-colors cursor-pointer w-fit h-fit line-clamp-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text hover:from-purple-600 hover:to-blue-600"
+                  className="mb-3 text-lg font-semibold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 transition-colors cursor-pointer w-fit h-fit line-clamp-2 hover:from-purple-600 hover:to-blue-600"
                   onClick={handleViewProduct}
                   title={product.name}
                 >
@@ -234,8 +234,8 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
                 )} */}
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex flex-row items-center gap-2">
+              <div className="flex justify-between items-center">
+                <div className="flex flex-row gap-2 items-center">
                   <div className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">
                     {formattedPrice}
                   </div>
@@ -246,13 +246,13 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
                   )}
                 </div>
 
-                <div className="flex w-2/5 gap-2">
+                <div className="flex gap-2 w-2/5">
                   <button
                     type="button"
                     onClick={() =>
                       router.push(`/products/${product.details[0].slug}`)
                     }
-                    className="flex items-center justify-center w-full p-2 transition-colors bg-transparent border rounded-full cursor-pointer select-none border-primary text-primary md:p-3 hover:bg-primary active:bg-primary/70 hover:text-white active:text-white/70 hover:border-primary active:border-primary/70 gap-x-3"
+                    className="flex gap-x-3 justify-center items-center p-2 w-full bg-transparent rounded-full border transition-colors cursor-pointer select-none border-primary text-primary md:p-3 hover:bg-primary active:bg-primary/70 hover:text-white active:text-white/70 hover:border-primary active:border-primary/70"
                     aria-label="Xem sản phẩm"
                   >
                     <Eye className="w-4 h-4" />

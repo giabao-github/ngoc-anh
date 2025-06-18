@@ -1,6 +1,6 @@
 import { ProductContent } from "@/types/product";
 
-export const content: ProductContent = {
+export const greenBadge: ProductContent = {
   description: (
     <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
       <p>
@@ -18,9 +18,8 @@ export const content: ProductContent = {
         tượng.
       </p>
       <p>
-        Phiên bản vàng nhạt: Logo màu xanh rêu hoặc đen được đặt trên nền vàng
-        nhạt, mang lại cảm giác nhẹ nhàng, trang nhã nhưng vẫn giữ được nét cổ
-        điển.
+        Phiên bản xanh rêu: Logo màu vàng đồng hoặc vàng gold nổi bật trên nền
+        xanh rêu, tạo cảm giác sang trọng, cổ kính và quyền quý.
       </p>
     </div>
   ),
