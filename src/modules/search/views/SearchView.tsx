@@ -20,15 +20,13 @@ import { calculateRatingStats } from "@/libs/productUtils";
 import { searchProducts } from "@/libs/searchUtils";
 import { cn } from "@/libs/utils";
 
+import { Product } from "@/types/product";
+
 export const SearchView = () => {
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";
   const aboutRef = useRef<HTMLDivElement>(null);
-
-  // Add state for search results to force re-computation
-  const [searchResults, setSearchResults] = useState(() => {
-    return searchProducts(query).products;
-  });
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
 
   // Update search results when query changes
   useEffect(() => {
@@ -107,21 +105,23 @@ export const SearchView = () => {
             return productCategory === selectedCategoryLower;
           });
 
+    const toSort = [...filtered];
+
     switch (sortBy) {
       case "price-low":
-        return filtered.sort((a, b) => a.details[0].price - b.details[0].price);
+        return toSort.sort((a, b) => a.details[0].price - b.details[0].price);
       case "price-high":
-        return filtered.sort((a, b) => b.details[0].price - a.details[0].price);
+        return toSort.sort((a, b) => b.details[0].price - a.details[0].price);
       case "rating":
-        return filtered.sort(
+        return toSort.sort(
           (a, b) =>
             calculateRatingStats(b.rating).averageRating -
             calculateRatingStats(a.rating).averageRating,
         );
       case "newest":
-        return filtered.sort((a, b) => b.id - a.id);
+        return toSort.sort((a, b) => b.id - a.id);
       default:
-        return filtered;
+        return toSort;
     }
   }, [searchResults, selectedCategory, sortBy]);
 
