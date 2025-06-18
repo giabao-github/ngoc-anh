@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 
-import { getProductContent } from "@/app/content/productContent";
+import { getProductContent } from "@/libs/productContentUtils";
+
 import { Product, ProductContent } from "@/types/product";
 
 export const useProductContent = (product: Product): ProductContent => {

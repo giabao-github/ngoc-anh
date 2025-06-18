@@ -1,6 +1,6 @@
 import { ProductContent } from "@/types/product";
 
-export const content: ProductContent = {
+export const nagaWind: ProductContent = {
   description: (
     <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
       <p>Quạt Tay Thạch Âm - Nét Đẹp Huyền Bí Từ Họa Tiết Khmer</p>

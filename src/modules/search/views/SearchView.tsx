@@ -1,32 +1,151 @@
 "use client";
 
-import { Suspense, useEffect, useRef } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
-import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 import Footer from "@/components/sections/footer/Footer";
 import Header from "@/components/sections/header/Header";
+import ProductCard from "@/components/sections/products/ProductCard";
+import ProductsPanel from "@/components/sections/products/ProductsPanel";
 
-import { formatPrice } from "@/libs/productUtils";
+import { calculateRatingStats } from "@/libs/productUtils";
 import { searchProducts } from "@/libs/searchUtils";
+import { cn } from "@/libs/utils";
 
-import { Product } from "@/types/invoice";
+import { Product } from "@/types/product";
 
 export const SearchView = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";
   const aboutRef = useRef<HTMLDivElement>(null);
-  const searchResults = searchProducts(query).products;
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
+
+  // Update search results when query changes
+  useEffect(() => {
+    const newResults = searchProducts(query).products;
+    setSearchResults(newResults);
+  }, [query]);
+
   const totalResults = searchResults.length;
 
+  // State for product panel
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [sortBy, setSortBy] = useState("featured");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const scrollPositionRef = useRef(0);
+  const isUpdatingRef = useRef(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Reset filters when query changes
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    setSelectedCategory("all");
+    setSortBy("featured");
+  }, [query]);
+
+  const handleCategoryChange = useCallback(
+    (category: string) => {
+      if (category === selectedCategory) {
+        return;
+      }
+      isUpdatingRef.current = true;
+      scrollPositionRef.current = window.scrollY;
+      setSelectedCategory(category);
+    },
+    [selectedCategory],
+  );
+
+  const handleSortChange = useCallback(
+    (newSortBy: string) => {
+      if (newSortBy === sortBy) {
+        return;
+      }
+      isUpdatingRef.current = true;
+      scrollPositionRef.current = window.scrollY;
+      setSortBy(newSortBy);
+    },
+    [sortBy],
+  );
+
+  // Handle scroll position restoration
+  useLayoutEffect(() => {
+    if (isUpdatingRef.current && wrapperRef.current) {
+      const wrapper = wrapperRef.current;
+      const originalHeight = wrapper.scrollHeight;
+
+      requestAnimationFrame(() => {
+        const newHeight = wrapper.scrollHeight;
+        const heightDiff = newHeight - originalHeight;
+        const scrollDiff = heightDiff;
+
+        window.scrollTo({
+          top: scrollPositionRef.current + scrollDiff,
+          behavior: "auto",
+        });
+
+        isUpdatingRef.current = false;
+      });
+    }
+  }, [selectedCategory, sortBy]);
+
+  const filteredAndSortedProducts = useMemo(() => {
+    let filtered =
+      selectedCategory === "all"
+        ? [...searchResults]
+        : searchResults.filter((p) => {
+            const productCategory = p.category.toLowerCase();
+            const selectedCategoryLower = selectedCategory.toLowerCase();
+            return productCategory === selectedCategoryLower;
+          });
+
+    switch (sortBy) {
+      case "price-low":
+        return [...filtered].sort(
+          (a, b) =>
+            (a.details[0]?.price ?? Number.POSITIVE_INFINITY) -
+            (b.details[0]?.price ?? Number.POSITIVE_INFINITY),
+        );
+      case "price-high":
+        return [...filtered].sort(
+          (a, b) =>
+            (b.details[0]?.price ?? Number.NEGATIVE_INFINITY) -
+            (a.details[0]?.price ?? Number.NEGATIVE_INFINITY),
+        );
+      case "rating":
+        return [...filtered]
+          .map((p) => ({
+            product: p,
+            avg: calculateRatingStats(p.rating).averageRating,
+          }))
+          .sort((a, b) => b.avg - a.avg)
+          .map(({ product }) => product);
+      case "newest":
+        return [...filtered].sort((a, b) => b.id - a.id);
+      default:
+        return filtered;
+    }
+  }, [searchResults, selectedCategory, sortBy]);
+
+  const categories = useMemo(() => {
+    const unique = new Map<string, string>();
+    searchResults.forEach((p) => {
+      const key = p.category.toLowerCase();
+      if (!unique.has(key)) {
+        unique.set(key, p.category);
+      }
+    });
+    return ["all", ...unique.values()];
+  }, [searchResults]);
 
   return (
-    <Suspense>
+    <>
       <Header hasFooter aboutRef={aboutRef} />
       <div className="px-2 pt-10 pb-20 lg:px-16">
         {/* Heading */}
@@ -45,58 +164,43 @@ export const SearchView = () => {
             </p>
           )}
 
-          <div className="w-16 h-1 mx-auto mt-2 bg-black rounded md:w-20" />
+          <div className="mx-auto mt-2 w-16 h-1 bg-black rounded md:w-20" />
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-2 gap-2 md:gap-8 md:grid-cols-3 2xl:grid-cols-5">
-          {searchResults.map((product: Product) => (
+        {/* Products Panel */}
+        <ProductsPanel
+          categories={categories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={handleCategoryChange}
+          sortBy={sortBy}
+          setSortBy={handleSortChange}
+          viewMode={viewMode}
+          setViewMode={setViewMode}
+        />
+
+        {/* Product Card */}
+        <div ref={wrapperRef} className="relative">
+          <div className="overflow-hidden transition-all duration-500 ease-in-out">
             <div
-              key={product.id}
-              className="overflow-hidden transition-all duration-200 border shadow-sm bg-neutral-100 border-neutral-200 rounded-xl hover:shadow-md"
+              className={cn(
+                "grid gap-2 md:gap-4 xl:gap-6 transition-all duration-300",
+                viewMode === "list"
+                  ? "grid-cols-1"
+                  : "grid-cols-2 md:grid-cols-3 2xl:grid-cols-4",
+              )}
             >
-              <div
-                onClick={() =>
-                  router.push(`/products/${product.details[0].slug}`)
-                }
-                className="relative flex items-center justify-center overflow-hidden border-b h-[136px] md:h-[223px] 2xl:h-[245px] cursor-pointer border-neutral-200"
-                style={{
-                  background: product.background || "",
-                }}
-              >
-                <Image
-                  src={product.images[0]}
-                  alt={product.name}
-                  width={245}
-                  height={245}
-                  quality={100}
-                  className="object-contain w-full h-auto rounded-t"
+              {filteredAndSortedProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  viewMode={viewMode}
                 />
-              </div>
-              <div
-                onClick={() =>
-                  router.push(`/products/${product.details[0].slug}`)
-                }
-                className="p-2 space-y-1 cursor-pointer md:p-3"
-              >
-                <p className="text-xs md:text-sm text-[#BE984E]">
-                  {product.brand}
-                </p>
-                <h2
-                  title={product.name}
-                  className="text-sm md:text-xl font-semibold text-primary line-clamp-2 min-h-[36px] md:min-h-[60px] leading-tight md:leading-[1.4] hover:underline active:text-primary/70"
-                >
-                  {product.name}
-                </h2>
-                <p className="mt-2 font-semibold text-orange-500 md:text-xl">
-                  {formatPrice(product.details[0].price)}
-                </p>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
       <Footer aboutRef={aboutRef} />
-    </Suspense>
+    </>
   );
 };

@@ -16,7 +16,6 @@ import { calculateRatingStats } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
 import { products } from "@/app/storage";
-import { Product } from "@/types/invoice";
 
 const ROWS_PER_CLICK = 2;
 const PRODUCTS_PER_ROW = { mobile: 1, tablet: 2, desktop: 3, xl: 4 };
@@ -34,7 +33,6 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   const scrollPositionRef = useRef(0);
   const isUpdatingRef = useRef(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
 
   const handleCategoryChange = useCallback(
     (category: string) => {
@@ -118,17 +116,27 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
 
     switch (sortBy) {
       case "price-low":
-        return filtered.sort((a, b) => a.details[0].price - b.details[0].price);
-      case "price-high":
-        return filtered.sort((a, b) => b.details[0].price - a.details[0].price);
-      case "rating":
-        return filtered.sort(
+        return [...filtered].sort(
           (a, b) =>
-            calculateRatingStats(b.rating).averageRating -
-            calculateRatingStats(a.rating).averageRating,
+            (a.details[0]?.price ?? Number.POSITIVE_INFINITY) -
+            (b.details[0]?.price ?? Number.POSITIVE_INFINITY),
         );
+      case "price-high":
+        return [...filtered].sort(
+          (a, b) =>
+            (b.details[0]?.price ?? Number.NEGATIVE_INFINITY) -
+            (a.details[0]?.price ?? Number.NEGATIVE_INFINITY),
+        );
+      case "rating":
+        return [...filtered]
+          .map((p) => ({
+            product: p,
+            avg: calculateRatingStats(p.rating).averageRating,
+          }))
+          .sort((a, b) => b.avg - a.avg)
+          .map(({ product }) => product);
       case "newest":
-        return filtered.sort((a, b) => b.id - a.id);
+        return [...filtered].sort((a, b) => b.id - a.id);
       default:
         return filtered;
     }
@@ -137,10 +145,11 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   const { itemsToShow, isAllVisible, showControls } = useMemo(() => {
     const columns = getColumnsPerRow();
     const items = visibleRows * columns;
+    const initialItems = ROWS_PER_CLICK * columns;
     return {
       itemsToShow: items,
       isAllVisible: items >= filteredAndSortedProducts.length,
-      showControls: filteredAndSortedProducts.length > items,
+      showControls: filteredAndSortedProducts.length > initialItems,
     };
   }, [visibleRows, filteredAndSortedProducts.length, getColumnsPerRow]);
 
@@ -168,10 +177,14 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   }, [productsRef]);
 
   const categories = useMemo(() => {
-    const uniqueCategories = new Set(
-      products.map((p) => p.category.toLowerCase()),
-    );
-    return ["all", ...Array.from(uniqueCategories)];
+    const unique = new Map<string, string>();
+    products.forEach((p) => {
+      const key = p.category.toLowerCase();
+      if (!unique.has(key)) {
+        unique.set(key, p.category);
+      }
+    });
+    return ["all", ...unique.values()];
   }, []);
 
   return (
@@ -183,11 +196,11 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
         <div className="mb-12 text-center md:mb-16">
           <h2 className="mb-4 space-y-2 text-xl font-bold text-gray-900 md:text-2xl xl:text-3xl 2xl:text-4xl">
             <div>Khám phá cửa hàng trực tuyến</div>
-            <div className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-600">
+            <div className="block text-transparent bg-clip-text bg-gradient-to-r to-green-600 from-primary">
               THẠCH ÂM
             </div>
           </h2>
-          <p className="max-w-2xl mx-auto text-sm text-gray-800 md:text-lg">
+          <p className="mx-auto max-w-2xl text-sm text-gray-800 md:text-lg">
             Những sản phẩm chất lượng cao được tuyển chọn kỹ lưỡng dành riêng
             cho bạn
           </p>
@@ -206,7 +219,6 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
         <div ref={wrapperRef} className="relative">
           <div className="overflow-hidden transition-all duration-500 ease-in-out">
             <div
-              ref={gridRef}
               className={cn(
                 "grid gap-2 md:gap-4 xl:gap-6 transition-all duration-300",
                 viewMode === "list"

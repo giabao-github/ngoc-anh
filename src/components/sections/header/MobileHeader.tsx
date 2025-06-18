@@ -55,7 +55,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
     <>
       <header className="sticky top-0 left-0 z-20 w-full text-white bg-primary">
         {/* App Logo */}
-        <div className="flex items-center justify-between px-6 py-2 mx-auto max-w-7xl">
+        <div className="flex justify-between items-center px-6 py-2 mx-auto max-w-7xl">
           <div className="flex items-center space-x-4">
             <Image
               src="/logo.png"
@@ -83,7 +83,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               Thạch Âm
             </span>
           </div>
-          <div className="flex flex-row items-center gap-x-6">
+          <div className="flex flex-row gap-x-6 items-center">
             <div ref={cartIconRef} className="relative cursor-pointer group">
               <FiShoppingCart
                 size={24}
@@ -125,7 +125,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
             </div>
             <button
               type="button"
-              className="outline-none cursor-pointer ring-0 focus:ring-0 focus:outline-none"
+              className="ring-0 cursor-pointer outline-none focus:ring-0 focus:outline-none"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -204,7 +204,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                   handleSearch(query, router);
                   setIsMenuOpen(false);
                 }}
-                className="absolute inset-y-0 flex items-center text-gray-200 transition cursor-pointer left-3 hover:text-white active:text-white/80"
+                className="flex absolute inset-y-0 left-3 items-center text-gray-200 transition cursor-pointer hover:text-white active:text-white/80"
               >
                 <BsSearchHeart size={18} />
               </button>
@@ -212,11 +212,12 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               {/* Input */}
               <Input
                 type="text"
+                aria-label="Tìm kiếm sản phẩm"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Tìm kiếm sản phẩm..."
-                className={`w-full py-2 pl-10 pr-4 transition border border-white rounded-full shadow-md header-input shadow-white focus:ring-1 text-sm focus:ring-white focus:outline-none placeholder:text-gray-300 ${montserrat.className}`}
+                className={`w-full py-2 pl-10 pr-4 transition border border-white rounded-full shadow-md header-input shadow-white focus:ring-1 text-sm focus:ring-white focus:outline-none placeholder:text-gray-300 font-medium placeholder:font-normal ${montserrat.className}`}
               />
 
               {query.trim().length > 0 && (
@@ -224,7 +225,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                   title="Xóa tìm kiếm"
                   type="button"
                   onClick={() => setQuery("")}
-                  className="absolute inset-y-0 flex items-center transition cursor-pointer right-3 text-neutral-300 hover:text-white active:text-white"
+                  className="flex absolute inset-y-0 right-3 items-center transition cursor-pointer text-neutral-300 hover:text-white active:text-white"
                 >
                   <IoCloseCircle size={18} />
                 </button>

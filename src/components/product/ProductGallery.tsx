@@ -6,7 +6,7 @@ interface ProductGalleryProps {
   images: string[];
 }
 
-export default function ProductGallery({ images }: ProductGalleryProps) {
+const ProductGallery = ({ images }: ProductGalleryProps) => {
   const [selectedImage, setSelectedImage] = useState<string | undefined>(
     images[0],
   );
@@ -21,7 +21,7 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
 
   return (
     <div className="flex flex-col-reverse">
-      <div className="hidden w-full max-w-2xl mx-auto mt-6 sm:block lg:max-w-none">
+      <div className="hidden mx-auto mt-6 w-full max-w-2xl sm:block lg:max-w-none">
         <div className="grid grid-cols-4 gap-6">
           {images.map((image) => (
             <button
@@ -47,7 +47,7 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
       </div>
 
       <div className="w-full aspect-square">
-        <div className="relative overflow-hidden bg-gray-100 rounded-lg aspect-square">
+        <div className="overflow-hidden relative bg-gray-100 rounded-lg aspect-square">
           <Image
             src={selectedImage!}
             alt="Enlarged product image"
@@ -60,4 +60,6 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
       </div>
     </div>
   );
-}
+};
+
+export default ProductGallery;

@@ -1,3 +1,5 @@
+import { type ReactElement } from "react";
+
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 import { montserrat } from "@/config/fonts";
@@ -17,10 +19,10 @@ interface TabConfig {
   content: React.ReactNode;
 }
 
-export default function ProductContent({
+const ProductContent: React.FC<ProductContentProps> = ({
   content,
   isLoading,
-}: ProductContentProps) {
+}): ReactElement | null => {
   const isMobile = useIsMobile();
 
   const tabs: TabConfig[] = [
@@ -62,7 +64,7 @@ export default function ProductContent({
 
   return (
     <TabGroup className="mx-2 md:mx-0 md:pb-20">
-      <TabList className="flex border-b border-secondary/40 gap-x-10">
+      <TabList className="flex gap-x-10 border-b border-secondary/40">
         {tabs.map((tab) => (
           <Tab
             key={tab.key}
@@ -88,4 +90,6 @@ export default function ProductContent({
       </TabPanels>
     </TabGroup>
   );
-}
+};
+
+export default ProductContent;
