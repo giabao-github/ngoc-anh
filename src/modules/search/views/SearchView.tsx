@@ -105,31 +105,29 @@ export const SearchView = () => {
             return productCategory === selectedCategoryLower;
           });
 
-    const toSort = [...filtered];
-
     switch (sortBy) {
       case "price-low":
-        return toSort.sort(
+        return [...filtered].sort(
           (a, b) =>
             (a.details[0]?.price ?? Number.POSITIVE_INFINITY) -
             (b.details[0]?.price ?? Number.POSITIVE_INFINITY),
         );
       case "price-high":
-        return toSort.sort(
+        return [...filtered].sort(
           (a, b) =>
             (b.details[0]?.price ?? Number.NEGATIVE_INFINITY) -
             (a.details[0]?.price ?? Number.NEGATIVE_INFINITY),
         );
       case "rating":
-        return toSort.sort(
+        return [...filtered].sort(
           (a, b) =>
             calculateRatingStats(b.rating).averageRating -
             calculateRatingStats(a.rating).averageRating,
         );
       case "newest":
-        return toSort.sort((a, b) => b.id - a.id);
+        return [...filtered].sort((a, b) => b.id - a.id);
       default:
-        return toSort;
+        return filtered;
     }
   }, [searchResults, selectedCategory, sortBy]);
 
