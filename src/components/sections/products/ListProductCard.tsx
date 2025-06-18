@@ -126,7 +126,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
         onClose={handleCloseNotification}
         progress={progress}
       />
-      <div className="overflow-hidden h-48 bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-lg group">
+      <div className="overflow-hidden bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300 min-h-48 hover:shadow-lg group">
         <div className="flex flex-row h-full">
           <div
             className="overflow-hidden relative w-64 h-full cursor-pointer"

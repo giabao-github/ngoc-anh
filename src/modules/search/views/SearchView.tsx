@@ -45,7 +45,6 @@ export const SearchView = () => {
   const scrollPositionRef = useRef(0);
   const isUpdatingRef = useRef(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
 
   // Reset filters when query changes
   useEffect(() => {
@@ -167,11 +166,10 @@ export const SearchView = () => {
           setViewMode={setViewMode}
         />
 
-        {/* Product Grid/List */}
+        {/* Product Card */}
         <div ref={wrapperRef} className="relative">
           <div className="overflow-hidden transition-all duration-500 ease-in-out">
             <div
-              ref={gridRef}
               className={cn(
                 "grid gap-2 md:gap-4 xl:gap-6 transition-all duration-300",
                 viewMode === "list"

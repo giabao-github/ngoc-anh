@@ -66,7 +66,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           </h1>
         </div>
 
-        <nav className="items-center hidden font-semibold tracking-wider md:flex md:space-x-5 xl:space-x-7">
+        <nav className="hidden items-center font-semibold tracking-wider md:flex md:space-x-5 xl:space-x-7">
           <Link
             href="#"
             onClick={(e) => {
@@ -122,7 +122,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 title="Tìm kiếm"
                 type="button"
                 onClick={() => handleSearch(query, router)}
-                className="absolute inset-y-0 flex items-center text-gray-300 transition cursor-pointer left-4 hover:text-white active:text-white/80"
+                className="flex absolute inset-y-0 left-4 items-center text-gray-300 transition cursor-pointer hover:text-white active:text-white/80"
               >
                 <BsSearchHeart size={18} />
               </button>
@@ -130,6 +130,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
               {/* Input */}
               <Input
                 type="text"
+                aria-label="Tìm kiếm sản phẩm"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
@@ -145,7 +146,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                   title="Xóa tìm kiếm"
                   type="button"
                   onClick={() => setQuery("")}
-                  className="absolute inset-y-0 flex items-center transition cursor-pointer right-3 text-neutral-400 hover:text-white active:text-white"
+                  className="flex absolute inset-y-0 right-3 items-center transition cursor-pointer text-neutral-400 hover:text-white active:text-white"
                 >
                   <IoCloseCircle size={18} />
                 </button>

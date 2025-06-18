@@ -1,3 +1,5 @@
+import { type ReactElement } from "react";
+
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 import { montserrat } from "@/config/fonts";
@@ -17,7 +19,10 @@ interface TabConfig {
   content: React.ReactNode;
 }
 
-const ProductContent = ({ content, isLoading }: ProductContentProps) => {
+const ProductContent: React.FC<ProductContentProps> = ({
+  content,
+  isLoading,
+}): ReactElement | null => {
   const isMobile = useIsMobile();
 
   const tabs: TabConfig[] = [

@@ -33,7 +33,6 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   const scrollPositionRef = useRef(0);
   const isUpdatingRef = useRef(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
 
   const handleCategoryChange = useCallback(
     (category: string) => {
@@ -136,10 +135,11 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   const { itemsToShow, isAllVisible, showControls } = useMemo(() => {
     const columns = getColumnsPerRow();
     const items = visibleRows * columns;
+    const initialItems = ROWS_PER_CLICK * columns;
     return {
       itemsToShow: items,
       isAllVisible: items >= filteredAndSortedProducts.length,
-      showControls: filteredAndSortedProducts.length > items,
+      showControls: filteredAndSortedProducts.length > initialItems,
     };
   }, [visibleRows, filteredAndSortedProducts.length, getColumnsPerRow]);
 
@@ -205,7 +205,6 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
         <div ref={wrapperRef} className="relative">
           <div className="overflow-hidden transition-all duration-500 ease-in-out">
             <div
-              ref={gridRef}
               className={cn(
                 "grid gap-2 md:gap-4 xl:gap-6 transition-all duration-300",
                 viewMode === "list"

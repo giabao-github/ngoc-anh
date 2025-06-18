@@ -212,6 +212,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               {/* Input */}
               <Input
                 type="text"
+                aria-label="Tìm kiếm sản phẩm"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
