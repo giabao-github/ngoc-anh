@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Arsenal } from "next/font/google";
+import { Quicksand } from "next/font/google";
 
 import { Toaster } from "@/components/ui/sonner";
 
@@ -7,9 +7,9 @@ import { CartProvider } from "@/hooks/CartContext";
 
 import "./globals.css";
 
-const arsenal = Arsenal({
-  weight: ["400", "700"],
-  subsets: ["cyrillic", "latin", "vietnamese"],
+const quicksand = Quicksand({
+  subsets: ["latin", "latin-ext", "vietnamese"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <CartProvider>
-        <body className={`${arsenal.className} antialiased`}>{children}</body>
+        <body className={`${quicksand.className} antialiased`}>{children}</body>
         <Toaster />
       </CartProvider>
     </html>

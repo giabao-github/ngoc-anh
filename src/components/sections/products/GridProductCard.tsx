@@ -1,16 +1,18 @@
 "use client";
 
 import { useCallback, useMemo, useState } from "react";
-import { MdOutlineDiscount } from "react-icons/md";
 
 import {
   Eye,
   Heart,
+  LucideFlame,
+  LucideGift,
+  LucideTag,
+  LucideZap,
   Shield,
   ShoppingCart,
   Star,
   Truck,
-  Zap,
 } from "lucide-react";
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import Image from "next/image";
@@ -185,23 +187,25 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
                   <>
                     {"discount" in badges && (
                       <span className="px-2 py-0.5 md:px-3 md:py-1 text-[10px] md:text-xs font-medium text-white rounded-full shadow-sm bg-gradient-to-r from-red-500 to-red-600 flex items-center gap-1">
-                        <MdOutlineDiscount className="hidden w-3 h-3 md:inline" />
+                        <LucideTag className="hidden w-3 h-3 md:inline" />
                         <span>-{badges.discount}%</span>
                       </span>
                     )}
                     {"isReward" in badges && (
-                      <span className="px-2 py-0.5 md:px-3 md:py-1 text-[10px] md:text-xs font-medium text-white rounded-full shadow-sm bg-gradient-to-r from-pink-600 to-pink-700">
+                      <span className="px-2 py-0.5 md:px-3 md:py-1 text-[10px] md:text-xs font-medium text-white rounded-full shadow-sm bg-gradient-to-r from-pink-600 to-pink-700 flex items-center gap-1">
+                        <LucideGift className="hidden w-3 h-3 md:inline" />
                         <span>Hàng tặng</span>
                       </span>
                     )}
                     {"isBestseller" in badges && (
-                      <span className="px-2 py-0.5 md:px-3 md:py-1 text-[10px] md:text-xs font-medium text-white rounded-full shadow-sm bg-gradient-to-r from-orange-500 to-orange-600">
+                      <span className="px-2 py-0.5 md:px-3 md:py-1 text-[10px] md:text-xs font-medium text-white rounded-full shadow-sm bg-gradient-to-r from-orange-500 to-orange-600 flex items-center gap-1">
+                        <LucideFlame className="hidden w-3 h-3 md:inline" />
                         <span>Bán chạy</span>
                       </span>
                     )}
                     {badges.isNew && (
                       <span className="px-2 py-0.5 md:px-3 md:py-1 text-[10px] md:text-xs font-medium text-white rounded-full shadow-sm bg-gradient-to-r from-green-500 to-green-600 flex items-center gap-1">
-                        <Zap className="hidden w-3 h-3 md:inline" />
+                        <LucideZap className="hidden w-3 h-3 md:inline" />
                         <span>Mới</span>
                       </span>
                     )}
@@ -228,7 +232,10 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
               className="p-2 rounded-full shadow-lg backdrop-blur-sm transition-all duration-200 md:p-3 bg-white/80 hover:bg-white hover:scale-110"
               aria-label="Xem sản phẩm"
             >
-              <Eye className="w-4 h-4 text-gray-700 md:w-5 md:h-5" />
+              <Eye
+                strokeWidth={2.2}
+                className="w-4 h-4 text-gray-700 md:w-5 md:h-5"
+              />
             </button>
             <button
               type="button"
@@ -241,6 +248,7 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
               aria-label="Thêm vào danh sách yêu thích"
             >
               <Heart
+                strokeWidth={2.2}
                 className={`w-4 h-4 md:w-5 md:h-5 ${isFavorite ? "text-red-500 fill-red-500" : "text-gray-700"}`}
               />
             </button>
@@ -258,7 +266,10 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
               )}
               aria-label="Thêm vào giỏ hàng"
             >
-              <ShoppingCart className="w-4 h-4 text-white md:w-5 md:h-5" />
+              <ShoppingCart
+                strokeWidth={2.2}
+                className="w-4 h-4 text-white md:w-5 md:h-5"
+              />
             </button>
           </div>
           <button
@@ -268,19 +279,20 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
             aria-label="Thêm vào danh sách yêu thích"
           >
             <Heart
+              strokeWidth={2.2}
               className={`w-3 h-3 md:w-4 md:h-4 ${isFavorite ? "text-red-500 fill-red-500" : "text-gray-400"}`}
             />
           </button>
         </div>
-        <div className="flex flex-col flex-grow p-2.5 md:p-5">
+        <div className="flex flex-col gap-y-2 flex-grow p-2.5 md:p-5">
           <div className="flex items-center justify-between flex-shrink-0 mb-1.5 md:mb-2">
-            <span className="mr-2 text-[10px] font-medium text-blue-600 truncate md:text-sm">
+            <span className="mr-2 text-[10px] text-blue-600 truncate md:text-sm">
               {product.category}
             </span>
             {ratingStats.totalReviews > 0 ? (
               <div className="flex flex-shrink-0 gap-1 items-center">
                 <Star className="w-2.5 h-2.5 text-yellow-400 md:w-4 md:h-4 fill-yellow-400" />
-                <span className="text-[10px] font-medium md:text-sm">
+                <span className="text-[10px] md:text-sm">
                   {ratingStats.displayRating}
                 </span>
                 <span className="hidden text-sm text-gray-500 md:inline">
@@ -298,7 +310,7 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
           </div>
           <div className="flex-shrink-0 mb-2 md:mb-3">
             <h3
-              className="text-[12px] font-semibold leading-tight text-transparent transition-colors cursor-pointer md:text-lg w-fit h-fit line-clamp-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text hover:from-purple-600 hover:to-blue-600"
+              className="text-[12px] font-semibold leading-tight text-transparent transition-colors cursor-pointer md:text-xl w-fit h-fit line-clamp-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text hover:from-purple-600 hover:to-blue-600"
               title={product.name}
               onClick={handleViewProduct}
             >
@@ -307,12 +319,12 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
           </div>
           <div className="flex-grow"></div>
           <div className="flex flex-shrink-0 justify-between items-center mb-1 md:mb-4">
-            <div className="flex flex-col gap-0.5 md:flex-row md:items-center md:gap-2">
-              <div className="text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 md:text-xl">
+            <div className="flex flex-col gap-0.5 md:gap-x-4 md:flex-row md:items-center md:gap-2">
+              <div className="text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 md:text-2xl">
                 {formattedPrice}
               </div>
               {formattedOriginalPrice && (
-                <div className="text-xs text-gray-400 line-through md:text-sm">
+                <div className="text-xs text-gray-400 line-through md:text-base">
                   {formattedOriginalPrice}
                 </div>
               )}
@@ -329,7 +341,9 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
             >
               <div className="inline absolute right-0 bottom-0">
                 {isOutOfStock
-                  ? "Không thể mua thêm"
+                  ? isMobile
+                    ? "Giới hạn mua"
+                    : "Không thể mua thêm"
                   : product.quantity > 0
                     ? "Còn hàng"
                     : "Hết hàng"}

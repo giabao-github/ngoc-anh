@@ -1,7 +1,6 @@
 import { RefObject, useState } from "react";
-import { BsSearchHeart } from "react-icons/bs";
 import { FiMenu, FiShoppingCart, FiUser, FiX } from "react-icons/fi";
-import { IoCloseCircle } from "react-icons/io5";
+import { IoCloseCircle, IoSearch } from "react-icons/io5";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 
-import { montserrat } from "@/config/fonts";
+import { arsenal } from "@/config/fonts";
 
 import { HASH_ROUTES } from "@/constants/routes";
 
@@ -17,6 +16,7 @@ import { useCart } from "@/hooks/useCart";
 
 import { handleNavigation } from "@/libs/navigationUtils";
 import { handleSearch } from "@/libs/searchUtils";
+import { cn } from "@/libs/utils";
 
 interface MobileHeaderProps {
   hasSections?: boolean;
@@ -99,7 +99,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                       ? "w-7 h-2/3 -top-2 -right-4"
                       : "w-5 h-5 -top-[10px] -right-2"
                   } rounded-full flex items-center justify-center ${
-                    montserrat.className
+                    arsenal.className
                   }`}
                 >
                   {cartCount > 99 ? "99+" : cartCount}
@@ -140,7 +140,12 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         }`}
       >
         <div className="p-6">
-          <nav className="flex flex-col space-y-6 text-lg font-semibold tracking-wider">
+          <nav
+            className={cn(
+              "flex flex-col space-y-6 text-lg font-semibold tracking-wider",
+              arsenal.className,
+            )}
+          >
             <Link
               href="#"
               onClick={(e) => {
@@ -206,7 +211,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 }}
                 className="flex absolute inset-y-0 left-3 items-center text-gray-200 transition cursor-pointer hover:text-white active:text-white/80"
               >
-                <BsSearchHeart size={18} />
+                <IoSearch size={18} />
               </button>
 
               {/* Input */}
@@ -217,7 +222,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Tìm kiếm sản phẩm..."
-                className={`w-full py-2 pl-10 pr-4 transition border border-white rounded-full shadow-md header-input shadow-white focus:ring-1 text-sm focus:ring-white focus:outline-none placeholder:text-gray-300 font-medium placeholder:font-normal ${montserrat.className}`}
+                className="py-2 pr-4 pl-10 w-full text-sm font-medium rounded-full border border-white shadow-md transition header-input shadow-white focus:ring-1 focus:ring-white focus:outline-none placeholder:text-gray-300 placeholder:font-medium"
               />
 
               {query.trim().length > 0 && (

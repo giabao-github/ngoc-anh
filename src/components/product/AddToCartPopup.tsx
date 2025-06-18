@@ -64,22 +64,22 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
         "fixed z-50 transition-all duration-300 ease-out",
         isMobile
           ? cn(
-              "left-4 right-4 bottom-0 transform",
-              show ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
+              "bottom-0 right-4 left-4 transform",
+              show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full",
             )
           : cn(
-              "top-20 right-4 w-80 transform",
+              "right-4 top-20 transform w-[340px]",
               show
-                ? "translate-x-0 opacity-100 scale-100"
-                : "translate-x-full opacity-0 scale-95",
+                ? "opacity-100 scale-100 translate-x-0"
+                : "opacity-0 scale-95 translate-x-full",
             ),
-        "bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden",
+        "overflow-hidden bg-white rounded-2xl border border-gray-100 shadow-xl",
       )}
     >
       <div className="p-4">
-        <div className="flex items-start justify-between mb-4">
+        <div className="flex justify-between items-start mb-4">
           <div className="flex items-center space-x-2">
-            <div className="flex items-center justify-center w-6 h-6 bg-green-100 rounded-full">
+            <div className="flex justify-center items-center w-6 h-6 bg-green-100 rounded-full">
               <FiCheck className="w-4 h-4 text-green-600" />
             </div>
             <h4 className="text-sm font-semibold text-gray-900">
@@ -89,7 +89,7 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
           <button
             type="button"
             onClick={handleManualClose}
-            className="p-1 transition-colors rounded-full hover:bg-gray-100 active:bg-gray-200"
+            className="p-1 rounded-full transition-colors hover:bg-gray-100 active:bg-gray-200"
             aria-label="Đóng"
           >
             <FiX className="w-4 h-4 text-gray-400" />
@@ -111,7 +111,7 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
                 background: product.background || "",
               }}
             />
-            <div className="absolute flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-green-500 rounded-full -top-2 -right-2">
+            <div className="flex absolute -top-2 -right-2 justify-center items-center w-6 h-6 text-xs font-bold text-white bg-green-500 rounded-full">
               {quantity}
             </div>
           </div>
@@ -142,25 +142,25 @@ const AddToCartPopup: React.FC<AddToCartPopupProps> = ({
           <Button
             variant="outline"
             onClick={handleManualClose}
-            className="flex-1 transition-all duration-200 border-gray-200 hover:border-gray-300"
+            className="flex-1 font-semibold border-gray-300 transition-all duration-200 hover:border-gray-400"
           >
             <span className="text-sm">Tiếp tục mua</span>
           </Button>
           <Button
             onClick={handleViewCart}
             className={cn(
-              "flex-1 bg-green-500 hover:bg-green-600 text-white transition-all duration-200",
+              "flex-1 bg-green-600 hover:bg-green-600 text-white font-semibold transition-all duration-200",
               "shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]",
             )}
           >
             <FiShoppingCart className="w-4 h-4" />
-            <span className="text-sm font-medium">Xem giỏ hàng</span>
+            <span className="text-sm">Xem giỏ hàng</span>
           </Button>
         </div>
       </div>
       <div className="h-1 bg-gray-100">
         <div
-          className="h-full transition-all duration-75 ease-linear bg-gradient-to-r from-green-400 to-green-600"
+          className="h-full bg-gradient-to-r from-green-400 to-green-600 transition-all duration-75 ease-linear"
           style={{ width: `${Math.max(0, Math.min(progress, 100))}%` }}
         />
       </div>

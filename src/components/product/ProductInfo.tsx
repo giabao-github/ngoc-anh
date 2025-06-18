@@ -7,8 +7,6 @@ import { toast } from "sonner";
 
 import { Separator } from "@/components/ui/separator";
 
-import { montserrat } from "@/config/fonts";
-
 import { formatPrice, getOriginalPrice } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
@@ -56,7 +54,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
 
   return (
     <>
-      <div className="flex items-start justify-between">
+      <div className="flex justify-between items-start">
         <h1 className="text-xl md:text-3xl font-bold max-w-[90%]">
           {product.name}
         </h1>
@@ -78,9 +76,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
         </button>
       </div>
 
-      <div
-        className={`space-y-2 text-xs text-gray-700 ${montserrat.className}`}
-      >
+      <div className="space-y-2 text-xs text-gray-700">
         <p>{`Mã sản phẩm: ${product.code}`}</p>
         <p>{`Thương hiệu: ${product.brand}`}</p>
         {"collection" in product ? (
@@ -90,7 +86,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
         )}
       </div>
 
-      <div className="flex flex-row items-center gap-x-3 md:gap-x-5">
+      <div className="flex flex-row gap-x-3 items-center md:gap-x-5">
         <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 md:text-4xl">
           {formattedPrice}
         </p>

@@ -126,7 +126,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
         onClose={handleCloseNotification}
         progress={progress}
       />
-      <div className="overflow-hidden bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300 min-h-48 hover:shadow-lg group">
+      <div className="overflow-hidden h-48 bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-lg group">
         <div className="flex flex-row h-full">
           <div
             className="overflow-hidden relative w-64 h-full cursor-pointer"
@@ -192,7 +192,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
             <div className="flex flex-col h-full">
               <div className="flex-1">
                 <div className="flex justify-between items-start md:mb-2">
-                  <span className="mr-2 text-sm font-medium text-blue-600 truncate">
+                  <span className="mr-2 text-sm text-blue-600 truncate">
                     {product.category}
                   </span>
                   {ratingStats.totalReviews > 0 ? (
@@ -213,7 +213,7 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
                 </div>
 
                 <h3
-                  className="mb-3 text-lg font-semibold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 transition-colors cursor-pointer w-fit h-fit line-clamp-2 hover:from-purple-600 hover:to-blue-600"
+                  className="mb-3 text-xl font-semibold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 transition-colors cursor-pointer w-fit h-fit line-clamp-2 hover:from-purple-600 hover:to-blue-600"
                   onClick={handleViewProduct}
                   title={product.name}
                 >
@@ -235,12 +235,12 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
               </div>
 
               <div className="flex justify-between items-center">
-                <div className="flex flex-row gap-2 items-center">
-                  <div className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">
+                <div className="flex flex-row gap-x-4 items-center">
+                  <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">
                     {formattedPrice}
                   </div>
                   {formattedOriginalPrice && (
-                    <div className="text-sm text-gray-400 line-through">
+                    <div className="text-base text-gray-400 line-through">
                       {formattedOriginalPrice}
                     </div>
                   )}
@@ -255,8 +255,8 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
                     className="flex gap-x-3 justify-center items-center p-2 w-full bg-transparent rounded-full border transition-colors cursor-pointer select-none border-primary text-primary md:p-3 hover:bg-primary active:bg-primary/70 hover:text-white active:text-white/70 hover:border-primary active:border-primary/70"
                     aria-label="Xem sản phẩm"
                   >
-                    <Eye className="w-4 h-4" />
-                    <span className="text-sm font-semibold tracking-wide">
+                    <Eye strokeWidth={2.2} className="w-4 h-4" />
+                    <span className="text-sm font-bold tracking-wide">
                       Xem sản phẩm
                     </span>
                   </button>
@@ -272,8 +272,8 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
                     )}
                     aria-label="Thêm vào giỏ hàng"
                   >
-                    <ShoppingCart className="w-4 h-4" />
-                    <span className="text-sm font-semibold tracking-wide">
+                    <ShoppingCart strokeWidth={2.2} className="w-4 h-4" />
+                    <span className="text-sm font-bold tracking-wide">
                       Thêm vào giỏ
                     </span>
                   </button>

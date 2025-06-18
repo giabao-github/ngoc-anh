@@ -2,8 +2,6 @@ import { type ReactElement } from "react";
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
-import { montserrat } from "@/config/fonts";
-
 import useIsMobile from "@/hooks/useIsMobile";
 
 import { ProductContent as ProductContentType } from "@/types/product";
@@ -81,7 +79,7 @@ const ProductContent: React.FC<ProductContentProps> = ({
         ))}
       </TabList>
 
-      <TabPanels className={`pt-6 ${montserrat.className}`}>
+      <TabPanels className="pt-6">
         {tabs.map((tab) => (
           <TabPanel key={tab.key} className="space-y-4">
             {tab.content}

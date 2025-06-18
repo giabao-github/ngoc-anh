@@ -80,7 +80,7 @@ const CartDetails: React.FC<CartDetailsProps> = ({
       <div className="flex-1 max-w-[920px]">
         <CartDetailsHeader />
         <div className="my-2 rounded-lg">
-          <div className="p-3 mx-2 mb-5 text-sm font-semibold tracking-wide rounded md:text-base md:p-4 md:mt-5 md:mb-7 bg-orange-50">
+          <div className="p-3 mx-2 mb-5 text-sm font-semibold bg-orange-50 rounded md:text-base md:p-4 md:mt-5 md:mb-7">
             SẢN PHẨM BÁN LẺ
           </div>
           <div className="px-8 skeleton-desktop">
@@ -113,16 +113,16 @@ const CartDetails: React.FC<CartDetailsProps> = ({
       <div className="flex-1 max-w-[920px]">
         <CartDetailsHeader />
         <div className="my-2 rounded-lg">
-          <div className="p-3 mx-2 mb-5 text-sm font-semibold tracking-wide rounded md:text-base md:p-4 md:mt-5 md:mb-7 bg-orange-50">
+          <div className="p-3 mx-2 mb-5 text-sm font-semibold bg-orange-50 rounded md:text-base md:p-4 md:mt-5 md:mb-7">
             SẢN PHẨM BÁN LẺ
           </div>
           <ProductList cartItems={sortedCartItems} isMobile={isMobile} />
           <Button
             onClick={handleClearCartClick}
-            className="py-4 mx-4 mt-6 space-x-1 bg-white border md:mt-8 md:mx-8 md:py-5 border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white active:bg-rose-400 active:text-white"
+            className="py-4 mx-4 mt-6 space-x-1 text-rose-500 bg-white border border-rose-500 md:mt-8 md:mx-8 md:py-5 hover:bg-rose-500 hover:text-white active:bg-rose-400 active:text-white"
           >
             <FaTrash size={isMobile ? 16 : 20} />
-            <span className="text-sm font-semibold tracking-wide md:text-base">
+            <span className="text-sm font-bold md:text-base">
               Xóa tất cả sản phẩm
             </span>
           </Button>

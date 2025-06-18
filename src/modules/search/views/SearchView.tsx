@@ -150,7 +150,7 @@ export const SearchView = () => {
       <div className="px-2 pt-10 pb-20 lg:px-16">
         {/* Heading */}
         <div className="mb-10 text-center md:mb-16">
-          <h1 className="text-2xl font-semibold text-gray-900 md:text-3xl">
+          <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">
             Tìm kiếm
           </h1>
           {query.trim().length > 0 ? (

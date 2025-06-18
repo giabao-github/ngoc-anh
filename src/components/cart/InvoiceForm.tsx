@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { InvoiceInput } from "@/components/cart/InvoiceInput";
 import { SelectDropdown } from "@/components/cart/SelectDropdown";
 
-import { montserrat } from "@/config/fonts";
+import { quicksand } from "@/config/fonts";
 
 import { ToastIds } from "@/constants/toastIds";
 
@@ -215,7 +215,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
       <form
         ref={contentRef}
         onSubmit={form.handleSubmit(onSubmit, onInvalid)}
-        className="flex flex-col pb-4 font-medium gap-y-2"
+        className="flex flex-col gap-y-2 pb-4 font-medium"
         style={{ height: "100%" }}
       >
         {/* Company Name */}
@@ -224,7 +224,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
           form={form}
           sanitizeLevel="name"
           placeholder="Tên công ty"
-          font={montserrat}
+          font={quicksand}
           className="relative"
         />
 
@@ -235,7 +235,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
             form={form}
             sanitizeLevel="email"
             placeholder="Email"
-            font={montserrat}
+            font={quicksand}
             className="flex flex-col w-[61%] md:w-[70%]"
           />
           <InvoiceInput
@@ -244,7 +244,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
             sanitizeLevel="taxCode"
             maxLength={14}
             placeholder="Mã số thuế"
-            font={montserrat}
+            font={quicksand}
             className="flex flex-col w-[39%] md:w-[30%]"
           />
         </div>
@@ -262,7 +262,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
               }))}
               placeholder="Chọn tỉnh/thành phố"
               loading={addressData.loading.provinces}
-              font={montserrat}
+              font={quicksand}
             />
             <SelectDropdown
               name="district"
@@ -274,7 +274,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
               }))}
               placeholder="Chọn quận/huyện"
               disabled={!watchedValues.province}
-              font={montserrat}
+              font={quicksand}
             />
             <SelectDropdown
               name="ward"
@@ -286,7 +286,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
               }))}
               placeholder="Chọn phường/xã"
               disabled={!watchedValues.district}
-              font={montserrat}
+              font={quicksand}
             />
           </div>
 
@@ -296,7 +296,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
             form={form}
             sanitizeLevel="address"
             placeholder="Số nhà, tên đường (ví dụ: 198 Lê Lợi)"
-            font={montserrat}
+            font={quicksand}
             className="relative"
           />
 
@@ -305,7 +305,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
             <div
               className={cn(
                 "p-3 space-x-1.5 text-sm text-gray-700 border border-blue-200 rounded-md bg-blue-50",
-                montserrat.className,
+                quicksand.className,
               )}
             >
               <span className="font-semibold text-blue-700">
@@ -324,7 +324,7 @@ export const InvoiceForm: React.FC<InvoiceFormProps> = ({
         <div className="pt-4">
           <button
             type="submit"
-            className="px-6 py-3 font-semibold tracking-wide text-white transition-colors rounded-full cursor-pointer select-none w-fit bg-primary hover:bg-primary/80 active:bg-primary/60"
+            className="px-6 py-3 font-bold tracking-wide text-white rounded-full transition-colors cursor-pointer select-none w-fit bg-primary hover:bg-primary/80 active:bg-primary/60"
           >
             Lưu thông tin
           </button>

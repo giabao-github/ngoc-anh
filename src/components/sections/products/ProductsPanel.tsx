@@ -1,5 +1,7 @@
 import { ChevronDown, Grid3X3, List } from "lucide-react";
 
+import { quicksand } from "@/config/fonts";
+
 import { cn } from "@/libs/utils";
 
 interface ProductsPanelProps {
@@ -41,7 +43,12 @@ const ProductsPanel: React.FC<ProductsPanelProps> = ({
     };
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 p-4 mb-8 bg-white border shadow-sm rounded-xl">
+    <div
+      className={cn(
+        "flex flex-wrap items-center justify-between gap-4 p-4 mb-8 bg-white border shadow-sm rounded-xl",
+        quicksand.className,
+      )}
+    >
       <div className="flex flex-wrap gap-2">
         {categories.map((category) => (
           <button
@@ -62,14 +69,14 @@ const ProductsPanel: React.FC<ProductsPanelProps> = ({
         ))}
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex gap-4 items-center">
         <div className="relative">
           <select
             title="Sắp xếp sản phẩm"
             aria-label="Sắp xếp sản phẩm"
             value={sortBy}
             onChange={handleSortChange}
-            className="px-3 py-1.5 md:px-4 md:py-2 pr-8 md:pr-10 text-xs md:text-sm bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-1 focus:ring-neutral-300 focus:border-transparent"
+            className="px-3 py-1.5 font-medium md:px-4 md:py-2 pr-8 md:pr-10 text-xs md:text-sm bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-1 focus:ring-neutral-300 focus:border-transparent"
           >
             <option value="featured">Nổi bật</option>
             <option value="newest">Mới nhất</option>
@@ -77,7 +84,7 @@ const ProductsPanel: React.FC<ProductsPanelProps> = ({
             <option value="price-high">Giá cao → thấp</option>
             <option value="rating">Đánh giá cao</option>
           </select>
-          <ChevronDown className="absolute w-4 h-4 text-gray-500 transform -translate-y-1/2 pointer-events-none right-2 top-1/2" />
+          <ChevronDown className="absolute right-2 top-1/2 w-4 h-4 text-gray-500 transform -translate-y-1/2 pointer-events-none" />
         </div>
 
         <div className="hidden p-1 bg-gray-100 rounded-lg md:flex">

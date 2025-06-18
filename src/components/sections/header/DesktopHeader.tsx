@@ -1,7 +1,6 @@
 import { RefObject } from "react";
-import { BsSearchHeart } from "react-icons/bs";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
-import { IoCloseCircle } from "react-icons/io5";
+import { IoCloseCircle, IoSearch } from "react-icons/io5";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 
-import { montserrat } from "@/config/fonts";
+import { arsenal, montserrat } from "@/config/fonts";
 
 import { HASH_ROUTES } from "@/constants/routes";
 
@@ -50,7 +49,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
   return (
     <header className="sticky top-0 z-20 px-6 py-2 text-white bg-primary">
       <div className="flex items-center justify-between mx-auto max-w-[1400px]">
-        <div className="flex items-center space-x-4">
+        <div className={cn("flex items-center space-x-4", arsenal.className)}>
           <Image
             src="/logo.png"
             alt="Logo"
@@ -61,12 +60,17 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             onClick={() => router.push("/")}
             className="object-contain w-16 h-16 cursor-pointer select-none md:w-20 md:h-20"
           />
-          <h1 className="hidden text-2xl font-semibold uppercase select-none 2xl:text-3xl text-logo md:block">
+          <h1 className="hidden text-2xl font-semibold uppercase select-none xl:text-3xl 2xl:text-4xl text-logo md:block">
             Thạch Âm
           </h1>
         </div>
 
-        <nav className="hidden items-center font-semibold tracking-wider md:flex md:space-x-5 xl:space-x-7">
+        <nav
+          className={cn(
+            "hidden items-center font-semibold tracking-wider md:flex md:space-x-5 xl:space-x-7",
+            arsenal.className,
+          )}
+        >
           <Link
             href="#"
             onClick={(e) => {
@@ -124,7 +128,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 onClick={() => handleSearch(query, router)}
                 className="flex absolute inset-y-0 left-4 items-center text-gray-300 transition cursor-pointer hover:text-white active:text-white/80"
               >
-                <BsSearchHeart size={18} />
+                <IoSearch size={18} />
               </button>
 
               {/* Input */}

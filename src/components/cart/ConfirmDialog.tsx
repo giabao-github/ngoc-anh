@@ -36,7 +36,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
         aria-modal="true"
         aria-labelledby="confirm-dialog-title"
         aria-describedby="confirm-dialog-desc"
-        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        className="flex fixed inset-0 z-50 justify-center items-center p-4"
       >
         <div
           className={`
@@ -45,12 +45,12 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
         `}
         >
           {/* Header */}
-          <div className="relative flex items-center gap-3 p-4 border-b md:p-6">
-            <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-full md:w-12 md:h-12 bg-rose-100">
+          <div className="flex relative gap-3 items-center p-4 border-b md:p-6">
+            <div className="flex flex-shrink-0 justify-center items-center w-10 h-10 bg-rose-100 rounded-full md:w-12 md:h-12">
               <FaTriangleExclamation className="text-lg text-rose-500 md:text-xl" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold md:text-xl text-rose-500">
+              <h3 className="text-lg font-bold text-rose-500 md:text-xl">
                 Xác nhận xóa giỏ hàng?
               </h3>
               <p className="mt-1 text-sm text-gray-600">
@@ -78,8 +78,8 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
               </span>{" "}
               trong giỏ hàng không?
             </p>
-            <div className="p-3 mt-4 border rounded-lg bg-amber-50 border-amber-600">
-              <p className="flex items-start gap-2 text-xs text-amber-800 md:text-sm">
+            <div className="p-3 mt-4 bg-amber-50 rounded-lg border border-amber-600">
+              <p className="flex gap-2 items-start text-xs text-amber-800 md:text-sm">
                 <FaTriangleExclamation
                   className="text-amber-600 mt-0.5 flex-shrink-0"
                   size={12}
@@ -96,7 +96,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
               onClick={onClose}
               variant="outline"
               className={`
-                flex-1 font-semibold transition-all duration-200
+                flex-1 font-bold transition-all duration-200
                 ${isMobile ? "py-2.5 text-sm" : "py-3 text-base"}
                 border-gray-400 hover:bg-gray-200 hover:border-gray-500 hover:text-black active:bg-gray-300 active:border-gray-600
               `}
@@ -106,7 +106,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
             <Button
               onClick={onConfirm}
               className={`
-                flex-1 font-semibold transition-all duration-200 transform
+                flex-1 font-bold transition-all duration-200 transform
                 ${isMobile ? "py-2.5 text-sm" : "py-3 text-base"}
                 bg-white border border-rose-500 text-rose-500 hover:bg-rose-500 hover:text-white active:bg-rose-400 active:text-white 
                 hover:scale-[1.02] active:scale-[0.98]

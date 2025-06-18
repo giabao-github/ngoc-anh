@@ -2,6 +2,10 @@ import { RefObject } from "react";
 
 import { CollectionCarousel } from "@/components/ui/collection-carousel";
 
+import { arsenal } from "@/config/fonts";
+
+import { cn } from "@/libs/utils";
+
 import { collections } from "@/app/storage";
 
 interface CollectionProps {
@@ -36,9 +40,14 @@ const Collection: React.FC<CollectionProps> = ({ collectionRef }) => (
       }
     `}</style>
     {/* Content Container - Centered with max-width */}
-    <div className="absolute inset-0 flex flex-col justify-center">
+    <div className="flex absolute inset-0 flex-col justify-center">
       <div className="px-2 mx-auto max-w-screen md:max-w-[90%] md:px-6">
-        <h2 className="mb-12 text-xl font-semibold tracking-wide text-center text-white md:text-2xl xl:text-3xl 2xl:text-4xl md:mb-24 2xl:mb-32">
+        <h2
+          className={cn(
+            "mb-12 text-xl font-semibold tracking-wide text-center text-white md:text-2xl xl:text-3xl 2xl:text-4xl md:mb-24 2xl:mb-32",
+            arsenal.className,
+          )}
+        >
           Sản phẩm nổi bật
         </h2>
         <CollectionCarousel onSelect={() => {}} data={data} />
