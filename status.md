@@ -7,7 +7,7 @@
 - [ ] Implement next/image priority loading only for above-the-fold images
 - [ ] Add explicit width/height to all images to prevent layout shifts
 - [ ] Consider using WebP format with fallback for all product images
-- [ ] Implement responsive image sizes using srcset for different view ports
+- [ ] Implement responsive image sizes using srcset for different viewports
 
 ### 2. Code Splitting and Bundle Size
 
@@ -178,14 +178,15 @@
   - ProductCard
   - CartProduct
   - ProductList
+  - RatingSection
 - Confirmed all expensive calculations are already memoized (useMemo/useCallback).
-- Confirmed all API and async logic have robust error handling and user feedback.
-- Confirmed in-memory caching is used where appropriate.
+- All API and async logic have robust error handling and user feedback.
+- Guaranteed in-memory caching is used where appropriate.
 - No useless or redundant operations were found.
 - No breaking changes or unoptimized code were introduced.
 
 ### What was not done
 
 - No further memoization or caching was added, as all critical areas are already optimized.
-- No changes to error handling, as it is already robust.
-- No changes to business logic or UI.
+- Error handling stays robust; no changes applied.
+- Business logic and UI remain unaltered.
