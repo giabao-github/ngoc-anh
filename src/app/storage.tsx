@@ -180,7 +180,7 @@ export const products: Product[] = [
   {
     id: 5,
     name: "Quạt Tay Thạch Âm - Khmer Wind",
-    images: ["/products/hand-fan-1.jpeg"],
+    images: ["/products/hand-fan-1.jpg"],
     background: "#FCFCFC",
     zoom: [],
     descriptionKey: "quat-tay-thach-am-khmer-wind",

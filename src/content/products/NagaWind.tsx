@@ -1,6 +1,6 @@
 import { ProductContent } from "@/types/product";
 
-export const nagaWind: ProductContent = {
+const nagaWind: ProductContent = {
   description: (
     <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
       <p>Quạt Tay Thạch Âm - Nét Đẹp Huyền Bí Từ Họa Tiết Khmer</p>
@@ -96,3 +96,5 @@ export const nagaWind: ProductContent = {
     </div>
   ),
 };
+
+export default nagaWind;
