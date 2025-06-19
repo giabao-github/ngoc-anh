@@ -1,6 +1,6 @@
 import { ProductContent } from "@/types/product";
 
-export const khmerWind: ProductContent = {
+const khmerWind: ProductContent = {
   description: (
     <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
       <p>Quạt Tay Thạch Âm - Nét Đẹp Huyền Bí Từ Họa Tiết Khmer</p>
@@ -97,3 +97,5 @@ export const khmerWind: ProductContent = {
     </div>
   ),
 };
+
+export default khmerWind;

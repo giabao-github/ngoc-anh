@@ -1,9 +1,13 @@
+import { useMemo, useRef } from "react";
+
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+
 import useIsMobile from "@/hooks/useIsMobile";
 import { useProductContent } from "@/hooks/useProductContent";
+
 import { Product } from "@/types/product";
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { useMemo, useRef } from "react";
 
 interface ProductDetailsProps {
   product: Product;
@@ -17,7 +21,7 @@ interface TabConfig {
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   const isMobile = useIsMobile();
-  const content = useProductContent(product);
+  const { content, isLoading, error } = useProductContent(product);
   const tabRefs = useRef<(HTMLElement | null)[]>([]);
 
   const tabs = useMemo(() => {
@@ -49,6 +53,24 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
 
     return tabConfigs;
   }, [content, isMobile]);
+
+  if (isLoading) {
+    return (
+      <div className="py-8 text-center text-gray-400">Đang tải nội dung...</div>
+    );
+  }
+
+  if (error) {
+    return <div className="py-8 text-center text-rose-500">{error}</div>;
+  }
+
+  if (tabs.length === 0) {
+    return (
+      <div className="py-8 text-center text-gray-400">
+        Không có nội dung cho sản phẩm này.
+      </div>
+    );
+  }
 
   return (
     <TabGroup

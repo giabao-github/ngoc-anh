@@ -1,6 +1,6 @@
 import { ProductContent } from "@/types/product";
 
-export const yellowBadge: ProductContent = {
+const yellowBadge: ProductContent = {
   description: (
     <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
       <p>
@@ -25,3 +25,5 @@ export const yellowBadge: ProductContent = {
     </div>
   ),
 };
+
+export default yellowBadge;

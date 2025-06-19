@@ -1,6 +1,6 @@
 import { ProductContent } from "@/types/product";
 
-export const bandana: ProductContent = {
+const bandana: ProductContent = {
   description: (
     <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
       <p>"Khăn Bandana Thạch Âm: Nét Vàng Cổ Tích Giữa Làn Gió Hiện Đại."</p>
@@ -47,3 +47,5 @@ export const bandana: ProductContent = {
     </div>
   ),
 };
+
+export default bandana;

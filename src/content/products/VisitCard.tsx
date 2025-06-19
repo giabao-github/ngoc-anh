@@ -1,6 +1,6 @@
 import { ProductContent } from "@/types/product";
 
-export const visitCard: ProductContent = {
+const visitCard: ProductContent = {
   description: (
     <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
       <p>Giới Thiệu Bộ Card Visit "Thạch Âm: Dấu Ấn Di Sản Khmer"</p>
@@ -63,3 +63,5 @@ export const visitCard: ProductContent = {
     </div>
   ),
 };
+
+export default visitCard;
