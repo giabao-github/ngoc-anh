@@ -15,11 +15,11 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
   <footer
     ref={aboutRef}
-    className="px-2 py-12 tracking-wide text-white md:px-6 bg-primary md:py-16"
+    className="px-2 py-12 text-white md:px-6 bg-primary md:py-16"
   >
     <div className="grid gap-16 mx-auto px-6 max-w-[1400px] md:grid-cols-7 md:gap-32 relative">
       <div className="text-sm md:text-base 2xl:text-lg w-fit md:col-span-3">
-        <h3 className="mb-4 font-medium uppercase">Trụ sở chính</h3>
+        <h3 className="mb-4 font-semibold uppercase">Trụ sở chính</h3>
         <div
           className="text-lg md:text-xl 2xl:text-2xl mb-4 font-semibold uppercase text-[#D4AF37] block"
           aria-label="Công ty TNHH Thạch Âm"
@@ -46,7 +46,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
         </a>
       </div>
       <div className="text-sm w-fit md:text-base 2xl:text-lg md:col-span-2">
-        <h3 className="mb-4 font-medium uppercase">Kết nối với chúng tôi</h3>
+        <h3 className="mb-4 font-semibold uppercase">Kết nối với chúng tôi</h3>
         <div className="space-y-1">
           <p>
             Hotline:&nbsp;
@@ -69,21 +69,21 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
         </div>
         <div className="flex mt-10 space-x-6 md:mt-12">
           <a
-            href="https://www.facebook.com/minhlongcompany"
+            href="https://www.facebook.com/hutechuniversity"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaFacebookF className="text-xl md:text-3xl hover:text-[#D4AF37] active:text-[#D4AF37]/70 cursor-pointer" />
           </a>
           <a
-            href="https://www.instagram.com/minhlongporcelain"
+            href="https://www.instagram.com/hutechuniversity"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaInstagram className="text-xl md:text-3xl hover:text-[#D4AF37] active:text-[#D4AF37]/70 cursor-pointer" />
           </a>
           <a
-            href="https://www.youtube.com/@MinhLongPorcelain"
+            href="https://www.youtube.com/HUTECHChannel"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -114,7 +114,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
               src={
                 "https://file.hstatic.net/200000532849/file/logothongbao_d4f8886efdb04dd3984bff803b418aa5.png"
               }
-              alt="Verified"
+              alt="Logo chứng nhận đã đăng ký Bộ Công Thương"
               fill
               sizes="(max-width: 768px) 128px, 192px"
               className="object-contain"
@@ -124,7 +124,7 @@ const Footer: React.FC<FooterProps> = ({ aboutRef }) => (
         </div>
       </div>
     </div>
-    <div className="mt-16 text-base font-semibold tracking-wide text-center text-white md:text-lg">
+    <div className="mt-16 text-base font-semibold text-center text-white md:text-lg">
       &copy; {currentYear} Thạch Âm. All rights reserved.
     </div>
   </footer>

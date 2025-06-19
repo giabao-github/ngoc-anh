@@ -168,15 +168,21 @@ export const SearchView = () => {
         </div>
 
         {/* Products Panel */}
-        <ProductsPanel
-          categories={categories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={handleCategoryChange}
-          sortBy={sortBy}
-          setSortBy={handleSortChange}
-          viewMode={viewMode}
-          setViewMode={setViewMode}
-        />
+        {totalResults > 0 ? (
+          <ProductsPanel
+            categories={categories}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={handleCategoryChange}
+            sortBy={sortBy}
+            setSortBy={handleSortChange}
+            viewMode={viewMode}
+            setViewMode={setViewMode}
+          />
+        ) : (
+          <p className="px-6 text-sm text-center text-gray-500 md:text-base">
+            Vui lòng kiểm tra chính tả, sử dụng các từ tổng quát hơn và thử lại.
+          </p>
+        )}
 
         {/* Product Card */}
         <div ref={wrapperRef} className="relative">

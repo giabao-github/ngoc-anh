@@ -15,7 +15,7 @@ import { montserrat } from "@/config/fonts";
 import { useCart } from "@/hooks/useCart";
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { formatPrice } from "@/libs/productUtils";
+import { formatPrice, getProductDetails } from "@/libs/productUtils";
 import { cn } from "@/libs/utils";
 
 import { CartItem } from "@/types/cart";
@@ -99,21 +99,6 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
     }
   };
 
-  const getProductDetails = () => {
-    const details = [];
-    // If pattern exists, only show pattern
-    if (product.details[0].pattern) {
-      details.push(product.details[0].pattern);
-    } else if (product.details[0].color) {
-      // Only show color if no pattern exists
-      details.push(product.details[0].color);
-    }
-    if (product.size) {
-      details.push(product.size);
-    }
-    return details.join(" / ");
-  };
-
   return (
     <div {...swipeHandlers} className="overflow-hidden relative">
       <div {...swipeHandlers} className="overflow-hidden relative min-h-24">
@@ -170,8 +155,8 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                   </span>
                 </Link>
               </h3>
-              <p className="text-sm text-gray-500 md:text-base">
-                {getProductDetails() || "Không xác định"}
+              <p className="text-sm tracking-tight text-gray-500 md:text-base">
+                {getProductDetails(product)}
               </p>
             </div>
 
@@ -187,13 +172,13 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                     product &&
                     handleQuantityChange("decrement", product)
                   }
-                  className={`w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-tl-lg rounded-bl-lg transition ${
+                  className={`w-7 h-7 md:w-9 md:h-9 flex items-center justify-center rounded-tl-lg rounded-bl-lg transition ${
                     item.quantity > 1
                       ? "cursor-pointer hover:bg-gray-200 active:bg-gray-200/80"
                       : "cursor-default text-gray-400"
                   }`}
                 >
-                  <FiMinus size={isMobile ? 12 : 16} aria-hidden="true" />
+                  <FiMinus size={isMobile ? 12 : 14} aria-hidden="true" />
                 </button>
                 <Input
                   type="text"
@@ -204,9 +189,10 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                   onBlur={handleBlur}
                   min={1}
                   max={product.quantity}
-                  className={`w-[34px] h-8 md:w-12 md:h-10 p-0 text-center font-medium rounded-none border-none shadow-[2px_0_4px_-1px_rgba(0,0,0,0.1),-2px_0_4px_-1px_rgba(0,0,0,0.1)] ${
-                    isMobile ? "text-xs" : "text-sm"
-                  } ${montserrat.className}`}
+                  className={cn(
+                    "w-[34px] h-8 md:w-12 md:h-9 p-0 text-center font-medium rounded-none border-none shadow-[2px_0_4px_-1px_rgba(0,0,0,0.1),-2px_0_4px_-1px_rgba(0,0,0,0.1)] text-xs md:text-sm",
+                    montserrat.className,
+                  )}
                   aria-label="Product quantity"
                   aria-valuemin={1}
                   aria-valuemax={product.quantity}
@@ -222,17 +208,20 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
                     item.quantity < product.quantity &&
                     handleQuantityChange("increment", product)
                   }
-                  className={`w-7 h-7 md:w-10 md:h-10 flex items-center justify-center rounded-tr-lg rounded-br-lg transition ${
+                  className={`w-7 h-7 md:w-9 md:h-9 flex items-center justify-center rounded-tr-lg rounded-br-lg transition ${
                     product?.quantity && item.quantity < product.quantity
                       ? "cursor-pointer hover:bg-gray-200 active:bg-gray-200/80"
                       : "cursor-default text-gray-400"
                   }`}
                 >
-                  <FiPlus size={isMobile ? 12 : 16} />
+                  <FiPlus size={isMobile ? 12 : 14} />
                 </button>
               </div>
               <div
-                className={`w-[134px] md:w-36 text-right text-sm md:text-base tracking-wide font-bold text-orange-500 ${montserrat.className}`}
+                className={cn(
+                  "w-[134px] md:w-36 text-right text-sm md:text-base tracking-[0.015em] font-bold text-orange-500",
+                  montserrat.className,
+                )}
               >
                 {formattedTotalPrice}
               </div>

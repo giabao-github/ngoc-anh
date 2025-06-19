@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 
-import { arsenal } from "@/config/fonts";
+import { arsenal, montserrat, quicksand } from "@/config/fonts";
 
 import { HASH_ROUTES } from "@/constants/routes";
 
@@ -83,7 +83,12 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               Thạch Âm
             </span>
           </div>
-          <div className="flex flex-row gap-x-6 items-center">
+          <div
+            className={cn(
+              "flex flex-row gap-x-6 items-center",
+              montserrat.className,
+            )}
+          >
             <div ref={cartIconRef} className="relative cursor-pointer group">
               <FiShoppingCart
                 size={24}
@@ -94,13 +99,12 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
               />
               {cartCount > 0 && (
                 <div
-                  className={`absolute bg-white text-orange-500 text-[10px] font-bold ${
+                  className={cn(
+                    "absolute bg-white text-orange-500 text-[10px] font-bold rounded-full flex items-center justify-center",
                     cartCount > 99
                       ? "w-7 h-2/3 -top-2 -right-4"
-                      : "w-5 h-5 -top-[10px] -right-2"
-                  } rounded-full flex items-center justify-center ${
-                    arsenal.className
-                  }`}
+                      : "w-5 h-5 -top-[10px] -right-2",
+                  )}
                 >
                   {cartCount > 99 ? "99+" : cartCount}
                 </div>
@@ -200,7 +204,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
             >
               Về chúng tôi
             </Link>
-            <div className="relative mt-4 mb-1">
+            <div className={cn("relative mt-4 mb-1", quicksand.className)}>
               {/* Search icon */}
               <button
                 title="Tìm kiếm"

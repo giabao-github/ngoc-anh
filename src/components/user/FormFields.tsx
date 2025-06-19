@@ -58,7 +58,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
           autoComplete="username"
           value={email}
           onChange={(e) => {
-            const value = e.target.value;
+            const { value } = e.target;
             if (isPhoneLogin) {
               const digitsOnly = value.replace(/\D/g, "");
               setEmail(digitsOnly);
