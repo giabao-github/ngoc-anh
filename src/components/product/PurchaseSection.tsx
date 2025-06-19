@@ -276,7 +276,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
               )}
             >
               <FiShoppingCart size={isMobile ? 18 : 24} />
-              <span className="text-sm font-bold md:text-base md:tracking-wide">
+              <span className="text-sm font-bold md:text-base">
                 {isAddingToCart
                   ? "Đang thêm..."
                   : isMobile
@@ -289,9 +289,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
               className="mt-2 border border-primary p-3 md:p-4 rounded-full w-full md:w-[55%] transition-colors flex items-center justify-center gap-x-2 md:gap-x-4 select-none bg-white text-primary hover:bg-primary hover:text-white active:bg-primary/80 active:text-white/80 cursor-pointer hover:border-none active:border-none"
             >
               <FaBagShopping size={isMobile ? 18 : 24} />
-              <span className="text-sm font-bold md:text-base md:tracking-wide">
-                Mua ngay
-              </span>
+              <span className="text-sm font-bold md:text-base">Mua ngay</span>
             </button>
           </>
         )}

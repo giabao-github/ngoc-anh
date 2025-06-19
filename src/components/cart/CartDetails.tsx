@@ -122,7 +122,7 @@ const CartDetails: React.FC<CartDetailsProps> = ({
             className="py-4 mx-4 mt-6 space-x-1 text-rose-500 bg-white border border-rose-500 md:mt-8 md:mx-8 md:py-5 hover:bg-rose-500 hover:text-white active:bg-rose-400 active:text-white"
           >
             <FaTrash size={isMobile ? 16 : 20} />
-            <span className="text-sm font-bold md:text-base">
+            <span className="text-sm tracking-tight font-bold md:text-base">
               Xóa tất cả sản phẩm
             </span>
           </Button>

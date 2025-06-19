@@ -23,9 +23,9 @@ const InvoiceSection: React.FC<InvoiceSectionProps> = ({
   contentHeight,
 }) => {
   return (
-    <div className="flex items-center gap-3 mx-2 mt-8 mb-0 md:mb-20">
-      <div className="flex flex-col w-full gap-y-4">
-        <div className="flex flex-row items-center gap-2 md:gap-3">
+    <div className="flex gap-3 items-center mx-2 mt-8 mb-0 md:mb-20">
+      <div className="flex flex-col gap-y-4 w-full">
+        <div className="flex flex-row gap-2 items-center md:gap-3">
           <Input
             type="checkbox"
             id="invoice"
@@ -35,7 +35,7 @@ const InvoiceSection: React.FC<InvoiceSectionProps> = ({
           />
           <label
             htmlFor="invoice"
-            className={`text-sm md:text-base font-medium ${montserrat.className}`}
+            className="text-sm font-semibold md:text-base"
           >
             Xuất hoá đơn cho đơn hàng
           </label>

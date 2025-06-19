@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 
-import { arsenal, montserrat } from "@/config/fonts";
+import { arsenal, montserrat, quicksand } from "@/config/fonts";
 
 import { HASH_ROUTES } from "@/constants/routes";
 
@@ -119,7 +119,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
           >
             Về chúng tôi
           </Link>
-          <div className="px-4">
+          <div className={cn("px-4", quicksand.className)}>
             <div className="relative">
               {/* Search icon */}
               <button
@@ -139,10 +139,7 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Tìm kiếm sản phẩm..."
-                className={cn(
-                  "header-input w-80 2xl:w-96 font-medium pl-12 pr-4 py-2 border border-white rounded-full shadow-md shadow-white focus:ring-1 focus:ring-white focus:outline-none placeholder:text-gray-400 transition",
-                  montserrat.className,
-                )}
+                className="py-2 pr-4 pl-12 w-80 font-medium rounded-full border border-white shadow-md transition header-input 2xl:w-96 shadow-white focus:ring-1 focus:ring-white focus:outline-none placeholder:text-gray-400 placeholder:font-medium"
               />
 
               {query.trim().length > 0 && (
@@ -157,7 +154,13 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
               )}
             </div>
           </div>
-          <div ref={cartIconRef} className="relative cursor-pointer group">
+          <div
+            ref={cartIconRef}
+            className={cn(
+              "relative cursor-pointer group",
+              montserrat.className,
+            )}
+          >
             <FiShoppingCart
               size={24}
               title="Đi đến giỏ hàng"
@@ -167,13 +170,12 @@ const DesktopHeader: React.FC<DesktopHeaderProps> = ({
             />
             {cartCount > 0 && (
               <div
-                className={`absolute bg-white text-orange-500 text-[10px] font-bold ${
+                className={cn(
+                  "absolute bg-white text-orange-500 text-[10px] font-bold rounded-full flex items-center justify-center",
                   cartCount > 99
                     ? "w-7 h-2/3 -top-2 -right-4"
-                    : "w-5 h-5 -top-[10px] -right-2"
-                } rounded-full flex items-center justify-center ${
-                  montserrat.className
-                }`}
+                    : "w-5 h-5 -top-[10px] -right-2",
+                )}
               >
                 {cartCount > 99 ? "99+" : cartCount}
               </div>

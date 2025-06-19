@@ -5,6 +5,21 @@ import { Product } from "@/types/invoice";
 export const findProductBySlug = (slug: string) =>
   products.find((item) => item.details[0].slug === slug);
 
+export const getProductDetails = (product: Product) => {
+  const details = [];
+  // If pattern exists, only show pattern
+  if (product.details[0].pattern) {
+    details.push(product.details[0].pattern);
+  } else if (product.details[0].color) {
+    // Only show color if no pattern exists
+    details.push(product.details[0].color);
+  }
+  if (product.size) {
+    details.push(product.size);
+  }
+  return details.join(" / ");
+};
+
 export const calculateRatingStats = (
   rating?: number[],
 ): {
