@@ -23,7 +23,7 @@ const RatingSection: React.FC<RatingSectionProps> = ({
 }) => {
   const router = useRouter();
   return (
-    <div className="px-2 pt-10 pb-12 md:pt-0 md:px-16 md:pb-24">
+    <div className="px-2 pt-10 pb-12 md:pt-0 md:px-12 md:pb-24">
       <div className="grid gap-8 md:grid-cols-1 md:gap-12">
         <div className="space-y-4 md:space-y-8">
           <h3 className="text-xl font-bold md:text-3xl">
@@ -100,6 +100,7 @@ const RatingSection: React.FC<RatingSectionProps> = ({
             để nhận xét và đánh giá sản phẩm này
           </p>
           <button
+            type="button"
             onClick={() => router.push(LOGIN_URL)}
             className="flex gap-x-2 justify-center items-center px-6 py-3 mt-2 bg-transparent rounded-full border transition-colors cursor-pointer select-none hover:border-primary active:border-primary/70 border-primary text-primary w-fit hover:bg-primary hover:text-white active:bg-primary/70 active:text-white/70 md:gap-x-4"
           >

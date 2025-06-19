@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
+import React from "react";
 
 import { Eye, Heart, ShoppingCart, Star } from "lucide-react";
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
@@ -287,4 +288,4 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
   );
 };
 
-export default ListProductCard;
+export default React.memo(ListProductCard);
