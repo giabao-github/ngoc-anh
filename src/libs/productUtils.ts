@@ -6,6 +6,9 @@ export const findProductBySlug = (slug: string) =>
   products.find((item) => item.details[0].slug === slug);
 
 export const getProductDetails = (product: Product) => {
+  if (!product.details?.length) {
+    return product.size || "";
+  }
   const details = [];
   // If pattern exists, only show pattern
   if (product.details[0].pattern) {
