@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { FaStar } from "react-icons/fa6";
 
 const RatingInput = ({ onRate }: { onRate: (rating: number) => void }) => {
@@ -26,9 +26,9 @@ const RatingInput = ({ onRate }: { onRate: (rating: number) => void }) => {
   };
 
   return (
-    <div className="inline-flex flex-col items-start gap-1">
-      <div className="flex items-center gap-1">
-        <p className="font-semibold text-xs md:text-base">
+    <div className="inline-flex flex-col gap-1 items-start">
+      <div className="flex gap-1 items-center">
+        <p className="text-xs font-semibold md:text-base">
           Chất lượng sản phẩm
         </p>
         <div className="mx-2 md:mx-4">
@@ -71,7 +71,7 @@ const RatingInput = ({ onRate }: { onRate: (rating: number) => void }) => {
         </p>
       </div>
       {selected > 0 && (
-        <span className="py-4 px-1 text-sm text-gray-700 font-medium">
+        <span className="px-1 py-4 text-sm font-medium text-gray-700">
           Bạn đã đánh giá{" "}
           <span className="text-[#F4B400] font-semibold">{selected} sao </span>{" "}
           cho sản phẩm này
@@ -81,4 +81,4 @@ const RatingInput = ({ onRate }: { onRate: (rating: number) => void }) => {
   );
 };
 
-export default RatingInput;
+export default memo(RatingInput);

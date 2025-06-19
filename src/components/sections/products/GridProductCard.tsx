@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 
 import {
   Eye,
@@ -368,4 +368,4 @@ const GridProductCard: React.FC<GridProductCardProps> = ({
   );
 };
 
-export default GridProductCard;
+export default memo(GridProductCard);

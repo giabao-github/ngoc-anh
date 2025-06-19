@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 
 import CartProduct from "@/components/cart/CartProduct";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -140,4 +140,4 @@ const ProductList: React.FC<ProductListProps> = ({ cartItems, isMobile }) => {
   );
 };
 
-export default ProductList;
+export default memo(ProductList);

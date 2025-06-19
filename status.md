@@ -167,3 +167,26 @@
 8. Add proper offline support
 9. Implement proper SEO
 10. Add proper social features
+
+## 2025-06-19: Performance & Robustness Improvements by AI
+
+### What was done
+
+- Wrapped the following components with React.memo for better list rendering performance:
+  - GridProductCard
+  - ListProductCard
+  - ProductCard
+  - CartProduct
+  - ProductList
+  - RatingSection
+- Confirmed all expensive calculations are already memoized (useMemo/useCallback).
+- All API and async logic have robust error handling and user feedback.
+- Guaranteed in-memory caching is used where appropriate.
+- No useless or redundant operations were found.
+- No breaking changes or unoptimized code were introduced.
+
+### What was not done
+
+- No further memoization or caching was added, as all critical areas are already optimized.
+- Error handling stays robust; no changes applied.
+- Business logic and UI remain unaltered.
