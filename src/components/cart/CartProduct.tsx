@@ -1,4 +1,4 @@
-import React from "react";
+import { memo } from "react";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { FaTrashCan } from "react-icons/fa6";
 import { FiMinus, FiPlus } from "react-icons/fi";
@@ -260,4 +260,4 @@ const CartProduct: React.FC<CartProductProps> = ({ item, index, product }) => {
   );
 };
 
-export default React.memo(CartProduct);
+export default memo(CartProduct);

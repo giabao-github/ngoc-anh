@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
-import React from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -112,4 +111,4 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
   );
 };
 
-export default React.memo(ProductCard);
+export default memo(ProductCard);

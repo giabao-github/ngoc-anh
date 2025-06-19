@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { FaStar } from "react-icons/fa6";
 
 const RatingInput = ({ onRate }: { onRate: (rating: number) => void }) => {
@@ -81,4 +81,4 @@ const RatingInput = ({ onRate }: { onRate: (rating: number) => void }) => {
   );
 };
 
-export default RatingInput;
+export default memo(RatingInput);
