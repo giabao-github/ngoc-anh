@@ -1,6 +1,7 @@
+import { useMemo } from "react";
 import { Path, UseFormReturn, useWatch } from "react-hook-form";
 
-export interface UseGenericFormOptions<T extends Record<string, any>> {
+interface UseGenericFormOptions<T extends Record<string, unknown>> {
   form: UseFormReturn<T>;
   pending: boolean;
   fieldNames: readonly Path<T>[];
@@ -13,7 +14,7 @@ export interface UseGenericFormOptions<T extends Record<string, any>> {
   singleErrorFallback: string;
 }
 
-export function useGenericForm<T extends Record<string, any>>({
+export const useGenericForm = <T extends Record<string, any>>({
   form,
   pending,
   fieldNames,
@@ -24,25 +25,34 @@ export function useGenericForm<T extends Record<string, any>>({
   emptyFieldText,
   multipleErrorText,
   singleErrorFallback,
-}: UseGenericFormOptions<T>) {
+}: UseGenericFormOptions<T>) => {
   const watchedValuesArr = useWatch({
     control: form.control,
     name: fieldNames,
   });
-  const watchedValues = fieldNames.reduce(
-    (acc, field, idx) => {
-      acc[field] = watchedValuesArr[idx];
-      return acc;
-    },
-    {} as Record<Path<T>, any>,
-  );
-  const watchedErrors = form.formState.errors;
 
-  const emptyFields = fieldNames.filter((f) => !watchedValues[f]);
+  const watchedValues = useMemo(
+    () =>
+      fieldNames.reduce(
+        (acc, field, idx) => {
+          acc[field] = watchedValuesArr[idx];
+          return acc;
+        },
+        {} as Record<Path<T>, any>,
+      ),
+    [fieldNames, watchedValuesArr],
+  );
+
+  const watchedErrors = form.formState.errors;
+  const emptyFields = fieldNames.filter((f) => {
+    const value = watchedValues[f];
+    return value === undefined || value === null || value === "";
+  });
   const errorFields = fieldNames.filter((f) => watchedErrors[f]);
-  let submitButtonText = buttonText;
   const isButtonDisabled =
     pending || errorFields.length > 0 || emptyFields.length > 0 || isSuccess;
+
+  let submitButtonText = buttonText;
 
   if (pending) {
     submitButtonText = pendingText;
@@ -54,7 +64,9 @@ export function useGenericForm<T extends Record<string, any>>({
     submitButtonText = multipleErrorText;
   } else if (errorFields.length === 1) {
     const field = errorFields[0];
-    const errorMsg = watchedErrors[field]?.message;
+    const error = watchedErrors[field];
+    const errorMsg =
+      error && typeof error === "object" ? error.message : undefined;
     submitButtonText =
       typeof errorMsg === "string" && errorMsg.length > 0
         ? errorMsg
@@ -64,4 +76,4 @@ export function useGenericForm<T extends Record<string, any>>({
   }
 
   return { submitButtonText, isButtonDisabled, watchedValues, watchedErrors };
-}
+};
