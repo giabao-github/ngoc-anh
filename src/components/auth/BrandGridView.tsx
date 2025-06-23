@@ -21,6 +21,37 @@ interface BrandGridViewProps {
   type: "login" | "register" | "recovery";
 }
 export const BrandGridView = ({ type }: BrandGridViewProps) => {
+  // Decorative star configuration
+  const starElements = [
+    // Bright stars
+    { className: "top-8 left-8 w-2 h-2 bg-white", delay: 0 },
+    { className: "right-6 bottom-12 w-2 h-2 bg-white/80", delay: 1000 },
+    { className: "left-6 top-1/2 w-2.5 h-2.5 bg-white", delay: 500 },
+    { className: "right-16 top-1/3 w-2 h-2 bg-white/90", delay: 1500 },
+    { className: "left-20 bottom-1/3 w-2 h-2 bg-white/70", delay: 750 },
+    // Medium brightness stars
+    { className: "right-12 top-16 w-1.5 h-1.5 bg-white/60", delay: 300 },
+    { className: "left-16 bottom-20 w-1.5 h-1.5 bg-white/50", delay: 1200 },
+    { className: "bottom-8 right-20 w-1.5 h-1.5 bg-white/40", delay: 800 },
+    { className: "left-12 top-24 w-1.5 h-1.5 bg-white/55", delay: 1600 },
+    // Faint distant stars
+    { className: "top-12 right-1/4 w-1 h-1 bg-white/30", delay: 300 },
+    { className: "bottom-16 left-1/3 w-1 h-1 bg-white/25", delay: 700 },
+    { className: "top-1/3 right-1/3 w-1 h-1 bg-white/35", delay: 1100 },
+    { className: "top-2/3 left-1/4 w-1 h-1 bg-white/20", delay: 900 },
+    // Additional stars
+    { className: "top-6 right-1/2 w-1 h-1 bg-white/25", delay: 1300 },
+    { className: "bottom-1/4 right-1/6 w-1 h-1 bg-white/20", delay: 600 },
+    { className: "top-3/4 left-1/6 w-1 h-1 bg-white/30", delay: 1000 },
+    { className: "top-1/4 left-1/2 w-1 h-1 bg-white/15", delay: 1400 },
+    { className: "right-1/3 bottom-1/3 w-1 h-1 bg-white/18", delay: 1100 },
+    // Very faint background stars
+    { className: "top-10 left-16 w-1 h-1 bg-white/10", delay: 1800 },
+    { className: "bottom-6 right-16 w-1 h-1 bg-white/12", delay: 1200 },
+    { className: "top-2/3 right-1/6 w-1 h-1 bg-white/8", delay: 900 },
+    { className: "left-1/3 top-1/6 w-1 h-1 bg-white/15", delay: 1500 },
+  ];
+
   return (
     <>
       {/* Mobile branding - Navigation Icons */}
@@ -33,7 +64,10 @@ export const BrandGridView = ({ type }: BrandGridViewProps) => {
               className="group p-2.5 bg-white/10 rounded-full transition-all duration-200 hover:bg-white/20 active:scale-95 backdrop-blur-sm"
               title={item.label}
             >
-              <item.icon className="w-4 h-4 transition-colors text-secondary/70 group-hover:text-secondary" />
+              <item.icon
+                strokeWidth={2.5}
+                className="w-4 h-4 transition-colors text-secondary/70 group-hover:text-secondary"
+              />
             </Link>
           ))}
         </div>
@@ -55,7 +89,10 @@ export const BrandGridView = ({ type }: BrandGridViewProps) => {
               className="group p-2.5 bg-white/10 rounded-full transition-all duration-200 hover:bg-white/20 hover:scale-110 active:scale-95 backdrop-blur-sm"
               title={item.label}
             >
-              <item.icon className="w-5 h-5 transition-colors text-secondary/70 group-hover:text-secondary" />
+              <item.icon
+                strokeWidth={2.5}
+                className="w-5 h-5 transition-colors text-secondary/70 group-hover:text-secondary"
+              />
             </Link>
           ))}
         </div>
@@ -83,164 +120,17 @@ export const BrandGridView = ({ type }: BrandGridViewProps) => {
         </div>
 
         {/* Decorative elements */}
-        <div
-          className="absolute top-8 left-8 w-2 h-2 bg-white animate-pulse"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute right-6 bottom-12 w-2 h-2 delay-1000 animate-pulse bg-white/80"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute left-6 top-1/2 w-2.5 h-2.5 bg-white animate-pulse delay-500"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute right-16 top-1/3 w-2 h-2 animate-pulse bg-white/90 delay-1500"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute left-20 bottom-1/3 w-2 h-2 animate-pulse bg-white/70 delay-750"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        {/* Medium brightness stars - well distributed */}
-        <div
-          className="absolute right-12 top-16 w-1.5 h-1.5 bg-white/60 animate-pulse delay-300"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute left-16 bottom-20 w-1.5 h-1.5 bg-white/50 animate-pulse delay-1200"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute bottom-8 right-20 w-1.5 h-1.5 bg-white/40 animate-pulse delay-800"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute left-12 top-24 w-1.5 h-1.5 bg-white/55 animate-pulse delay-1600"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        {/* Faint distant stars - sparse and natural */}
-        <div
-          className="absolute top-12 right-1/4 w-1 h-1 delay-300 animate-pulse bg-white/30"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute bottom-16 left-1/3 w-1 h-1 delay-700 animate-pulse bg-white/25"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute top-1/3 right-1/3 w-1 h-1 animate-pulse bg-white/35 delay-1100"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute top-2/3 left-1/4 w-1 h-1 animate-pulse bg-white/20 delay-900"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        {/* Additional stars for balance */}
-        <div
-          className="absolute top-6 right-1/2 w-1 h-1 animate-pulse bg-white/25 delay-1300"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute bottom-1/4 w-1 h-1 animate-pulse right-1/6 bg-white/20 delay-600"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute top-3/4 w-1 h-1 delay-1000 animate-pulse left-1/6 bg-white/30"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute top-1/4 left-1/2 w-1 h-1 animate-pulse bg-white/15 delay-1400"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute right-1/3 bottom-1/3 w-1 h-1 animate-pulse bg-white/18 delay-1100"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        {/* Very faint background stars - minimal for depth */}
-        <div
-          className="absolute top-10 left-16 w-1 h-1 animate-pulse bg-white/10 delay-1800"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute bottom-6 right-16 w-1 h-1 animate-pulse bg-white/12 delay-1200"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute top-2/3 w-1 h-1 animate-pulse right-1/6 bg-white/8 delay-900"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
-        <div
-          className="absolute left-1/3 w-1 h-1 animate-pulse top-1/6 bg-white/15 delay-1500"
-          style={{
-            clipPath:
-              "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
-          }}
-        ></div>
+        {starElements.map((star, index) => (
+          <div
+            key={index}
+            className={`absolute animate-pulse ${star.className}`}
+            style={{
+              animationDelay: `${star.delay}ms`,
+              clipPath:
+                "polygon(50% 0%, 70% 30%, 100% 50%, 70% 70%, 50% 100%, 30% 70%, 0% 50%, 30% 30%)",
+            }}
+          />
+        ))}
         {/* Subtle cosmic background glow */}
         <div className="absolute right-6 top-1/3 w-12 h-12 rounded-full blur-md animate-pulse bg-white/5 delay-2000"></div>
         <div className="absolute left-8 bottom-1/3 w-8 h-8 rounded-full blur-sm animate-pulse bg-white/4 delay-1800"></div>

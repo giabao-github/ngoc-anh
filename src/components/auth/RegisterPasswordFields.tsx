@@ -47,14 +47,14 @@ export const RegisterPasswordFields = ({
                 <LockIcon className="absolute left-3 top-1/2 w-4 h-4 transition-colors transform -translate-y-1/2 text-secondary/50 md:text-gray-400 group-focus-within:text-secondary md:group-focus-within:text-primary" />
                 <Input
                   type={showPassword ? "text" : "password"}
-                  placeholder="Tối thiểu 6 ký tự, có chữ và số"
+                  placeholder="Tối thiểu 8 ký tự, có chữ và số"
+                  {...field}
                   className={cn(
                     "pl-10 h-10 border-2 transition-all duration-300 font-medium text-sm placeholder:text-secondary/50 md:placeholder:text-gray-400 bg-white/5 border-white/20 text-secondary focus:shadow-primary/10 md:bg-transparent md:text-gray-900",
                     fieldState.error
                       ? "border-red-400/50 focus:border-red-400 md:focus:border-red-500 md:shadow-red-100"
                       : "focus:border-white/50 hover:border-white/30 md:border-gray-300 md:hover:border-gray-400/70 md:focus:border-primary/50",
                   )}
-                  {...field}
                 />
                 <button
                   type="button"
@@ -93,13 +93,13 @@ export const RegisterPasswordFields = ({
                 <Input
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="Nhập lại mật khẩu"
+                  {...field}
                   className={cn(
                     "pl-10 h-10 border-2 transition-all duration-300 font-medium text-sm placeholder:text-secondary/50 md:placeholder:text-gray-400 bg-white/5 border-white/20 text-secondary focus:shadow-primary/10 md:bg-transparent md:text-gray-900",
                     fieldState.error
                       ? "border-red-400/50 focus:border-red-400 md:focus:border-red-500 md:shadow-red-100"
                       : "focus:border-white/50 hover:border-white/30 md:border-gray-300 md:hover:border-gray-400/70 md:focus:border-primary/50",
                   )}
-                  {...field}
                 />
                 <button
                   type="button"

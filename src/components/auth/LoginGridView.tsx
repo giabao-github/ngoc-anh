@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { FaArrowRightLong, FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { IoWarningOutline } from "react-icons/io5";
@@ -15,6 +15,8 @@ import { z } from "zod";
 import { LoginFields } from "@/components/auth/LoginFields";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
+
+import { useLoginForm } from "@/hooks/useLoginForm";
 
 import { authClient } from "@/lib/auth-client";
 
@@ -37,32 +39,7 @@ export const LoginGridView = () => {
     },
   });
 
-  // Use useWatch to subscribe to all field values
-  const fieldNames = ["email", "password"] as const;
-  const watchedValues = useWatch({ control: form.control });
-  const watchedErrors = form.formState.errors;
-
-  // Dynamic submit button text
-  const emptyFields = fieldNames.filter((f) => !watchedValues[f]);
-  const errorFields = fieldNames.filter((f) => watchedErrors[f]);
-  const hasAnyError = Object.keys(form.formState.errors).length > 0;
-  let submitButtonText = "Đăng nhập";
-  const isButtonDisabled = pending || hasAnyError || emptyFields.length > 0;
-
-  if (pending) {
-    submitButtonText = "Đang đăng nhập";
-  } else if (!isButtonDisabled) {
-    submitButtonText = "Đăng nhập";
-  } else if (errorFields.length > 1) {
-    submitButtonText = "Vui lòng sửa các lỗi trong biểu mẫu";
-  } else if (errorFields.length === 1) {
-    const field = errorFields[0];
-    submitButtonText = watchedErrors[field]?.message
-      ? `${watchedErrors[field]?.message}`
-      : "Có lỗi trong biểu mẫu";
-  } else if (emptyFields.length > 0) {
-    submitButtonText = "Vui lòng điền đầy đủ thông tin";
-  }
+  const { submitButtonText, isButtonDisabled } = useLoginForm(form, pending);
 
   const handleToastMessage = (errorCode: string) => {
     if (errorCode === "INVALID_EMAIL_OR_PASSWORD") {

@@ -120,7 +120,7 @@ export const LoginFields = ({
                 <LockIcon className="absolute left-3 top-1/2 w-4 h-4 transition-colors transform -translate-y-1/2 text-secondary/50 md:text-gray-400 group-focus-within:text-secondary md:group-focus-within:text-primary" />
                 <Input
                   type={showPassword ? "text" : "password"}
-                  placeholder="Tối thiểu 6 ký tự, có chữ và số"
+                  placeholder="Tối thiểu 8 ký tự, có chữ và số"
                   {...field}
                   onChange={(e) => {
                     field.onChange(e.target.value);

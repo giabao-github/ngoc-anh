@@ -73,7 +73,10 @@ export const InvoiceInput = ({
                 }
               }}
               onBlur={() => {
-                const trimmed = sanitizeInputOnBlur(field.value);
+                const trimmed = sanitizeInputOnBlur(
+                  field.value,
+                  name === "email" ? "email" : undefined,
+                );
                 const sanitized = sanitizeLevel
                   ? sanitizeInputWithLevel(trimmed, sanitizeLevel)
                   : trimmed;
@@ -91,7 +94,7 @@ export const InvoiceInput = ({
                     : "border-gray-300",
               )}
             />
-            <div className="absolute -translate-y-1/2 pointer-events-none right-3 top-1/2">
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
               {isValid && (
                 <FaCircleCheck className="w-4 h-4 text-emerald-500" />
               )}

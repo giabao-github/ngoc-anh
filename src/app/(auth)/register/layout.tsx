@@ -4,15 +4,6 @@ interface RegisterLayoutProps {
   children: ReactNode;
 }
 
-/* 
-  Error codes:
-    INVALID_EMAIL
-    PASSWORD_TOO_SHORT
-    USER_ALREADY_EXISTS
-    INVALID_EMAIL_OR_PASSWORD
-    PROVIDER_NOT_FOUND
-*/
-
 const RegisterLayout = ({ children }: RegisterLayoutProps) => {
   return (
     <div className="flex justify-center items-center py-12 md:py-0 bg-radial from-primary via-primary to-primary-accent md:bg-none min-h-svh md:flex-col md:p-9">

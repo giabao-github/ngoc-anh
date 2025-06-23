@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { FaArrowRightLong, FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { IoWarningOutline } from "react-icons/io5";
@@ -17,7 +17,7 @@ import { RegisterTextFields } from "@/components/auth/RegisterTextFields";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 
-import useIsMobile from "@/hooks/useIsMobile";
+import { useRegisterForm } from "@/hooks/useRegisterForm";
 
 import { authClient } from "@/lib/auth-client";
 
@@ -25,7 +25,6 @@ import { registerSchema } from "@/app/schemas";
 
 export const RegisterGridView = () => {
   const router = useRouter();
-  const isMobile = useIsMobile();
   const [pending, setPending] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -42,39 +41,7 @@ export const RegisterGridView = () => {
     mode: "onChange",
   });
 
-  // Use useWatch to subscribe to all field values
-  const fieldNames = ["name", "email", "password", "confirmPassword"] as const;
-  const watchedValues = useWatch({ control: form.control });
-  const watchedErrors = form.formState.errors;
-
-  // Cross-field validation
-  useEffect(() => {
-    if (watchedValues.confirmPassword) {
-      form.trigger("confirmPassword");
-    }
-  }, [watchedValues.password, watchedValues.confirmPassword, form]);
-
-  // Dynamic submit button text
-  const emptyFields = fieldNames.filter((f) => !watchedValues[f]);
-  const errorFields = fieldNames.filter((f) => watchedErrors[f]);
-  const hasAnyError = Object.keys(form.formState.errors).length > 0;
-  let submitButtonText = "Đăng ký";
-  const isButtonDisabled = pending || hasAnyError || emptyFields.length > 0;
-
-  if (pending) {
-    submitButtonText = "Đang tạo tài khoản";
-  } else if (!isButtonDisabled) {
-    submitButtonText = "Đăng ký";
-  } else if (errorFields.length > 1) {
-    submitButtonText = "Vui lòng sửa các lỗi trong biểu mẫu";
-  } else if (errorFields.length === 1) {
-    const field = errorFields[0];
-    submitButtonText = watchedErrors[field]?.message
-      ? `${watchedErrors[field]?.message}`
-      : "Có lỗi trong biểu mẫu";
-  } else if (emptyFields.length > 0) {
-    submitButtonText = "Vui lòng điền đầy đủ thông tin";
-  }
+  const { submitButtonText, isButtonDisabled } = useRegisterForm(form, pending);
 
   const handleToastMessage = (errorCode: string) => {
     if (errorCode === "USER_ALREADY_EXISTS") {
@@ -183,44 +150,20 @@ export const RegisterGridView = () => {
           </div>
 
           {/* Form fields */}
-          <div className="grid gap-y-4">
-            {/* Name and email field */}
-            {isMobile ? (
-              <RegisterTextFields
-                form={form}
-                inputKey={inputKey}
-                setInputKey={setInputKey}
-              />
-            ) : (
-              <div className="md:grid md:grid-cols-2 md:gap-x-6">
-                <RegisterTextFields
-                  form={form}
-                  inputKey={inputKey}
-                  setInputKey={setInputKey}
-                />
-              </div>
-            )}
+          <div className="grid grid-cols-1 gap-y-4 md:grid-cols-2 md:gap-x-6">
+            <RegisterTextFields
+              form={form}
+              inputKey={inputKey}
+              setInputKey={setInputKey}
+            />
 
-            {/* Password fields */}
-            {isMobile ? (
-              <RegisterPasswordFields
-                form={form}
-                showPassword={showPassword}
-                showConfirmPassword={showConfirmPassword}
-                setShowPassword={setShowPassword}
-                setShowConfirmPassword={setShowConfirmPassword}
-              />
-            ) : (
-              <div className="md:grid md:grid-cols-2 md:gap-x-6">
-                <RegisterPasswordFields
-                  form={form}
-                  showPassword={showPassword}
-                  showConfirmPassword={showConfirmPassword}
-                  setShowPassword={setShowPassword}
-                  setShowConfirmPassword={setShowConfirmPassword}
-                />
-              </div>
-            )}
+            <RegisterPasswordFields
+              form={form}
+              showPassword={showPassword}
+              showConfirmPassword={showConfirmPassword}
+              setShowPassword={setShowPassword}
+              setShowConfirmPassword={setShowConfirmPassword}
+            />
           </div>
 
           {/* Submit button */}

@@ -4,6 +4,14 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db";
 import * as schema from "@/db/schema";
 
+const getRequiredEnv = (name: string): string => {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`${name} is required`);
+  }
+  return value;
+};
+
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "pg",
@@ -16,16 +24,8 @@ export const auth = betterAuth({
   },
   socialProviders: {
     google: {
-      clientId:
-        process.env.GOOGLE_CLIENT_ID ||
-        (() => {
-          throw new Error("GOOGLE_CLIENT_ID is required");
-        })(),
-      clientSecret:
-        process.env.GOOGLE_CLIENT_SECRET ||
-        (() => {
-          throw new Error("GOOGLE_CLIENT_SECRET is required");
-        })(),
+      clientId: getRequiredEnv("GOOGLE_CLIENT_ID"),
+      clientSecret: getRequiredEnv("GOOGLE_CLIENT_SECRET"),
       authorizationParams: {
         access_type: "offline",
         prompt: "consent",
@@ -33,16 +33,8 @@ export const auth = betterAuth({
       },
     },
     github: {
-      clientId:
-        process.env.GITHUB_CLIENT_ID ||
-        (() => {
-          throw new Error("GITHUB_CLIENT_ID is required");
-        })(),
-      clientSecret:
-        process.env.GITHUB_CLIENT_SECRET ||
-        (() => {
-          throw new Error("GITHUB_CLIENT_SECRET is required");
-        })(),
+      clientId: getRequiredEnv("GITHUB_CLIENT_ID"),
+      clientSecret: getRequiredEnv("GITHUB_CLIENT_SECRET"),
     },
   },
 });

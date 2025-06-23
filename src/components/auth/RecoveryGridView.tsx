@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { IoWarningOutline } from "react-icons/io5";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle2, LucideCheckCircle2, MailIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -21,7 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { authClient } from "@/lib/auth-client";
+import { useRecoveryForm } from "@/hooks/useRecoveryForm";
 
 import { cn } from "@/utils/styleUtils";
 import { sanitizeInputOnBlur } from "@/utils/textUtils";
@@ -29,6 +30,7 @@ import { sanitizeInputOnBlur } from "@/utils/textUtils";
 import { recoverySchema } from "@/app/schemas";
 
 export const RecoveryGridView = () => {
+  const router = useRouter();
   const [pending, setPending] = useState(false);
   const [inputKey, setInputKey] = useState(0);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -41,27 +43,11 @@ export const RecoveryGridView = () => {
     },
   });
 
-  const fieldNames = ["email"] as const;
-  const watchedValues = useWatch({ control: form.control });
-  const watchedErrors = form.formState.errors;
-
-  const emptyFields = fieldNames.filter((f) => !watchedValues[f]);
-  const hasAnyError = Object.keys(form.formState.errors).length > 0;
-  let submitButtonText = "Gửi yêu cầu";
-  const isButtonDisabled =
-    pending || hasAnyError || emptyFields.length > 0 || isSuccess;
-
-  if (pending) {
-    submitButtonText = "Đang xử lý...";
-  } else if (isSuccess) {
-    submitButtonText = "Email đã được gửi";
-  } else if (!isButtonDisabled) {
-    submitButtonText = "Gửi yêu cầu";
-  } else if (watchedErrors.email) {
-    submitButtonText = watchedErrors.email.message || "Email không hợp lệ";
-  } else if (emptyFields.length > 0) {
-    submitButtonText = "Vui lòng nhập email của bạn";
-  }
+  const { submitButtonText, isButtonDisabled } = useRecoveryForm(
+    form,
+    pending,
+    isSuccess,
+  );
 
   const onSubmit = async (data: z.infer<typeof recoverySchema>) => {
     setPending(true);
@@ -94,7 +80,7 @@ export const RecoveryGridView = () => {
             <h1 className="text-xl font-bold md:text-2xl text-secondary md:text-gray-900">
               Kiểm tra hộp thư của bạn
             </h1>
-            <div className="flex flex-col gap-y-1 w-full md:gap-y-2">
+            <div className="flex flex-col w-full md:gap-y-1">
               <p className="text-sm whitespace-nowrap md:text-base text-secondary/80 md:text-gray-600">
                 Nếu email hợp lệ, bạn sẽ nhận được liên kết khôi phục.
               </p>
@@ -105,19 +91,17 @@ export const RecoveryGridView = () => {
           </div>
           <div className="flex flex-col gap-y-4 mt-2 w-full">
             <Button
-              size="lg"
-              className="flex gap-x-2 justify-center items-center w-full h-11 text-base font-semibold text-white bg-green-600 shadow-md transition-all hover:bg-green-600 group"
-              onClick={() => (window.location.href = "/login")}
+              className="w-full mt-3 md:mt-4 h-10 text-sm font-semibold transition duration-200 bg-white/10 border-secondary md:bg-primary text-secondary border md:border-none hover:bg-primary/90 hover:shadow-lg active:scale-[0.98] disabled:hover:scale-100 disabled:hover:shadow-none group"
+              onClick={() => router.push("/login")}
             >
-              <LucideCheckCircle2 className="w-[18px] h-[18px] group-hover:scale-[1.2]" />
+              <LucideCheckCircle2 className="w-[18px] h-[18px] group-hover:scale-[1.2] group-active:scale-[1.2]" />
               Quay lại đăng nhập
             </Button>
             <Button
-              size="lg"
-              className="flex gap-x-2 justify-center items-center w-full h-11 text-base font-semibold shadow-md transition-all text-primary bg-secondary hover:bg-secondary group"
+              className="w-full mt-3 md:mt-4 h-10 text-sm font-semibold transition duration-200 bg-secondary text-primary hover:bg-secondary/90 hover:shadow-lg active:scale-[0.98] disabled:hover:scale-100 disabled:hover:shadow-none group"
               onClick={() => setIsSuccess(false)}
             >
-              <FaArrowLeftLong className="w-4 h-4 group-hover:transform group-hover:-translate-x-1" />
+              <FaArrowLeftLong className="w-4 h-4 group-hover:transform group-hover:-translate-x-1 group-active:transform group-active:-translate-x-1" />
               Gửi lại yêu cầu khác
             </Button>
           </div>
