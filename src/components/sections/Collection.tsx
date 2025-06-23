@@ -4,7 +4,7 @@ import { CollectionCarousel } from "@/components/ui/collection-carousel";
 
 import { arsenal } from "@/config/fonts";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 import { collections } from "@/app/storage";
 

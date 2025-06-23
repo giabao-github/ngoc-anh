@@ -3,8 +3,8 @@ import { FaCircleCheck, FaCircleExclamation } from "react-icons/fa6";
 
 import { Input } from "@/components/ui/input";
 
-import { sanitizeInputOnBlur, sanitizeInputWithLevel } from "@/libs/textUtils";
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
+import { sanitizeInputOnBlur, sanitizeInputWithLevel } from "@/utils/textUtils";
 
 import { SanitizeLevel } from "@/types/invoice";
 

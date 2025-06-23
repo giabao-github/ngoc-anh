@@ -5,15 +5,11 @@ import { RegisterView } from "@/modules/auth/register/views/RegisterView";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Đăng ký tài khoản",
+  title: "Thạch Âm - Đăng ký tài khoản",
 };
 
 const RegisterPage = () => {
-  return (
-    <div className="bg-gray-50">
-      <RegisterView />
-    </div>
-  );
+  return <RegisterView />;
 };
 
 export default RegisterPage;

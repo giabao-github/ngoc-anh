@@ -10,8 +10,8 @@ import ProductCard from "@/components/sections/products/ProductCard";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { formatPrice, getOriginalPrice } from "@/libs/productUtils";
-import { cn } from "@/libs/utils";
+import { formatPrice, getOriginalPrice } from "@/utils/productUtils";
+import { cn } from "@/utils/styleUtils";
 
 import { Product } from "@/types/invoice";
 

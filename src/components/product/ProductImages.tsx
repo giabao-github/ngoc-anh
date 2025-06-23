@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ProductCarousel } from "@/components/ui/product-carousel";
 import { Separator } from "@/components/ui/separator";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 import { ImageData, Product } from "@/types/invoice";
 

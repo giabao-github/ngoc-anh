@@ -3,7 +3,7 @@ import { FaCircleCheck, FaCircleExclamation } from "react-icons/fa6";
 
 import { ChevronDown } from "lucide-react";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 interface SelectDropdownProps {
   name:

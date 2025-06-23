@@ -9,7 +9,7 @@ import SearchBar from "@/components/SearchBar";
 
 import { arsenal } from "@/config/fonts";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 const ProductError = () => {
   const router = useRouter();

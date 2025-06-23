@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getProductContent } from "@/libs/productContentUtils";
+import { getProductContent } from "@/utils/productContentUtils";
 
 import { Product, ProductContent } from "@/types/product";
 

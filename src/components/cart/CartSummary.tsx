@@ -9,7 +9,7 @@ import { montserrat } from "@/config/fonts";
 
 import { useCart } from "@/hooks/useCart";
 
-import { formatPrice } from "@/libs/productUtils";
+import { formatPrice } from "@/utils/productUtils";
 
 const CartSummary = () => {
   const router = useRouter();

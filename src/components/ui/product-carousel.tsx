@@ -17,7 +17,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import { ToastIds } from "@/constants/toastIds";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 import { ImageData, Product } from "@/types/product";
 

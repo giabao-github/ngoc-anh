@@ -6,7 +6,7 @@ import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,

@@ -8,7 +8,7 @@ import {
   calculateRatingStats,
   createImageData,
   findProductBySlug,
-} from "@/libs/productUtils";
+} from "@/utils/productUtils";
 
 import { ImageData, Product } from "@/types/invoice";
 

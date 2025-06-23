@@ -14,7 +14,7 @@ import { ToastIds } from "@/constants/toastIds";
 
 import { useAddressData } from "@/hooks/useAddressData";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 import { invoiceFormSchema } from "@/app/schemas";
 import { InvoiceFormData } from "@/types/invoice";

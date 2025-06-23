@@ -12,7 +12,7 @@ import { montserrat } from "@/config/fonts";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 import { Product, ProductDetail } from "@/types/invoice";
 

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
 
-import { handleSearch } from "@/libs/searchUtils";
+import { handleSearch } from "@/utils/searchUtils";
 
 const SearchBar = () => {
   const router = useRouter();

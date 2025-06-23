@@ -16,7 +16,7 @@ import { Slot } from "@radix-ui/react-slot";
 
 import { Label } from "@/components/ui/label";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 const Form = FormProvider;
 
