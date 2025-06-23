@@ -14,7 +14,7 @@ import { toast } from "sonner";
 
 import { ToastIds } from "@/constants/toastIds";
 
-import { getLocalCart } from "@/libs/cartUtils";
+import { getLocalCart } from "@/utils/cartUtils";
 
 import { products } from "@/app/storage";
 import { CartItem } from "@/types/cart";

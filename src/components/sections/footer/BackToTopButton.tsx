@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 interface BackToTopButtonProps {
   variant: "desktop" | "mobile";

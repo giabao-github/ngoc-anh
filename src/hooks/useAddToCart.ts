@@ -8,8 +8,8 @@ import { ToastIds } from "@/constants/toastIds";
 import { useCart } from "@/hooks/useCart";
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { animateAddToCart } from "@/libs/cartUtils";
-import { createCartItem, getCartFromStorage } from "@/libs/productUtils";
+import { animateAddToCart } from "@/utils/cartUtils";
+import { createCartItem, getCartFromStorage } from "@/utils/productUtils";
 
 import { CartItem } from "@/types/cart";
 import { Product } from "@/types/invoice";

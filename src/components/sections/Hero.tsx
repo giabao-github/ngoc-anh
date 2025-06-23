@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { arsenal } from "@/config/fonts";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 const Hero = () => {
   const router = useRouter();

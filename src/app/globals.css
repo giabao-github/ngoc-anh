@@ -32,6 +32,7 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-primary-accent: var(--primary-accent);
   --color-logo: var(--logo);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
@@ -74,6 +75,7 @@ input::-webkit-credentials-auto-fill-button {
   /* (original) --primary: oklch(0.208 0.042 265.755); */
   --primary: #103330;
   --primary-foreground: oklch(0.984 0.003 247.858);
+  --primary-accent: #3f5b58;
   /* (original) --secondary: oklch(0.968 0.007 247.896); */
   --secondary: #fbd885;
   --secondary-foreground: oklch(0.208 0.042 265.755);

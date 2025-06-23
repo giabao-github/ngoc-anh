@@ -1,6 +1,6 @@
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-import { formatText, normalizeText } from "@/libs/textUtils";
+import { formatText, normalizeText } from "@/utils/textUtils";
 
 import { products } from "@/app/storage";
 import { Product } from "@/types/invoice";

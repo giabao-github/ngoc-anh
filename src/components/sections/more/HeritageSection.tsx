@@ -2,7 +2,7 @@ import { AnimatedSection } from "@/components/sections/more/AnimatedSection";
 
 import { montserrat } from "@/config/fonts";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 export const HeritageSection = () => (
   <AnimatedSection>

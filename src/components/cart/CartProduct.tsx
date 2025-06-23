@@ -16,8 +16,8 @@ import { montserrat } from "@/config/fonts";
 import { useCart } from "@/hooks/useCart";
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { formatPrice, getProductDetails } from "@/libs/productUtils";
-import { cn } from "@/libs/utils";
+import { formatPrice, getProductDetails } from "@/utils/productUtils";
+import { cn } from "@/utils/styleUtils";
 
 import { CartItem } from "@/types/cart";
 import { Product } from "@/types/invoice";

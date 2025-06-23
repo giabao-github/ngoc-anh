@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { formatPrice } from "@/libs/productUtils";
-import { cn } from "@/libs/utils";
+import { formatPrice } from "@/utils/productUtils";
+import { cn } from "@/utils/styleUtils";
 
 import { Product } from "@/types/invoice";
 

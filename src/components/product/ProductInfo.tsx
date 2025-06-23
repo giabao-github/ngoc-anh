@@ -7,8 +7,8 @@ import { toast } from "sonner";
 
 import { Separator } from "@/components/ui/separator";
 
-import { formatPrice, getOriginalPrice } from "@/libs/productUtils";
-import { cn } from "@/libs/utils";
+import { formatPrice, getOriginalPrice } from "@/utils/productUtils";
+import { cn } from "@/utils/styleUtils";
 
 import { Product } from "@/types/invoice";
 

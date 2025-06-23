@@ -16,9 +16,9 @@ import Header from "@/components/sections/header/Header";
 import ProductCard from "@/components/sections/products/ProductCard";
 import ProductsPanel from "@/components/sections/products/ProductsPanel";
 
-import { calculateRatingStats } from "@/libs/productUtils";
-import { searchProducts } from "@/libs/searchUtils";
-import { cn } from "@/libs/utils";
+import { calculateRatingStats } from "@/utils/productUtils";
+import { searchProducts } from "@/utils/searchUtils";
+import { cn } from "@/utils/styleUtils";
 
 import { Product } from "@/types/product";
 

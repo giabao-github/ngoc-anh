@@ -15,7 +15,7 @@ import {
 
 import useIsMobile from "@/hooks/useIsMobile";
 
-import { cn } from "@/libs/utils";
+import { cn } from "@/utils/styleUtils";
 
 interface CollectionCarouselProps {
   isLoading?: boolean;

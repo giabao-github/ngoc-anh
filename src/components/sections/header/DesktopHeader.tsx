@@ -14,9 +14,9 @@ import { HASH_ROUTES } from "@/constants/routes";
 
 import { useCart } from "@/hooks/useCart";
 
-import { handleNavigation } from "@/libs/navigationUtils";
-import { handleSearch } from "@/libs/searchUtils";
-import { cn } from "@/libs/utils";
+import { handleNavigation } from "@/utils/navigationUtils";
+import { handleSearch } from "@/utils/searchUtils";
+import { cn } from "@/utils/styleUtils";
 
 interface DesktopHeaderProps {
   hasSections?: boolean;

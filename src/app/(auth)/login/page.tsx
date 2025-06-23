@@ -5,15 +5,11 @@ import { LoginView } from "@/modules/auth/login/views/LoginView";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Đăng nhập",
+  title: "Thạch Âm - Đăng nhập",
 };
 
 const LoginPage = () => {
-  return (
-    <div className="bg-gray-50">
-      <LoginView />
-    </div>
-  );
+  return <LoginView />;
 };
 
 export default LoginPage;

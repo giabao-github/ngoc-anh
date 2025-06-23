@@ -14,8 +14,8 @@ import ProductsPanel from "@/components/sections/products/ProductsPanel";
 
 import { arsenal } from "@/config/fonts";
 
-import { calculateRatingStats } from "@/libs/productUtils";
-import { cn } from "@/libs/utils";
+import { calculateRatingStats } from "@/utils/productUtils";
+import { cn } from "@/utils/styleUtils";
 
 import { products } from "@/app/storage";
 
