@@ -95,23 +95,6 @@ const ceramicGlass: ProductContent = {
       </div>
     </div>
   ),
-  note: (
-    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:text-base md:tracking-wide">
-      <p>
-        Quạt được thiết kế để sử dụng nhẹ nhàng. Tránh vung quạt quá mạnh hoặc
-        dùng lực tác động lên các nan quạt khi đang mở.
-      </p>
-      <p>
-        Sản phẩm không dành cho trẻ em dưới 3 tuổi sử dụng mà không có sự giám
-        sát của người lớn.
-      </p>
-      <p>
-        Do đặc tính của chất liệu giấy và kỹ thuật thủ công, mỗi chiếc quạt có
-        thể có sự khác biệt nhỏ về màu sắc hoặc chi tiết hoa văn, tạo nên nét
-        độc đáo riêng cho từng sản phẩm.
-      </p>
-    </div>
-  ),
 };
 
 export default ceramicGlass;

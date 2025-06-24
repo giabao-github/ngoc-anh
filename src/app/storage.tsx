@@ -284,8 +284,8 @@ export const products: Product[] = [
       },
     ],
     size: "9.5 cm × 15.5 cm",
-    quantity: 6000,
-    rating: [15, 25, 50, 320, 900],
+    quantity: 7000,
+    rating: [16, 19, 33, 492, 6440],
   },
   {
     id: 8,
@@ -313,7 +313,7 @@ export const products: Product[] = [
     ],
     size: "8.5 cm × 10.5 cm",
     quantity: 6000,
-    rating: [15, 25, 50, 320, 900],
+    rating: [58, 62, 175, 605, 5100],
   },
   {
     id: 9,
@@ -324,10 +324,10 @@ export const products: Product[] = [
     descriptionKey: "naga-tinh-am-de-ly-thach-am",
     instructionKey: "naga-tinh-am-de-ly-thach-am",
     maintenanceKey: "naga-tinh-am-de-ly-thach-am",
-    code: "A001_694537520",
+    code: "A001_694537590",
     brand: "Thạch Âm",
     material: "Gốm sứ cao cấp",
-    category: "Ly",
+    category: "Phụ kiện",
     details: [
       {
         color: "Xanh rêu đậm",
@@ -340,7 +340,7 @@ export const products: Product[] = [
       },
     ],
     size: "10.5 cm × 2 cm",
-    quantity: 6000,
-    rating: [15, 25, 50, 320, 900],
+    quantity: 5000,
+    rating: [48, 52, 155, 745, 4000],
   },
 ];
