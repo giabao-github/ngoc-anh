@@ -14,7 +14,7 @@ interface RatingSectionProps {
   displayRating: string;
 }
 
-const LOGIN_URL = "/login?method=email";
+const LOGIN_URL = "/login";
 
 const RatingSection: React.FC<RatingSectionProps> = ({
   product,

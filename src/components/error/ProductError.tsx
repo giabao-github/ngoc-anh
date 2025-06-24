@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import SearchBar from "@/components/SearchBar";
+import SearchBar from "@/components/sections/header/SearchBar";
 
 import { arsenal } from "@/config/fonts";
 
