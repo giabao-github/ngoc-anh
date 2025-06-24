@@ -2,7 +2,7 @@ import { ProductContent } from "@/types/product";
 
 const khmerWind: ProductContent = {
   description: (
-    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
+    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:text-base md:tracking-wide">
       <p>Quạt Tay Thạch Âm - Nét Đẹp Huyền Bí Từ Họa Tiết Khmer</p>
       <p>
         Chào mừng bạn đến với Quạt Tay Thạch Âm – một tác phẩm nghệ thuật thủ
@@ -53,7 +53,7 @@ const khmerWind: ProductContent = {
     </div>
   ),
   instruction: (
-    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
+    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:text-base md:tracking-wide">
       <p>
         Tránh nước và độ ẩm: Quạt được làm từ chất liệu giấy, do đó tuyệt đối
         tránh tiếp xúc trực tiếp với nước, mưa hoặc môi trường có độ ẩm cao.
@@ -80,7 +80,7 @@ const khmerWind: ProductContent = {
     </div>
   ),
   note: (
-    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
+    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:text-base md:tracking-wide">
       <p>
         Quạt được thiết kế để sử dụng nhẹ nhàng. Tránh vung quạt quá mạnh hoặc
         dùng lực tác động lên các nan quạt khi đang mở.

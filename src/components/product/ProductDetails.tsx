@@ -38,8 +38,16 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     if (content.instruction) {
       tabConfigs.push({
         key: "instruction",
-        label: isMobile ? "HƯỚNG DẪN" : "HƯỚNG DẪN SỬ DỤNG",
+        label: isMobile ? "SỬ DỤNG" : "HƯỚNG DẪN SỬ DỤNG",
         content: content.instruction,
+      });
+    }
+
+    if (content.maintenance) {
+      tabConfigs.push({
+        key: "maintenance",
+        label: isMobile ? "BẢO QUẢN" : "HƯỚNG DẪN BẢO QUẢN",
+        content: content.maintenance,
       });
     }
 

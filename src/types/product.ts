@@ -18,6 +18,7 @@ export type BaseProduct = {
 export type Product = BaseProduct & {
   descriptionKey?: string;
   instructionKey?: string;
+  maintenanceKey?: string;
   noteKey?: string;
 };
 
@@ -37,6 +38,7 @@ export type ProductDetail = {
 export type ProductContent = {
   description?: React.ReactNode;
   instruction?: React.ReactNode;
+  maintenance?: React.ReactNode;
   note?: React.ReactNode;
 };
 

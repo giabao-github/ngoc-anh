@@ -19,11 +19,15 @@ export const useProductContent = (product: Product) => {
       setError(null);
       const result: ProductContent = {};
       const keyMap: Record<
-        keyof Pick<Product, "descriptionKey" | "instructionKey" | "noteKey">,
+        keyof Pick<
+          Product,
+          "descriptionKey" | "instructionKey" | "maintenanceKey" | "noteKey"
+        >,
         keyof ProductContent
       > = {
         descriptionKey: "description",
         instructionKey: "instruction",
+        maintenanceKey: "maintenance",
         noteKey: "note",
       };
 
@@ -61,7 +65,12 @@ export const useProductContent = (product: Product) => {
     return () => {
       isMounted = false;
     };
-  }, [product.descriptionKey, product.instructionKey, product.noteKey]);
+  }, [
+    product.descriptionKey,
+    product.instructionKey,
+    product.maintenanceKey,
+    product.noteKey,
+  ]);
 
   return { content, isLoading, error };
 };

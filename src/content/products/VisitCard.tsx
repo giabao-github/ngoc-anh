@@ -2,7 +2,7 @@ import { ProductContent } from "@/types/product";
 
 const visitCard: ProductContent = {
   description: (
-    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
+    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:text-base md:tracking-wide">
       <p>Giới Thiệu Bộ Card Visit "Thạch Âm: Dấu Ấn Di Sản Khmer"</p>
       <p>"Không chỉ là card visit, đây là một tuyên ngôn văn hóa."</p>
       <p>

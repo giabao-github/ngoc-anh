@@ -2,7 +2,7 @@ import { ProductContent } from "@/types/product";
 
 const yellowBadge: ProductContent = {
   description: (
-    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
+    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:text-base md:tracking-wide">
       <p>
         Huy hiệu này là một biểu tượng tinh tế của dự án Thạch Âm trong môn Đồ
         án Vốn cổ Khmer, kết hợp giữa yếu tố văn hóa truyền thống và thiết kế

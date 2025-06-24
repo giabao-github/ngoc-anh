@@ -2,7 +2,7 @@ import { ProductContent } from "@/types/product";
 
 const bandana: ProductContent = {
   description: (
-    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
+    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:text-base md:tracking-wide">
       <p>"Khăn Bandana Thạch Âm: Nét Vàng Cổ Tích Giữa Làn Gió Hiện Đại."</p>
       <p>
         Hãy tưởng tượng bạn đang lạc bước giữa những hành lang đá rêu phong của
@@ -26,7 +26,7 @@ const bandana: ProductContent = {
     </div>
   ),
   instruction: (
-    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:tracking-wide">
+    <div className="space-y-4 text-sm tracking-normal text-gray-700 md:text-base md:tracking-wide">
       <p>
         Để giữ gìn vẻ đẹp nguyên bản và giá trị tinh thần của Khăn Bandana Thạch
         Âm, bạn nên giặt tay nhẹ nhàng với nước lạnh và xà phòng dịu nhẹ.
