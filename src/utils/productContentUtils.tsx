@@ -11,6 +11,11 @@ const productContentImporters: Record<
   "card-visit-thach-am": () => import("@/content/products/VisitCard"),
   "quat-tay-thach-am-khmer-wind": () => import("@/content/products/KhmerWind"),
   "quat-tay-thach-am-naga-wind": () => import("@/content/products/NagaWind"),
+  "naga-hoa-binh-gom-di-san": () => import("@/content/products/CeramicVase"),
+  "naga-tinh-am-ly-gom-thach-am": () =>
+    import("@/content/products/CeramicGlass"),
+  "naga-tinh-am-de-ly-thach-am": () =>
+    import("@/content/products/CeramicCoaster"),
 };
 
 export const getProductContent = async (
