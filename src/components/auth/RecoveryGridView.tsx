@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import { TEXTS } from "@/constants/texts";
+
 import { useRecoveryForm } from "@/hooks/useRecoveryForm";
 
 import { cn } from "@/utils/styleUtils";
@@ -54,15 +56,13 @@ export const RecoveryGridView = () => {
     form.clearErrors();
 
     try {
-      // @ts-ignore - this is the placeholder feature, the real implementation will be updated soon
-      toast.success("Yêu cầu đã được gửi", {
-        description:
-          "Nếu email của bạn tồn tại trong hệ thống, bạn sẽ nhận được một liên kết để khôi phục mật khẩu.",
+      toast.success(TEXTS.requestSent, {
+        description: TEXTS.ifEmailValid,
       });
       setIsSuccess(true);
     } catch (error) {
-      toast.error("Gửi yêu cầu thất bại", {
-        description: "Đã có lỗi xảy ra. Vui lòng thử lại sau.",
+      toast.error(TEXTS.requestFailed, {
+        description: TEXTS.errorOccurred,
       });
     } finally {
       setPending(false);
@@ -78,14 +78,14 @@ export const RecoveryGridView = () => {
           </div>
           <div className="flex flex-col gap-y-4 w-full md:gap-y-6">
             <h1 className="text-xl font-bold md:text-2xl text-secondary md:text-gray-900">
-              Kiểm tra hộp thư của bạn
+              {TEXTS.checkInbox}
             </h1>
             <div className="flex flex-col w-full md:gap-y-1">
               <p className="text-sm whitespace-nowrap md:text-base text-secondary/80 md:text-gray-600">
-                Nếu email hợp lệ, bạn sẽ nhận được liên kết khôi phục.
+                {TEXTS.ifEmailValid}
               </p>
               <p className="mt-1 text-sm whitespace-nowrap md:text-base text-secondary/80 md:text-gray-600">
-                Đừng quên kiểm tra cả hộp thư rác (spam).
+                {TEXTS.checkSpam}
               </p>
             </div>
           </div>
@@ -95,14 +95,14 @@ export const RecoveryGridView = () => {
               onClick={() => router.push("/login")}
             >
               <LucideCheckCircle2 className="w-[18px] h-[18px] group-hover:scale-[1.2] group-active:scale-[1.2]" />
-              Quay lại đăng nhập
+              {TEXTS.backToLogin}
             </Button>
             <Button
               className="w-full mt-3 md:mt-4 h-10 text-sm font-semibold transition duration-200 bg-secondary text-primary hover:bg-secondary/90 hover:shadow-lg active:scale-[0.98] disabled:hover:scale-100 disabled:hover:shadow-none group"
               onClick={() => setIsSuccess(false)}
             >
               <FaArrowLeftLong className="w-4 h-4 group-hover:transform group-hover:-translate-x-1 group-active:transform group-active:-translate-x-1" />
-              Gửi lại yêu cầu khác
+              {TEXTS.resendRequest}
             </Button>
           </div>
         </div>
@@ -119,10 +119,10 @@ export const RecoveryGridView = () => {
         <div className="flex flex-col gap-y-8 md:gap-y-6">
           <div className="flex flex-col gap-y-2 items-center mb-2 text-center md:mb-3">
             <h1 className="text-xl font-bold md:text-2xl text-secondary md:text-gray-900">
-              Khôi phục mật khẩu
+              {TEXTS.passwordRecovery}
             </h1>
             <p className="text-xs md:text-sm text-secondary/80 md:text-gray-600">
-              Nhập email để lấy lại mật khẩu của bạn
+              {TEXTS.enterEmailToRecover}
             </p>
           </div>
 
@@ -132,7 +132,7 @@ export const RecoveryGridView = () => {
             render={({ field, fieldState }) => (
               <FormItem className="space-y-1">
                 <FormLabel className="text-[15px] md:text-sm font-semibold text-secondary/90 md:text-gray-700">
-                  Địa chỉ email *:
+                  {TEXTS.emailLabel}
                 </FormLabel>
                 <FormControl>
                   <div className="relative group">
@@ -140,7 +140,7 @@ export const RecoveryGridView = () => {
                     <Input
                       key={inputKey}
                       type="email"
-                      placeholder="thacham@gmail.com"
+                      placeholder={TEXTS.emailPlaceholder}
                       {...field}
                       className={cn(
                         "pl-10 h-10 border-2 transition-all duration-300 font-medium text-sm placeholder:text-secondary/50 md:placeholder:text-gray-400 bg-white/5 border-white/20 text-secondary focus:shadow-primary/10 md:bg-transparent md:text-gray-900",
@@ -197,19 +197,19 @@ export const RecoveryGridView = () => {
           </Button>
 
           <div className="text-sm text-center text-secondary/80 md:text-gray-600">
-            Quay lại{" "}
+            {TEXTS.backToLogin}{" "}
             <Link
               href="/login"
               className="font-semibold transition-all duration-200 text-secondary md:text-primary hover:text-secondary/80 md:hover:text-primary/80 hover:underline"
             >
-              đăng nhập
+              {TEXTS.login}
             </Link>{" "}
             hoặc{" "}
             <Link
               href="/register"
               className="font-semibold transition-all duration-200 text-secondary md:text-primary hover:text-secondary/80 md:hover:text-primary/80 hover:underline"
             >
-              đăng ký
+              {TEXTS.register}
             </Link>
           </div>
         </div>

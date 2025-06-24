@@ -13,6 +13,7 @@ import {
   UserPlus,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import { UserAvatar } from "@/components/sections/header/UserAvatar";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -27,6 +28,8 @@ import {
 import { Separator } from "@/components/ui/separator";
 
 import { lexend } from "@/config/fonts";
+
+import { TEXTS } from "@/constants/texts";
 
 import useIsMobile from "@/hooks/useIsMobile";
 
@@ -52,6 +55,12 @@ export const UserCard = ({ className = "" }: UserCardProps) => {
       fetchOptions: {
         onSuccess: () => {
           router.push("/");
+        },
+        onError: (error) => {
+          console.error("Logout failed:", error);
+          toast.error("Đăng xuất không thành công", {
+            description: "Vui lòng thử lại hoặc tải lại trang",
+          });
         },
       },
     });
@@ -88,7 +97,7 @@ export const UserCard = ({ className = "" }: UserCardProps) => {
               <div className="flex gap-3 items-center">
                 <UserAvatar
                   user={data.user}
-                  size={isMobile ? "base" : "lg"}
+                  size={isMobile ? "md" : "lg"}
                   className="ring ring-primary/20"
                 />
                 <div className="flex-1 min-w-0">
@@ -100,7 +109,7 @@ export const UserCard = ({ className = "" }: UserCardProps) => {
                       variant="secondary"
                       className="text-xs text-green-700 bg-green-100 dark:bg-green-900 dark:text-green-300"
                     >
-                      Online
+                      {TEXTS.online}
                     </Badge>
                   </div>
                   <div className="flex gap-1 justify-center items-center text-sm text-muted-foreground w-fit">
@@ -109,7 +118,7 @@ export const UserCard = ({ className = "" }: UserCardProps) => {
                   </div>
                   <div className="flex gap-1 items-center mt-1 text-xs text-muted-foreground w-fit">
                     <Shield className="w-3 h-3" />
-                    <p>Premium Member</p>
+                    <p>{TEXTS.premiumMember}</p>
                   </div>
                 </div>
               </div>
@@ -120,12 +129,12 @@ export const UserCard = ({ className = "" }: UserCardProps) => {
                   variant="ghost"
                   className="justify-start w-full h-10 text-sm font-normal transition-colors md:text-base hover:bg-primary/10 group"
                   onClick={() => {
-                    router.push("/password-recovery");
+                    router.push("/change-password");
                     setIsOpen(false);
                   }}
                 >
                   <Lock className="mr-3 w-4 h-4 md:w-5 md:h-5 group-hover:scale-110" />
-                  Thay đổi mật khẩu
+                  {TEXTS.changePassword}
                 </Button>
                 <Button
                   variant="ghost"
@@ -136,7 +145,7 @@ export const UserCard = ({ className = "" }: UserCardProps) => {
                   }}
                 >
                   <KeyRound className="mr-3 w-4 h-4 md:w-5 md:h-5 group-hover:scale-110" />
-                  Đặt lại mật khẩu
+                  {TEXTS.resetPassword}
                 </Button>
                 <Separator color="#D1D5DB" className="my-2" />
                 <Button
@@ -148,7 +157,7 @@ export const UserCard = ({ className = "" }: UserCardProps) => {
                   }}
                 >
                   <LogOut className="mr-3 w-4 h-4 md:w-5 md:h-5 group-hover:scale-110" />
-                  Đăng xuất
+                  {TEXTS.logout}
                 </Button>
               </div>
             </CardContent>
@@ -195,10 +204,8 @@ export const UserCard = ({ className = "" }: UserCardProps) => {
                 </AvatarFallback>
               </Avatar>
             </div>
-            <h3 className="text-lg font-semibold">Chào bạn!</h3>
-            <p className="text-sm text-muted-foreground">
-              Hãy đăng nhập để trải nghiệm các tính năng được cá nhân hóa
-            </p>
+            <h3 className="text-lg font-semibold">{TEXTS.greeting}</h3>
+            <p className="text-sm text-muted-foreground">{TEXTS.loginPrompt}</p>
           </CardHeader>
           <CardContent className="pt-0">
             <div className="space-y-3">
@@ -210,7 +217,7 @@ export const UserCard = ({ className = "" }: UserCardProps) => {
                 }}
               >
                 <LogIn className="mr-2 w-4 h-4 md:w-5 md:h-5 group-hover:scale-110" />
-                Đăng nhập
+                {TEXTS.login}
               </Button>
               <Button
                 className="w-full h-10 text-sm font-normal bg-gradient-to-r from-orange-600 to-amber-600 transition-all duration-200 md:text-base hover:from-orange-500 hover:to-amber-500 active:from-orange-400 active:to-amber-400 group"
@@ -220,7 +227,7 @@ export const UserCard = ({ className = "" }: UserCardProps) => {
                 }}
               >
                 <UserPlus className="mr-2 w-4 h-4 md:w-5 md:h-5 group-hover:scale-110" />
-                Tạo tài khoản
+                {TEXTS.register}
               </Button>
             </div>
           </CardContent>

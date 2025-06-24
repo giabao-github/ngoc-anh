@@ -17,6 +17,8 @@ import { RegisterTextFields } from "@/components/auth/RegisterTextFields";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 
+import { TEXTS } from "@/constants/texts";
+
 import { useRegisterForm } from "@/hooks/useRegisterForm";
 
 import { authClient } from "@/lib/auth-client";
@@ -45,8 +47,8 @@ export const RegisterGridView = () => {
 
   const handleToastMessage = (errorCode: string) => {
     if (errorCode === "USER_ALREADY_EXISTS") {
-      toast.error("Email này đã được đăng ký", {
-        description: "Vui lòng sử dụng email khác hoặc đăng nhập",
+      toast.error(TEXTS.emailExists, {
+        description: TEXTS.useAnotherEmail,
       });
     }
   };
@@ -65,8 +67,8 @@ export const RegisterGridView = () => {
       {
         onSuccess: () => {
           setPending(false);
-          toast.success("Đã đăng ký tài khoản thành công", {
-            description: "Hãy sử dụng thông tin vừa đăng ký để đăng nhập",
+          toast.success(TEXTS.registerSuccess, {
+            description: TEXTS.useRegisteredInfo,
           });
           router.push("/login");
         },
@@ -75,7 +77,7 @@ export const RegisterGridView = () => {
           if (error.code === "USER_ALREADY_EXISTS") {
             form.setError("email", {
               type: "manual",
-              message: "Email này đã được đăng ký",
+              message: TEXTS.emailExists,
             });
           }
           handleToastMessage(error.code);
@@ -112,10 +114,10 @@ export const RegisterGridView = () => {
         <div className="flex flex-col gap-y-8 md:gap-y-6">
           <div className="flex flex-col gap-y-2 items-center mb-2 text-center md:mb-3">
             <h1 className="text-xl font-bold md:text-2xl text-secondary md:text-gray-900">
-              Chào mừng bạn đến với Thạch Âm
+              {TEXTS.welcome}
             </h1>
             <p className="text-xs md:text-sm text-secondary/80 md:text-gray-600">
-              Tạo tài khoản để bắt đầu hành trình của bạn
+              {TEXTS.startJourney}
             </p>
           </div>
 
@@ -129,7 +131,9 @@ export const RegisterGridView = () => {
               className="flex gap-3 justify-center items-center w-full h-10 text-white border-2 transition-all duration-300 bg-white/10 border-white/20 hover:bg-white/20 hover:border-white/30 md:bg-transparent md:border-gray-200 md:text-black md:hover:bg-blue-50 md:hover:border-blue-400 md:hover:text-black"
             >
               <FcGoogle className="w-4 h-4" />
-              <span className="text-sm font-semibold">Tiếp tục với Google</span>
+              <span className="text-sm font-semibold">
+                {TEXTS.continueWithGoogle}
+              </span>
             </Button>
             <Button
               disabled={pending}
@@ -139,13 +143,15 @@ export const RegisterGridView = () => {
               className="flex gap-3 justify-center items-center w-full h-10 text-white border-2 transition-all duration-300 bg-white/10 border-white/20 hover:bg-white/20 hover:border-white/30 md:bg-transparent md:border-gray-200 md:text-black md:hover:bg-gray-50 md:hover:border-gray-400 md:hover:text-black"
             >
               <FaGithub className="w-4 h-4" />
-              <span className="text-sm font-semibold">Tiếp tục với GitHub</span>
+              <span className="text-sm font-semibold">
+                {TEXTS.continueWithGithub}
+              </span>
             </Button>
           </div>
 
           <div className="relative text-xs text-center after:border-white/20 md:after:border-gray-200 after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
             <span className="relative z-10 px-3 font-medium bg-primary text-secondary/80 md:text-gray-500 md:bg-white">
-              Hoặc đăng ký bằng email
+              {TEXTS.orRegisterWithEmail}
             </span>
           </div>
 
@@ -175,7 +181,7 @@ export const RegisterGridView = () => {
             {pending ? (
               <span className="flex gap-x-2 items-center">
                 <span className="w-4 h-4 rounded-full border-2 animate-spin border-primary/20 border-t-primary" />
-                Đang tạo tài khoản
+                {TEXTS.creatingAccount}
               </span>
             ) : isButtonDisabled ? (
               <span className="flex gap-x-2 items-center">
@@ -192,12 +198,12 @@ export const RegisterGridView = () => {
 
           {/* Login and recovery links */}
           <div className="text-sm text-center text-secondary/80 md:text-gray-600">
-            Đã có tài khoản?{" "}
+            {TEXTS.alreadyHaveAccount}{" "}
             <Link
               href="/login"
               className="font-semibold transition-all duration-200 text-secondary md:text-primary hover:text-secondary/80 md:hover:text-primary/80 hover:underline"
             >
-              Đăng nhập ngay
+              {TEXTS.loginNow}
             </Link>
           </div>
         </div>

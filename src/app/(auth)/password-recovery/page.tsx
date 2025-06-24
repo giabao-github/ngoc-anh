@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 
+import { TEXTS } from "@/constants/texts";
+
 import { RecoveryView } from "@/modules/auth/recovery/views/RecoveryView";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Thạch Âm - Đặt lại mật khẩu",
+  title: TEXTS.passwordRecoveryTitle,
 };
 
 const PasswordRecoveryPage = () => {

@@ -1,42 +1,23 @@
-import { botttsNeutral, initials } from "@dicebear/collection";
+import { initials } from "@dicebear/collection";
 import { createAvatar } from "@dicebear/core";
 import { User } from "lucide-react";
 import { toast } from "sonner";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+import { AVATAR_GRADIENTS } from "@/constants/colors";
+
 import { cn } from "@/utils/styleUtils";
 
 interface GeneratedAvatarProps {
   seed: string | undefined;
-  size?: "sm" | "base" | "lg";
-  variant: "botttsNeutral" | "initials";
+  size?: "sm" | "md" | "lg";
   className?: string;
 }
 
-const gradients = [
-  "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-  "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-  "linear-gradient(135deg, #28c76f 0%, #00bfa5 100%)",
-  "linear-gradient(135deg, #f86aa0 0%, #fbc531 100%)",
-  "linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%)",
-  "linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%)",
-  "linear-gradient(135deg, #00c896 0%, #00aa88 100%)",
-  "linear-gradient(135deg, #ff8a80 0%, #ea4c89 100%)",
-  "linear-gradient(135deg, #4a90e2 0%, #8ac926 100%)",
-  "linear-gradient(135deg, #ffc371 0%, #ff6f61 100%)",
-  "linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%)",
-  "linear-gradient(135deg, #00b894 0%, #00cec9 100%)",
-  "linear-gradient(135deg, #e17055 0%, #fdcb6e 100%)",
-  "linear-gradient(135deg, #a29bfe 0%, #fd79a8 100%)",
-  "linear-gradient(135deg, #00c3ff 0%, #4481eb 100%)",
-  "linear-gradient(135deg, #ff7675 0%, #74b9ff 100%)",
-];
-
 export const GeneratedAvatar = ({
   seed,
-  size = "base",
-  variant,
+  size = "md",
   className,
 }: GeneratedAvatarProps) => {
   let avatar;
@@ -51,12 +32,16 @@ export const GeneratedAvatar = ({
     });
   } catch (error) {
     console.warn("Failed to generate avatar:", error);
-    toast.warning("Failed to fetch user avatar");
+    toast.warning("Không thể lấy dữ liệu avatar");
+    avatar = null;
   }
 
   // Create a simple hash function to consistently select gradient based on seed
   const hashCode = (str: string): number => {
     let hash = 0;
+    if (str.length === 0) {
+      return hash;
+    }
     for (let i = 0; i < str.length; i++) {
       const char = str.charCodeAt(i);
       hash = (hash << 5) - hash + char;
@@ -65,21 +50,23 @@ export const GeneratedAvatar = ({
     return Math.abs(hash);
   };
 
-  const selectedGradient = seed && gradients[hashCode(seed) % gradients.length];
+  const selectedGradient = seed
+    ? AVATAR_GRADIENTS[hashCode(seed) % AVATAR_GRADIENTS.length]
+    : AVATAR_GRADIENTS[0];
 
   const sizeClassName =
-    size === "sm" ? "size-8" : size === "base" ? "size-10" : "size-12";
+    size === "sm" ? "size-8" : size === "md" ? "size-10" : "size-12";
   const fontClassName =
-    size === "sm" ? "text-sm" : size === "base" ? "text-base" : "text-lg";
+    size === "sm" ? "text-sm" : size === "md" ? "text-base" : "text-lg";
 
   return (
     <Avatar
       className={cn(className, sizeClassName)}
-      style={variant === "initials" ? { background: selectedGradient } : {}}
+      style={{ background: selectedGradient }}
     >
       {seed ? (
         <>
-          <AvatarImage src={avatar?.toDataUri()} alt="User avatar" />
+          {avatar && <AvatarImage src={avatar.toDataUri()} alt="User avatar" />}
           <AvatarFallback className={cn("font-semibold", fontClassName)}>
             {seed?.charAt(0).toUpperCase()}
           </AvatarFallback>
