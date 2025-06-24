@@ -21,19 +21,15 @@ export const UserAvatar = ({
   const sizeClassName =
     size === "sm" ? "size-8" : size === "md" ? "size-10" : "size-12";
 
-  return (
-    <>
-      {user?.image ? (
-        <Avatar className={cn(baseClassName, className, sizeClassName)}>
-          <AvatarImage src={user.image} alt={user.name} />
-        </Avatar>
-      ) : (
-        <GeneratedAvatar
-          seed={user?.name || user?.email}
-          size={size}
-          className={cn(baseClassName, className)}
-        />
-      )}
-    </>
+  return user?.image ? (
+    <Avatar className={cn(baseClassName, className, sizeClassName)}>
+      <AvatarImage src={user.image} alt={user.name} />
+    </Avatar>
+  ) : (
+    <GeneratedAvatar
+      seed={user?.name || user?.email}
+      size={size}
+      className={cn(baseClassName, className)}
+    />
   );
 };

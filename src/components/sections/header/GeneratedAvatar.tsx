@@ -6,8 +6,9 @@ import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { AVATAR_GRADIENTS } from "@/constants/colors";
+import { TEXTS } from "@/constants/texts";
 
-import { cn } from "@/utils/styleUtils";
+import { cn, hashCode } from "@/utils/styleUtils";
 
 interface GeneratedAvatarProps {
   seed: string | undefined;
@@ -32,23 +33,9 @@ export const GeneratedAvatar = ({
     });
   } catch (error) {
     console.warn("Failed to generate avatar:", error);
-    toast.warning("Không thể lấy dữ liệu avatar");
+    toast.warning(TEXTS.avatarError);
     avatar = null;
   }
-
-  // Create a simple hash function to consistently select gradient based on seed
-  const hashCode = (str: string): number => {
-    let hash = 0;
-    if (str.length === 0) {
-      return hash;
-    }
-    for (let i = 0; i < str.length; i++) {
-      const char = str.charCodeAt(i);
-      hash = (hash << 5) - hash + char;
-      hash &= hash;
-    }
-    return Math.abs(hash);
-  };
 
   const selectedGradient = seed
     ? AVATAR_GRADIENTS[hashCode(seed) % AVATAR_GRADIENTS.length]
