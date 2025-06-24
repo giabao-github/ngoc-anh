@@ -1,7 +1,10 @@
 import { memo, useMemo, useState } from "react";
 import { FaStar } from "react-icons/fa6";
 
-const RatingInput = ({ onRate }: { onRate: (rating: number) => void }) => {
+interface RatingInputProps {
+  onRate?: (rating: number) => void;
+}
+const RatingInput = ({ onRate }: RatingInputProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const [selected, setSelected] = useState<number>(0);
   const quality = useMemo(() => {
@@ -22,7 +25,9 @@ const RatingInput = ({ onRate }: { onRate: (rating: number) => void }) => {
 
   const handleClick = (rating: number) => {
     setSelected(rating);
-    onRate(rating);
+    if (onRate) {
+      onRate(rating);
+    }
   };
 
   return (

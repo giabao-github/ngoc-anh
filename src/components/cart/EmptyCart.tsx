@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import SearchBar from "@/components/SearchBar";
+import SearchBar from "@/components/sections/header/SearchBar";
 
 const MESSAGES = {
   emptyCart: "Chưa có sản phẩm trong giỏ hàng...",

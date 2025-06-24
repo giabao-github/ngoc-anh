@@ -18,6 +18,8 @@ import { handleNavigation } from "@/utils/navigationUtils";
 import { handleSearch } from "@/utils/searchUtils";
 import { cn } from "@/utils/styleUtils";
 
+import { UserCard } from "./UserCard";
+
 interface MobileHeaderProps {
   hasSections?: boolean;
   hasFooter?: boolean;
@@ -57,6 +59,13 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         {/* App Logo */}
         <div className="flex justify-between items-center px-6 py-2 mx-auto max-w-7xl">
           <div className="flex items-center space-x-4">
+            <button
+              type="button"
+              className="ring-0 cursor-pointer outline-none focus:ring-0 focus:outline-none"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            </button>
             <Image
               src="/logo.png"
               alt="Thạch Âm Logo"
@@ -110,30 +119,9 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
                 </div>
               )}
             </div>
-            <FiUser
-              size={24}
-              title="Tài khoản"
-              aria-label="Tài khoản"
-              onClick={() => router.push("/login?method=email")}
-              className="cursor-pointer hover:text-[#D4AF37] active:text-[#D4AF37]/70"
-            />
-            <div className="relative flex items-center justify-center w-10 bg-white h-10 overflow-hidden rounded-full ring-2 ring-white shadow-[0_0_20px_rgba(255,255,255,0.8)] hover:shadow-[0_0_20px_rgba(255,255,255,1)]">
-              <Image
-                src="/avatar.jpeg"
-                alt="Avatar"
-                width={24}
-                height={24}
-                quality={100}
-                className="object-contain w-8 h-8 cursor-pointer select-none"
-              />
+            <div className="ml-1 relative flex items-center justify-center w-10 bg-white h-10 rounded-full ring-2 ring-white hover:ring-[#D4AF37] active:ring-[#D4AF37] shadow-[0_0_8px_rgba(255,255,255,0.8)] hover:shadow-[0_0_12px_rgba(255,255,255,1)]">
+              <UserCard />
             </div>
-            <button
-              type="button"
-              className="ring-0 cursor-pointer outline-none focus:ring-0 focus:outline-none"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-            </button>
           </div>
         </div>
       </header>

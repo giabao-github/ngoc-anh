@@ -4,6 +4,8 @@ import { BrandGridView } from "@/components/auth/BrandGridView";
 import { LoginGridView } from "@/components/auth/LoginGridView";
 import { Card, CardContent } from "@/components/ui/card";
 
+import { TEXTS } from "@/constants/texts";
+
 export const LoginView = () => {
   return (
     <div className="flex flex-col gap-4 justify-between h-full md:gap-8">
@@ -19,21 +21,21 @@ export const LoginView = () => {
 
       {/* Terms and Privacy */}
       <div className="px-4 pb-6 text-xs leading-relaxed text-center md:pb-0 text-secondary/70 md:text-gray-500 md:px-0">
-        Bằng cách đăng nhập, bạn đồng ý với{" "}
+        {TEXTS.termsPrefix}{" "}
         <Link
           href="https://policies.google.com/terms"
           className="font-semibold transition-colors duration-200 text-secondary md:text-primary hover:underline"
         >
-          Điều khoản sử dụng
+          {TEXTS.termsOfUse}
         </Link>{" "}
-        và{" "}
+        {TEXTS.and}{" "}
         <Link
           href="https://policies.google.com/privacy"
           className="font-semibold transition-colors duration-200 text-secondary md:text-primary hover:underline"
         >
-          Chính sách bảo mật
+          {TEXTS.privacyPolicy}
         </Link>{" "}
-        của chúng tôi.
+        {TEXTS.our}
       </div>
     </div>
   );

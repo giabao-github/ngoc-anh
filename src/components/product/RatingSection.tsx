@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import RatingBar from "@/components/product/RatingBar";
 import RatingInput from "@/components/product/RatingInput";
 
+import { TEXTS } from "@/constants/texts";
+
 import { Product } from "@/types/invoice";
 
 interface RatingSectionProps {
@@ -14,7 +16,7 @@ interface RatingSectionProps {
   displayRating: string;
 }
 
-const LOGIN_URL = "/login?method=email";
+const LOGIN_URL = "/login";
 
 const RatingSection: React.FC<RatingSectionProps> = ({
   product,
@@ -27,7 +29,7 @@ const RatingSection: React.FC<RatingSectionProps> = ({
       <div className="grid gap-8 md:grid-cols-1 md:gap-12">
         <div className="space-y-4 md:space-y-8">
           <h3 className="text-xl font-bold md:text-3xl">
-            Nhận xét và đánh giá
+            {TEXTS.reviewAndRating}
           </h3>
           <div className="flex flex-col space-y-6 md:flex-row md:items-center md:justify-start md:space-y-0 md:space-x-10">
             {/* Left: overall rating */}
@@ -40,8 +42,8 @@ const RatingSection: React.FC<RatingSectionProps> = ({
               </div>
               <p className="text-sm text-left text-gray-700 whitespace-nowrap md:text-right">
                 {totalReviews === 0
-                  ? "Chưa có đánh giá"
-                  : `${totalReviews} đánh giá`}
+                  ? TEXTS.noRatings
+                  : `${totalReviews} ${TEXTS.ratings}`}
               </p>
             </div>
 
@@ -84,30 +86,31 @@ const RatingSection: React.FC<RatingSectionProps> = ({
               })}
             </div>
           </div>
-          <RatingInput onRate={() => {}} />
+          <RatingInput />
         </div>
 
         <div className="space-y-5">
-          <h3 className="text-lg font-bold md:text-xl">Đánh giá sản phẩm</h3>
+          <h3 className="text-lg font-bold md:text-xl">
+            {TEXTS.productRating}
+          </h3>
           <p className="text-sm text-gray-600 md:text-base">
-            Bạn cần
+            {TEXTS.needLogin}
             <Link
               href={LOGIN_URL}
               className="font-semibold text-primary hover:underline active:text-primary/70 px-[6px]"
             >
-              đăng nhập
+              {TEXTS.loginToReview}
             </Link>
-            để nhận xét và đánh giá sản phẩm này
+            {` ${TEXTS.toReview}`}
           </p>
-          <button
-            type="button"
-            onClick={() => router.push(LOGIN_URL)}
+          <Link
+            href={LOGIN_URL}
             className="flex gap-x-2 justify-center items-center px-6 py-3 mt-2 bg-transparent rounded-full border transition-colors cursor-pointer select-none hover:border-primary active:border-primary/70 border-primary text-primary w-fit hover:bg-primary hover:text-white active:bg-primary/70 active:text-white/70 md:gap-x-4"
           >
             <span className="text-xs font-bold tracking-wide md:text-sm">
-              Viết đánh giá
+              {TEXTS.writeReview}
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </div>
