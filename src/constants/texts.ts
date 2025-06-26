@@ -74,4 +74,7 @@ export const TEXTS = {
 
   // GeneratedAvatar (src/components/sections/header/GeneratedAvatar.tsx)
   avatarError: "Không thể lấy dữ liệu avatar",
+
+  // Change password page (src/app/(auth)/change-password/page.tsx)
+  passwordUpdateTitle: "Thạch Âm - Thay đổi mật khẩu",
 };

@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { BANNED_WORDS, WEAK_PASSWORDS } from "@/constants/schemas";
+
 const hasRedundantSpaces = (value: string) => !/^\s+|\s+$|\s{2,}/.test(value);
 
 export const invoiceFormSchema = z
@@ -73,7 +75,8 @@ export const loginSchema = z.object({
   password: z
     .string()
     .min(1, "Mật khẩu không được để trống")
-    .min(8, { message: "Mật khẩu phải có ít nhất 8 ký tự" })
+    .min(8, { message: "Mật khẩu phải chứa ít nhất 8 ký tự" })
+    .max(32, { message: "Mật khẩu chỉ chứa tối đa 32 ký tự" })
     .refine(
       (value) => {
         // At least one letter and one number
@@ -94,7 +97,7 @@ export const registerSchema = z
       .string()
       .trim()
       .min(1, { message: "Vui lòng nhập tên người dùng" })
-      .min(2, { message: "Tên người dùng phải có ít nhất 2 ký tự" })
+      .min(2, { message: "Tên người dùng phải chứa ít nhất 2 ký tự" })
       .max(50, { message: "Tên người dùng không được quá 50 ký tự" })
       .refine(
         hasRedundantSpaces,
@@ -112,24 +115,9 @@ export const registerSchema = z
       )
       .refine(
         (value) => {
-          // Only ban truly offensive or inappropriate words
-          const bannedWords = [
-            "asshole",
-            "bitch",
-            "cock",
-            "dick",
-            "fuck",
-            "hitler",
-            "nazi",
-            "pussy",
-            "cặc",
-            "đụ",
-            "địt",
-            "đít",
-            "lồn",
-          ];
+          // Ban offensive or inappropriate words
           const lowerValue = value.toLowerCase();
-          return !bannedWords.some((word) => lowerValue.includes(word));
+          return !BANNED_WORDS.some((word) => lowerValue.includes(word));
         },
         { message: "Tên người dùng chứa từ không phù hợp" },
       )
@@ -151,7 +139,8 @@ export const registerSchema = z
     password: z
       .string()
       .min(1, "Mật khẩu không được để trống")
-      .min(8, { message: "Mật khẩu phải có ít nhất 8 ký tự" })
+      .min(8, { message: "Mật khẩu phải chứa ít nhất 8 ký tự" })
+      .max(32, { message: "Mật khẩu chỉ chứa tối đa 32 ký tự" })
       .refine(
         (value) => {
           // At least one letter and one number
@@ -166,19 +155,7 @@ export const registerSchema = z
       )
       .refine(
         (value) => {
-          // Prevent only the most common weak passwords
-          const weakPasswords = [
-            "password",
-            "123456",
-            "12345678",
-            "qwerty",
-            "abc123",
-            "matkhau",
-            "123456789",
-            "iloveyou",
-            "thacham",
-          ];
-          return !weakPasswords.includes(value.toLowerCase());
+          return !WEAK_PASSWORDS.includes(value.toLowerCase());
         },
         { message: "Mật khẩu quá đơn giản" },
       ),
@@ -196,4 +173,42 @@ export const recoverySchema = z.object({
     .min(1, "Email không được để trống")
     .email("Email không hợp lệ")
     .refine(hasRedundantSpaces, "Email không được chứa khoảng trắng thừa"),
+});
+
+export const changePasswordClientSchema = z
+  .object({
+    currentPassword: z.string().min(1, "Vui lòng nhập mật khẩu hiện tại"),
+    newPassword: z
+      .string()
+      .min(1, "Mật khẩu mới không được để trống")
+      .min(8, { message: "Mật khẩu mới phải chứa ít nhất 8 ký tự" })
+      .max(32, { message: "Mật khẩu mới chỉ chứa tối đa 32 ký tự" })
+      .refine(
+        (value) => {
+          // At least one letter and one number
+          const hasLetter = /[a-zA-Z]/.test(value);
+          const hasNumber = /\d/.test(value);
+
+          return hasLetter && hasNumber;
+        },
+        {
+          message: "Mật khẩu mới phải chứa chữ và số",
+        },
+      )
+      .refine(
+        (value) => {
+          return !WEAK_PASSWORDS.includes(value.toLowerCase());
+        },
+        { message: "Mật khẩu mới quá đơn giản" },
+      ),
+    confirmNewPassword: z.string().min(1, "Vui lòng xác nhận mật khẩu mới"),
+  })
+  .refine((data) => data.newPassword === data.confirmNewPassword, {
+    message: "Mật khẩu xác nhận phải trùng khớp",
+    path: ["confirmNewPassword"],
+  });
+
+export const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1, "Current password is required"),
+  newPassword: z.string().min(8, "New password must be at least 8 characters"),
 });

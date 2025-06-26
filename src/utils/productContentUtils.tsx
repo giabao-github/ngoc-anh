@@ -16,6 +16,7 @@ const productContentImporters: Record<
     import("@/content/products/CeramicGlass"),
   "naga-tinh-am-de-ly-thach-am": () =>
     import("@/content/products/CeramicCoaster"),
+  "thach-am-khmer-pure": () => import("@/content/products/Beverages"),
 };
 
 export const getProductContent = async (

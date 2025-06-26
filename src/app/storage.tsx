@@ -3,46 +3,40 @@ import { Product } from "@/types/product";
 export const collections = [
   {
     id: 1,
-    name: "Card Visit Thạch Âm (hộp)",
-    description: "",
-    image: "/products/card-1-transparent.png",
-  },
-  {
-    id: 2,
-    name: "Card Visit Thạch Âm (card)",
-    description: "",
-    image: "/products/featured-card-transparent.png",
-  },
-  {
-    id: 3,
     name: "Huy Hiệu Thạch Âm (vàng)",
     description: "",
     image: "/products/yellow-badge-transparent.png",
   },
   {
-    id: 4,
-    name: "Huy Hiệu Thạch Âm (xanh rêu)",
-    description: "",
-    image: "/products/green-badge-transparent.png",
-  },
-  {
-    id: 5,
+    id: 2,
     name: "Khăn Bandana Thạch Âm",
     description: "",
     image: "/products/bandana-transparent.png",
   },
 
   {
-    id: 6,
+    id: 3,
     name: "Quạt Giấy Thạch Âm - Khmer Wind",
     description: "",
     image: "/products/hand-fan-1-transparent.png",
   },
   {
-    id: 7,
+    id: 4,
     name: "Quạt Giấy Thạch Âm - Naga Wind",
     description: "",
     image: "/products/hand-fan-2-transparent.png",
+  },
+  {
+    id: 5,
+    name: "Bình Gốm Di Sản - Naga Hoa",
+    description: "",
+    image: "/products/ceramic-vase-transparent.png",
+  },
+  {
+    id: 6,
+    name: "Ly Gốm Thạch Âm - Naga Tịnh Ấm",
+    description: "",
+    image: "/products/ceramic-glass-transparent.png",
   },
 ];
 
@@ -149,12 +143,7 @@ export const products: Product[] = [
   {
     id: 4,
     name: "Card Visit Thạch Âm",
-    images: [
-      "/products/card-1.png",
-      "/products/featured-card.png",
-      "/products/card-2.png",
-      "/products/card-3.png",
-    ],
+    images: ["/products/card-1.png", "/products/card-2.png"],
     background: "#797979",
     zoom: [2, 3],
     descriptionKey: "card-visit-thach-am",
@@ -342,5 +331,61 @@ export const products: Product[] = [
     size: "10.5 cm × 2 cm",
     quantity: 5000,
     rating: [48, 52, 155, 745, 4000],
+  },
+  {
+    id: 10,
+    name: "Thạch Âm Khmer Pure",
+    images: ["/products/beverages.jpg"],
+    background: "linear-gradient(to right, #ebebeb, #eee, #ebebeb)",
+    zoom: [],
+    descriptionKey: "thach-am-khmer-pure",
+    instructionKey: "thach-am-khmer-pure",
+    maintenanceKey: "thach-am-khmer-pure",
+    noteKey: "thach-am-khmer-pure",
+    code: "A001_694537540",
+    brand: "Thạch Âm",
+    bottleMaterial: "Thủy tinh",
+    category: "Thức uống",
+    details: [
+      {
+        variantId: 1,
+        color: "",
+        slug: "thach-am-khmer-pure",
+        ingredient: "100% nước mía ép",
+        drink: "Mía ép",
+        price: 45000,
+        badge: {
+          discount: 10,
+          isBestseller: true,
+        },
+      },
+      {
+        variantId: 2,
+        color: "",
+        slug: "thach-am-khmer-pure",
+        ingredient: "100% nước dừa tươi",
+        drink: "Dừa tươi",
+        price: 45000,
+        badge: {
+          discount: 10,
+          isBestseller: true,
+        },
+      },
+      {
+        variantId: 3,
+        color: "",
+        slug: "thach-am-khmer-pure",
+        ingredient: "100% nước từ trái dừa nước",
+        drink: "Dừa nước",
+        price: 45000,
+        badge: {
+          discount: 10,
+          isBestseller: true,
+        },
+      },
+    ],
+    volume: "180 ml",
+    quantity: 4385,
+    rating: [58, 61, 135, 945, 3186],
   },
 ];

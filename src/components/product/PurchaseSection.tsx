@@ -52,7 +52,13 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
   const isMobile = useIsMobile();
   const [inputValue, setInputValue] = useState(quantity.toString());
   const [isAddingToCart, setIsAddingToCart] = useState(false);
-  const variantLabel = product.details[0].pattern ? "Họa tiết" : "Màu sắc";
+  const variantLabel = product.details[0].pattern
+    ? "Họa tiết"
+    : product.details[0].drink
+      ? "Thức uống"
+      : "Màu sắc";
+  const volumeSizeLabel = product.size ? "Kích thước" : "Dung tích";
+  const [variantId, setVariantId] = useState(1);
 
   // Handle add to cart with cool down
   const handleAntiSpamAddToCart = useCallback(() => {
@@ -131,18 +137,21 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
     }
   }, [inputValue, handleQuantityChange]);
 
-  const getSelectorValue = (detail: ProductDetail) => {
-    return detail.pattern || detail.color;
+  const getVariantValue = (detail: ProductDetail) => {
+    return detail.pattern || detail.drink || detail.color;
   };
 
   const handleVariantChange = useCallback(
-    (variantSlug: string) => {
+    (variantSlug: string, variantId?: number) => {
       // Update URL first for immediate feedback
       if (slug !== variantSlug) {
         router.replace(`/products/${variantSlug}`, { scroll: false });
       }
-      // Then update the active selector
-      setActiveSelector(variantSlug);
+      if (variantId) {
+        setVariantId(variantId);
+      } else {
+        setActiveSelector(variantSlug);
+      }
     },
     [slug, router, setActiveSelector],
   );
@@ -167,15 +176,16 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
             <button
               type="button"
               key={detail.slug}
-              onClick={() => handleVariantChange(detail.slug)}
+              onClick={() => handleVariantChange(detail.slug, detail.variantId)}
               className={cn(
                 "px-4 py-2 rounded-lg cursor-pointer select-none border text-sm font-medium hover:bg-secondary hover:text-primary transition-colors",
-                activeSelector === detail.slug
+                (activeSelector === detail.slug && !detail.variantId) ||
+                  detail.variantId === variantId
                   ? "border-primary bg-secondary text-primary hover:border-primary"
                   : "border-gray-300",
               )}
             >
-              {getSelectorValue(detail)}
+              {getVariantValue(detail)}
             </button>
           ))}
         </div>
@@ -183,9 +193,9 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
 
       {/* Size card */}
       <div className="mb-6 space-y-2">
-        <p className="font-semibold">Kích thước</p>
+        <p className="font-semibold">{volumeSizeLabel}</p>
         <div className="px-4 py-2 text-sm font-medium rounded-lg border transition-colors select-none w-fit border-primary bg-secondary text-primary">
-          {product.size || "Không xác định"}
+          {product.size || product.volume || "Không xác định"}
         </div>
       </div>
 

@@ -81,9 +81,11 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
         <p>{`Thương hiệu: ${product.brand}`}</p>
         {"collection" in product ? (
           <p>{`Bộ sưu tập: ${product.collection}`}</p>
-        ) : (
+        ) : "material" in product ? (
           <p>{`Chất liệu: ${product.material}`}</p>
-        )}
+        ) : "bottleMaterial" in product ? (
+          <p>{`Chất liệu chai: ${product.bottleMaterial}`}</p>
+        ) : null}
       </div>
 
       <div className="flex flex-row gap-x-3 items-center md:gap-x-5">
