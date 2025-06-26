@@ -66,7 +66,7 @@ export const RegisterGridView = () => {
         callbackURL: "/login",
       },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
           setPending(false);
           toast.success(TEXTS.registerSuccess, {
             description: TEXTS.useRegisteredInfo,
@@ -77,7 +77,7 @@ export const RegisterGridView = () => {
           formData.append("name", data.name);
           formData.append("email", data.email);
           formData.append("password", data.password);
-          addUser(formData);
+          await addUser(formData);
         },
         onError: ({ error }) => {
           setPending(false);

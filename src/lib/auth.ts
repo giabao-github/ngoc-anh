@@ -30,7 +30,6 @@ export const auth = betterAuth({
     expiresIn: 60 * 60 * 24 * 7,
     updateAge: 60 * 60 * 24,
   },
-  plugins: [],
   socialProviders: {
     google: {
       clientId: getRequiredEnv("GOOGLE_CLIENT_ID"),

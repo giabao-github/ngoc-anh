@@ -6,11 +6,13 @@ export type BaseProduct = {
   zoom?: number[];
   code: string;
   brand: string;
-  material: string;
+  material?: string;
+  bottleMaterial?: string;
   pin?: string;
   category: string;
   details: ProductDetail[];
   size?: string;
+  volume?: string;
   quantity: number;
   rating: number[];
 };
@@ -27,6 +29,8 @@ export type ProductDetail = {
   slug: string;
   price: number;
   pattern?: string;
+  ingredient?: string;
+  drink?: string;
   badge: {
     isNew?: boolean;
     discount?: number;

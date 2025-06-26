@@ -12,10 +12,18 @@ const ChangePasswordPage = () => {
 
   if (!isPending && !data) {
     router.replace("/login");
-    return;
+    return null;
   }
 
-  return <ChangePasswordView email={data?.user.email} />;
+  if (isPending) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="loader" />
+      </div>
+    );
+  }
+
+  return <ChangePasswordView email={data?.user.email || ""} />;
 };
 
 export default ChangePasswordPage;

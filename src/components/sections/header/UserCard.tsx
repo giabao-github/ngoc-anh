@@ -26,6 +26,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { lexend } from "@/config/fonts";
 
@@ -45,7 +46,7 @@ export const UserCard = ({ className = "" }: UserCardProps) => {
   const router = useRouter();
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
-  const { data } = authClient.useSession();
+  const { data, isPending } = authClient.useSession();
 
   const userName = data?.user.name;
   const userEmail = data?.user.email;
@@ -65,6 +66,15 @@ export const UserCard = ({ className = "" }: UserCardProps) => {
       },
     });
   };
+
+  if (isPending) {
+    return (
+      <Skeleton
+        className="w-10 h-10 rounded-full 2xl:w-12 2xl:h-12"
+        aria-label="Loading user avatar"
+      />
+    );
+  }
 
   // Authenticated user card
   if (data?.user) {

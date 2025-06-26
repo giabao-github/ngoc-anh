@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+import { UserCard } from "@/components/sections/header/UserCard";
 import { Input } from "@/components/ui/input";
 
 import { arsenal, montserrat, quicksand } from "@/config/fonts";
@@ -17,8 +18,6 @@ import { useCart } from "@/hooks/useCart";
 import { handleNavigation } from "@/utils/navigationUtils";
 import { handleSearch } from "@/utils/searchUtils";
 import { cn } from "@/utils/styleUtils";
-
-import { UserCard } from "./UserCard";
 
 interface DesktopHeaderProps {
   hasSections?: boolean;

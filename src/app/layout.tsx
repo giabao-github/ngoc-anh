@@ -35,11 +35,12 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       </head>
 
-      <CartProvider>
-        <body className={`${quicksand.className} antialiased`}>{children}</body>
-
-        <Toaster />
-      </CartProvider>
+      <body className={`${quicksand.className} antialiased`}>
+        <CartProvider>
+          {children}
+          <Toaster />
+        </CartProvider>
+      </body>
     </html>
   );
 }

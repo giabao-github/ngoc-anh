@@ -119,9 +119,8 @@ export async function changePassword(formData: FormData) {
 }
 
 export async function testNewPassword(email: string, newPassword: string) {
-  const userResult = await (
-    await auth.$context
-  ).internalAdapter.findUserByEmail(email);
+  const context = await auth.$context;
+  const userResult = await context.internalAdapter.findUserByEmail(email);
 
   if (!userResult || !userResult.user) {
     return { success: false, error: "Không tìm thấy người dùng." };
@@ -136,6 +135,14 @@ export async function testNewPassword(email: string, newPassword: string) {
   // Find the email/password account
   const passwordAccount = accounts.find((acc) => acc.password);
 
+  // Check if there are multiple password accounts
+  const passwordAccounts = accounts.filter((acc) => acc.password);
+  if (passwordAccounts.length > 1) {
+    console.warn(
+      `User (id: ${userResult.user.id}) (${userResult.user.email}) has multiple password accounts`,
+    );
+  }
+
   const passwordHash = passwordAccount?.password;
 
   if (!passwordHash) {
@@ -145,9 +152,7 @@ export async function testNewPassword(email: string, newPassword: string) {
     };
   }
 
-  const isSame = await (
-    await auth.$context
-  ).password.verify({
+  const isSame = await context.password.verify({
     password: newPassword,
     hash: passwordHash,
   });

@@ -35,11 +35,13 @@ import { changePasswordClientSchema } from "@/app/schemas";
 
 type ChangePasswordForm = z.infer<typeof changePasswordClientSchema>;
 
-interface CPGVProps {
-  email: string | undefined;
+interface ChangePasswordGridViewProps {
+  email: string;
 }
 
-export const ChangePasswordGridView = ({ email }: CPGVProps) => {
+export const ChangePasswordGridView = ({
+  email,
+}: ChangePasswordGridViewProps) => {
   const router = useRouter();
   const [pending, setPending] = useState(false);
   const [showCurrent, setShowCurrent] = useState(false);
@@ -65,9 +67,9 @@ export const ChangePasswordGridView = ({ email }: CPGVProps) => {
     setPending(true);
 
     const formData = new FormData();
-    formData.append("email", email || "");
-    formData.append("currentPassword", data.currentPassword);
-    formData.append("newPassword", data.newPassword);
+    Object.entries({ ...data, email: email || "" }).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
 
     try {
       const check = await testNewPassword(email || "", data.newPassword);
@@ -85,15 +87,15 @@ export const ChangePasswordGridView = ({ email }: CPGVProps) => {
             "Các phiên đăng nhập đã được đăng xuất, hãy đăng nhập lại để tiếp tục",
         });
 
-        router.replace("/login");
-
         form.reset({
           currentPassword: "",
           newPassword: "",
           confirmNewPassword: "",
         });
 
-        updateUserPassword(email || "", data.newPassword);
+        router.replace("/login");
+
+        await updateUserPassword(email || "", data.newPassword);
       } else {
         console.error("Password change error:", res.error);
         if (res.error) {
@@ -118,7 +120,7 @@ export const ChangePasswordGridView = ({ email }: CPGVProps) => {
     if (!pending && !email) {
       router.replace("/login");
     }
-  }, [pending, email]);
+  }, [pending, email, router]);
 
   return (
     <Form {...form}>

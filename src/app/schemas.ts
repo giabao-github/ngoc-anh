@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { BANNED_WORDS, WEAK_PASSWORDS } from "@/constants/schemas";
+
 const hasRedundantSpaces = (value: string) => !/^\s+|\s+$|\s{2,}/.test(value);
 
 export const invoiceFormSchema = z
@@ -113,24 +115,9 @@ export const registerSchema = z
       )
       .refine(
         (value) => {
-          // Only ban truly offensive or inappropriate words
-          const bannedWords = [
-            "asshole",
-            "bitch",
-            "cock",
-            "dick",
-            "fuck",
-            "hitler",
-            "nazi",
-            "pussy",
-            "cặc",
-            "đụ",
-            "địt",
-            "đít",
-            "lồn",
-          ];
+          // Ban offensive or inappropriate words
           const lowerValue = value.toLowerCase();
-          return !bannedWords.some((word) => lowerValue.includes(word));
+          return !BANNED_WORDS.some((word) => lowerValue.includes(word));
         },
         { message: "Tên người dùng chứa từ không phù hợp" },
       )
@@ -168,19 +155,7 @@ export const registerSchema = z
       )
       .refine(
         (value) => {
-          // Prevent only the most common weak passwords
-          const weakPasswords = [
-            "password",
-            "123456",
-            "12345678",
-            "qwerty",
-            "abc123",
-            "matkhau",
-            "123456789",
-            "iloveyou",
-            "thacham",
-          ];
-          return !weakPasswords.includes(value.toLowerCase());
+          return !WEAK_PASSWORDS.includes(value.toLowerCase());
         },
         { message: "Mật khẩu quá đơn giản" },
       ),
@@ -222,19 +197,7 @@ export const changePasswordClientSchema = z
       )
       .refine(
         (value) => {
-          // Prevent only the most common weak passwords
-          const weakPasswords = [
-            "password",
-            "123456",
-            "12345678",
-            "qwerty",
-            "abc123",
-            "matkhau",
-            "123456789",
-            "iloveyou",
-            "thacham",
-          ];
-          return !weakPasswords.includes(value.toLowerCase());
+          return !WEAK_PASSWORDS.includes(value.toLowerCase());
         },
         { message: "Mật khẩu mới quá đơn giản" },
       ),
