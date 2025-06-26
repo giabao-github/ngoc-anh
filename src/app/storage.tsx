@@ -348,6 +348,7 @@ export const products: Product[] = [
     category: "Thức uống",
     details: [
       {
+        variantId: 1,
         color: "",
         slug: "thach-am-khmer-pure",
         ingredient: "100% nước mía ép",
@@ -359,6 +360,7 @@ export const products: Product[] = [
         },
       },
       {
+        variantId: 2,
         color: "",
         slug: "thach-am-khmer-pure",
         ingredient: "100% nước dừa tươi",
@@ -370,6 +372,7 @@ export const products: Product[] = [
         },
       },
       {
+        variantId: 3,
         color: "",
         slug: "thach-am-khmer-pure",
         ingredient: "100% nước từ trái dừa nước",

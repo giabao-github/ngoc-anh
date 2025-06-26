@@ -25,6 +25,7 @@ export type Product = BaseProduct & {
 };
 
 export type ProductDetail = {
+  variantId?: number;
   color: string;
   slug: string;
   price: number;

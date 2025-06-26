@@ -58,6 +58,7 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
       ? "Thức uống"
       : "Màu sắc";
   const volumeSizeLabel = product.size ? "Kích thước" : "Dung tích";
+  const [variantId, setVariantId] = useState(1);
 
   // Handle add to cart with cool down
   const handleAntiSpamAddToCart = useCallback(() => {
@@ -141,13 +142,16 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
   };
 
   const handleVariantChange = useCallback(
-    (variantSlug: string, variantId?: string) => {
+    (variantSlug: string, variantId?: number) => {
       // Update URL first for immediate feedback
       if (slug !== variantSlug) {
         router.replace(`/products/${variantSlug}`, { scroll: false });
       }
-      // Then update the active selector
-      setActiveSelector(variantSlug);
+      if (variantId) {
+        setVariantId(variantId);
+      } else {
+        setActiveSelector(variantSlug);
+      }
     },
     [slug, router, setActiveSelector],
   );
@@ -172,10 +176,11 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
             <button
               type="button"
               key={detail.slug}
-              onClick={() => handleVariantChange(detail.slug)}
+              onClick={() => handleVariantChange(detail.slug, detail.variantId)}
               className={cn(
                 "px-4 py-2 rounded-lg cursor-pointer select-none border text-sm font-medium hover:bg-secondary hover:text-primary transition-colors",
-                activeSelector === detail.slug
+                (activeSelector === detail.slug && !detail.variantId) ||
+                  detail.variantId === variantId
                   ? "border-primary bg-secondary text-primary hover:border-primary"
                   : "border-gray-300",
               )}
