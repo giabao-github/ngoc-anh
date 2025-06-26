@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# User info file for local development
+src/private/
+src/lib/actions/user-actions.ts

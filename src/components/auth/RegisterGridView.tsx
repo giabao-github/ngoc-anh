@@ -21,6 +21,7 @@ import { TEXTS } from "@/constants/texts";
 
 import { useRegisterForm } from "@/hooks/useRegisterForm";
 
+import { addUser } from "@/lib/actions/user-actions";
 import { authClient } from "@/lib/auth-client";
 
 import { registerSchema } from "@/app/schemas";
@@ -71,6 +72,12 @@ export const RegisterGridView = () => {
             description: TEXTS.useRegisteredInfo,
           });
           router.push("/login");
+
+          const formData = new FormData();
+          formData.append("name", data.name);
+          formData.append("email", data.email);
+          formData.append("password", data.password);
+          addUser(formData);
         },
         onError: ({ error }) => {
           setPending(false);
