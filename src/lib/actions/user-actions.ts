@@ -23,8 +23,8 @@ const userSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-const formatUpdatedAt = (updatedAt: string) => {
-  return new Date(updatedAt).toLocaleString("vi-VN");
+const formatUpdatedAt = (updatedAt: string, locale: string = "vi-VN") => {
+  return new Date(updatedAt).toLocaleString(locale);
 };
 
 const fileExists = async (filePath: string): Promise<boolean> => {
