@@ -14,16 +14,25 @@ import { Product } from "@/types/invoice";
 
 interface ProductInfoProps {
   product: Product;
+  activeDetailIndex: number;
+  setActiveDetailIndex: (index: number) => void;
 }
 
-const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
+const ProductInfo: React.FC<ProductInfoProps> = ({
+  product,
+  activeDetailIndex,
+  setActiveDetailIndex,
+}) => {
   const favoriteKey = `favorite-${product.id}`;
   const [isFavorite, setIsFavorite] = useState(false);
 
+  const selectedDetail =
+    product.details[activeDetailIndex] || product.details[0];
+
   // Memoize formatted prices
   const formattedPrice = useMemo(
-    () => formatPrice(product.details[0].price),
-    [product.details[0].price],
+    () => formatPrice(selectedDetail.price),
+    [selectedDetail.price],
   );
   const formattedOriginalPrice = useMemo(
     () => getOriginalPrice(product),
@@ -79,6 +88,9 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       <div className="space-y-2 text-xs text-gray-700">
         <p>{`Mã sản phẩm: ${product.code}`}</p>
         <p>{`Thương hiệu: ${product.brand}`}</p>
+        {selectedDetail.ingredient && (
+          <p>{`Nguyên liệu: ${selectedDetail.ingredient}`}</p>
+        )}
         {"collection" in product ? (
           <p>{`Bộ sưu tập: ${product.collection}`}</p>
         ) : "material" in product ? (
