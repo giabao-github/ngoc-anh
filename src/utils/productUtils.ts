@@ -14,9 +14,13 @@ export const getProductDetails = (product: Product) => {
     details.push(product.details[0].pattern);
   } else if (product.details[0].color) {
     details.push(product.details[0].color);
+  } else if (product.details[0].drink) {
+    details.push(product.details[0].drink);
   }
   if (product.size) {
     details.push(product.size);
+  } else if (product.volume) {
+    details.push(product.volume);
   }
   return details.join(" / ");
 };

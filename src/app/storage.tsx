@@ -36,7 +36,7 @@ export const collections = [
     id: 6,
     name: "Ly Gốm Thạch Âm - Naga Tịnh Ấm",
     description: "",
-    image: "/products/ceramic-glass-transparent.png",
+    image: "/products/ceramic-glass-transparent.jpeg",
   },
 ];
 
@@ -143,7 +143,7 @@ export const products: Product[] = [
   {
     id: 4,
     name: "Card Visit Thạch Âm",
-    images: ["/products/card-1.png", "/products/card-2.png"],
+    images: ["/products/card-1.jpeg", "/products/card-2.png"],
     background: "#797979",
     zoom: [2, 3],
     descriptionKey: "card-visit-thach-am",
@@ -335,7 +335,7 @@ export const products: Product[] = [
   {
     id: 10,
     name: "Thạch Âm Khmer Pure",
-    images: ["/products/beverages.jpg"],
+    images: ["/products/beverages.jpeg"],
     background: "linear-gradient(to right, #ebebeb, #eee, #ebebeb)",
     zoom: [],
     descriptionKey: "thach-am-khmer-pure",

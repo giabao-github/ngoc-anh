@@ -25,8 +25,10 @@ interface ProductViewLayoutProps {
   cartIconRef: RefObject<HTMLDivElement | null>;
 
   // State
-  activeSelector: string;
-  setActiveSelector: (selector: string) => void;
+  activeVariant: string;
+  setActiveVariant: (selector: string) => void;
+  activeDetailIndex: number;
+  setActiveDetailIndex: (index: number) => void;
   quantity: number;
   currentImageIndex: number;
   setCurrentImageIndex: (index: number) => void;
@@ -61,8 +63,10 @@ export const ProductViewLayout: React.FC<ProductViewLayoutProps> = ({
   aboutRef,
   imageRef,
   cartIconRef,
-  activeSelector,
-  setActiveSelector,
+  activeVariant,
+  setActiveVariant,
+  activeDetailIndex,
+  setActiveDetailIndex,
   quantity,
   currentImageIndex,
   setCurrentImageIndex,
@@ -110,18 +114,24 @@ export const ProductViewLayout: React.FC<ProductViewLayoutProps> = ({
           />
 
           <div className="mx-1 space-y-4 md:space-y-6 md:mx-0">
-            <ProductInfo product={product} />
+            <ProductInfo
+              product={product}
+              activeDetailIndex={activeDetailIndex}
+              setActiveDetailIndex={setActiveDetailIndex}
+            />
             <PurchaseSection
               product={product}
               slug={slug}
-              activeSelector={activeSelector}
+              activeVariant={activeVariant}
+              activeDetailIndex={activeDetailIndex}
               quantity={quantity}
               availableQuantity={availableQuantity}
               cartQuantity={cartQuantity}
               canDecrement={canDecrement}
               canIncrement={canIncrement}
               isOutOfStock={isOutOfStock}
-              setActiveSelector={setActiveSelector}
+              setActiveVariant={setActiveVariant}
+              setActiveDetailIndex={setActiveDetailIndex}
               handleQuantityChange={handleQuantityChange}
               handleAddToCart={handleAddToCart}
             />

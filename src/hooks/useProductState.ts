@@ -2,8 +2,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { toast } from "sonner";
 
-import { ToastIds } from "@/constants/toastIds";
-
 import { Product } from "@/types/invoice";
 
 export const useProductState = (
@@ -11,9 +9,10 @@ export const useProductState = (
   availableQuantity: number,
   initialSlug?: string,
 ) => {
-  const [activeSelector, setActiveSelector] = useState(initialSlug || "");
+  const [activeVariant, setActiveVariant] = useState(initialSlug || "");
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [activeDetailIndex, setActiveDetailIndex] = useState(0);
 
   // Quantity controls
   const isAtMaxQuantity = useMemo(() => {
@@ -48,13 +47,13 @@ export const useProductState = (
   // Initialize state when product changes
   useEffect(() => {
     if (product) {
-      if (!activeSelector) {
-        setActiveSelector(product.details[0].slug);
+      if (!activeVariant) {
+        setActiveVariant(product.details[0].slug);
       }
       setQuantity(1);
       setCurrentImageIndex(0);
     }
-  }, [product, activeSelector]);
+  }, [product, activeVariant]);
 
   // Quantity warning effect
   useEffect(() => {
@@ -68,8 +67,8 @@ export const useProductState = (
   }, [isAtMaxQuantity, availableQuantity]);
 
   return {
-    activeSelector,
-    setActiveSelector,
+    activeVariant,
+    setActiveVariant,
     quantity,
     currentImageIndex,
     setCurrentImageIndex,
@@ -77,5 +76,7 @@ export const useProductState = (
     canDecrement,
     isAtMaxQuantity,
     handleQuantityChange,
+    activeDetailIndex,
+    setActiveDetailIndex,
   };
 };

@@ -19,14 +19,16 @@ import { Product, ProductDetail } from "@/types/invoice";
 interface PurchaseSectionProps {
   product: Product;
   slug: string;
-  activeSelector: string;
+  activeVariant: string;
   quantity: number;
+  activeDetailIndex: number;
   availableQuantity: number;
   cartQuantity: number;
   canIncrement: boolean;
   canDecrement: boolean;
   isOutOfStock: boolean;
-  setActiveSelector: (selector: string) => void;
+  setActiveVariant: (selector: string) => void;
+  setActiveDetailIndex: (index: number) => void;
   handleQuantityChange: (
     type: "increment" | "decrement" | "set",
     value?: number,
@@ -37,16 +39,18 @@ interface PurchaseSectionProps {
 const PurchaseSection: React.FC<PurchaseSectionProps> = ({
   product,
   slug,
-  activeSelector,
+  activeVariant,
+  activeDetailIndex,
   quantity,
   availableQuantity,
   cartQuantity,
   canIncrement,
   canDecrement,
   isOutOfStock,
-  setActiveSelector,
+  setActiveVariant,
   handleQuantityChange,
   handleAddToCart,
+  setActiveDetailIndex,
 }) => {
   const router = useRouter();
   const isMobile = useIsMobile();
@@ -142,18 +146,19 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
   };
 
   const handleVariantChange = useCallback(
-    (variantSlug: string, variantId?: number) => {
+    (variantSlug: string, idx: number, variantId?: number) => {
       // Update URL first for immediate feedback
       if (slug !== variantSlug) {
         router.replace(`/products/${variantSlug}`, { scroll: false });
       }
       if (variantId) {
+        setActiveDetailIndex(idx);
         setVariantId(variantId);
       } else {
-        setActiveSelector(variantSlug);
+        setActiveVariant(variantSlug);
       }
     },
-    [slug, router, setActiveSelector],
+    [slug, router, setActiveVariant],
   );
 
   return (
@@ -172,14 +177,16 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
       <div className="space-y-2">
         <p className="font-semibold">{variantLabel}</p>
         <div className="flex gap-4">
-          {product.details.map((detail) => (
+          {product.details.map((detail, idx) => (
             <button
               type="button"
-              key={detail.slug}
-              onClick={() => handleVariantChange(detail.slug, detail.variantId)}
+              key={detail.slug + idx}
+              onClick={() =>
+                handleVariantChange(detail.slug, idx, detail.variantId)
+              }
               className={cn(
                 "px-4 py-2 rounded-lg cursor-pointer select-none border text-sm font-medium hover:bg-secondary hover:text-primary transition-colors",
-                (activeSelector === detail.slug && !detail.variantId) ||
+                (activeVariant === detail.slug && !detail.variantId) ||
                   detail.variantId === variantId
                   ? "border-primary bg-secondary text-primary hover:border-primary"
                   : "border-gray-300",
