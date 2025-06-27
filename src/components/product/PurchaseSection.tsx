@@ -1,20 +1,14 @@
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { montserrat } from "@/config/fonts";
+import useIsMobile from "@/hooks/useIsMobile";
+import { Product, ProductDetail } from "@/types/invoice";
+import { cn } from "@/utils/styleUtils";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { FaBagShopping } from "react-icons/fa6";
 import { FiMinus, FiPlus, FiShoppingCart } from "react-icons/fi";
 import { LuPackageX } from "react-icons/lu";
-
-import { useRouter } from "next/navigation";
-
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-
-import { montserrat } from "@/config/fonts";
-
-import useIsMobile from "@/hooks/useIsMobile";
-
-import { cn } from "@/utils/styleUtils";
-
-import { Product, ProductDetail } from "@/types/invoice";
 
 interface PurchaseSectionProps {
   product: Product;
@@ -151,8 +145,8 @@ const PurchaseSection: React.FC<PurchaseSectionProps> = ({
       if (slug !== variantSlug) {
         router.replace(`/products/${variantSlug}`, { scroll: false });
       }
+      setActiveDetailIndex(idx);
       if (variantId) {
-        setActiveDetailIndex(idx);
         setVariantId(variantId);
       } else {
         setActiveVariant(variantSlug);

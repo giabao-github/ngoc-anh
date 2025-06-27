@@ -26,7 +26,7 @@ interface ProductViewLayoutProps {
 
   // State
   activeVariant: string;
-  setActiveVariant: (selector: string) => void;
+  setActiveVariant: (variant: string) => void;
   activeDetailIndex: number;
   setActiveDetailIndex: (index: number) => void;
   quantity: number;
