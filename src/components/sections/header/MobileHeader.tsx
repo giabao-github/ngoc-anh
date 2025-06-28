@@ -133,7 +133,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         <div className="p-6">
           <nav
             className={cn(
-              "flex flex-col space-y-6 text-lg font-semibold tracking-wider",
+              "flex flex-col space-y-6 text-lg font-semibold tracking-wide",
               arsenal.className,
             )}
           >

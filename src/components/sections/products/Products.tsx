@@ -37,8 +37,8 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleCategoryChange = useCallback(
-    (category: string) => {
-      if (category === selectedCategory) {
+    (category: string | null) => {
+      if (!category || category === selectedCategory) {
         return;
       }
       isUpdatingRef.current = true;
