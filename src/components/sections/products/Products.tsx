@@ -37,8 +37,8 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const handleCategoryChange = useCallback(
-    (category: string | null) => {
-      if (!category || category === selectedCategory) {
+    (category: string) => {
+      if (category === selectedCategory) {
         return;
       }
       isUpdatingRef.current = true;
@@ -216,7 +216,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
         <ProductsPanel
           categories={categories}
           selectedCategory={selectedCategory}
-          setSelectedCategory={handleCategoryChange}
+          handleCategoryChange={handleCategoryChange}
           sortBy={sortBy}
           setSortBy={handleSortChange}
           viewMode={viewMode}

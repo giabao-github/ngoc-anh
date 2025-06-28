@@ -19,6 +19,7 @@ interface FilterCarouselProps {
   isLoading?: boolean;
   selectedCategory: string;
   categories: string[];
+  allCategoriesLabel?: string;
   onSelect: (category: string) => (e: React.MouseEvent) => void;
 }
 
@@ -26,6 +27,7 @@ export const FilterCarousel = ({
   isLoading = false,
   selectedCategory,
   categories,
+  allCategoriesLabel = "Tất cả",
   onSelect,
 }: FilterCarouselProps) => {
   const [api, setApi] = useState<CarouselApi>();
@@ -85,7 +87,7 @@ export const FilterCarousel = ({
                     onClick={onSelect(item)}
                     aria-label={`Select ${item} category`}
                   >
-                    {index === 0 ? "Tất cả" : item}
+                    {index === 0 ? allCategoriesLabel : item}
                   </Badge>
                 </CarouselItem>
               ))}

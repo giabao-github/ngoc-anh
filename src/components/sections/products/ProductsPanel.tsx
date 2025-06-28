@@ -9,7 +9,7 @@ import { cn } from "@/utils/styleUtils";
 interface ProductsPanelProps {
   categories: string[];
   selectedCategory: string;
-  setSelectedCategory: (category: string) => void;
+  handleCategoryChange: (category: string) => void;
   sortBy: string;
   setSortBy: (sortBy: string) => void;
   viewMode: "grid" | "list";
@@ -19,7 +19,7 @@ interface ProductsPanelProps {
 const ProductsPanel: React.FC<ProductsPanelProps> = ({
   categories,
   selectedCategory,
-  setSelectedCategory,
+  handleCategoryChange,
   sortBy,
   setSortBy,
   viewMode,
@@ -28,7 +28,7 @@ const ProductsPanel: React.FC<ProductsPanelProps> = ({
   const handleCategoryClick = (category: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setSelectedCategory(category);
+    handleCategoryChange(category);
   };
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
