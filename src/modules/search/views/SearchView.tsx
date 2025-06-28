@@ -172,7 +172,7 @@ export const SearchView = () => {
           <ProductsPanel
             categories={categories}
             selectedCategory={selectedCategory}
-            setSelectedCategory={handleCategoryChange}
+            handleCategoryChange={handleCategoryChange}
             sortBy={sortBy}
             setSortBy={handleSortChange}
             viewMode={viewMode}
