@@ -6,8 +6,6 @@ import { quicksand } from "@/config/fonts";
 
 import { cn } from "@/utils/styleUtils";
 
-import CategoryCarousel from "./CategoryCarousel";
-
 interface ProductsPanelProps {
   categories: string[];
   selectedCategory: string;
