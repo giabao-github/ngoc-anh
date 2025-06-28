@@ -1,4 +1,6 @@
-import { ChevronDown, Grid3X3, List } from "lucide-react";
+import { ChevronDown, LayoutGrid, List } from "lucide-react";
+
+import { FilterCarousel } from "@/components/ui/filter-carousel";
 
 import { quicksand } from "@/config/fonts";
 
@@ -7,7 +9,7 @@ import { cn } from "@/utils/styleUtils";
 interface ProductsPanelProps {
   categories: string[];
   selectedCategory: string;
-  setSelectedCategory: (category: string) => void;
+  handleCategoryChange: (category: string) => void;
   sortBy: string;
   setSortBy: (sortBy: string) => void;
   viewMode: "grid" | "list";
@@ -17,7 +19,7 @@ interface ProductsPanelProps {
 const ProductsPanel: React.FC<ProductsPanelProps> = ({
   categories,
   selectedCategory,
-  setSelectedCategory,
+  handleCategoryChange,
   sortBy,
   setSortBy,
   viewMode,
@@ -26,7 +28,7 @@ const ProductsPanel: React.FC<ProductsPanelProps> = ({
   const handleCategoryClick = (category: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setSelectedCategory(category);
+    handleCategoryChange(category);
   };
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -49,27 +51,45 @@ const ProductsPanel: React.FC<ProductsPanelProps> = ({
         quicksand.className,
       )}
     >
-      <div className="flex flex-wrap gap-2">
-        {categories.map((category) => (
-          <button
-            type="button"
-            key={category}
-            onClick={handleCategoryClick(category)}
-            className={cn(
-              "px-3 py-1.5 md:px-4 md:py-2 border border-neutral-200 rounded-full text-xs md:text-sm font-medium transition-all",
-              selectedCategory === category
-                ? "bg-blue-600 text-white shadow-md ring-1 ring-blue-400"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200",
-            )}
-          >
-            {category === "all"
-              ? "Tất cả"
-              : category.charAt(0).toUpperCase() + category.slice(1)}
-          </button>
-        ))}
-      </div>
+      <FilterCarousel
+        isLoading={!categories}
+        selectedCategory={selectedCategory}
+        categories={categories}
+        onSelect={handleCategoryClick}
+      />
 
       <div className="flex gap-4 items-center">
+        <div className="hidden relative p-1 bg-gray-200 rounded-lg md:flex">
+          {/* Animated active indicator */}
+          <span
+            className={cn(
+              "absolute top-1 left-1 w-8 h-8 rounded-md bg-primary transition-transform duration-300 z-0",
+              viewMode === "grid" ? "translate-x-0" : "translate-x-full",
+            )}
+            aria-hidden="true"
+          />
+          <button
+            type="button"
+            onClick={handleViewModeClick("grid")}
+            className={cn(
+              "relative z-10 flex-1 p-2 rounded-md transition-colors duration-300",
+              viewMode === "grid" ? "text-white" : "text-gray-500",
+            )}
+          >
+            <LayoutGrid className="mx-auto w-4 h-4" />
+          </button>
+          <button
+            type="button"
+            onClick={handleViewModeClick("list")}
+            className={cn(
+              "relative z-10 flex-1 p-2 rounded-md transition-colors duration-300",
+              viewMode === "list" ? "text-white" : "text-gray-500",
+            )}
+          >
+            <List className="mx-auto w-4 h-4" />
+          </button>
+        </div>
+
         <div className="relative">
           <select
             title="Sắp xếp sản phẩm"
@@ -85,29 +105,6 @@ const ProductsPanel: React.FC<ProductsPanelProps> = ({
             <option value="rating">Đánh giá cao</option>
           </select>
           <ChevronDown className="absolute right-2 top-1/2 w-4 h-4 text-gray-500 transform -translate-y-1/2 pointer-events-none" />
-        </div>
-
-        <div className="hidden p-1 bg-gray-100 rounded-lg md:flex">
-          <button
-            type="button"
-            onClick={handleViewModeClick("grid")}
-            className={cn(
-              "p-2 rounded-md transition-all",
-              viewMode === "grid" ? "bg-white shadow-sm" : "text-gray-500",
-            )}
-          >
-            <Grid3X3 className="w-4 h-4" />
-          </button>
-          <button
-            type="button"
-            onClick={handleViewModeClick("list")}
-            className={cn(
-              "p-2 rounded-md transition-all",
-              viewMode === "list" ? "bg-white shadow-sm" : "text-gray-500",
-            )}
-          >
-            <List className="w-4 h-4" />
-          </button>
         </div>
       </div>
     </div>

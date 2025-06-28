@@ -216,7 +216,7 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
         <ProductsPanel
           categories={categories}
           selectedCategory={selectedCategory}
-          setSelectedCategory={handleCategoryChange}
+          handleCategoryChange={handleCategoryChange}
           sortBy={sortBy}
           setSortBy={handleSortChange}
           viewMode={viewMode}
