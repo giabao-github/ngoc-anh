@@ -28,6 +28,7 @@ interface LoginFieldsProps {
   setInputKey: React.Dispatch<React.SetStateAction<number>>;
   setChangeCount: React.Dispatch<React.SetStateAction<number>>;
 }
+
 export const LoginFields = ({
   form,
   showPassword,
@@ -54,7 +55,7 @@ export const LoginFields = ({
         render={({ field, fieldState }) => (
           <FormItem className="space-y-1">
             <FormLabel className="text-[15px] md:text-sm font-semibold text-secondary/90 md:text-gray-700">
-              Địa chỉ email *:
+              Địa chỉ email *
             </FormLabel>
             <FormControl>
               <div className="relative group">

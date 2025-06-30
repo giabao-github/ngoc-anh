@@ -95,7 +95,7 @@ export const RecoveryGridView = () => {
               onClick={() => router.push("/login")}
             >
               <LucideCheckCircle2 className="w-[18px] h-[18px] group-hover:scale-[1.2] group-active:scale-[1.2]" />
-              {TEXTS.backToLogin}
+              Quay lại đăng nhập
             </Button>
             <Button
               className="w-full mt-3 md:mt-4 h-10 text-sm font-semibold transition duration-200 bg-secondary text-primary hover:bg-secondary/90 hover:shadow-lg active:scale-[0.98] disabled:hover:scale-100 disabled:hover:shadow-none group"
@@ -197,17 +197,17 @@ export const RecoveryGridView = () => {
           </Button>
 
           <div className="text-sm text-center text-secondary/80 md:text-gray-600">
-            {TEXTS.backToLogin}{" "}
+            Quay lại{" "}
             <Link
               href="/login"
-              className="font-semibold transition-all duration-200 text-secondary md:text-primary hover:text-secondary/80 md:hover:text-primary/80 hover:underline"
+              className="font-semibold lowercase transition-all duration-200 text-secondary md:text-primary hover:text-secondary/80 md:hover:text-primary/80 hover:underline"
             >
               {TEXTS.login}
             </Link>{" "}
             hoặc{" "}
             <Link
               href="/register"
-              className="font-semibold transition-all duration-200 text-secondary md:text-primary hover:text-secondary/80 md:hover:text-primary/80 hover:underline"
+              className="font-semibold lowercase transition-all duration-200 text-secondary md:text-primary hover:text-secondary/80 md:hover:text-primary/80 hover:underline"
             >
               {TEXTS.register}
             </Link>
