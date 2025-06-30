@@ -95,7 +95,7 @@ export const RecoveryGridView = () => {
               onClick={() => router.push("/login")}
             >
               <LucideCheckCircle2 className="w-[18px] h-[18px] group-hover:scale-[1.2] group-active:scale-[1.2]" />
-              Quay lại đăng nhập
+              {TEXTS.backToLogin}
             </Button>
             <Button
               className="w-full mt-3 md:mt-4 h-10 text-sm font-semibold transition duration-200 bg-secondary text-primary hover:bg-secondary/90 hover:shadow-lg active:scale-[0.98] disabled:hover:scale-100 disabled:hover:shadow-none group"

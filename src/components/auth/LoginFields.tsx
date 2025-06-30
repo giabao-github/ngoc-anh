@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import { TEXTS } from "@/constants/texts";
+
 import { cn } from "@/utils/styleUtils";
 import { sanitizeInputOnBlur } from "@/utils/textUtils";
 
@@ -55,7 +57,7 @@ export const LoginFields = ({
         render={({ field, fieldState }) => (
           <FormItem className="space-y-1">
             <FormLabel className="text-[15px] md:text-sm font-semibold text-secondary/90 md:text-gray-700">
-              Địa chỉ email *
+              {TEXTS.emailLabel}
             </FormLabel>
             <FormControl>
               <div className="relative group">

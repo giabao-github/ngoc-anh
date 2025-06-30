@@ -21,7 +21,13 @@ import { products } from "@/app/storage";
 
 const INITIAL_ROWS = 2;
 const LOAD_MORE_ROWS = 2;
-const PRODUCTS_PER_ROW = { mobile: 2, tablet: 2, desktop: 3, xl: 4 };
+const PRODUCTS_PER_ROW: Record<"mobile" | "tablet" | "desktop" | "xl", number> =
+  {
+    mobile: 2,
+    tablet: 2,
+    desktop: 3,
+    xl: 4,
+  };
 
 // Breakpoints matching Tailwind CSS
 const BREAKPOINTS = {
@@ -104,19 +110,16 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
       const wrapper = wrapperRef.current;
       const originalHeight = wrapper.scrollHeight;
 
-      // Use double RAF for better timing
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          const newHeight = wrapper.scrollHeight;
-          const heightDiff = newHeight - originalHeight;
+        const newHeight = wrapper.scrollHeight;
+        const heightDiff = newHeight - originalHeight;
 
-          window.scrollTo({
-            top: scrollPositionRef.current + heightDiff,
-            behavior: "auto",
-          });
-
-          isUpdatingRef.current = false;
+        window.scrollTo({
+          top: scrollPositionRef.current + heightDiff,
+          behavior: "auto",
         });
+
+        isUpdatingRef.current = false;
       });
     }
   }, [selectedCategory, sortBy]);

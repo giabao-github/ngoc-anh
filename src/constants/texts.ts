@@ -48,6 +48,7 @@ export const TEXTS = {
   checkInbox: "Kiểm tra hộp thư của bạn",
   ifEmailValid: "Nếu email hợp lệ, bạn sẽ nhận được liên kết khôi phục.",
   checkSpam: "Đừng quên kiểm tra cả hộp thư rác (spam).",
+  backToLogin: "Quay lại đăng nhập",
   resendRequest: "Gửi lại yêu cầu khác",
   passwordRecovery: "Khôi phục mật khẩu",
   enterEmailToRecover: "Nhập email để lấy lại mật khẩu của bạn",
