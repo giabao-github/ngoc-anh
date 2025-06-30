@@ -197,17 +197,17 @@ export const RecoveryGridView = () => {
           </Button>
 
           <div className="text-sm text-center text-secondary/80 md:text-gray-600">
-            {TEXTS.backToLogin}{" "}
+            Quay lại{" "}
             <Link
               href="/login"
-              className="font-semibold transition-all duration-200 text-secondary md:text-primary hover:text-secondary/80 md:hover:text-primary/80 hover:underline"
+              className="font-semibold lowercase transition-all duration-200 text-secondary md:text-primary hover:text-secondary/80 md:hover:text-primary/80 hover:underline"
             >
               {TEXTS.login}
             </Link>{" "}
             hoặc{" "}
             <Link
               href="/register"
-              className="font-semibold transition-all duration-200 text-secondary md:text-primary hover:text-secondary/80 md:hover:text-primary/80 hover:underline"
+              className="font-semibold lowercase transition-all duration-200 text-secondary md:text-primary hover:text-secondary/80 md:hover:text-primary/80 hover:underline"
             >
               {TEXTS.register}
             </Link>

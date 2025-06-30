@@ -52,7 +52,7 @@ export const TEXTS = {
   resendRequest: "Gửi lại yêu cầu khác",
   passwordRecovery: "Khôi phục mật khẩu",
   enterEmailToRecover: "Nhập email để lấy lại mật khẩu của bạn",
-  emailLabel: "Địa chỉ email *:",
+  emailLabel: "Địa chỉ email *",
   emailPlaceholder: "thacham@gmail.com",
   sendRequest: "Gửi yêu cầu",
   requestSent: "Yêu cầu đã được gửi",
