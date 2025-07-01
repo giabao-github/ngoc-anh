@@ -68,9 +68,15 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
   const getColumnsPerRow = useCallback(() => {
     const { isTablet, isDesktop, isXl } = viewportInfo;
 
-    if (isTablet) return PRODUCTS_PER_ROW.tablet;
-    if (isDesktop) return PRODUCTS_PER_ROW.desktop;
-    if (isXl) return PRODUCTS_PER_ROW.xl;
+    if (isTablet) {
+      return PRODUCTS_PER_ROW.tablet;
+    }
+    if (isDesktop) {
+      return PRODUCTS_PER_ROW.desktop;
+    }
+    if (isXl) {
+      return PRODUCTS_PER_ROW.xl;
+    }
     return PRODUCTS_PER_ROW.mobile;
   }, [viewportInfo]);
 
@@ -83,7 +89,9 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
 
   const handleCategoryChange = useCallback(
     (category: string) => {
-      if (category === selectedCategory) return;
+      if (category === selectedCategory) {
+        return;
+      }
 
       isUpdatingRef.current = true;
       scrollPositionRef.current = window.scrollY;
@@ -95,7 +103,9 @@ const Products: React.FC<ProductsProps> = ({ productsRef }) => {
 
   const handleSortChange = useCallback(
     (newSortBy: string) => {
-      if (newSortBy === sortBy) return;
+      if (newSortBy === sortBy) {
+        return;
+      }
 
       isUpdatingRef.current = true;
       scrollPositionRef.current = window.scrollY;

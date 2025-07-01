@@ -92,11 +92,11 @@ export const ProductCarousel = ({
             <CarouselItem
               key={item.value ?? index.toString()}
               onClick={() => onSelect(item.value ?? index.toString())}
-              className="relative pl-3 cursor-pointer basis-auto group"
+              className="relative pl-3 basis-auto group"
             >
               {/* Desktop image */}
               <div
-                className="relative hidden overflow-hidden rounded-md md:block aspect-square"
+                className="hidden overflow-hidden relative rounded-md md:block aspect-square"
                 style={{
                   width: DESKTOP_IMAGE_WIDTH,
                 }}
@@ -120,7 +120,7 @@ export const ProductCarousel = ({
               </div>
               {/* Mobile image */}
               <div
-                className="relative overflow-hidden rounded-md md:hidden aspect-square"
+                className="overflow-hidden relative rounded-md md:hidden aspect-square"
                 style={{
                   width: MOBILE_IMAGE_WIDTH,
                 }}
