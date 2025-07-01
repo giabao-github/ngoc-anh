@@ -388,4 +388,38 @@ export const products: Product[] = [
     quantity: 4385,
     rating: [58, 61, 135, 945, 3186],
   },
+  {
+    id: 11,
+    name: "Túi Ngọc Lục Naga",
+    images: [
+      "/products/handbag-1.jpeg",
+      "/products/handbag-2.jpeg",
+      "/products/handbag-3.jpeg",
+      "/products/handbag-4.jpeg",
+    ],
+    background: "linear-gradient(to right, #ebebeb, #eee, #ebebeb)",
+    zoom: [0, 1, 2, 3],
+    descriptionKey: "tui-ngoc-luc-naga",
+    instructionKey: "tui-ngoc-luc-naga",
+    maintenanceKey: "tui-ngoc-luc-naga",
+    code: "A001_694537599",
+    brand: "Thạch Âm",
+    material: "Vải đay Linen",
+    category: "Túi",
+    details: [
+      {
+        color: "Trắng & xanh lục ngọc",
+        slug: "tui-ngoc-luc-naga",
+        price: 300000,
+        badge: {
+          isNew: true,
+          discount: 20,
+          isBestseller: true,
+        },
+      },
+    ],
+    size: "30 cm × 25 cm × 12 cm",
+    quantity: 6759,
+    rating: [41, 59, 85, 1245, 5329],
+  },
 ];

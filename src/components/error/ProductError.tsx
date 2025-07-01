@@ -9,10 +9,13 @@ import SearchBar from "@/components/sections/header/SearchBar";
 
 import { arsenal } from "@/config/fonts";
 
+import useIsMobile from "@/hooks/useIsMobile";
+
 import { cn } from "@/utils/styleUtils";
 
 const ProductError = () => {
   const router = useRouter();
+  const isMobile = useIsMobile();
 
   return (
     <div className="flex flex-col gap-y-8 justify-center items-center px-6 min-h-screen">
@@ -32,15 +35,11 @@ const ProductError = () => {
           quality={100}
           priority
           onClick={() => router.push("/")}
-          className="object-contain w-20 h-20 cursor-pointer select-none"
+          className="object-contain w-16 h-16 cursor-pointer select-none md:w-20 md:h-20"
         />
-        <span
-          className="block text-2xl font-semibold uppercase select-none text-primary md:text-3xl"
-          aria-label="Thạch Âm - Trang chủ"
-          role="text"
-        >
+        <h1 className="hidden text-2xl font-semibold uppercase select-none xl:text-3xl 2xl:text-4xl text-primary md:block">
           Thạch Âm
-        </span>
+        </h1>
       </div>
 
       {/* Illustration */}
@@ -70,20 +69,20 @@ const ProductError = () => {
           className="inline-flex gap-3 justify-center items-center px-6 py-4 font-bold text-white rounded-full shadow-md transition duration-200 select-none bg-primary active:bg-primary/80 group"
         >
           <LucideHome
-            size={18}
+            size={isMobile ? 16 : 18}
             strokeWidth={2}
             className="group-hover:scale-[1.2] group-active:scale-[1.2]"
           />
-          <span>Quay về trang chủ</span>
+          <span className="text-sm md:text-base">Quay về trang chủ</span>
         </Link>
 
         <Link
           href="/#products"
           className="inline-flex gap-3 justify-center items-center px-6 py-4 font-bold bg-white rounded-full border shadow-md transition select-none text-primary border-primary active:bg-gray-200 group"
         >
-          <span>Xem sản phẩm khác</span>
+          <span className="text-sm md:text-base">Xem sản phẩm khác</span>
           <FaArrowRightLong
-            size={18}
+            size={isMobile ? 16 : 18}
             strokeWidth={2}
             className="group-hover:transform group-hover:translate-x-1 group-active:transform group-active:translate-x-1"
           />
@@ -91,6 +90,9 @@ const ProductError = () => {
       </div>
 
       {/* Search bar */}
+      <p className="mt-6 text-base font-semibold md:text-lg">
+        Hoặc tìm kiếm sản phẩm khác
+      </p>
       <SearchBar />
     </div>
   );

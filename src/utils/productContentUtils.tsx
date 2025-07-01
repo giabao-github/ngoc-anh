@@ -17,6 +17,7 @@ const productContentImporters: Record<
   "naga-tinh-am-de-ly-thach-am": () =>
     import("@/content/products/CeramicCoaster"),
   "thach-am-khmer-pure": () => import("@/content/products/Beverages"),
+  "tui-ngoc-luc-naga": () => import("@/content/products/Handbag"),
 };
 
 export const getProductContent = async (
