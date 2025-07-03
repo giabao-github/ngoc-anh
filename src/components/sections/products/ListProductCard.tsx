@@ -61,8 +61,6 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
   const isMobile = useIsMobile();
   const favoriteKey = `favorite-${product.id}`;
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [showQuickView, setShowQuickView] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
 
   // Memoize formatted prices
   const formattedPrice = useMemo(
@@ -219,19 +217,6 @@ const ListProductCard: React.FC<ListProductCardProps> = ({
                 >
                   {product.name}
                 </h3>
-
-                {/* {"features" in product.details && (
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {product.details[0].features.map((feature: string, index: number) => (
-                      <span
-                        key={index}
-                        className="px-2 py-1 text-xs text-gray-600 bg-gray-100 rounded"
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                )} */}
               </div>
 
               <div className="flex justify-between items-center">
